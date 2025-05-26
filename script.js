@@ -10,11 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
   menuBtn.onclick = () => sideMenu.classList.add('open');
   closeBtn.onclick = () => sideMenu.classList.remove('open');
 
-// Zoom image
-images.forEach(img => {
-  img.onclick = function (e) {
-    // Si l'image est dans un lien (<a>), on ne fait rien
-    if (this.closest('a')) return;
+  // Zoom image
+  images.forEach(img => {
+    img.onclick = function () {
+      modal.classList.add('flex');
+      modalImg.src = this.src;
+    };
+  });
+
+  modal.onclick = function () {
+    modal.classList.remove('flex');
+    modalImg.src = '';
+  };
+});
 
     // Sinon, on ouvre la modale
     modal.classList.add('flex');
@@ -41,5 +49,4 @@ document.addEventListener('keydown', (e) => {
       modalImg.src = '';
     }
   }
-});
-
+})
