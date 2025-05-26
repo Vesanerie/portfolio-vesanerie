@@ -1,4 +1,13 @@
-/* Base pour html et body */
+@font-face {
+  font-family: 'CasagrandeGrind';
+  src: url('fonts/casagrande-grind-regular.woff2') format('woff2'),
+       url('fonts/casagrande-grind-regular.woff') format('woff'),
+       url('fonts/casagrande-grind-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -9,17 +18,9 @@ html, body {
   background-size: cover;
   color: rgb(161, 185, 255);
   font-family: 'CasagrandeGrind', sans-serif;
+  cursor: url('icons/waiting.png'), auto;
 }
 
-@font-face {
-  font-family: 'CasagrandeGrind';
-  src: url('../fonts/casagrande-grind-regular.woff2') format('woff2'),
-       url('../fonts/casagrande-grind-regular.woff') format('woff'),
-       url('../fonts/casagrande-grind-regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
 /* Titres */
 h1 {
   font-size: 72px;
@@ -29,12 +30,11 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;
+  text-fill-color: transparent;
   position: relative;
   left: 20px;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s ease;
   cursor: pointer;
-  color: red;
 }
 
 h1:hover {
@@ -54,7 +54,7 @@ h2 {
 .clickable-img {
   width: 400px;
   height: auto;
-  max-width: 100%; /* pour limiter la largeur sur petits écrans */
+  max-width: 100%;
 }
 
 /* Conteneur images et icônes sociales */
@@ -65,10 +65,11 @@ h2 {
 .image-container img {
   display: inline-block;
   margin: 0 20px;
-  max-width: 100%; /* limite largeur */
+  max-width: 100%;
   height: auto;
 }
 
+/* Icônes sociales */
 .social-icons {
   text-align: center;
   margin-top: 40px;
@@ -85,11 +86,6 @@ h2 {
   height: auto;
   margin: 0 1px;
   cursor: pointer;
-}
-
-/* Curseur personnalisé */
-body {
-  cursor: url('icons/waiting.png'), auto;
 }
 
 /* Bouton menu */
@@ -137,12 +133,13 @@ body {
   display: flex;
 }
 
+/* Thème clair (dessin couleur) */
 body.dessin-couleur {
   background-color: #fef7e0;
   color: #333;
 }
 
-/* Image hover */
+/* Hover image + overlay texte animé */
 .image-hover-container {
   position: relative;
   display: inline-block;
@@ -178,7 +175,7 @@ body.dessin-couleur {
 
 .image-hover-container:hover .overlay-text {
   opacity: 1;
-  animation: wave 2s ease-in-out infinite;
+  animation: wave 3s ease-in-out infinite;
 }
 
 @keyframes wave {
@@ -197,9 +194,7 @@ body.dessin-couleur {
 }
 
 /* ----------- MEDIA QUERIES ----------- */
-/* Sur écrans petits (tablettes, mobiles) max 768px */
 @media screen and (max-width: 768px) {
-  
   h1 {
     font-size: 48px;
     left: 10px;
@@ -211,38 +206,32 @@ body.dessin-couleur {
     left: 20px;
   }
 
-  /* Réduire largeur images */
   .colordrawing,
   .BWdrawing,
   .Stopmotion,
   .clickable-img {
-    width: 90%; /* prend 90% de la largeur dispo */
+    width: 90%;
   }
 
-  /* Marges images réduites */
   .image-container img {
     margin: 0 10px;
   }
 
-  /* Menu bouton plus petit */
   #menuBtn {
     font-size: 24px;
     top: 15px;
     right: 15px;
   }
 
-  /* Menu latéral plus étroit */
   #sideMenu {
     width: 200px;
   }
 
-  /* Social icons plus petits */
   .social-icons img {
     width: 30px;
   }
 }
 
-/* Sur écrans très petits mobiles max 480px */
 @media screen and (max-width: 480px) {
   h1 {
     font-size: 32px;
