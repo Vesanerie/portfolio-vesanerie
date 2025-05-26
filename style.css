@@ -11,6 +11,15 @@ html, body {
   font-family: 'CasagrandeGrind', sans-serif;
 }
 
+@font-face {
+  font-family: 'CasagrandeGrind';
+  src: url('fonts/casagrande-grind-regular.woff2') format('woff2'),
+       url('fonts/casagrande-grind-regular.woff') format('woff'),
+       url('fonts/casagrande-grind-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* améliore le rendu et évite le flash de texte invisible */
+}
 /* Titres */
 h1 {
   font-size: 72px;
