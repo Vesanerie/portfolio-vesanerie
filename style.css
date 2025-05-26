@@ -1,3 +1,4 @@
+/* Base pour html et body */
 html, body {
   height: 100%;
   margin: 0;
@@ -7,9 +8,10 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;
   color: rgb(161, 185, 255);
+  font-family: 'CasagrandeGrind', sans-serif;
 }
 
-
+/* Titres */
 h1 {
   font-size: 72px;
   background: linear-gradient(to bottom, #ffffff, #ff4848);
@@ -21,69 +23,52 @@ h1 {
   color: transparent;
   position: relative;
   left: 20px;
-}
-h1 {
-  font-family: 'CasagrandeGrind', sans-serif;
-}
-@font-face {
-  font-family: 'CasagrandeGrind';
-  src: url('fonts/casagrande-grind-regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-h1 {
-  font-family: 'Casagrande Grind', serif; /* ta typo personnalisée */
-  font-size: 72px;
   transition: transform 0.3s ease, color 0.3s ease;
   cursor: pointer;
-  color: red; /* si tu veux la couleur rouge de base */
+  color: red;
 }
 
 h1:hover {
   transform: scale(1.1) rotate(5deg);
-  /* tu peux aussi changer la couleur ici ou pas */
 }
+
 h2 {
   font-size: 42px;
   position: relative;
   left: 50px;
-  }
-.center-text {
-  text-align: center;
 }
-.stretch {
-  display: inline-block; /* nécessaire pour appliquer transform */
-  transform: scaleY(1.5); /* étire verticalement cette lettre */
-  color: red; /* si tu veux changer la couleur */
-}
-.colordrawing {
-  width: 400px;
-  height: auto;
-}
-.BWdrawing {
-  width: 400px;
-  height: auto;
-}
-.Stopmotion {
-  width: 400px;
-  height: auto;
-}
+
+/* Classes pour images */
+.colordrawing,
+.BWdrawing,
+.Stopmotion,
 .clickable-img {
   width: 400px;
-  cursor: pointer;
+  height: auto;
+  max-width: 100%; /* pour limiter la largeur sur petits écrans */
 }
-.social-icons {
-  text-align: center;
-  margin-top: 40px;
-}
+
+/* Conteneur images et icônes sociales */
 .image-container {
   text-align: center;
 }
 
 .image-container img {
-  display: inline-block;  /* ou inline */
-  margin: 0 20px; /* 10px de marge à gauche et à droite → total 20px entre 2 images */
+  display: inline-block;
+  margin: 0 20px;
+  max-width: 100%; /* limite largeur */
+  height: auto;
+}
+
+.social-icons {
+  text-align: center;
+  margin-top: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 .social-icons img {
@@ -92,18 +77,13 @@ h2 {
   margin: 0 1px;
   cursor: pointer;
 }
-.social-icons {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  
-  padding: 0px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
+
+/* Curseur personnalisé */
 body {
   cursor: url('icons/waiting.png'), auto;
 }
+
+/* Bouton menu */
 #menuBtn {
   position: fixed;
   top: 20px;
@@ -114,20 +94,19 @@ body {
   z-index: 2000;
 }
 
-/* Menu caché par défaut (hors de l'écran à gauche ou à droite) */
+/* Menu latéral */
 #sideMenu {
   position: fixed;
   top: 0;
-  right: -250px; /* on le pousse en dehors de l’écran */
+  right: -250px;
   width: 250px;
   height: 100%;
   background-color: rgb(48, 72, 90);
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2); /* ombre latérale facultative */
-  transition: right 0.3s ease; /* transition douce */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease;
   z-index: 1000;
 }
 
-/* Quand le menu est ouvert, il glisse dans l’écran */
 #sideMenu.open {
   right: 0;
 }
@@ -140,6 +119,7 @@ body {
   font-size: 24px;
 }
 
+/* Modal */
 #modal {
   display: none;
 }
@@ -153,66 +133,45 @@ body.dessin-couleur {
   color: #333;
 }
 
+/* Image hover */
 .image-hover-container {
   position: relative;
-  display: inline-block; /* pour que ça prenne la taille de l'image */
+  display: inline-block;
   cursor: pointer;
 }
 
 .image-hover-container img {
   display: block;
   transition: 0.3s ease;
-  width: 400px; /* adapte selon ta taille */
+  width: 400px;
+  max-width: 100%;
+  height: auto;
 }
 
-/* Assombrir l'image au hover */
 .image-hover-container:hover img {
   filter: brightness(50%);
 }
 
-/* Texte caché, centré, invisible au départ */
 .overlay-text {
-  font-family: 'CasagrandeGrind', sans-serif;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
   font-size: 24px;
+  font-weight: bold;
+  pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
-  pointer-events: none; /* pour que la souris "passe à travers" */
   text-align: center;
   width: 100%;
-  font-weight: bold;
 }
 
-/* Au hover du conteneur, on montre le texte */
-.image-hover-container:hover .overlay-text {
-  opacity: 1;
-}
-
-
-.overlay-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  pointer-events: none; /* pour ne pas gêner le clic sur l’image */
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* On affiche le texte quand on survole l’image */
 .image-hover-container:hover .overlay-text {
   opacity: 1;
   animation: wave 2s ease-in-out infinite;
 }
 
-/* Animation vague */
 @keyframes wave {
   0%, 100% {
     transform: translate(-50%, -50%) translateX(0);
@@ -228,3 +187,83 @@ body.dessin-couleur {
   }
 }
 
+/* ----------- MEDIA QUERIES ----------- */
+/* Sur écrans petits (tablettes, mobiles) max 768px */
+@media screen and (max-width: 768px) {
+  
+  h1 {
+    font-size: 48px;
+    left: 10px;
+    transform: scaleY(1.3);
+  }
+
+  h2 {
+    font-size: 28px;
+    left: 20px;
+  }
+
+  /* Réduire largeur images */
+  .colordrawing,
+  .BWdrawing,
+  .Stopmotion,
+  .clickable-img {
+    width: 90%; /* prend 90% de la largeur dispo */
+  }
+
+  /* Marges images réduites */
+  .image-container img {
+    margin: 0 10px;
+  }
+
+  /* Menu bouton plus petit */
+  #menuBtn {
+    font-size: 24px;
+    top: 15px;
+    right: 15px;
+  }
+
+  /* Menu latéral plus étroit */
+  #sideMenu {
+    width: 200px;
+  }
+
+  /* Social icons plus petits */
+  .social-icons img {
+    width: 30px;
+  }
+}
+
+/* Sur écrans très petits mobiles max 480px */
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 32px;
+    left: 5px;
+    transform: scaleY(1.2);
+  }
+
+  h2 {
+    font-size: 20px;
+    left: 10px;
+  }
+
+  #menuBtn {
+    font-size: 20px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .colordrawing,
+  .BWdrawing,
+  .Stopmotion,
+  .clickable-img {
+    width: 100%;
+  }
+
+  .image-container img {
+    margin: 0 5px;
+  }
+
+  .social-icons img {
+    width: 24px;
+  }
+}
