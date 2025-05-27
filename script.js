@@ -10,12 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
   menuBtn.onclick = () => sideMenu.classList.add('open');
   closeBtn.onclick = () => sideMenu.classList.remove('open');
 
-  // Zoom image
+  // Zoom image uniquement si l'image n'est pas dans un lien
   images.forEach(img => {
-    img.onclick = function () {
-      modal.classList.add('flex');
-      modalImg.src = this.src;
-    };
+    if (!img.closest('a')) {
+      img.onclick = function () {
+        modal.classList.add('flex');
+        modalImg.src = this.src;
+      };
+    }
   });
 
   // Empêche la fermeture si on clique sur l'image elle-même
@@ -38,5 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
         modalImg.src = '';
       }
     }
+  });
+
+  // Fermeture automatique du modal au retour sur la page
+  window.addEventListener('pageshow', () => {
+    modal.classList.remove('flex');
+    modalImg.src = '';
   });
 });
