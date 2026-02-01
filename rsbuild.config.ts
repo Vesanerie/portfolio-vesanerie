@@ -9,6 +9,6 @@ export default defineConfig({
     favicon: './public/favicon.png', // Point this to your sketchbook SVG
   },
   output: {
-    assetPrefix: process.env.NODE_ENV === 'production' ? '/your-repo-name/' : '/',
+    assetPrefix: '/',
   },
 });
