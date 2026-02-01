@@ -13,32 +13,32 @@ const PORTFOLIO_ITEMS: ArtWork[] = [
   {
     id: 0,
     title: "Example 1",
-    url: "/images/Carnet-Rouge-67.jpeg",
+    url: "images/Carnet-Rouge-67.jpeg",
   },
   {
     id: 1,
     title: "Example 2",
-    url: "/images/Carnet-Rouge-68.jpeg",
+    url: "images/Carnet-Rouge-68.jpeg",
   },
   {
     id: 2,
     title: "Example 3",
-    url: "/images/Carnet-Rouge-69.jpeg",
+    url: "images/Carnet-Rouge-69.jpeg",
   },
   {
     id: 2,
     title: "Example 4",
-    url: "/images/Carnet-Rouge-70.jpeg",
+    url: "images/Carnet-Rouge-70.jpeg",
   },
   {
     id: 2,
     title: "Example 5",
-    url: "/images/Carnet-Rouge-71.jpeg",
+    url: "images/Carnet-Rouge-71.jpeg",
   },
   {
     id: 2,
     title: "Example 6",
-    url: "/images/Carnet-Rouge-72.jpeg",
+    url: "images/Carnet-Rouge-72.jpeg",
   },
 ];
 
