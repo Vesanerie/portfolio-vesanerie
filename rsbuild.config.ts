@@ -9,6 +9,6 @@ export default defineConfig({
     favicon: './public/favicon.png', // Point this to your sketchbook SVG
   },
   output: {
-    assetPrefix: '/',
+    assetPrefix: './',
   },
 });
