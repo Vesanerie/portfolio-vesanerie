@@ -2,19 +2,26 @@
 
 /* --- Variables & Reset --- */
 :root {
-  --bg-main: #121212;
-  --bg-secondary: #1e1e1e;
-  --text-primary: #e0e0e0;
-  --text-muted: #a0a0a0;
-  --border-color: #2a2a2a;
-  --accent-color: #ffffff;
+  /* Backgrounds */
+  --bg-primary: #0a0a0a;    /* Deep Black */
+  --bg-secondary: #121212;  /* Slightly lighter charcoal */
+  
+  /* Accents */
+  --malachite: #04E762;
+  --malachite-dim: rgba(4, 231, 98, 0.15); /* For subtle glows */
+  
+  /* Text */
+  --text-main: #f5f5f5;
+  --text-muted: #888888;
+  
+  --border-color: #222222;
 }
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-main);
-  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
   overflow-x: hidden;
 }
 
@@ -24,7 +31,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
@@ -34,20 +41,24 @@ body {
 .navbar h2 {
   margin: 0;
   font-weight: 300;
-  letter-spacing: 1px;
-  color: var(--accent-color);
+  letter-spacing: 2px;
+  color: var(--malachite);
+  text-transform: uppercase;
+  font-size: 1.2rem;
 }
 
 .nav-links a {
   margin-left: 20px;
   text-decoration: none;
   color: var(--text-muted);
+  font-size: 0.9rem;
   font-weight: 500;
-  transition: color 0.2s;
+  transition: all 0.2s;
 }
 
 .nav-links a:hover {
-  color: var(--accent-color);
+  color: var(--malachite);
+  text-shadow: 0 0 10px var(--malachite-dim);
 }
 
 /* --- Main Container --- */
@@ -59,40 +70,70 @@ body {
 
 /* --- Masonry Gallery Grid --- */
 .gallery-grid {
-  /* Using CSS Columns for Masonry */
   column-count: 3;
   column-gap: 20px;
   width: 100%;
 }
 
 .gallery-item {
-  display: inline-block; /* Required for column-flow */
+  display: inline-block;
   width: 100%;
   margin-bottom: 20px;
-  cursor: pointer;
+  position: relative; /* For watermark positioning */
+  cursor: none !important;
   overflow: hidden;
-  border-radius: 8px;
-  background: var(--bg-secondary);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 4px;
+  background: #000;
+  border: 1px solid var(--border-color);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .gallery-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  transform: translateY(-8px);
+  border-color: var(--malachite);
+  box-shadow: 0 10px 30px rgba(4, 231, 98, 0.1);
 }
 
 .gallery-item img {
   width: 100%;
-  height: auto; /* Natural height for Masonry */
+  height: auto;
   display: block;
-  filter: brightness(0.9);
-  transition: filter 0.3s ease;
-  min-height: 150px; /* Placeholder space */
+  filter: grayscale(20%) brightness(0.8);
+  transition: all 0.5s ease;
 }
 
 .gallery-item:hover img {
-  filter: brightness(1.05);
+  filter: grayscale(0%) brightness(0.4); /* Dims more for watermark readability */
+  transform: scale(1.05);
+}
+
+/* --- Watermark Tooltip --- */
+.item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.item-title {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--malachite);
+  padding-bottom: 5px;
+}
+
+.gallery-item:hover .item-overlay {
+  opacity: 1;
 }
 
 /* --- Carousel / Modal Overlay --- */
@@ -102,39 +143,59 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.98);
+  backdrop-filter: blur(12px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  animation: fadeIn 0.25s ease-out;
+  animation: fadeIn 0.3s ease-out;
+  touch-action: none;
 }
 
-.carousel-content {
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
+/* Carousel Track Sliding Logic */
+.carousel-track-container {
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.carousel-slide {
+  min-width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .carousel-image {
-  max-width: 100%;
-  max-height: 80vh;
+  max-width: 90%;
+  max-height: 75vh;
   object-fit: contain;
-  border-radius: 4px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.9);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 50px rgba(0,0,0,1);
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .carousel-caption {
-  color: var(--accent-color);
+  color: var(--malachite);
   margin-top: 1.5rem;
-  font-size: 1.1rem;
-  font-weight: 300;
-  letter-spacing: 0.8px;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  text-align: center;
 }
 
 /* --- Controls --- */
@@ -142,14 +203,13 @@ body {
   background: none;
   border: none;
   color: var(--text-muted);
-  cursor: pointer;
-  padding: 10px;
-  transition: all 0.2s ease;
+  cursor: none !important;
+  padding: 15px;
+  transition: all 0.3s ease;
 }
 
 .close-btn:hover, .nav-btn:hover {
-  color: var(--accent-color);
-  transform: scale(1.1);
+  color: var(--malachite);
 }
 
 .close-btn {
@@ -157,23 +217,74 @@ body {
   top: 25px;
   right: 25px;
   z-index: 1010;
+  font-size: 1.5rem;
 }
 
 .nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(4, 231, 98, 0.05);
+  border: 1px solid rgba(4, 231, 98, 0.1);
   border-radius: 50%;
   z-index: 1010;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--malachite-dim);
+  border-color: var(--malachite);
+  transform: translateY(-50%) scale(1.1);
 }
 
-.prev-btn { left: 30px; }
-.next-btn { right: 30px; }
+.prev-btn { left: 40px; }
+.next-btn { right: 40px; }
+
+/* --- Custom Cursor --- */
+html, body, #root, .container, .app, 
+a, button, .gallery-item, .modal-overlay, .nav-btn, .close-btn {
+  cursor: none !important;
+}
+
+.custom-cursor-wrapper {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-circle {
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid var(--malachite);
+  border-radius: 50%;
+  background-color: var(--malachite-dim);
+  transition: all 0.2s ease-out;
+}
+
+.type-nav .cursor-circle {
+  width: 40px;
+  height: 40px;
+  background-color: var(--malachite-dim);
+  border-color: rgba(0, 255, 127, 0.5);
+}
+
+.custom-cursor-wrapper.hovering {
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.custom-cursor-wrapper svg {
+  filter: drop-shadow(0 0 8px var(--malachite-dim));
+}
+
+.type-action {
+  transform: translate(-50%, -50%) scale(1.3);
+}
 
 /* --- Animations & Responsiveness --- */
 @keyframes fadeIn {
@@ -182,19 +293,15 @@ body {
 }
 
 @media (max-width: 1100px) {
-  .gallery-grid {
-    column-count: 2;
-  }
+  .gallery-grid { column-count: 2; }
 }
 
 @media (max-width: 768px) {
-  .nav-btn { display: none; } /* Mobile users can tap/swipe */
-  
-  .gallery-grid {
-    column-count: 1;
-  }
-  
-  .navbar {
-    padding: 1rem;
-  }
+  .nav-btn { display: none; } 
+  .gallery-grid { column-count: 1; }
+  .navbar { padding: 1rem; }
+  .container { padding: 1rem; }
+
+  .custom-cursor-wrapper { display: none; }
+  html, body, button, a, .gallery-item { cursor: auto !important; }
 }

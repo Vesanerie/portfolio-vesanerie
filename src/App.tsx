@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Target } from 'lucide-react';
 import './App.css';
 
 // 1. Define our Data Type
@@ -26,24 +26,102 @@ const PORTFOLIO_ITEMS: ArtWork[] = [
     url: "images/Carnet-Rouge-69.jpeg",
   },
   {
-    id: 2,
+    id: 3, // Fixed duplicate ID
     title: "Example 4",
     url: "images/Carnet-Rouge-70.jpeg",
   },
   {
-    id: 2,
+    id: 4, // Fixed duplicate ID
     title: "Example 5",
     url: "images/Carnet-Rouge-71.jpeg",
   },
   {
-    id: 2,
+    id: 5, // Fixed duplicate ID
     title: "Example 6",
     url: "images/Carnet-Rouge-72.jpeg",
   },
 ];
 
+const CustomCursor = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [hoverType, setHoverType] = useState<'nav' | 'action'>('action'); // Default to action
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      setIsVisible(true);
+      setPosition({ x: e.clientX, y: e.clientY });
+
+      // Check if we are over the navbar or a link within it
+      const target = e.target as HTMLElement;
+      if (target.closest('.navbar')) {
+        setHoverType('nav');
+      } else {
+        setHoverType('action');
+      }
+    };
+
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
+
+    window.addEventListener('mousemove', moveCursor);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseenter', handleMouseEnter);
+
+    return () => {
+      window.removeEventListener('mousemove', moveCursor);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseenter', handleMouseEnter);
+    };
+  }, []);
+
+  if (!isVisible) return null;
+
+  return (
+    <div 
+      className={`custom-cursor-wrapper type-${hoverType}`}
+      style={{ left: `${position.x}px`, top: `${position.y}px` }}
+    >
+      {hoverType === 'action' ? (
+        <Target size={28} color="var(--malachite)" strokeWidth={1.5} />
+      ) : (
+        <div className="cursor-circle" />
+      )}
+    </div>
+  );
+};
+
 const App = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Minimum distance required to be considered a "swipe"
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null); // Reset for new swipe
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      showNext();
+    } else if (isRightSwipe) {
+      showPrev();
+    }
+  };
 
   // 3. Navigation Handlers
   const closeCarousel = () => setSelectedIndex(null);
@@ -107,14 +185,20 @@ const App = () => {
 
       {/* --- Main Gallery Grid --- */}
       <main className="container">
+        <CustomCursor />
         <div className="gallery-grid">
           {PORTFOLIO_ITEMS.map((item, index) => (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className="gallery-item"
               onClick={() => setSelectedIndex(index)}
             >
               <img src={item.url} alt={item.title} loading="lazy" />
+
+              {/* The Watermark Tooltip */}
+              <div className="item-overlay">
+                <span className="item-title">{item.title}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -122,28 +206,39 @@ const App = () => {
 
       {/* --- Carousel Overlay --- */}
       {selectedIndex !== null && (
-        <div className="modal-overlay" onClick={closeCarousel}>
+        <div
+          className="modal-overlay"
+          onClick={closeCarousel}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           {/* Close Button */}
           <button className="close-btn" onClick={closeCarousel}>
             <X size={32} />
           </button>
 
           {/* Previous Arrow */}
-          <button 
-            className="nav-btn prev-btn" 
-            onClick={(e) => { e.stopPropagation(); showPrev(); }}
+          <button
+            className="nav-btn prev-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              showPrev();
+            }}
           >
             <ChevronLeft size={48} />
           </button>
 
           {/* Image Content */}
-          <div 
-            className="carousel-content" 
-            onClick={(e) => e.stopPropagation()} /* Stop click passing to overlay */
+          <div
+            className="carousel-content"
+            onClick={(e) =>
+              e.stopPropagation()
+            } /* Stop click passing to overlay */
           >
-            <img 
-              src={PORTFOLIO_ITEMS[selectedIndex].url} 
-              alt={PORTFOLIO_ITEMS[selectedIndex].title} 
+            <img
+              src={PORTFOLIO_ITEMS[selectedIndex].url}
+              alt={PORTFOLIO_ITEMS[selectedIndex].title}
               className="carousel-image"
             />
             <div className="carousel-caption">
@@ -152,9 +247,12 @@ const App = () => {
           </div>
 
           {/* Next Arrow */}
-          <button 
-            className="nav-btn next-btn" 
-            onClick={(e) => { e.stopPropagation(); showNext(); }}
+          <button
+            className="nav-btn next-btn"
+            onClick={(e) => {
+              e.stopPropagation();
+              showNext();
+            }}
           >
             <ChevronRight size={48} />
           </button>
