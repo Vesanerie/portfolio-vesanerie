@@ -26,17 +26,17 @@ const PORTFOLIO_ITEMS: ArtWork[] = [
     url: "images/Carnet-Rouge-69.jpeg",
   },
   {
-    id: 3, // Fixed duplicate ID
+    id: 3,
     title: "Example 4",
     url: "images/Carnet-Rouge-70.jpeg",
   },
   {
-    id: 4, // Fixed duplicate ID
+    id: 4,
     title: "Example 5",
     url: "images/Carnet-Rouge-71.jpeg",
   },
   {
-    id: 5, // Fixed duplicate ID
+    id: 5,
     title: "Example 6",
     url: "images/Carnet-Rouge-72.jpeg",
   },
@@ -44,7 +44,7 @@ const PORTFOLIO_ITEMS: ArtWork[] = [
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [hoverType, setHoverType] = useState<'nav' | 'action'>('action'); // Default to action
+  const [hoverType, setHoverType] = useState<'nav' | 'action'>('action');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -52,7 +52,6 @@ const CustomCursor = () => {
       setIsVisible(true);
       setPosition({ x: e.clientX, y: e.clientY });
 
-      // Check if we are over the navbar or a link within it
       const target = e.target as HTMLElement;
       if (target.closest('.navbar')) {
         setHoverType('nav');
@@ -97,11 +96,10 @@ const App = () => {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  // Minimum distance required to be considered a "swipe"
   const minSwipeDistance = 50;
 
   const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null); // Reset for new swipe
+    setTouchEnd(null); 
     setTouchStart(e.targetTouches[0].clientX);
   };
 
