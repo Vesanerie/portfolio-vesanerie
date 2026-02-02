@@ -66,6 +66,7 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
+  min-height: 80vh; /* Ensure footer pushes down if added later */
 }
 
 /* --- Masonry Gallery Grid --- */
@@ -153,29 +154,11 @@ body {
   touch-action: none;
 }
 
-/* Carousel Track Sliding Logic */
-.carousel-track-container {
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
-.carousel-slide {
-  min-width: 100vw;
+.carousel-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
-  box-sizing: border-box;
 }
 
 .carousel-image {
@@ -292,6 +275,10 @@ a, button, .gallery-item, .modal-overlay, .nav-btn, .close-btn {
   to { opacity: 1; }
 }
 
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
 @media (max-width: 1100px) {
   .gallery-grid { column-count: 2; }
 }
@@ -304,4 +291,71 @@ a, button, .gallery-item, .modal-overlay, .nav-btn, .close-btn {
 
   .custom-cursor-wrapper { display: none; }
   html, body, button, a, .gallery-item { cursor: auto !important; }
+}
+
+/* --- New Page Styles (About / Contact) --- */
+.page-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.page-section h1 {
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--malachite);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.text-content p {
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+/* Contact Specifics */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-item .label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.contact-link {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.contact-link:hover {
+  color: var(--malachite);
+  text-shadow: 0 0 10px var(--malachite-dim);
+  padding-left: 10px; /* Slight shift on hover */
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
