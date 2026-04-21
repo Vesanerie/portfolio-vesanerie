@@ -2,25 +2,6 @@
 
 .hidden { display: none !important; }
 
-/* ===== Back Link ===== */
-.back-link {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 999;
-  font-family: 'Bangers', sans-serif;
-  font-size: 18px;
-  letter-spacing: 2px;
-  border: 2px solid var(--border);
-  padding: 6px 14px;
-  background: var(--bg-card);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.back-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 4px 4px 0 var(--border);
-}
 
 /* ========================================
    PILE VIEW — Stack of books
@@ -64,6 +45,8 @@
 }
 
 .pile-book {
+  all: unset;
+  box-sizing: border-box;
   width: 260px;
   height: 340px;
   border: 3px solid var(--border);
@@ -399,11 +382,6 @@
 }
 
 @media (max-width: 400px) {
-  .pile-stack {
-    width: 260px;
-    height: 400px;
-  }
-
   .pile-book {
     width: 200px;
     height: 270px;
