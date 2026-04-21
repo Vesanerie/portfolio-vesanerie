@@ -60,9 +60,9 @@
   gap: 16px;
   cursor: pointer;
   position: relative;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.35s;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
+  box-shadow: 8px 8px 0 0 var(--border);
 }
 
 /* Size variants */
@@ -81,7 +81,7 @@
 
 .pile-book:hover {
   transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
-  box-shadow: 8px 8px 0 var(--border);
+  box-shadow: 12px 12px 0 0 var(--border);
   z-index: 100;
 }
 
@@ -150,6 +150,60 @@
 }
 
 /* ========================================
+   IMAGE GALLERY
+   ======================================== */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 960px;
+  padding: 0 20px 40px;
+}
+
+.gallery-item {
+  border: 3px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 4px 4px 0 0 var(--border);
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 0 0 var(--border);
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Lightbox */
+.gallery-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.gallery-lightbox.open {
+  display: flex;
+}
+
+.gallery-lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+/* ========================================
    TIKTOK SCROLL
    ======================================== */
 
@@ -177,7 +231,7 @@
 
 .pile-phone:hover {
   transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
-  box-shadow: 8px 8px 0 var(--border);
+  box-shadow: 12px 12px 0 0 var(--border);
   z-index: 100;
 }
 

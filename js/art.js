@@ -20,7 +20,7 @@ var carnetsView = document.getElementById('carnets-view');
 var currentSubPile = null;
 
 // ===== Pile: click to open a book or folder =====
-document.querySelectorAll('.pile-book').forEach(function(card) {
+document.querySelectorAll('.pile-book, .pile-phone').forEach(function(card) {
   card.addEventListener('click', function() {
     var folder = card.getAttribute('data-folder');
     if (folder) {
@@ -51,6 +51,39 @@ function openFolder(folderId) {
     closeFolder();
   };
 }
+
+// TikTok scroll counter + arrows
+var tiktokScroll = document.querySelector('.tiktok-scroll');
+var tiktokCounter = document.getElementById('tiktok-counter');
+var tiktokUp = document.getElementById('tiktok-up');
+var tiktokDown = document.getElementById('tiktok-down');
+if (tiktokScroll && tiktokCounter) {
+  var tiktokTotal = tiktokScroll.querySelectorAll('.tiktok-embed-wrap').length;
+  var itemH = 580;
+
+  tiktokScroll.addEventListener('scroll', function() {
+    var idx = Math.round(tiktokScroll.scrollTop / itemH);
+    tiktokCounter.textContent = (idx + 1) + ' / ' + tiktokTotal;
+  });
+
+  tiktokUp.addEventListener('click', function() {
+    var idx = Math.round(tiktokScroll.scrollTop / itemH);
+    if (idx > 0) tiktokScroll.scrollTo({ top: (idx - 1) * itemH, behavior: 'smooth' });
+  });
+
+  tiktokDown.addEventListener('click', function() {
+    var idx = Math.round(tiktokScroll.scrollTop / itemH);
+    if (idx < tiktokTotal - 1) tiktokScroll.scrollTo({ top: (idx + 1) * itemH, behavior: 'smooth' });
+  });
+}
+
+// Gallery lightbox
+document.querySelectorAll('.gallery-item img').forEach(function(img) {
+  img.addEventListener('click', function() {
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+  });
+});
 
 function closeFolder() {
   if (currentSubPile) {

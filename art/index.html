@@ -92,6 +92,12 @@
       <div class="pile-sub">Identit&eacute;s &amp; illustrations</div>
     </div>
     <div class="pile-stack">
+      <button class="pile-book pile-lg" data-folder="esport" style="--rot: -2deg; --ox: 0px; --oy: 8px;">
+        <div class="pile-book-icon">&#127918;</div>
+        <div class="pile-book-title">Esport Team</div>
+        <div class="pile-book-type">Identit&eacute; visuelle</div>
+      </button>
+
       <button class="pile-book pile-md" data-book="rk-brand" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/RK_Final_Brand_Concept.pdf" data-single="true" style="--rot: -2deg; --ox: 0px; --oy: 10px;">
         <div class="pile-book-icon">&#10022;</div>
         <div class="pile-book-title">RK Brand Concept</div>
@@ -112,6 +118,37 @@
         <div class="pile-book-title">Carnets</div>
         <div class="pile-book-type">3 carnets</div>
       </button>
+    </div>
+  </div>
+
+  <!-- ===== VUE ESPORT ===== -->
+  <div class="pile-view hidden" id="esport-view">
+    <div class="pile-header">
+      <div class="pile-title">Esport Team</div>
+      <div class="pile-sub">Identit&eacute; visuelle</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/EsporT%20Team/Banniere%20twitter_exo.png" alt="Banniere Twitter" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/EsporT%20Team/Exo%20Visu.png" alt="Exo Visu" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/EsporT%20Team/Jersey_presentation_exo%20carr%C3%A9.png" alt="Jersey presentation carre" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/EsporT%20Team/Jersey_presentation_exo.png" alt="Jersey presentation" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/EsporT%20Team/Maillot%20simple_exo.png" alt="Maillot simple" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/EsporT%20Team/Maillot_fruit_exo.png" alt="Maillot fruit" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/EsporT%20Team/fiche%20joueur_exo.png" alt="Fiche joueur" loading="lazy">
+      </div>
     </div>
   </div>
 
@@ -455,6 +492,11 @@
       <button class="nav-btn" id="next-btn" onclick="nextPage()">Suiv. &rarr;</button>
     </div>
 
+  </div>
+
+  <!-- Lightbox -->
+  <div class="gallery-lightbox" id="lightbox" onclick="this.classList.remove('open')">
+    <img id="lightbox-img" src="" alt="">
   </div>
 
   <script src="../js/main.js"></script>
