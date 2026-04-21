@@ -24,7 +24,24 @@
       <!-- Écran -->
       <div class="screen-shell">
         <div class="screen-inner">
-          <iframe src="https://gesturo.fr/" class="screen-iframe" title="Gesturo"></iframe>
+
+          <!-- Bureau -->
+          <div class="desktop" id="desktop">
+            <button class="app-icon" data-url="https://gesturo.fr/">
+              <div class="app-icon-img">&#9998;</div>
+              <div class="app-icon-name">Gesturo</div>
+            </button>
+          </div>
+
+          <!-- Vue site (cachée par défaut) -->
+          <div class="site-view hidden" id="site-view">
+            <div class="site-topbar">
+              <button class="site-back" id="site-back">&larr;</button>
+              <span class="site-url" id="site-url"></span>
+            </div>
+            <iframe class="site-iframe" id="site-iframe" title="Projet"></iframe>
+          </div>
+
         </div>
       </div>
 
@@ -51,5 +68,6 @@
   </div>
 
   <script src="../js/main.js"></script>
+  <script src="../js/tech.js"></script>
 </body>
 </html>

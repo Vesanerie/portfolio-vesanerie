@@ -45,9 +45,101 @@
   position: relative;
 }
 
-.screen-iframe {
+/* ===== Bureau ===== */
+.desktop {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 12px;
+  padding: 28px 24px;
+}
+
+.app-icon {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+.app-icon:hover {
+  border-color: var(--border);
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+.app-icon:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.app-icon-img {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.app-icon-name {
+  font-family: 'Bangers', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--text);
+  text-align: center;
+}
+
+/* ===== Vue site ===== */
+.site-view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-view.hidden {
+  display: none;
+}
+
+.site-topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  background: var(--bg);
+  border-bottom: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.site-back {
+  all: unset;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text);
+  padding: 2px 8px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-card);
+  transition: opacity 0.2s;
+}
+
+.site-back:hover {
+  opacity: 0.6;
+}
+
+.site-url {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.site-iframe {
+  flex: 1;
+  width: 100%;
   border: none;
   display: block;
 }
@@ -65,7 +157,6 @@
   gap: 14px;
 }
 
-/* ===== Clavier grille simple ===== */
 .keyboard {
   display: flex;
   flex-direction: column;
@@ -88,7 +179,6 @@
   border-radius: 5px;
 }
 
-/* ===== Trackpad ===== */
 .trackpad {
   width: 200px;
   height: 110px;
@@ -114,6 +204,23 @@
     border-width: 2px;
   }
 
+  .desktop {
+    padding: 16px 12px;
+    gap: 8px;
+  }
+
+  .app-icon {
+    padding: 10px 14px;
+  }
+
+  .app-icon-img {
+    font-size: 34px;
+  }
+
+  .app-icon-name {
+    font-size: 13px;
+  }
+
   .base-shell {
     padding: 14px 14px 12px;
     gap: 10px;
@@ -126,13 +233,8 @@
     border-radius: 4px;
   }
 
-  .kb-row {
-    gap: 4px;
-  }
-
-  .keyboard {
-    gap: 4px;
-  }
+  .kb-row { gap: 4px; }
+  .keyboard { gap: 4px; }
 
   .trackpad {
     width: 140px;
