@@ -76,6 +76,7 @@ function openPdfBook(pdfUrl) {
   bookEl.style.display = 'none';
   bookNav.style.display = 'none';
   pdfContainer.style.display = '';
+  pdfContainer.style.width = '100%';
   pdfContainer.innerHTML = '<div class="book-loading">Chargement du PDF...</div>';
 
   // Switch views
@@ -99,89 +100,156 @@ async function loadPdfAsBook(url, container) {
     var pdf = await pdfjsLib.getDocument(url).promise;
     var numPages = pdf.numPages;
 
-    container.innerHTML = '';
-
-    // Create book wrapper
-    var wrapper = document.createElement('div');
-    wrapper.className = 'pdf-book-wrapper';
-    container.appendChild(wrapper);
-
-    var pagesEl = document.createElement('div');
-    pagesEl.className = 'pdf-book';
-    wrapper.appendChild(pagesEl);
-
-    var pdfPages = [];
+    var pdfPages = new Array(numPages).fill(null);
     var pdfCurrentPage = 0;
 
-    // Render pages
-    for (var i = 1; i <= numPages; i++) {
-      var page = await pdf.getPage(i);
+    async function renderPage(idx) {
+      if (pdfPages[idx]) return pdfPages[idx];
+      var page = await pdf.getPage(idx + 1);
       var scale = 1.5;
       var viewport = page.getViewport({ scale: scale });
-
       var canvas = document.createElement('canvas');
       canvas.width = viewport.width;
       canvas.height = viewport.height;
-
       await page.render({
         canvasContext: canvas.getContext('2d'),
         viewport: viewport
       }).promise;
-
-      var pageDiv = document.createElement('div');
-      pageDiv.className = 'pdf-page';
-      if (i > 1) pageDiv.style.display = 'none';
-      pageDiv.appendChild(canvas);
-      pagesEl.appendChild(pageDiv);
-      pdfPages.push(pageDiv);
+      pdfPages[idx] = canvas;
+      return canvas;
     }
 
-    // Show first page
-    pdfPages[0].style.display = '';
+    // Render first page immediately
+    await renderPage(0);
 
-    // Navigation
-    var nav = document.createElement('div');
-    nav.className = 'book-nav';
-    nav.innerHTML =
-      '<button class="nav-btn" id="pdf-prev">&#8592; Pr\u00e9c.</button>' +
-      '<span class="nav-indicator" id="pdf-indicator">1 / ' + numPages + '</span>' +
-      '<button class="nav-btn" id="pdf-next">Suiv. &#8594;</button>';
-    container.appendChild(nav);
+    // Build fullscreen viewer
+    container.innerHTML = '';
+    var viewer = document.createElement('div');
+    viewer.className = 'pdf-reader';
+    container.appendChild(viewer);
 
-    var prevBtn = nav.querySelector('#pdf-prev');
-    var nextBtn = nav.querySelector('#pdf-next');
-    var indicator = nav.querySelector('#pdf-indicator');
+    var display = document.createElement('div');
+    display.className = 'pdf-display';
+    viewer.appendChild(display);
 
-    function showPdfPage(idx) {
-      pdfPages[pdfCurrentPage].style.display = 'none';
-      pdfCurrentPage = idx;
-      pdfPages[pdfCurrentPage].style.display = '';
-      indicator.textContent = (pdfCurrentPage + 1) + ' / ' + numPages;
-      prevBtn.disabled = pdfCurrentPage === 0;
-      nextBtn.disabled = pdfCurrentPage >= numPages - 1;
+    // Click zones
+    var zoneLeft = document.createElement('div');
+    zoneLeft.className = 'pdf-zone pdf-zone-left';
+    display.appendChild(zoneLeft);
+
+    var zoneRight = document.createElement('div');
+    zoneRight.className = 'pdf-zone pdf-zone-right';
+    display.appendChild(zoneRight);
+
+    // Page counter
+    var counter = document.createElement('div');
+    counter.className = 'pdf-counter';
+    container.appendChild(counter);
+
+    // Build spreads: page 0 alone (cover), then pairs [1,2], [3,4], etc.
+    var spreads = [];
+    spreads.push([0]); // cover alone
+    for (var s = 1; s < numPages; s += 2) {
+      if (s + 1 < numPages) {
+        spreads.push([s, s + 1]);
+      } else {
+        spreads.push([s]);
+      }
     }
 
-    prevBtn.disabled = true;
-    if (numPages <= 1) nextBtn.disabled = true;
+    var currentSpread = 0;
+    var isAnimating = false;
 
-    prevBtn.addEventListener('click', function() {
-      if (pdfCurrentPage > 0) showPdfPage(pdfCurrentPage - 1);
-    });
-    nextBtn.addEventListener('click', function() {
-      if (pdfCurrentPage < numPages - 1) showPdfPage(pdfCurrentPage + 1);
+    function copyCanvas(source) {
+      var copy = document.createElement('canvas');
+      copy.width = source.width;
+      copy.height = source.height;
+      copy.getContext('2d').drawImage(source, 0, 0);
+      return copy;
+    }
+
+    function buildSpreadEl(spread, canvases) {
+      var spreadDiv = document.createElement('div');
+      spreadDiv.className = spread.length === 1 ? 'pdf-spread pdf-spread-single' : 'pdf-spread';
+      spreadDiv.appendChild(copyCanvas(canvases[0]));
+      if (canvases.length === 2) {
+        var spine = document.createElement('div');
+        spine.className = 'pdf-spine';
+        spreadDiv.appendChild(spine);
+        spreadDiv.appendChild(copyCanvas(canvases[1]));
+      }
+      return spreadDiv;
+    }
+
+    async function loadSpreadCanvases(idx) {
+      var spread = spreads[idx];
+      var canvases = [];
+      for (var i = 0; i < spread.length; i++) {
+        canvases.push(await renderPage(spread[i]));
+      }
+      return canvases;
+    }
+
+    async function showSpread(idx, direction) {
+      if (isAnimating) return;
+      if (idx < 0 || idx >= spreads.length) return;
+
+      var newCanvases = await loadSpreadCanvases(idx);
+
+      // Preload neighbors
+      if (idx + 1 < spreads.length) loadSpreadCanvases(idx + 1);
+      if (idx - 1 >= 0) loadSpreadCanvases(idx - 1);
+
+      display.querySelectorAll('.pdf-page-wrapper').forEach(function(w) { w.remove(); });
+      var wrapper = document.createElement('div');
+      wrapper.className = 'pdf-page-wrapper';
+      wrapper.appendChild(buildSpreadEl(spreads[idx], newCanvases));
+      display.insertBefore(wrapper, display.firstChild);
+
+      currentSpread = idx;
+
+      var spread = spreads[idx];
+      var first = spread[0] + 1;
+      var last = spread[spread.length - 1] + 1;
+      counter.textContent = (first === last ? first : first + '-' + last) + ' / ' + numPages;
+    }
+
+    showSpread(0, null);
+
+    zoneLeft.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (currentSpread > 0) showSpread(currentSpread - 1, 'prev');
     });
 
-    // Keyboard
+    zoneRight.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (currentSpread < spreads.length - 1) showSpread(currentSpread + 1, 'next');
+    });
+
     container._keyHandler = function(e) {
       if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
-        if (pdfCurrentPage < numPages - 1) showPdfPage(pdfCurrentPage + 1);
+        if (currentSpread < spreads.length - 1) showSpread(currentSpread + 1, 'next');
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        if (pdfCurrentPage > 0) showPdfPage(pdfCurrentPage - 1);
+        if (currentSpread > 0) showSpread(currentSpread - 1, 'prev');
       }
     };
     document.addEventListener('keydown', container._keyHandler);
+
+    var startX = 0;
+    container._touchStart = function(e) {
+      startX = e.touches[0].clientX;
+    };
+    container._touchEnd = function(e) {
+      var diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && currentSpread < spreads.length - 1) showSpread(currentSpread + 1, 'next');
+        else if (diff < 0 && currentSpread > 0) showSpread(currentSpread - 1, 'prev');
+      }
+    };
+    display.addEventListener('touchstart', container._touchStart, { passive: true });
+    display.addEventListener('touchend', container._touchEnd, { passive: true });
 
   } catch (err) {
     container.innerHTML = '<div class="book-loading">Erreur de chargement du PDF</div>';
@@ -197,6 +265,13 @@ function closeBook() {
   if (isPdfMode) {
     if (pdfContainer._keyHandler) {
       document.removeEventListener('keydown', pdfContainer._keyHandler);
+    }
+    if (pdfContainer._touchStart) {
+      var pdfDisplay = pdfContainer.querySelector('.pdf-display');
+      if (pdfDisplay) {
+        pdfDisplay.removeEventListener('touchstart', pdfContainer._touchStart);
+        pdfDisplay.removeEventListener('touchend', pdfContainer._touchEnd);
+      }
     }
     pdfContainer.innerHTML = '';
     pdfContainer.style.display = 'none';
@@ -252,6 +327,7 @@ bookEl.addEventListener('click', function() {
 // Keyboard navigation (only when book is open)
 document.addEventListener('keydown', function(e) {
   if (bookView.classList.contains('hidden')) return;
+  if (isPdfMode) return;
   if (e.key === 'ArrowRight' || e.key === ' ') {
     e.preventDefault();
     nextPage();

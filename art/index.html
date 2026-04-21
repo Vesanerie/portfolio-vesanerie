@@ -4,19 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vesanerie — Art</title>
+  <meta name="description" content="Portfolio art de Valentin Mardoukhaev — Fanzines, bande dessinee, illustration, graphisme.">
+  <meta property="og:title" content="Vesanerie — Art">
+  <meta property="og:description" content="Portfolio art de Valentin Mardoukhaev — Fanzines, bande dessinee, illustration, graphisme.">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/art.css">
   <link rel="stylesheet" href="../css/pdf-viewer.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha512-q+4liFwdPC/bNdhupZfAhzIRAiV8QJCh6LoXb5fMjjxJAYVFI0sD+CIiJKKrDSPfLfHVqIEdAE1zoGPxEhPFQ==" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <div class="theme-toggle" onclick="toggleTheme()">
+  <button class="theme-toggle" aria-label="Changer le theme" onclick="toggleTheme()">
     <div class="dot"></div>
-  </div>
+  </button>
 
   <a href="../" class="back-link" id="back-link">&larr; Retour</a>
 
@@ -29,47 +33,47 @@
 
     <div class="pile-stack" id="pile-stack">
 
-      <div class="pile-book" data-book="random-zine" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Random%20Zine.pdf" style="--rot: -5deg; --ox: 15px; --oy: 12px;">
+      <button class="pile-book" data-book="random-zine" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Random%20Zine%202.pdf" style="--rot: -5deg; --ox: 15px; --oy: 12px;">
         <div class="pile-book-icon">&#9790;</div>
         <div class="pile-book-title">Random Zine</div>
         <div class="pile-book-type">Fanzine PDF</div>
-      </div>
+      </button>
 
-      <div class="pile-book" data-book="nuits-blanches" style="--rot: 2deg; --ox: -10px; --oy: 6px;">
+      <button class="pile-book" data-book="nuits-blanches" style="--rot: 2deg; --ox: -10px; --oy: 6px;">
         <div class="pile-book-icon">&#9790;</div>
         <div class="pile-book-title">Nuits Blanches</div>
         <div class="pile-book-type">Fanzine</div>
-      </div>
+      </button>
 
-      <div class="pile-book" data-book="chroniques-urbaines" style="--rot: 4deg; --ox: -20px; --oy: -10px;">
+      <button class="pile-book" data-book="chroniques-urbaines" style="--rot: 4deg; --ox: -20px; --oy: -10px;">
         <div class="pile-book-icon">&#9881;</div>
         <div class="pile-book-title">Chroniques Urbaines</div>
         <div class="pile-book-type">Bande Dessin&eacute;e</div>
-      </div>
+      </button>
 
-      <div class="pile-book" data-book="portraits-perdus" style="--rot: -3deg; --ox: 25px; --oy: 18px;">
+      <button class="pile-book" data-book="portraits-perdus" style="--rot: -3deg; --ox: 25px; --oy: 18px;">
         <div class="pile-book-icon">&#9786;</div>
         <div class="pile-book-title">Portraits Perdus</div>
         <div class="pile-book-type">Illustration</div>
-      </div>
+      </button>
 
-      <div class="pile-book" data-book="identites-visuelles" style="--rot: 6deg; --ox: -15px; --oy: -14px;">
+      <button class="pile-book" data-book="identites-visuelles" style="--rot: 6deg; --ox: -15px; --oy: -14px;">
         <div class="pile-book-icon">&#10022;</div>
         <div class="pile-book-title">Identit&eacute;s Visuelles</div>
         <div class="pile-book-type">Graphisme</div>
-      </div>
+      </button>
 
-      <div class="pile-book" data-book="derives" style="--rot: -4deg; --ox: 20px; --oy: 8px;">
+      <button class="pile-book" data-book="derives" style="--rot: -4deg; --ox: 20px; --oy: 8px;">
         <div class="pile-book-icon">&#9654;</div>
         <div class="pile-book-title">D&eacute;rives</div>
         <div class="pile-book-type">Court-m&eacute;trage</div>
-      </div>
+      </button>
 
-      <div class="pile-book" data-book="carnet-croquis" style="--rot: 3deg; --ox: -25px; --oy: -12px;">
+      <button class="pile-book" data-book="carnet-croquis" style="--rot: 3deg; --ox: -25px; --oy: -12px;">
         <div class="pile-book-icon">&#9998;</div>
         <div class="pile-book-title">Carnet de Croquis</div>
         <div class="pile-book-type">Dessin</div>
-      </div>
+      </button>
 
     </div>
   </div>
@@ -359,7 +363,6 @@
   </div>
 
   <script src="../js/main.js"></script>
-  <script src="../js/pdf-viewer.js"></script>
   <script src="../js/art.js"></script>
 </body>
 </html>

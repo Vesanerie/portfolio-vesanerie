@@ -7,20 +7,6 @@
   padding: 60px 20px 40px;
 }
 
-.back-link {
-  position: fixed;
-  top: 22px;
-  left: 20px;
-  z-index: 999;
-  font-size: 14px;
-  letter-spacing: 1px;
-  color: var(--text-muted);
-  transition: color 0.2s;
-}
-
-.back-link:hover {
-  color: var(--text);
-}
 
 /* ===== Laptop ===== */
 .laptop {
