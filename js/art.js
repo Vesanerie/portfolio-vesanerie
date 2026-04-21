@@ -37,14 +37,26 @@ document.querySelectorAll('.pile-book, .pile-phone').forEach(function(card) {
   }
 });
 
+var folderHistory = [];
+
 function openFolder(folderId) {
   var folderView = document.getElementById(folderId + '-view');
   if (!folderView) return;
-  pileView.classList.add('hidden');
+
+  // Hide current view
+  if (currentSubPile) {
+    var currentView = document.getElementById(currentSubPile + '-view');
+    if (currentView) currentView.classList.add('hidden');
+    folderHistory.push(currentSubPile);
+  } else {
+    pileView.classList.add('hidden');
+    folderHistory = [];
+  }
+
   folderView.classList.remove('hidden');
   currentSubPile = folderId;
 
-  backLink.textContent = '\u2190 Pile';
+  backLink.textContent = '\u2190 Retour';
   backLink.href = '#';
   backLink.onclick = function(e) {
     e.preventDefault();
@@ -89,12 +101,26 @@ function closeFolder() {
   if (currentSubPile) {
     var folderView = document.getElementById(currentSubPile + '-view');
     if (folderView) folderView.classList.add('hidden');
-    currentSubPile = null;
   }
-  pileView.classList.remove('hidden');
-  backLink.textContent = '\u2190 Retour';
-  backLink.href = '../';
-  backLink.onclick = null;
+
+  // Go back to parent folder or main pile
+  if (folderHistory.length > 0) {
+    currentSubPile = folderHistory.pop();
+    var parentView = document.getElementById(currentSubPile + '-view');
+    if (parentView) parentView.classList.remove('hidden');
+    backLink.textContent = '\u2190 Retour';
+    backLink.href = '#';
+    backLink.onclick = function(e) {
+      e.preventDefault();
+      closeFolder();
+    };
+  } else {
+    currentSubPile = null;
+    pileView.classList.remove('hidden');
+    backLink.textContent = '\u2190 Retour';
+    backLink.href = '../';
+    backLink.onclick = null;
+  }
 }
 
 async function loadPdfCover(url, card) {
