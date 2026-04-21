@@ -154,15 +154,16 @@
    ======================================== */
 
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  columns: 3;
+  column-gap: 16px;
   width: 100%;
   max-width: 960px;
   padding: 0 20px 40px;
 }
 
 .gallery-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
   border: 3px solid var(--border);
   overflow: hidden;
   cursor: pointer;
@@ -313,7 +314,7 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   border-radius: 8px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .tiktok-scroll::-webkit-scrollbar {
@@ -371,7 +372,7 @@
 }
 
 /* ========================================
-   BOOK VIEW — Flip-through pages
+   BOOK VIEW (PDF only)
    ======================================== */
 
 .book-view {
@@ -382,215 +383,6 @@
   justify-content: center;
   padding: 40px 20px;
   gap: 30px;
-}
-
-.book-wrapper {
-  perspective: 1800px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 900px;
-}
-
-.book {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  aspect-ratio: 4 / 3;
-  transform-style: preserve-3d;
-}
-
-/* All book-pages groups are hidden by default */
-.book-pages {
-  display: none;
-}
-
-.book-pages.active {
-  display: block;
-}
-
-/* ===== Pages ===== */
-.page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform-origin: left center;
-  transform-style: preserve-3d;
-  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-  cursor: pointer;
-}
-
-.page.flipped {
-  transform: rotateY(-180deg);
-}
-
-.page-front,
-.page-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border: 3px solid var(--border);
-  background: var(--bg-card);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  gap: 20px;
-}
-
-.page-back {
-  transform: rotateY(180deg);
-}
-
-/* ===== Page Content ===== */
-.page-number {
-  position: absolute;
-  bottom: 16px;
-  font-size: 12px;
-  color: var(--text-muted);
-  letter-spacing: 2px;
-}
-
-.page-number.left { left: 20px; }
-.page-number.right { right: 20px; }
-
-.page-title {
-  font-family: 'Bangers', sans-serif;
-  font-size: clamp(28px, 5vw, 48px);
-  letter-spacing: 4px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.page-subtitle {
-  font-size: clamp(11px, 2vw, 14px);
-  color: var(--text-muted);
-  letter-spacing: 2px;
-  text-align: center;
-}
-
-.page-desc {
-  font-size: clamp(12px, 1.8vw, 15px);
-  color: var(--text-muted);
-  line-height: 1.8;
-  text-align: center;
-  max-width: 500px;
-  letter-spacing: 0.5px;
-}
-
-.page-image-placeholder {
-  width: 80%;
-  max-width: 360px;
-  aspect-ratio: 4 / 3;
-  border: 3px dashed var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-  background: var(--bg);
-}
-
-.page-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.page-tag {
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  border: 2px solid var(--border);
-  padding: 4px 10px;
-  color: var(--text-muted);
-}
-
-/* ===== Cover & End Cover ===== */
-.cover-icon {
-  font-size: clamp(48px, 10vw, 80px);
-  line-height: 1;
-}
-
-.cover-author {
-  font-size: clamp(11px, 1.6vw, 13px);
-  color: var(--text-muted);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-.page-endcover {
-  gap: 24px;
-}
-
-/* ===== Navigation ===== */
-.book-nav {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.nav-btn {
-  font-family: 'Bangers', sans-serif;
-  font-size: 20px;
-  letter-spacing: 2px;
-  border: 3px solid var(--border);
-  background: var(--bg-card);
-  color: var(--text);
-  padding: 10px 24px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.4s, color 0.4s;
-}
-
-.nav-btn:hover:not(:disabled) {
-  transform: translateY(-3px);
-  box-shadow: 5px 5px 0 var(--border);
-}
-
-.nav-btn:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.nav-indicator {
-  font-size: 12px;
-  color: var(--text-muted);
-  letter-spacing: 2px;
-  min-width: 60px;
-  text-align: center;
-}
-
-/* ===== Page Shadow ===== */
-.page.flipped .page-front::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(to left, rgba(0,0,0,0.08), transparent);
-  pointer-events: none;
-}
-
-.page:not(.flipped) .page-back::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0,0,0,0.08), transparent);
-  pointer-events: none;
 }
 
 /* ========================================
@@ -629,26 +421,6 @@
     gap: 20px;
   }
 
-  .book {
-    aspect-ratio: 3 / 4;
-  }
-
-  .page-front,
-  .page-back {
-    padding: 24px 16px;
-    gap: 14px;
-  }
-
-  .page-image-placeholder {
-    width: 90%;
-    max-width: 240px;
-  }
-
-  .nav-btn {
-    font-size: 16px;
-    padding: 8px 16px;
-  }
-
   .back-link {
     font-size: 14px;
     padding: 4px 10px;
@@ -664,15 +436,5 @@
 
   .pile-book-title {
     font-size: 18px;
-  }
-
-  .page-front,
-  .page-back {
-    padding: 16px 10px;
-    gap: 10px;
-  }
-
-  .page-title {
-    font-size: 24px;
   }
 }

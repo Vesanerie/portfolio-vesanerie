@@ -1,8 +1,8 @@
 # Audit complet — Vesanerie-sur-Internet
 
-> Date : 2026-04-21 (mis a jour)
+> Date : 2026-04-21 (3e revision)
 > Auteur : Claude (audit automatique)
-> Statut : **partiellement corrige** — voir detail ci-dessous
+> Statut : **partiellement corrige** — 14 points corriges, 12 restants
 
 ---
 
@@ -10,108 +10,125 @@
 
 | Fichier | Lignes | Role |
 |---|---|---|
-| `index.html` | 45 | Landing page |
-| `art/index.html` | 445 | Portfolio art (pile + livre + PDF + TikTok + carnets) |
-| `tech/index.html` | 77 | Page tech (laptop + iframe) |
-| `css/style.css` | 171 | Base + landing + back-link |
-| `css/art.css` | 613 | Styles portfolio art (pile, phone, tiktok, book, responsive) |
+| `index.html` | 45 | Landing page (Tech / Art) |
+| `art/index.html` | 226 | Portfolio art — pile, sous-dossiers (edition, graphisme, esport, tiktoks, carnets), PDF viewer, gallery, lightbox |
+| `tech/index.html` | 77 | Page tech — laptop mockup + iframe |
+| `css/style.css` | 175 | Base + landing + back-link |
+| `css/art.css` | 679 | Styles portfolio art (pile, phone, tiktok, gallery, lightbox, book, responsive) |
 | `css/tech.css` | 231 | Styles page tech |
-| `css/pdf-viewer.css` | 115 | Styles viewer PDF |
+| `css/pdf-viewer.css` | 115 | Styles viewer PDF fullscreen |
 | `js/main.js` | 17 | Toggle theme clair/sombre |
-| `js/art.js` | 462 | Logique pile + folders + livre + PDF + TikTok |
+| `js/art.js` | 496 | Logique pile + folders + livre HTML + PDF + TikTok + lightbox |
 | `js/tech.js` | 25 | Logique bureau → iframe |
 | `package.json` | 13 | Config npm (rsbuild encore en devDep) |
 
 ---
 
-## Points CORRIGES depuis le dernier audit
+## Points CORRIGES (cumul)
 
-- ~~1a. Double handler clavier en mode PDF~~ — Corrige : `if (isPdfMode) return;` present `js/art.js:436`
-- ~~1b. Fuite memoire listeners touch du PDF~~ — Corrige : `_touchStart`/`_touchEnd` stockes et nettoyes dans `closeBook()` `js/art.js:363-369`
-- ~~1c. setTimeout couple au CSS~~ — Corrige : animation supprimee, remplacement simple dans `showSpread`
-- ~~2a. Supprimer `js/pdf-viewer.js`~~ — Corrige : fichier supprime
-- ~~2b. Retirer le script de `art/index.html`~~ — Corrige : balise script retiree
-- ~~2c. Supprimer le scaffold rsbuild~~ — Corrige : `src/index.html`, `src/index.js`, `rsbuild.config.ts` supprimes
-- ~~3a. Breakpoint 400px casse~~ — Corrige : `width`/`height` retires de `.pile-stack` dans le media query
-- ~~3b. `.back-link` duplique~~ — Corrige : unifie dans `css/style.css:147-164`, supprime de `art.css` et `tech.css`
-- ~~4a. `.theme-toggle` non accessible~~ — Corrige : `<button>` avec `aria-label` sur les 3 pages, `all: unset` en CSS
-- ~~4b. `.pile-book` non accessibles~~ — Corrige : `<button>` avec `all: unset` en CSS
-- ~~5a. CDN pdf.js sans SRI~~ — Corrige : `integrity` + `crossorigin="anonymous"` present `art/index.html:17`
-- ~~6a. Pas de meta description~~ — Corrige : present sur les 3 pages
-- ~~6c. Pas de balises Open Graph~~ — Corrige : `og:title`, `og:description`, `og:type` sur les 3 pages
+- ~~Double handler clavier en mode PDF~~ — `if (isPdfMode) return;` present
+- ~~Fuite memoire listeners touch du PDF~~ — `_touchStart`/`_touchEnd` nettoyes dans `closeBook()`
+- ~~setTimeout couple au CSS~~ — animation supprimee
+- ~~`js/pdf-viewer.js` code mort~~ — fichier supprime
+- ~~Script pdf-viewer retire de art/index.html~~
+- ~~Scaffold rsbuild supprime~~ — `src/`, `rsbuild.config.ts` supprimes
+- ~~Breakpoint 400px casse~~ — corrige
+- ~~`.back-link` duplique~~ — unifie dans `style.css`
+- ~~`.theme-toggle` non accessible~~ — `<button>` + `aria-label`
+- ~~`.pile-book` non accessible~~ — `<button>` + `all: unset`
+- ~~CDN pdf.js sans SRI~~ — `integrity` + `crossorigin` present
+- ~~Meta description manquante~~ — present sur les 3 pages
+- ~~Open Graph manquant~~ — present sur les 3 pages
+- ~~`.pile-book` manque `position: relative`~~ — present ligne 62 de `art.css`
+- ~~5 livres placeholder~~ — contenu HTML fictif retire, `#book` vide
 
 ---
 
 ## Corrections RESTANTES
 
-### 1. PACKAGE.JSON — devDependency rsbuild residuelle
+### 1. CODE MORT JS — systeme de livre HTML inutilise
 
-- **Fichier** : `package.json`
-- **Probleme** : `@rsbuild/core` est encore dans les `devDependencies` alors que le scaffold rsbuild a ete supprime. Le site est 100% vanilla, cette dependance ne sert a rien.
-- **Correction** : Retirer `@rsbuild/core` de `package.json`. Si le fichier ne contient plus que `name`/`version`/`private`/`type` sans scripts utiles, envisager de le supprimer.
-- **Priorite** : BASSE
+- **Fichier** : `js/art.js` lignes 429-495
+- **Probleme** : Tout le systeme de page-flip HTML (`updateNav`, `updateZIndex`, `nextPage`, `prevPage`, click/keyboard/swipe handlers sur `bookEl`) est mort. Le `<div id="book">` dans `art/index.html:200` est vide — plus aucun `.book-pages` n'existe. Seul le viewer PDF est utilise. Le `book-nav` (prev/next) en HTML appelle encore `prevPage()`/`nextPage()` via `onclick` mais ne sera jamais atteint.
+- **Correction** : Supprimer les fonctions `updateNav`, `updateZIndex`, `nextPage`, `prevPage`, le click handler sur `bookEl`, le keydown handler global (sauf la partie Escape), et le swipe support. Supprimer aussi le `book-nav` de `art/index.html` et le `#book` wrapper vide. Ne garder que le PDF container.
+- **Priorite** : HAUTE (code mort substantiel, ~70 lignes)
 
-### 2. FAVICON — pas lie dans les HTML
+### 2. CODE MORT CSS — styles livre HTML inutilises
 
-- **Fichier** : `index.html`, `art/index.html`, `tech/index.html`
-- **Probleme** : `favicon.png` existe dans `public/` et `dist/` mais aucun `<link rel="icon">` dans les HTML.
-- **Correction** : Ajouter `<link rel="icon" href="public/favicon.png">` dans `index.html` et `<link rel="icon" href="../public/favicon.png">` dans les sous-pages (ou copier `favicon.png` a la racine et utiliser `href="favicon.png"` / `href="../favicon.png"`).
-- **Priorite** : BASSE
+- **Fichier** : `css/art.css` lignes 373-594
+- **Probleme** : Tout le CSS `book-view`, `.book-wrapper`, `.book`, `.page`, `.page-front`, `.page-back`, `.page-number`, `.page-title`, `.page-subtitle`, `.page-desc`, `.page-image-placeholder`, `.page-tags`, `.page-tag`, `.cover-icon`, `.cover-author`, `.page-endcover`, `.book-nav`, `.nav-btn`, `.nav-indicator`, les shadows `.page.flipped`, et les responsive rules associees — tout est mort puisque plus aucun HTML ne l'utilise.
+- **Correction** : Supprimer tout le bloc CSS de `.book-view` jusqu'a `.page:not(.flipped) .page-back::after` (~220 lignes). Garder uniquement le responsive de `.pile-*` et `.back-link`.
+- **Priorite** : HAUTE (code mort substantiel, ~220 lignes)
 
-### 3. JS — `catch` vide dans `loadPdfCover`
+### 3. JS — variable `carnetsView` inutilisee
 
-- **Fichier** : `js/art.js` ligne 105
-- **Probleme** : `catch (e) {}` avale silencieusement toute erreur de chargement de couverture PDF. Si une URL est incorrecte ou le reseau echoue, aucun feedback.
-- **Correction** : Ajouter au minimum `console.warn('Cover load failed:', url, e);` dans le catch.
+- **Fichier** : `js/art.js` ligne 19
+- **Probleme** : `var carnetsView = document.getElementById('carnets-view');` est declaree mais jamais lue.
+- **Correction** : Supprimer cette ligne.
 - **Priorite** : BASSE
 
 ### 4. JS — variable `pdfCurrentPage` inutilisee
 
-- **Fichier** : `js/art.js` ligne 187
-- **Probleme** : `var pdfCurrentPage = 0;` est declaree mais jamais lue ni ecrite apres. Code mort.
+- **Fichier** : `js/art.js` ligne 221
+- **Probleme** : `var pdfCurrentPage = 0;` est declaree mais jamais lue ni ecrite.
 - **Correction** : Supprimer cette ligne.
 - **Priorite** : BASSE
 
-### 5. CSS — `.tiktok-scroll` `overflow` conflictuel
+### 5. JS — `catch (e) {}` vide dans `loadPdfCover`
 
-- **Fichier** : `css/art.css` lignes 241-246
-- **Probleme** : `overflow-y: scroll;` est suivi par `overflow: hidden;` quelques lignes plus bas. La seconde propriete ecrase la premiere — le scroll TikTok vertical ne fonctionne pas comme prevu si les iframes debordent.
-- **Correction** : Remplacer `overflow: hidden;` par `overflow-x: hidden;` pour garder le scroll vertical.
-- **Priorite** : HAUTE (impacte le fonctionnement du scroll TikTok)
+- **Fichier** : `js/art.js` ligne 139
+- **Probleme** : Les erreurs de chargement de couverture PDF sont avalees silencieusement.
+- **Correction** : Ajouter `console.warn('Cover load failed:', url, e);`.
+- **Priorite** : BASSE
 
-### 6. CSS — `.pile-book` manque `position: relative`
+### 6. CSS — `.tiktok-scroll` overflow conflictuel
 
-- **Fichier** : `css/art.css` ligne 47-64
-- **Probleme** : `.pile-book.has-cover::before` utilise `position: absolute; inset: 0;` (ligne 89-96) mais `.pile-book` n'a pas `position: relative`. Le pseudo-element se positionne par rapport au parent le plus proche avec `position`, ce qui peut donner un overlay deplace.
-- **Correction** : Ajouter `position: relative;` a `.pile-book`.
-- **Priorite** : MOYENNE
+- **Fichier** : `css/art.css` lignes 311-316
+- **Probleme** : `overflow-y: scroll;` (ligne 311) est ecrase par `overflow: hidden;` (ligne 316). Le shorthand `overflow` remplace les deux axes. Le scroll TikTok vertical est casse.
+- **Correction** : Remplacer `overflow: hidden;` par `overflow-x: hidden;`.
+- **Priorite** : HAUTE (casse le scroll TikTok)
 
-### 7. HTML — 5 livres HTML sont des placeholders
+### 7. CSS — `.landing-card` defini deux fois
 
-- **Fichier** : `art/index.html` lignes 165-426
-- **Probleme** : Les livres `nuits-blanches`, `chroniques-urbaines`, `portraits-perdus`, `identites-visuelles`, `derives`, `carnet-croquis` sont du contenu fictif avec `[ image ]` en placeholder. Ils apparaissent dans la grille mais n'ont pas de vrai contenu.
-- **Correction** : Soit remplacer par du vrai contenu (PDF ou images), soit les retirer de la grille jusqu'a ce que le contenu soit pret.
-- **Priorite** : MOYENNE (impacte l'experience utilisateur)
+- **Fichier** : `css/style.css` lignes 105-118 et 121-123
+- **Probleme** : `.landing-card` est declare deux fois. Le second bloc ajoute `box-shadow: 6px 6px 0 0 var(--border)` seul. Devrait etre fusionne dans le premier bloc.
+- **Correction** : Deplacer `box-shadow` dans le premier `.landing-card` et supprimer le second bloc.
+- **Priorite** : BASSE
 
-### 8. PERF — pdf.js charge systematiquement sur la page art
+### 8. PERF — pdf.js charge en synchrone sans `defer`
 
 - **Fichier** : `art/index.html` ligne 17
-- **Probleme** : Le script pdf.js (~800KB) est charge en synchrone dans le `<head>`, bloquant le rendu, meme si l'utilisateur ne consulte jamais un PDF.
-- **Correction** : Ajouter l'attribut `defer` a la balise script : `<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" …></script>`.
+- **Probleme** : Le script pdf.js (~800KB) bloque le rendu dans le `<head>`.
+- **Correction** : Ajouter `defer` a la balise `<script>`.
 - **Priorite** : MOYENNE
 
-### 9. A11Y — iframes TikTok sans `title`
+### 9. SEO — favicon non lie dans les HTML
 
-- **Fichier** : `art/index.html` lignes 111-120
-- **Probleme** : Les 4 `<iframe>` TikTok n'ont pas d'attribut `title`, ce qui les rend opaques pour les lecteurs d'ecran.
+- **Fichier** : `index.html`, `art/index.html`, `tech/index.html`
+- **Probleme** : `favicon.png` existe dans `public/` mais aucun `<link rel="icon">` dans les HTML.
+- **Correction** : Ajouter `<link rel="icon" href="public/favicon.png">` dans `index.html` et `<link rel="icon" href="../public/favicon.png">` dans les sous-pages.
+- **Priorite** : BASSE
+
+### 10. A11Y — iframes TikTok sans `title`
+
+- **Fichier** : `art/index.html` lignes 149-159
+- **Probleme** : Les 4 `<iframe>` TikTok n'ont pas d'attribut `title`.
 - **Correction** : Ajouter `title="Video TikTok 1"` (etc.) a chaque iframe.
 - **Priorite** : BASSE
 
-### 10. A11Y — boutons TikTok nav sans etiquettes explicites
+### 11. A11Y — lightbox img `alt` vide
 
-- **Fichier** : `art/index.html` lignes 126-128
-- **Probleme** : Les boutons `tiktok-up`/`tiktok-down` ont des `aria-label` (bien), mais le contenu textuel est une fleche unicode qui n'a pas de semantique. OK pour l'accessibilite grace au `aria-label`.
-- **Note** : Pas de correction requise — juste a verifier que les `aria-label` sont bien lus.
+- **Fichier** : `art/index.html` ligne 220
+- **Probleme** : `<img id="lightbox-img" src="" alt="">` a un alt vide en permanence. Le JS (`art.js:95`) copie le `src` mais pas le `alt` de l'image cliquee.
+- **Correction** : Dans le handler de clic gallery (`art.js:93-97`), copier aussi l'alt : `document.getElementById('lightbox-img').alt = img.alt;`.
+- **Priorite** : BASSE
+
+### 12. PACKAGE.JSON — devDependency rsbuild residuelle
+
+- **Fichier** : `package.json`
+- **Probleme** : `@rsbuild/core` est encore dans les `devDependencies`. Le site est 100% vanilla.
+- **Correction** : Retirer `@rsbuild/core` et les scripts `build`/`dev` inutiles.
+- **Priorite** : BASSE
 
 ---
 
@@ -119,15 +136,18 @@
 
 | Priorite | Ref | Probleme | Effort |
 |---|---|---|---|
-| **HAUTE** | 5 | `.tiktok-scroll` overflow conflictuel | 1 ligne |
-| **MOYENNE** | 6 | `.pile-book` manque `position: relative` | 1 ligne |
-| **MOYENNE** | 7 | 5 livres HTML sont des placeholders | Decision contenu |
+| **HAUTE** | 1 | Code mort JS — systeme livre HTML (~70 lignes) | Suppression |
+| **HAUTE** | 2 | Code mort CSS — styles livre HTML (~220 lignes) | Suppression |
+| **HAUTE** | 6 | `.tiktok-scroll` overflow conflictuel | 1 ligne |
 | **MOYENNE** | 8 | pdf.js bloquant — ajouter `defer` | 1 mot |
-| **BASSE** | 1 | devDependency rsbuild residuelle | 1 ligne |
-| **BASSE** | 2 | Favicon non lie dans les HTML | 3 lignes |
-| **BASSE** | 3 | `catch` vide dans `loadPdfCover` | 1 ligne |
+| **BASSE** | 3 | Variable `carnetsView` inutilisee | 1 ligne |
 | **BASSE** | 4 | Variable `pdfCurrentPage` inutilisee | 1 ligne |
-| **BASSE** | 9 | Iframes TikTok sans `title` | 4 lignes |
+| **BASSE** | 5 | `catch` vide dans `loadPdfCover` | 1 ligne |
+| **BASSE** | 7 | `.landing-card` defini deux fois | Fusion |
+| **BASSE** | 9 | Favicon non lie | 3 lignes |
+| **BASSE** | 10 | Iframes TikTok sans `title` | 4 lignes |
+| **BASSE** | 11 | Lightbox img alt vide | 1 ligne |
+| **BASSE** | 12 | devDependency rsbuild residuelle | 1 ligne |
 
 ---
 
@@ -137,3 +157,4 @@
 - Ne creer **aucun nouveau fichier** sauf si strictement necessaire.
 - Garder le style de code existant (vanilla JS, pas de framework, pas de bundler).
 - Tester que les 3 pages (`/`, `/art/`, `/tech/`) fonctionnent apres modifications.
+- Pour les points 1 et 2 (code mort) : bien verifier qu'aucun chemin ne mene plus au systeme de livre HTML avant de supprimer. Si un futur livre HTML est prevu, conserver le code mais le commenter.

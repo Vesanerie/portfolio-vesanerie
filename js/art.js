@@ -3,12 +3,7 @@
 var pileView = document.getElementById('pile-view');
 var bookView = document.getElementById('book-view');
 var backLink = document.getElementById('back-link');
-var bookEl = document.getElementById('book');
 var pdfContainer = document.getElementById('pdf-container');
-var bookNav = document.querySelector('.book-nav');
-var activePages = [];
-var currentPage = 0;
-var totalPages = 0;
 var isPdfMode = false;
 
 // PDF.js worker
@@ -16,7 +11,6 @@ if (typeof pdfjsLib !== 'undefined') {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 }
 
-var carnetsView = document.getElementById('carnets-view');
 var currentSubPile = null;
 
 // ===== Pile: click to open a book or folder =====
@@ -93,6 +87,7 @@ if (tiktokScroll && tiktokCounter) {
 document.querySelectorAll('.gallery-item img').forEach(function(img) {
   img.addEventListener('click', function() {
     document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
     document.getElementById('lightbox').classList.add('open');
   });
 });
@@ -136,62 +131,19 @@ async function loadPdfCover(url, card) {
     card.style.backgroundSize = 'cover';
     card.style.backgroundPosition = 'center';
     card.classList.add('has-cover');
-  } catch (e) {}
+  } catch (e) { console.warn('Cover load failed:', url, e); }
 }
 
 function openBook(bookId) {
-  // Check if this book has a PDF
   var card = document.querySelector('.pile-book[data-book="' + bookId + '"]');
   var pdfUrl = card ? card.getAttribute('data-pdf') : null;
-
-  if (pdfUrl) {
-    var singlePage = card.getAttribute('data-single') === 'true';
-    openPdfBook(pdfUrl, singlePage);
-    return;
-  }
-
-  // HTML book mode
-  isPdfMode = false;
-  pdfContainer.style.display = 'none';
-  bookEl.style.display = '';
-  bookNav.style.display = '';
-
-  // Hide all book-pages, show the selected one
-  document.querySelectorAll('.book-pages').forEach(function(bp) {
-    bp.classList.remove('active');
-  });
-  var target = document.querySelector('.book-pages[data-book="' + bookId + '"]');
-  if (!target) return;
-  target.classList.add('active');
-
-  // Reset all pages
-  activePages = target.querySelectorAll('.page');
-  totalPages = activePages.length;
-  currentPage = 0;
-  activePages.forEach(function(p) {
-    p.classList.remove('flipped');
-  });
-
-  // Switch views
-  pileView.classList.add('hidden');
-  bookView.classList.remove('hidden');
-
-  // Update back link to go to pile
-  backLink.textContent = '\u2190 Pile';
-  backLink.href = '#';
-  backLink.onclick = function(e) {
-    e.preventDefault();
-    closeBook();
-  };
-
-  updateZIndex();
-  updateNav();
+  if (!pdfUrl) return;
+  var singlePage = card.getAttribute('data-single') === 'true';
+  openPdfBook(pdfUrl, singlePage);
 }
 
 function openPdfBook(pdfUrl, singlePage) {
   isPdfMode = true;
-  bookEl.style.display = 'none';
-  bookNav.style.display = 'none';
   pdfContainer.style.display = '';
   pdfContainer.style.width = '100%';
   pdfContainer.innerHTML = '<div class="book-loading">Chargement du PDF...</div>';
@@ -218,8 +170,6 @@ async function loadPdfAsBook(url, container, forceSingle) {
     var numPages = pdf.numPages;
 
     var pdfPages = new Array(numPages).fill(null);
-    var pdfCurrentPage = 0;
-
     async function renderPage(idx) {
       if (pdfPages[idx]) return pdfPages[idx];
       var page = await pdf.getPage(idx + 1);
@@ -403,8 +353,6 @@ function closeBook() {
     }
     pdfContainer.innerHTML = '';
     pdfContainer.style.display = 'none';
-    bookEl.style.display = '';
-    bookNav.style.display = '';
     isPdfMode = false;
   }
 
@@ -426,70 +374,8 @@ function closeBook() {
   }
 }
 
-// ===== Book: page flip =====
-function updateNav() {
-  document.getElementById('prev-btn').disabled = currentPage === 0;
-  document.getElementById('next-btn').disabled = currentPage >= totalPages - 1;
-  document.getElementById('nav-indicator').textContent = (currentPage + 1) + ' / ' + totalPages;
-}
-
-function updateZIndex() {
-  activePages.forEach(function(page, i) {
-    if (i < currentPage) {
-      page.style.zIndex = i;
-    } else {
-      page.style.zIndex = totalPages - i;
-    }
-  });
-}
-
-function nextPage() {
-  if (currentPage >= totalPages - 1) return;
-  activePages[currentPage].classList.add('flipped');
-  currentPage++;
-  updateZIndex();
-  updateNav();
-}
-
-function prevPage() {
-  if (currentPage <= 0) return;
-  currentPage--;
-  activePages[currentPage].classList.remove('flipped');
-  updateZIndex();
-  updateNav();
-}
-
-// Click on book to flip forward
-bookEl.addEventListener('click', function() {
-  nextPage();
-});
-
-// Keyboard navigation (only when book is open)
+// Keyboard: Escape to close book
 document.addEventListener('keydown', function(e) {
   if (bookView.classList.contains('hidden')) return;
-  if (isPdfMode) return;
-  if (e.key === 'ArrowRight' || e.key === ' ') {
-    e.preventDefault();
-    nextPage();
-  } else if (e.key === 'ArrowLeft') {
-    e.preventDefault();
-    prevPage();
-  } else if (e.key === 'Escape') {
-    closeBook();
-  }
+  if (e.key === 'Escape') closeBook();
 });
-
-// Swipe support
-(function() {
-  var startX = 0;
-  bookEl.addEventListener('touchstart', function(e) {
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-  bookEl.addEventListener('touchend', function(e) {
-    var diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextPage();
-      else prevPage();
-    }
-  }, { passive: true });
-})();
