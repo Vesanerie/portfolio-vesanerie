@@ -40,56 +40,16 @@
   background: var(--bg-card);
   border: 3px solid var(--border);
   border-radius: 4px;
-  min-height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  position: relative;
 }
 
-/* ===== Apps sur l'écran ===== */
-.desktop-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  padding: 30px 24px;
+.screen-iframe {
   width: 100%;
-}
-
-.app-icon {
-  all: unset;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 18px 8px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  transition: border-color 0.2s, transform 0.15s, box-shadow 0.15s;
-}
-
-.app-icon:hover {
-  border-color: var(--border);
-  transform: translateY(-4px);
-  box-shadow: 4px 4px 0 var(--border);
-}
-
-.app-icon:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-.app-icon-img {
-  font-size: 44px;
-  line-height: 1;
-}
-
-.app-icon-name {
-  font-family: 'Bangers', sans-serif;
-  font-size: 15px;
-  letter-spacing: 2px;
-  color: var(--text);
-  text-align: center;
+  height: 100%;
+  border: none;
+  display: block;
 }
 
 /* ===== Base / Clavier ===== */
@@ -138,123 +98,6 @@
   margin-top: 4px;
 }
 
-/* ===== Modal ===== */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s;
-}
-
-.modal-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.modal-window {
-  background: var(--bg-card);
-  border: 3px solid var(--border);
-  border-radius: 12px;
-  width: 100%;
-  max-width: 480px;
-  overflow: hidden;
-  transform: scale(0.92);
-  transition: transform 0.25s;
-}
-
-.modal-overlay.open .modal-window {
-  transform: scale(1);
-}
-
-.modal-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-  border-bottom: 2px solid var(--border);
-  background: var(--bg);
-}
-
-.topbar-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.tb-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1.5px solid var(--border);
-}
-
-.tb-red { background: #ff5f57; }
-.tb-yellow { background: #febc2e; }
-.tb-green { background: #28c840; }
-
-.modal-close {
-  all: unset;
-  cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
-  color: var(--text);
-  transition: opacity 0.2s;
-}
-
-.modal-close:hover {
-  opacity: 0.6;
-}
-
-.modal-body {
-  padding: 32px 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  text-align: center;
-}
-
-.modal-icon {
-  font-size: 64px;
-  line-height: 1;
-}
-
-.modal-title {
-  font-family: 'Bangers', sans-serif;
-  font-size: 28px;
-  letter-spacing: 3px;
-}
-
-.modal-desc {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.7;
-  letter-spacing: 0.5px;
-}
-
-.modal-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin-top: 4px;
-}
-
-.modal-tag {
-  font-size: 11px;
-  letter-spacing: 1px;
-  padding: 4px 12px;
-  border: 2px solid var(--border);
-  border-radius: 20px;
-  color: var(--text-muted);
-}
-
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
   .tech-page {
@@ -268,28 +111,7 @@
   }
 
   .screen-inner {
-    min-height: 260px;
     border-width: 2px;
-  }
-
-  .desktop-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
-    padding: 16px 10px;
-  }
-
-  .app-icon {
-    padding: 12px 4px;
-    gap: 6px;
-  }
-
-  .app-icon-img {
-    font-size: 30px;
-  }
-
-  .app-icon-name {
-    font-size: 11px;
-    letter-spacing: 1px;
   }
 
   .base-shell {
