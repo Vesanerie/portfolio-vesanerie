@@ -69,9 +69,23 @@ if (tiktokScroll && tiktokCounter) {
   var tiktokTotal = tiktokScroll.querySelectorAll('.tiktok-embed-wrap').length;
   var itemH = 580;
 
+  var tiktokWraps = tiktokScroll.querySelectorAll('.tiktok-embed-wrap');
+  var currentTiktok = 0;
+
   tiktokScroll.addEventListener('scroll', function() {
     var idx = Math.round(tiktokScroll.scrollTop / itemH);
     tiktokCounter.textContent = (idx + 1) + ' / ' + tiktokTotal;
+
+    if (idx !== currentTiktok) {
+      // Stop previous video
+      var prevIframe = tiktokWraps[currentTiktok].querySelector('iframe');
+      if (prevIframe) {
+        var src = prevIframe.src;
+        prevIframe.src = '';
+        prevIframe.src = src;
+      }
+      currentTiktok = idx;
+    }
   });
 
   tiktokUp.addEventListener('click', function() {
