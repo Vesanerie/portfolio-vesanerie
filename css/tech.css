@@ -1,0 +1,276 @@
+/* ===== Tech Page ===== */
+.tech-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 80px 20px 40px;
+  gap: 40px;
+}
+
+.tech-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: clamp(36px, 8vw, 64px);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+.back-link {
+  position: fixed;
+  top: 22px;
+  left: 20px;
+  z-index: 999;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--text);
+}
+
+/* ===== Laptop Shell ===== */
+.laptop {
+  width: 100%;
+  max-width: 820px;
+}
+
+.laptop-screen {
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+
+.screen-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 2px solid var(--border);
+  background: var(--bg);
+}
+
+.topbar-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.tb-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+}
+
+.tb-red { background: #ff5f57; }
+.tb-yellow { background: #febc2e; }
+.tb-green { background: #28c840; }
+
+.topbar-title {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ===== Desktop Grid (inside screen) ===== */
+.desktop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 32px 24px;
+}
+
+.app-icon {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 8px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+
+.app-icon:hover {
+  border-color: var(--border);
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+.app-icon:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.app-icon-img {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.app-icon-name {
+  font-family: 'Bangers', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--text);
+  text-align: center;
+}
+
+/* ===== Laptop Base ===== */
+.laptop-base {
+  background: var(--bg);
+  border: 3px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.laptop-base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: var(--border);
+  border-radius: 0 0 4px 4px;
+}
+
+.laptop-trackpad {
+  width: 80px;
+  height: 8px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+}
+
+/* ===== Modal ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-window {
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px;
+  overflow: hidden;
+  transform: scale(0.92);
+  transition: transform 0.25s;
+}
+
+.modal-overlay.open .modal-window {
+  transform: scale(1);
+}
+
+.modal-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 2px solid var(--border);
+  background: var(--bg);
+}
+
+.modal-close {
+  all: unset;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text);
+  transition: opacity 0.2s;
+}
+
+.modal-close:hover {
+  opacity: 0.6;
+}
+
+.modal-body {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.modal-icon {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.modal-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 28px;
+  letter-spacing: 3px;
+}
+
+.modal-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.modal-tag {
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-muted);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .desktop-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 20px 16px;
+  }
+
+  .app-icon-img {
+    font-size: 36px;
+  }
+
+  .app-icon-name {
+    font-size: 13px;
+  }
+
+  .tech-page {
+    padding: 70px 12px 30px;
+    gap: 24px;
+  }
+}
