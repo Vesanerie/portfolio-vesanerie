@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/jeke7360/vesanerie.fr/
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp -r images/ $DEPLOYPATH 2>/dev/null || true
