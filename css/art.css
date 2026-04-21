@@ -36,19 +36,21 @@
 
 /* ===== Scattered Books ===== */
 .pile-stack {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px 16px;
   width: 100%;
-  max-width: 960px;
+  max-width: 1100px;
   padding: 0 20px;
 }
 
 .pile-book {
   all: unset;
   box-sizing: border-box;
-  width: 260px;
-  height: 340px;
+  width: 240px;
+  height: 320px;
   border: 3px solid var(--border);
   background: var(--bg-card);
   display: flex;
@@ -57,11 +59,25 @@
   justify-content: center;
   gap: 16px;
   cursor: pointer;
-  justify-self: center;
+  position: relative;
   transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               box-shadow 0.35s;
   transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
 }
+
+/* Size variants */
+.pile-sm { width: 200px; height: 270px; }
+.pile-sm .pile-book-title { font-size: 20px; }
+.pile-sm .pile-book-icon { font-size: 36px; }
+
+.pile-md { width: 240px; height: 320px; }
+
+.pile-lg { width: 280px; height: 380px; }
+.pile-lg .pile-book-title { font-size: 30px; }
+.pile-lg .pile-book-icon { font-size: 56px; }
+
+.pile-wide { width: 300px; height: 240px; }
+.pile-wide .pile-book-icon { font-size: 40px; }
 
 .pile-book:hover {
   transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
@@ -137,21 +153,124 @@
    TIKTOK SCROLL
    ======================================== */
 
+/* ===== Phone card (TikTok) ===== */
+.pile-phone {
+  all: unset;
+  box-sizing: border-box;
+  width: 180px;
+  height: 340px;
+  border: 3px solid var(--border);
+  border-radius: 24px;
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  justify-self: center;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s;
+  transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
+}
+
+.pile-phone:hover {
+  transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
+  box-shadow: 8px 8px 0 var(--border);
+  z-index: 100;
+}
+
+.phone-notch {
+  width: 50px;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  position: absolute;
+  top: 14px;
+}
+
+.phone-screen-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 28px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.phone-sub-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+}
+
+.phone-home-bar {
+  width: 40px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  position: absolute;
+  bottom: 12px;
+}
+
+.tiktok-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.tiktok-phone {
+  width: 340px;
+  border: 4px solid var(--border);
+  border-radius: 36px;
+  background: var(--bg-card);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  box-shadow: 8px 8px 0 var(--border);
+}
+
+.tiktok-phone-notch {
+  width: 80px;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.tiktok-phone-home {
+  width: 50px;
+  height: 5px;
+  background: var(--border);
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
 .tiktok-scroll {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
   width: 100%;
-  max-width: 400px;
-  padding: 0 20px 40px;
+  height: 580px;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tiktok-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .tiktok-embed-wrap {
+  flex: 0 0 100%;
   width: 100%;
-  aspect-ratio: 9 / 16;
-  border: 3px solid var(--border);
-  box-shadow: 6px 6px 0 var(--border);
+  height: 580px;
+  scroll-snap-align: start;
   overflow: hidden;
 }
 
@@ -159,6 +278,42 @@
   width: 100%;
   height: 100%;
   border: none;
+}
+
+.tiktok-nav-arrows {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.tiktok-arrow {
+  all: unset;
+  box-sizing: border-box;
+  width: 52px;
+  height: 52px;
+  border: 3px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-family: 'Bangers', sans-serif;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tiktok-arrow:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+.tiktok-counter {
+  font-family: 'Bangers', sans-serif;
+  font-size: 16px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
 }
 
 /* ========================================
@@ -388,13 +543,6 @@
    RESPONSIVE
    ======================================== */
 
-@media (max-width: 900px) {
-  .pile-stack {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px 20px;
-  }
-}
-
 @media (max-width: 700px) {
   .pile-view {
     padding: 80px 10px 30px;
@@ -402,13 +550,16 @@
   }
 
   .pile-stack {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 
-  .pile-book {
-    width: 220px;
-    height: 300px;
+  .pile-book,
+  .pile-sm,
+  .pile-md,
+  .pile-lg,
+  .pile-wide {
+    width: 200px;
+    height: 270px;
   }
 
   .pile-book-title {
