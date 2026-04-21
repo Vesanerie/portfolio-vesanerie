@@ -1,14 +1,6 @@
-/* ===== Art Portfolio — Book Layout ===== */
+/* ===== Art Portfolio ===== */
 
-.art-page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  gap: 30px;
-}
+.hidden { display: none !important; }
 
 /* ===== Back Link ===== */
 .back-link {
@@ -30,7 +22,107 @@
   box-shadow: 4px 4px 0 var(--border);
 }
 
-/* ===== Book Container ===== */
+/* ========================================
+   PILE VIEW — Stack of books
+   ======================================== */
+
+.pile-view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 50px;
+}
+
+.pile-header {
+  text-align: center;
+}
+
+.pile-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: clamp(48px, 10vw, 80px);
+  letter-spacing: 6px;
+}
+
+.pile-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+/* ===== The Stack ===== */
+.pile-stack {
+  position: relative;
+  width: 320px;
+  height: 460px;
+}
+
+.pile-book {
+  position: absolute;
+  width: 260px;
+  height: 340px;
+  border: 3px solid var(--border);
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.35s;
+  /* position in the pile — each book uses custom properties */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translate(var(--ox), var(--oy)) rotate(var(--rot));
+}
+
+.pile-book:hover {
+  transform: translate(-50%, -50%) translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
+  box-shadow: 8px 8px 0 var(--border);
+  z-index: 100 !important;
+}
+
+.pile-book-icon {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.pile-book-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 26px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.pile-book-type {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 2px solid var(--border);
+  padding: 4px 12px;
+}
+
+/* ========================================
+   BOOK VIEW — Flip-through pages
+   ======================================== */
+
+.book-view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 30px;
+}
+
 .book-wrapper {
   perspective: 1800px;
   display: flex;
@@ -46,6 +138,15 @@
   max-width: 800px;
   aspect-ratio: 4 / 3;
   transform-style: preserve-3d;
+}
+
+/* All book-pages groups are hidden by default */
+.book-pages {
+  display: none;
+}
+
+.book-pages.active {
+  display: block;
 }
 
 /* ===== Pages ===== */
@@ -154,7 +255,7 @@
   color: var(--text-muted);
 }
 
-/* ===== Cover Specific ===== */
+/* ===== Cover & End Cover ===== */
 .cover-icon {
   font-size: clamp(48px, 10vw, 80px);
   line-height: 1;
@@ -165,6 +266,10 @@
   color: var(--text-muted);
   letter-spacing: 3px;
   text-transform: uppercase;
+}
+
+.page-endcover {
+  gap: 24px;
 }
 
 /* ===== Navigation ===== */
@@ -204,7 +309,7 @@
   text-align: center;
 }
 
-/* ===== Page Shadow on Flip ===== */
+/* ===== Page Shadow ===== */
 .page.flipped .page-front::after {
   content: '';
   position: absolute;
@@ -227,9 +332,35 @@
   pointer-events: none;
 }
 
-/* ===== Responsive ===== */
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
 @media (max-width: 700px) {
-  .art-page {
+  .pile-view {
+    padding: 80px 10px 30px;
+    gap: 30px;
+  }
+
+  .pile-stack {
+    width: 280px;
+    height: 420px;
+  }
+
+  .pile-book {
+    width: 220px;
+    height: 300px;
+  }
+
+  .pile-book-title {
+    font-size: 22px;
+  }
+
+  .pile-book-icon {
+    font-size: 36px;
+  }
+
+  .book-view {
     padding: 80px 10px 30px;
     gap: 20px;
   }
@@ -261,6 +392,21 @@
 }
 
 @media (max-width: 400px) {
+  .pile-stack {
+    width: 260px;
+    height: 400px;
+  }
+
+  .pile-book {
+    width: 200px;
+    height: 270px;
+    gap: 10px;
+  }
+
+  .pile-book-title {
+    font-size: 18px;
+  }
+
   .page-front,
   .page-back {
     padding: 16px 10px;
