@@ -21,7 +21,29 @@ document.querySelectorAll('.pile-book').forEach(function(card) {
   card.addEventListener('click', function() {
     openBook(card.getAttribute('data-book'));
   });
+
+  // Load PDF cover as card thumbnail
+  var pdfUrl = card.getAttribute('data-pdf');
+  if (pdfUrl) {
+    loadPdfCover(pdfUrl, card);
+  }
 });
+
+async function loadPdfCover(url, card) {
+  try {
+    var pdf = await pdfjsLib.getDocument(url).promise;
+    var page = await pdf.getPage(1);
+    var viewport = page.getViewport({ scale: 0.5 });
+    var canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
+    card.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
+    card.style.backgroundSize = 'cover';
+    card.style.backgroundPosition = 'center';
+    card.classList.add('has-cover');
+  } catch (e) {}
+}
 
 function openBook(bookId) {
   // Check if this book has a PDF
@@ -29,7 +51,8 @@ function openBook(bookId) {
   var pdfUrl = card ? card.getAttribute('data-pdf') : null;
 
   if (pdfUrl) {
-    openPdfBook(pdfUrl);
+    var singlePage = card.getAttribute('data-single') === 'true';
+    openPdfBook(pdfUrl, singlePage);
     return;
   }
 
@@ -71,7 +94,7 @@ function openBook(bookId) {
   updateNav();
 }
 
-function openPdfBook(pdfUrl) {
+function openPdfBook(pdfUrl, singlePage) {
   isPdfMode = true;
   bookEl.style.display = 'none';
   bookNav.style.display = 'none';
@@ -92,10 +115,10 @@ function openPdfBook(pdfUrl) {
   };
 
   // Load PDF and render pages into flip-through
-  loadPdfAsBook(pdfUrl, pdfContainer);
+  loadPdfAsBook(pdfUrl, pdfContainer, singlePage);
 }
 
-async function loadPdfAsBook(url, container) {
+async function loadPdfAsBook(url, container, forceSingle) {
   try {
     var pdf = await pdfjsLib.getDocument(url).promise;
     var numPages = pdf.numPages;
@@ -146,14 +169,26 @@ async function loadPdfAsBook(url, container) {
     counter.className = 'pdf-counter';
     container.appendChild(counter);
 
-    // Build spreads: page 0 alone (cover), then pairs [1,2], [3,4], etc.
+    // Detect if pages are landscape (already double-page spreads)
+    var firstCanvas = pdfPages[0];
+    var isLandscape = firstCanvas.width > firstCanvas.height;
+
+    // Build spreads
     var spreads = [];
-    spreads.push([0]); // cover alone
-    for (var s = 1; s < numPages; s += 2) {
-      if (s + 1 < numPages) {
-        spreads.push([s, s + 1]);
-      } else {
+    if (isLandscape || forceSingle) {
+      // Each PDF page is already a spread — show one at a time
+      for (var s = 0; s < numPages; s++) {
         spreads.push([s]);
+      }
+    } else {
+      // Portrait: page 0 alone (cover), then pairs [1,2], [3,4], etc.
+      spreads.push([0]);
+      for (var s = 1; s < numPages; s += 2) {
+        if (s + 1 < numPages) {
+          spreads.push([s, s + 1]);
+        } else {
+          spreads.push([s]);
+        }
       }
     }
 
