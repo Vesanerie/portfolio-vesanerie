@@ -11,6 +11,7 @@
   --accent: #333;
   --switch-bg: #ddd;
   --switch-dot: #111;
+  --halftone: #111;
 }
 
 [data-theme="dark"] {
@@ -22,6 +23,7 @@
   --accent: #ccc;
   --switch-bg: #333;
   --switch-dot: #f0ece4;
+  --halftone: #f0ece4;
 }
 
 body {
@@ -30,9 +32,33 @@ body {
   font-family: 'Special Elite', serif;
   min-height: 100vh;
   transition: background 0.4s, color 0.4s;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, var(--halftone) 1.5px, transparent 1.5px),
+    radial-gradient(circle, var(--halftone) 1px, transparent 1px),
+    radial-gradient(circle, var(--halftone) 0.5px, transparent 0.5px);
+  background-size:
+    20px 20px,
+    15px 15px,
+    10px 10px;
+  background-position:
+    0 0,
+    7px 7px,
+    3px 3px;
+  opacity: 0.12;
 }
 
 a { color: inherit; text-decoration: none; }
+
+body > *:not(.gallery-lightbox) { position: relative; z-index: 1; }
 
 /* ===== Theme Switch ===== */
 .theme-toggle {
@@ -116,9 +142,6 @@ a { color: inherit; text-decoration: none; }
   transition: transform 0.2s, box-shadow 0.2s;
   position: relative;
   overflow: hidden;
-}
-
-.landing-card {
   box-shadow: 6px 6px 0 0 var(--border);
 }
 

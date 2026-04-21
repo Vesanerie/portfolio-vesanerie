@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.png">
   <title>Vesanerie — Art</title>
   <meta name="description" content="Portfolio art de Valentin Mardoukhaev — Fanzines, bande dessinee, illustration, graphisme.">
   <meta property="og:title" content="Vesanerie — Art">
@@ -14,7 +15,7 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/art.css">
   <link rel="stylesheet" href="../css/pdf-viewer.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha512-q+4liFwdPC/bNdhUpZx6aXDx/h77yEQtn4I1slHydcbZK34nLaR3cAeYSJshoxIOq3mjEf7xJE8YWIUHMn+oCQ==" crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha512-q+4liFwdPC/bNdhUpZx6aXDx/h77yEQtn4I1slHydcbZK34nLaR3cAeYSJshoxIOq3mjEf7xJE8YWIUHMn+oCQ==" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -146,16 +147,16 @@
         <div class="tiktok-phone-notch"></div>
         <div class="tiktok-scroll">
           <div class="tiktok-embed-wrap">
-            <iframe src="https://www.tiktok.com/embed/v2/7610068718210583830" allowfullscreen allow="encrypted-media"></iframe>
+            <iframe src="https://www.tiktok.com/embed/v2/7610068718210583830" title="Video TikTok 1" allowfullscreen allow="encrypted-media"></iframe>
           </div>
           <div class="tiktok-embed-wrap">
-            <iframe src="https://www.tiktok.com/embed/v2/7608205217351585027" allowfullscreen allow="encrypted-media"></iframe>
+            <iframe src="https://www.tiktok.com/embed/v2/7608205217351585027" title="Video TikTok 2" allowfullscreen allow="encrypted-media"></iframe>
           </div>
           <div class="tiktok-embed-wrap">
-            <iframe src="https://www.tiktok.com/embed/v2/7606630879707843862" allowfullscreen allow="encrypted-media"></iframe>
+            <iframe src="https://www.tiktok.com/embed/v2/7606630879707843862" title="Video TikTok 3" allowfullscreen allow="encrypted-media"></iframe>
           </div>
           <div class="tiktok-embed-wrap">
-            <iframe src="https://www.tiktok.com/embed/v2/7606255381228031254" allowfullscreen allow="encrypted-media"></iframe>
+            <iframe src="https://www.tiktok.com/embed/v2/7606255381228031254" title="Video TikTok 4" allowfullscreen allow="encrypted-media"></iframe>
           </div>
         </div>
         <div class="tiktok-phone-home"></div>
@@ -193,26 +194,9 @@
     </div>
   </div>
 
-  <!-- ===== VUE LIVRE ===== -->
+  <!-- ===== VUE PDF ===== -->
   <div class="book-view hidden" id="book-view">
-
-    <div class="book-wrapper">
-      <div class="book" id="book">
-
-        <!-- Projets HTML book-pages à ajouter ici si besoin -->
-
-      </div>
-    </div>
-
-    <!-- ===== VUE PDF ===== -->
     <div id="pdf-container" class="book-viewer" style="display:none;"></div>
-
-    <div class="book-nav">
-      <button class="nav-btn" id="prev-btn" onclick="prevPage()">&larr; Pr&eacute;c.</button>
-      <span class="nav-indicator" id="nav-indicator">1 / 3</span>
-      <button class="nav-btn" id="next-btn" onclick="nextPage()">Suiv. &rarr;</button>
-    </div>
-
   </div>
 
   <!-- Lightbox -->
