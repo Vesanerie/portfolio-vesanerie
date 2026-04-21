@@ -3,12 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vésanerie</title>
-  <style>
-    body { margin: 0; height: 100vh; display: flex; align-items: center; justify-content: center; font-family: sans-serif; }
-  </style>
+  <title>Vesanerie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>coucou</h1>
+
+  <div class="theme-toggle" onclick="toggleTheme()">
+    <div class="dot"></div>
+  </div>
+
+  <div class="landing">
+    <div>
+      <div class="landing-title">Valentin Mardoukhaev</div>
+      <div class="landing-sub">Dessinateur · Développeur · Auto-éditeur</div>
+    </div>
+
+    <div class="landing-choices">
+      <a href="tech/" class="landing-card">
+        <div class="landing-card-icon">&lt;/&gt;</div>
+        <div class="landing-card-title">Tech</div>
+        <div class="landing-card-desc">Projets de développement, IA, outils</div>
+      </a>
+
+      <a href="art/" class="landing-card">
+        <div class="landing-card-icon">&#9998;</div>
+        <div class="landing-card-title">Art</div>
+        <div class="landing-card-desc">Dessins, fanzines, graphisme, vidéos</div>
+      </a>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
