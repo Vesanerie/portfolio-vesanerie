@@ -53,15 +53,17 @@
   margin-top: 10px;
 }
 
-/* ===== The Stack ===== */
+/* ===== Scattered Books ===== */
 .pile-stack {
-  position: relative;
-  width: 320px;
-  height: 460px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 30px;
+  width: 100%;
+  max-width: 960px;
+  padding: 0 20px;
 }
 
 .pile-book {
-  position: absolute;
   width: 260px;
   height: 340px;
   border: 3px solid var(--border);
@@ -72,18 +74,16 @@
   justify-content: center;
   gap: 16px;
   cursor: pointer;
+  justify-self: center;
   transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               box-shadow 0.35s;
-  /* position in the pile — each book uses custom properties */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) translate(var(--ox), var(--oy)) rotate(var(--rot));
+  transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
 }
 
 .pile-book:hover {
-  transform: translate(-50%, -50%) translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
+  transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
   box-shadow: 8px 8px 0 var(--border);
-  z-index: 100 !important;
+  z-index: 100;
 }
 
 .pile-book-icon {
@@ -336,6 +336,13 @@
    RESPONSIVE
    ======================================== */
 
+@media (max-width: 900px) {
+  .pile-stack {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 20px;
+  }
+}
+
 @media (max-width: 700px) {
   .pile-view {
     padding: 80px 10px 30px;
@@ -343,8 +350,8 @@
   }
 
   .pile-stack {
-    width: 280px;
-    height: 420px;
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .pile-book {
