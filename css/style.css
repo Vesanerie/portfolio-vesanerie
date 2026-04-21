@@ -67,6 +67,7 @@ body > *:not(.gallery-lightbox) { position: relative; z-index: 1; }
   position: fixed;
   top: 20px;
   right: 20px;
+  left: auto;
   z-index: 999;
   cursor: pointer;
   width: 52px;
