@@ -33,66 +33,85 @@
 
     <div class="pile-stack" id="pile-stack">
 
-      <button class="pile-book" data-book="random-zine" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Random%20Zine%202.pdf" style="--rot: -5deg; --ox: 15px; --oy: 12px;">
+      <button class="pile-book pile-lg" data-folder="edition" style="--rot: -3deg; --ox: 0px; --oy: 8px;">
+        <div class="pile-book-icon">&#128214;</div>
+        <div class="pile-book-title">&Eacute;dition</div>
+        <div class="pile-book-type">Fanzines &amp; Zines</div>
+      </button>
+
+      <button class="pile-phone" data-folder="tiktoks" style="--rot: 3deg; --ox: 0px; --oy: -10px;">
+        <div class="phone-notch"></div>
+        <div class="phone-screen-label">Vid&eacute;o</div>
+        <div class="phone-sub-label">TikToks &amp; films</div>
+        <div class="phone-home-bar"></div>
+      </button>
+
+      <button class="pile-book pile-lg" data-folder="graphisme" style="--rot: 2deg; --ox: 0px; --oy: -12px;">
+        <div class="pile-book-icon">&#10022;</div>
+        <div class="pile-book-title">Graphisme</div>
+        <div class="pile-book-type">Identit&eacute;s &amp; illustrations</div>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ===== VUE EDITION ===== -->
+  <div class="pile-view hidden" id="edition-view">
+    <div class="pile-header">
+      <div class="pile-title">&Eacute;dition</div>
+      <div class="pile-sub">Fanzines &amp; Zines</div>
+    </div>
+    <div class="pile-stack">
+      <button class="pile-book pile-lg" data-book="random-zine" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Random%20Zine%202.pdf" style="--rot: -3deg; --ox: 0px; --oy: 8px;">
         <div class="pile-book-icon">&#9790;</div>
         <div class="pile-book-title">Random Zine</div>
         <div class="pile-book-type">Fanzine PDF</div>
       </button>
-
-      <button class="pile-book" data-book="spirale-sket-tour" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/SPIRALE%20Sket%20tour.pdf" data-single="true" style="--rot: -2deg; --ox: 20px; --oy: 5px;">
+      <button class="pile-book pile-md" data-book="spirale-sket-tour" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/SPIRALE%20Sket%20tour.pdf" data-single="true" style="--rot: 2deg; --ox: 0px; --oy: -15px;">
         <div class="pile-book-icon">&#9724;</div>
         <div class="pile-book-title">Spirale Sket Tour</div>
         <div class="pile-book-type">Fanzine PDF</div>
       </button>
-
-      <button class="pile-book" data-folder="carnets" data-cover-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20Rouge%203.pdf" style="--rot: 3deg; --ox: -18px; --oy: -8px;">
-        <div class="pile-book-icon">&#128210;</div>
-        <div class="pile-book-title">Carnets</div>
-        <div class="pile-book-type">4 carnets</div>
+      <button class="pile-book pile-md" data-book="voiture" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/VOITURE.pdf" data-single="true" style="--rot: -2deg; --ox: 0px; --oy: 10px;">
+        <div class="pile-book-icon">&#128663;</div>
+        <div class="pile-book-title">Voiture</div>
+        <div class="pile-book-type">Fanzine PDF</div>
       </button>
-
-      <button class="pile-book" data-folder="tiktoks" style="--rot: -3deg; --ox: 10px; --oy: -5px;">
-        <div class="pile-book-icon">&#9654;</div>
-        <div class="pile-book-title">TikToks</div>
-        <div class="pile-book-type">4 vid&eacute;os</div>
+      <button class="pile-book pile-sm" data-book="sauce" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Sauce%20Fanzine.pdf" style="--rot: 3deg; --ox: 0px; --oy: -10px;">
+        <div class="pile-book-icon">&#127798;</div>
+        <div class="pile-book-title">Sauce</div>
+        <div class="pile-book-type">Fanzine PDF</div>
       </button>
+    </div>
+  </div>
 
-      <button class="pile-book" data-book="nuits-blanches" style="--rot: 2deg; --ox: -10px; --oy: 6px;">
-        <div class="pile-book-icon">&#9790;</div>
-        <div class="pile-book-title">Nuits Blanches</div>
-        <div class="pile-book-type">Fanzine</div>
+  <!-- ===== VUE GRAPHISME ===== -->
+  <div class="pile-view hidden" id="graphisme-view">
+    <div class="pile-header">
+      <div class="pile-title">Graphisme</div>
+      <div class="pile-sub">Identit&eacute;s &amp; illustrations</div>
+    </div>
+    <div class="pile-stack">
+      <button class="pile-book pile-md" data-book="rk-brand" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/RK_Final_Brand_Concept.pdf" data-single="true" style="--rot: -2deg; --ox: 0px; --oy: 10px;">
+        <div class="pile-book-icon">&#10022;</div>
+        <div class="pile-book-title">RK Brand Concept</div>
+        <div class="pile-book-type">Identit&eacute; visuelle</div>
       </button>
-
-      <button class="pile-book" data-book="chroniques-urbaines" style="--rot: 4deg; --ox: -20px; --oy: -10px;">
-        <div class="pile-book-icon">&#9881;</div>
-        <div class="pile-book-title">Chroniques Urbaines</div>
-        <div class="pile-book-type">Bande Dessin&eacute;e</div>
-      </button>
-
-      <button class="pile-book" data-book="portraits-perdus" style="--rot: -3deg; --ox: 25px; --oy: 18px;">
+      <button class="pile-book pile-md" data-book="portraits-perdus" style="--rot: 2deg; --ox: 0px; --oy: -12px;">
         <div class="pile-book-icon">&#9786;</div>
         <div class="pile-book-title">Portraits Perdus</div>
         <div class="pile-book-type">Illustration</div>
       </button>
-
-      <button class="pile-book" data-book="identites-visuelles" style="--rot: 6deg; --ox: -15px; --oy: -14px;">
-        <div class="pile-book-icon">&#10022;</div>
-        <div class="pile-book-title">Identit&eacute;s Visuelles</div>
-        <div class="pile-book-type">Graphisme</div>
-      </button>
-
-      <button class="pile-book" data-book="derives" style="--rot: -4deg; --ox: 20px; --oy: 8px;">
-        <div class="pile-book-icon">&#9654;</div>
-        <div class="pile-book-title">D&eacute;rives</div>
-        <div class="pile-book-type">Court-m&eacute;trage</div>
-      </button>
-
-      <button class="pile-book" data-book="carnet-croquis" style="--rot: 3deg; --ox: -25px; --oy: -12px;">
+      <button class="pile-book pile-sm" data-book="carnet-croquis" style="--rot: -1deg; --ox: 0px; --oy: 15px;">
         <div class="pile-book-icon">&#9998;</div>
         <div class="pile-book-title">Carnet de Croquis</div>
         <div class="pile-book-type">Dessin</div>
       </button>
-
+      <button class="pile-book pile-md" data-folder="carnets" data-cover-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20Rouge%203.pdf" style="--rot: 3deg; --ox: 0px; --oy: -8px;">
+        <div class="pile-book-icon">&#128210;</div>
+        <div class="pile-book-title">Carnets</div>
+        <div class="pile-book-type">3 carnets</div>
+      </button>
     </div>
   </div>
 
@@ -102,18 +121,29 @@
       <div class="pile-title">TikToks</div>
       <div class="pile-sub">@culture.hot.mag</div>
     </div>
-    <div class="tiktok-scroll">
-      <div class="tiktok-embed-wrap">
-        <iframe src="https://www.tiktok.com/embed/v2/7610068718210583830" allowfullscreen allow="encrypted-media"></iframe>
+    <div class="tiktok-row">
+      <div class="tiktok-phone">
+        <div class="tiktok-phone-notch"></div>
+        <div class="tiktok-scroll">
+          <div class="tiktok-embed-wrap">
+            <iframe src="https://www.tiktok.com/embed/v2/7610068718210583830" allowfullscreen allow="encrypted-media"></iframe>
+          </div>
+          <div class="tiktok-embed-wrap">
+            <iframe src="https://www.tiktok.com/embed/v2/7608205217351585027" allowfullscreen allow="encrypted-media"></iframe>
+          </div>
+          <div class="tiktok-embed-wrap">
+            <iframe src="https://www.tiktok.com/embed/v2/7606630879707843862" allowfullscreen allow="encrypted-media"></iframe>
+          </div>
+          <div class="tiktok-embed-wrap">
+            <iframe src="https://www.tiktok.com/embed/v2/7606255381228031254" allowfullscreen allow="encrypted-media"></iframe>
+          </div>
+        </div>
+        <div class="tiktok-phone-home"></div>
       </div>
-      <div class="tiktok-embed-wrap">
-        <iframe src="https://www.tiktok.com/embed/v2/7608205217351585027" allowfullscreen allow="encrypted-media"></iframe>
-      </div>
-      <div class="tiktok-embed-wrap">
-        <iframe src="https://www.tiktok.com/embed/v2/7606630879707843862" allowfullscreen allow="encrypted-media"></iframe>
-      </div>
-      <div class="tiktok-embed-wrap">
-        <iframe src="https://www.tiktok.com/embed/v2/7606255381228031254" allowfullscreen allow="encrypted-media"></iframe>
+      <div class="tiktok-nav-arrows">
+        <button class="tiktok-arrow" id="tiktok-up" aria-label="Video precedente">&#8593;</button>
+        <div class="tiktok-counter" id="tiktok-counter">1 / 4</div>
+        <button class="tiktok-arrow" id="tiktok-down" aria-label="Video suivante">&#8595;</button>
       </div>
     </div>
   </div>
