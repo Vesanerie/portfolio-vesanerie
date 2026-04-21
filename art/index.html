@@ -35,7 +35,7 @@
     <div class="pile-stack" id="pile-stack">
 
       <button class="pile-book pile-lg" data-folder="edition" style="--rot: -3deg; --ox: 0px; --oy: 8px;">
-        <div class="pile-book-icon">&#128214;</div>
+        <div class="pile-book-icon">&#9998;</div>
         <div class="pile-book-title">&Eacute;dition</div>
         <div class="pile-book-type">Fanzines &amp; Zines</div>
       </button>
@@ -45,6 +45,11 @@
         <div class="phone-screen-label">Vid&eacute;o</div>
         <div class="phone-sub-label">TikToks &amp; films</div>
         <div class="phone-home-bar"></div>
+      </button>
+
+      <button class="pile-folder" data-folder="illustration" style="--rot: -2deg; --ox: 0px; --oy: 12px;">
+        <div class="folder-tab">Illustration</div>
+        <div class="folder-body"></div>
       </button>
 
       <button class="pile-book pile-lg" data-folder="graphisme" style="--rot: 2deg; --ox: 0px; --oy: -12px;">
@@ -63,7 +68,12 @@
       <div class="pile-sub">Fanzines &amp; Zines</div>
     </div>
     <div class="pile-stack">
-      <button class="pile-book pile-lg" data-book="random-zine" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Random%20Zine%202.pdf" style="--rot: -3deg; --ox: 0px; --oy: 8px;">
+      <button class="pile-book pile-lg" data-book="memoire-clown" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/M%C3%A9moire%20clown%20final%203.pdf" style="--rot: -2deg; --ox: 0px; --oy: 8px;">
+        <div class="pile-book-icon">&#9790;</div>
+        <div class="pile-book-title">M&eacute;moire Clown</div>
+        <div class="pile-book-type">M&eacute;moire PDF</div>
+      </button>
+      <button class="pile-book pile-md" data-book="random-zine" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Random%20Zine%202.pdf" style="--rot: -3deg; --ox: 0px; --oy: -10px;">
         <div class="pile-book-icon">&#9790;</div>
         <div class="pile-book-title">Random Zine</div>
         <div class="pile-book-type">Fanzine PDF</div>
@@ -73,14 +83,24 @@
         <div class="pile-book-title">Spirale Sket Tour</div>
         <div class="pile-book-type">Fanzine PDF</div>
       </button>
-      <button class="pile-book pile-wide" data-book="voiture" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/VOITURE.pdf" data-single="true" style="--rot: -2deg; --ox: 0px; --oy: 10px;">
-        <div class="pile-book-icon">&#128663;</div>
-        <div class="pile-book-title">Voiture</div>
+      <button class="pile-book pile-sm" data-book="sauce" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Sauce%20Fanzine.pdf" style="--rot: 3deg; --ox: 0px; --oy: -10px;">
+        <div class="pile-book-icon">&#9790;</div>
+        <div class="pile-book-title">Sauce</div>
         <div class="pile-book-type">Fanzine PDF</div>
       </button>
-      <button class="pile-book pile-sm" data-book="sauce" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Sauce%20Fanzine.pdf" style="--rot: 3deg; --ox: 0px; --oy: -10px;">
-        <div class="pile-book-icon">&#127798;</div>
-        <div class="pile-book-title">Sauce</div>
+    </div>
+  </div>
+
+  <!-- ===== VUE ILLUSTRATION ===== -->
+  <div class="pile-view hidden" id="illustration-view">
+    <div class="pile-header">
+      <div class="pile-title">Illustration</div>
+      <div class="pile-sub">Dessins &amp; illustrations</div>
+    </div>
+    <div class="pile-stack">
+      <button class="pile-book pile-wide" data-book="voiture" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/VOITURE.pdf" data-single="true" style="--rot: -2deg; --ox: 0px; --oy: 10px;">
+        <div class="pile-book-icon">&#9724;</div>
+        <div class="pile-book-title">Voiture</div>
         <div class="pile-book-type">Fanzine PDF</div>
       </button>
     </div>
@@ -98,13 +118,18 @@
         <div class="pile-book-type">Identit&eacute; visuelle</div>
       </button>
 
+      <button class="pile-book pile-md has-cover" data-book="flyer-perth" data-img="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Flyer%20Perth%20Draw%20Club%20Call%20For%20Artists%20V6.jpg" style="--rot: 2deg; --ox: 0px; --oy: -10px; background-image: url('https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Flyer%20Perth%20Draw%20Club%20Call%20For%20Artists%20V6.jpg'); background-size: cover; background-position: center;">
+        <div class="pile-book-title">Flyer Perth Draw Club</div>
+        <div class="pile-book-type">Affiche</div>
+      </button>
+
       <button class="pile-book pile-wide" data-book="rk-brand" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/RK_Final_Brand_Concept.pdf" data-single="true" style="--rot: -2deg; --ox: 0px; --oy: 10px;">
         <div class="pile-book-icon">&#10022;</div>
         <div class="pile-book-title">RK Brand Concept</div>
         <div class="pile-book-type">Identit&eacute; visuelle</div>
       </button>
       <button class="pile-book pile-md" data-folder="carnets" data-cover-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20Rouge%203.pdf" style="--rot: 3deg; --ox: 0px; --oy: -8px;">
-        <div class="pile-book-icon">&#128210;</div>
+        <div class="pile-book-icon">&#9998;</div>
         <div class="pile-book-title">Carnets</div>
         <div class="pile-book-type">3 carnets</div>
       </button>
@@ -132,6 +157,27 @@
       </div>
       <div class="gallery-item">
         <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Esport%20Team/fiche%20joueur_exo.png" alt="Fiche joueur" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Esport%20Team/Maillot_Back_exo.png" alt="Maillot Back" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Esport%20Team/Test%201_exo.png" alt="Test 1" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Esport%20Team/Test%202_exo.png" alt="Test 2" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Esport%20Team/Test%203_exo.png" alt="Test 3" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Esport%20Team/Test%204_exo.png" alt="Test 4" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Esport%20Team/Test%205_exo.png" alt="Test 5" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Esport%20Team/Test%206_exo.png" alt="Test 6" loading="lazy">
       </div>
     </div>
   </div>
@@ -176,7 +222,7 @@
       <div class="pile-sub">Choisis un carnet</div>
     </div>
     <div class="pile-stack">
-      <button class="pile-book" data-book="carnet-rose" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20De%20recherche%20ROSE.pdf" data-single="true" style="--rot: -5deg; --ox: 15px; --oy: 12px;">
+      <button class="pile-book" data-book="carnet-rose" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20De%20recherche%20ROSE.pdf" style="--rot: -5deg; --ox: 15px; --oy: 12px;">
         <div class="pile-book-icon">&#9998;</div>
         <div class="pile-book-title">Carnet de Recherche Rose</div>
         <div class="pile-book-type">Carnet PDF</div>

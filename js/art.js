@@ -14,7 +14,7 @@ if (typeof pdfjsLib !== 'undefined') {
 var currentSubPile = null;
 
 // ===== Pile: click to open a book or folder =====
-document.querySelectorAll('.pile-book, .pile-phone').forEach(function(card) {
+document.querySelectorAll('.pile-book, .pile-phone, .pile-folder').forEach(function(card) {
   card.addEventListener('click', function() {
     var folder = card.getAttribute('data-folder');
     if (folder) {
@@ -175,10 +175,21 @@ async function loadPdfCover(url, card) {
 
 function openBook(bookId) {
   var card = document.querySelector('.pile-book[data-book="' + bookId + '"]');
-  var pdfUrl = card ? card.getAttribute('data-pdf') : null;
-  if (!pdfUrl) return;
-  var singlePage = card.getAttribute('data-single') === 'true';
-  openPdfBook(pdfUrl, singlePage);
+  if (!card) return;
+
+  var pdfUrl = card.getAttribute('data-pdf');
+  if (pdfUrl) {
+    var singlePage = card.getAttribute('data-single') === 'true';
+    openPdfBook(pdfUrl, singlePage);
+    return;
+  }
+
+  var imgUrl = card.getAttribute('data-img');
+  if (imgUrl) {
+    document.getElementById('lightbox-img').src = imgUrl;
+    document.getElementById('lightbox-img').alt = card.querySelector('.pile-book-title')?.textContent || '';
+    document.getElementById('lightbox').classList.add('open');
+  }
 }
 
 function openPdfBook(pdfUrl, singlePage) {

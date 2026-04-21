@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../favicon.png">
+  <title>Vesanerie — Musique</title>
+  <meta name="description" content="Musique de Valentin Mardoukhaev — Beats, compositions, projets sonores.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/music.css">
+</head>
+<body>
+
+  <button class="theme-toggle" aria-label="Changer le theme" onclick="toggleTheme()">
+    <div class="dot"></div>
+  </button>
+
+  <a href="../" class="back-link">&larr; Retour</a>
+
+  <div class="music-page">
+    <div class="ipod">
+      <div class="ipod-screen">
+        <div class="ipod-header">iPod</div>
+        <div class="ipod-now-playing" id="now-playing">Choisis un morceau</div>
+        <div class="ipod-list" id="track-list">
+          <button class="ipod-track" data-src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Musique/SANGANT%202.mp3" data-title="SANGANT 2">
+            <span class="track-num">1</span>
+            <span class="track-name">SANGANT 2</span>
+          </button>
+          <button class="ipod-track" data-src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Musique/regarde%20le%20monde%20bruler.mp3" data-title="Regarde le monde bruler">
+            <span class="track-num">2</span>
+            <span class="track-name">Regarde le monde bruler</span>
+          </button>
+          <button class="ipod-track" data-src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Musique/spider%20man%20V7.mp3" data-title="Spider Man V7">
+            <span class="track-num">3</span>
+            <span class="track-name">Spider Man V7</span>
+          </button>
+        </div>
+        <div class="ipod-progress">
+          <div class="ipod-progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="ipod-time">
+          <span id="time-current">0:00</span>
+          <span id="time-total">0:00</span>
+        </div>
+      </div>
+      <div class="ipod-wheel">
+        <div class="ipod-wheel-ring">
+          <div class="ipod-wheel-label top">MENU</div>
+          <div class="ipod-wheel-label right">&#9654;&#9654;</div>
+          <div class="ipod-wheel-label bottom">&#9646;&#9646;</div>
+          <div class="ipod-wheel-label left">&#9664;&#9664;</div>
+          <button class="ipod-wheel-center" id="play-btn" aria-label="Play/Pause"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio-player"></audio>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/music.js"></script>
+</body>
+</html>

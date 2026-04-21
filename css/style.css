@@ -123,6 +123,16 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
   text-align: center;
 }
 
+.landing-bio {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  text-align: center;
+  max-width: 480px;
+  margin: 20px auto 0;
+  letter-spacing: 0.5px;
+}
+
 .landing-choices {
   display: flex;
   gap: 40px;
