@@ -267,6 +267,53 @@
   bottom: 12px;
 }
 
+/* ===== Folder card (macOS style) ===== */
+.pile-folder {
+  all: unset;
+  box-sizing: border-box;
+  width: 240px;
+  height: 180px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
+}
+
+.pile-folder:hover {
+  transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
+  z-index: 100;
+}
+
+.folder-tab {
+  width: 100px;
+  height: 28px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  font-family: 'Bangers', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+}
+
+.folder-body {
+  flex: 1;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  border-radius: 0 8px 8px 8px;
+  box-shadow: 6px 6px 0 0 var(--border);
+}
+
+.pile-folder:hover .folder-body {
+  box-shadow: 10px 10px 0 0 var(--border);
+}
+
 .tiktok-row {
   display: flex;
   align-items: center;

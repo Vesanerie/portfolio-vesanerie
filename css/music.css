@@ -1,0 +1,212 @@
+/* ===== Music Page ===== */
+.music-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 60px 20px 40px;
+}
+
+/* ===== iPod Classic ===== */
+.ipod {
+  width: 280px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  border-radius: 20px;
+  padding: 20px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 8px 8px 0 0 var(--border);
+}
+
+/* Screen */
+.ipod-screen {
+  width: 100%;
+  background: #c8d4a2;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+[data-theme="dark"] .ipod-screen {
+  background: #2a3a1a;
+}
+
+.ipod-header {
+  font-family: 'Bangers', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #444;
+  border-bottom: 1px solid #a0b080;
+  padding-bottom: 4px;
+}
+
+[data-theme="dark"] .ipod-header {
+  color: #8a9a6a;
+  border-bottom-color: #3a4a2a;
+}
+
+.ipod-now-playing {
+  font-family: 'Special Elite', serif;
+  font-size: 11px;
+  text-align: center;
+  color: #333;
+  padding: 4px 0;
+  min-height: 18px;
+}
+
+[data-theme="dark"] .ipod-now-playing {
+  color: #a0b080;
+}
+
+/* Track list */
+.ipod-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ipod-track {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-family: 'Special Elite', serif;
+  font-size: 11px;
+  color: #333;
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+
+[data-theme="dark"] .ipod-track {
+  color: #a0b080;
+}
+
+.ipod-track:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .ipod-track:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.ipod-track.active {
+  background: #444;
+  color: #c8d4a2;
+}
+
+[data-theme="dark"] .ipod-track.active {
+  background: #8a9a6a;
+  color: #1a2a0a;
+}
+
+.track-num {
+  font-size: 10px;
+  width: 14px;
+  text-align: right;
+  opacity: 0.6;
+}
+
+.track-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Progress */
+.ipod-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 2px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.ipod-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #444;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+[data-theme="dark"] .ipod-progress-bar {
+  background: #8a9a6a;
+}
+
+.ipod-time {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Special Elite', serif;
+  font-size: 9px;
+  color: #666;
+}
+
+[data-theme="dark"] .ipod-time {
+  color: #6a7a5a;
+}
+
+/* Click Wheel */
+.ipod-wheel {
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ipod-wheel-ring {
+  width: 160px;
+  height: 160px;
+  border: 3px solid var(--border);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.ipod-wheel-center {
+  all: unset;
+  box-sizing: border-box;
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.ipod-wheel-center:hover {
+  transform: scale(1.05);
+}
+
+.ipod-wheel-center:active {
+  transform: scale(0.95);
+}
+
+.ipod-wheel-label {
+  position: absolute;
+  font-family: 'Bangers', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.ipod-wheel-label.top { top: 10px; }
+.ipod-wheel-label.bottom { bottom: 10px; }
+.ipod-wheel-label.left { left: 14px; }
+.ipod-wheel-label.right { right: 14px; }
