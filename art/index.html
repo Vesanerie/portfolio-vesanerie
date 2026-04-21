@@ -39,22 +39,22 @@
         <div class="pile-book-type">Fanzine PDF</div>
       </button>
 
-      <button class="pile-book" data-book="carnet-rose" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20De%20recherche%20ROSE.pdf" data-single="true" style="--rot: 3deg; --ox: -18px; --oy: -8px;">
-        <div class="pile-book-icon">&#9998;</div>
-        <div class="pile-book-title">Carnet de Recherche Rose</div>
-        <div class="pile-book-type">Carnet PDF</div>
+      <button class="pile-book" data-book="spirale-sket-tour" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/SPIRALE%20Sket%20tour.pdf" data-single="true" style="--rot: -2deg; --ox: 20px; --oy: 5px;">
+        <div class="pile-book-icon">&#9724;</div>
+        <div class="pile-book-title">Spirale Sket Tour</div>
+        <div class="pile-book-type">Fanzine PDF</div>
       </button>
 
-      <button class="pile-book" data-book="carnet-rouge" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20Rouge%203.pdf" data-single="true" style="--rot: -4deg; --ox: 12px; --oy: 10px;">
-        <div class="pile-book-icon">&#9998;</div>
-        <div class="pile-book-title">Carnet Rouge</div>
-        <div class="pile-book-type">Carnet PDF</div>
+      <button class="pile-book" data-folder="carnets" data-cover-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20Rouge%203.pdf" style="--rot: 3deg; --ox: -18px; --oy: -8px;">
+        <div class="pile-book-icon">&#128210;</div>
+        <div class="pile-book-title">Carnets</div>
+        <div class="pile-book-type">4 carnets</div>
       </button>
 
-      <button class="pile-book" data-book="carnet-jaune" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20de%20Recherche%20JAUNE.pdf" data-single="true" style="--rot: 5deg; --ox: -14px; --oy: -6px;">
-        <div class="pile-book-icon">&#9998;</div>
-        <div class="pile-book-title">Carnet de Recherche Jaune</div>
-        <div class="pile-book-type">Carnet PDF</div>
+      <button class="pile-book" data-folder="tiktoks" style="--rot: -3deg; --ox: 10px; --oy: -5px;">
+        <div class="pile-book-icon">&#9654;</div>
+        <div class="pile-book-title">TikToks</div>
+        <div class="pile-book-type">4 vid&eacute;os</div>
       </button>
 
       <button class="pile-book" data-book="nuits-blanches" style="--rot: 2deg; --ox: -10px; --oy: 6px;">
@@ -93,6 +93,53 @@
         <div class="pile-book-type">Dessin</div>
       </button>
 
+    </div>
+  </div>
+
+  <!-- ===== VUE TIKTOKS ===== -->
+  <div class="pile-view hidden" id="tiktoks-view">
+    <div class="pile-header">
+      <div class="pile-title">TikToks</div>
+      <div class="pile-sub">@culture.hot.mag</div>
+    </div>
+    <div class="tiktok-scroll">
+      <div class="tiktok-embed-wrap">
+        <iframe src="https://www.tiktok.com/embed/v2/7610068718210583830" allowfullscreen allow="encrypted-media"></iframe>
+      </div>
+      <div class="tiktok-embed-wrap">
+        <iframe src="https://www.tiktok.com/embed/v2/7608205217351585027" allowfullscreen allow="encrypted-media"></iframe>
+      </div>
+      <div class="tiktok-embed-wrap">
+        <iframe src="https://www.tiktok.com/embed/v2/7606630879707843862" allowfullscreen allow="encrypted-media"></iframe>
+      </div>
+      <div class="tiktok-embed-wrap">
+        <iframe src="https://www.tiktok.com/embed/v2/7606255381228031254" allowfullscreen allow="encrypted-media"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VUE SOUS-PILE CARNETS ===== -->
+  <div class="pile-view hidden" id="carnets-view">
+    <div class="pile-header">
+      <div class="pile-title">Carnets</div>
+      <div class="pile-sub">Choisis un carnet</div>
+    </div>
+    <div class="pile-stack">
+      <button class="pile-book" data-book="carnet-rose" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20De%20recherche%20ROSE.pdf" data-single="true" style="--rot: -5deg; --ox: 15px; --oy: 12px;">
+        <div class="pile-book-icon">&#9998;</div>
+        <div class="pile-book-title">Carnet de Recherche Rose</div>
+        <div class="pile-book-type">Carnet PDF</div>
+      </button>
+      <button class="pile-book" data-book="carnet-rouge" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20Rouge%203.pdf" style="--rot: 4deg; --ox: -20px; --oy: -10px;">
+        <div class="pile-book-icon">&#9998;</div>
+        <div class="pile-book-title">Carnet Rouge</div>
+        <div class="pile-book-type">Carnet PDF</div>
+      </button>
+      <button class="pile-book" data-book="carnet-jaune" data-pdf="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/Carnet%20de%20Recherche%20JAUNE.pdf" data-single="true" style="--rot: 5deg; --ox: -14px; --oy: -6px;">
+        <div class="pile-book-icon">&#9998;</div>
+        <div class="pile-book-title">Carnet de Recherche Jaune</div>
+        <div class="pile-book-type">Carnet PDF</div>
+      </button>
     </div>
   </div>
 

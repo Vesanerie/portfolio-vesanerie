@@ -69,10 +69,45 @@
   z-index: 100;
 }
 
-.pile-book.has-cover .pile-book-icon,
+/* Cards with cover image */
+.pile-book.has-cover .pile-book-icon {
+  display: none;
+}
+
 .pile-book.has-cover .pile-book-title,
 .pile-book.has-cover .pile-book-type {
-  display: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pile-book.has-cover:hover .pile-book-title,
+.pile-book.has-cover:hover .pile-book-type {
+  opacity: 1;
+}
+
+/* Hover overlay for cards with covers */
+.pile-book.has-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.3s;
+  z-index: 1;
+}
+
+.pile-book.has-cover:hover::before {
+  background: rgba(0,0,0,0.5);
+}
+
+.pile-book.has-cover .pile-book-title,
+.pile-book.has-cover .pile-book-type {
+  position: relative;
+  z-index: 2;
+  color: #f0ece4;
+}
+
+.pile-book.has-cover .pile-book-type {
+  border-color: #f0ece4;
 }
 
 .pile-book-icon {
@@ -96,6 +131,34 @@
   text-transform: uppercase;
   border: 2px solid var(--border);
   padding: 4px 12px;
+}
+
+/* ========================================
+   TIKTOK SCROLL
+   ======================================== */
+
+.tiktok-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 20px 40px;
+}
+
+.tiktok-embed-wrap {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border: 3px solid var(--border);
+  box-shadow: 6px 6px 0 var(--border);
+  overflow: hidden;
+}
+
+.tiktok-embed-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /* ========================================

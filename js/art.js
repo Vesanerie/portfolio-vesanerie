@@ -16,18 +16,53 @@ if (typeof pdfjsLib !== 'undefined') {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 }
 
-// ===== Pile: click to open a book =====
+var carnetsView = document.getElementById('carnets-view');
+var currentSubPile = null;
+
+// ===== Pile: click to open a book or folder =====
 document.querySelectorAll('.pile-book').forEach(function(card) {
   card.addEventListener('click', function() {
+    var folder = card.getAttribute('data-folder');
+    if (folder) {
+      openFolder(folder);
+      return;
+    }
     openBook(card.getAttribute('data-book'));
   });
 
   // Load PDF cover as card thumbnail
-  var pdfUrl = card.getAttribute('data-pdf');
+  var pdfUrl = card.getAttribute('data-pdf') || card.getAttribute('data-cover-pdf');
   if (pdfUrl) {
     loadPdfCover(pdfUrl, card);
   }
 });
+
+function openFolder(folderId) {
+  var folderView = document.getElementById(folderId + '-view');
+  if (!folderView) return;
+  pileView.classList.add('hidden');
+  folderView.classList.remove('hidden');
+  currentSubPile = folderId;
+
+  backLink.textContent = '\u2190 Pile';
+  backLink.href = '#';
+  backLink.onclick = function(e) {
+    e.preventDefault();
+    closeFolder();
+  };
+}
+
+function closeFolder() {
+  if (currentSubPile) {
+    var folderView = document.getElementById(currentSubPile + '-view');
+    if (folderView) folderView.classList.add('hidden');
+    currentSubPile = null;
+  }
+  pileView.classList.remove('hidden');
+  backLink.textContent = '\u2190 Retour';
+  backLink.href = '../';
+  backLink.onclick = null;
+}
 
 async function loadPdfCover(url, card) {
   try {
@@ -294,7 +329,6 @@ async function loadPdfAsBook(url, container, forceSingle) {
 
 function closeBook() {
   bookView.classList.add('hidden');
-  pileView.classList.remove('hidden');
 
   // Clean up PDF
   if (isPdfMode) {
@@ -315,10 +349,22 @@ function closeBook() {
     isPdfMode = false;
   }
 
-  // Restore back link
-  backLink.textContent = '\u2190 Retour';
-  backLink.href = '../';
-  backLink.onclick = null;
+  // Return to sub-pile or main pile
+  if (currentSubPile) {
+    var folderView = document.getElementById(currentSubPile + '-view');
+    if (folderView) folderView.classList.remove('hidden');
+    backLink.textContent = '\u2190 Pile';
+    backLink.href = '#';
+    backLink.onclick = function(e) {
+      e.preventDefault();
+      closeFolder();
+    };
+  } else {
+    pileView.classList.remove('hidden');
+    backLink.textContent = '\u2190 Retour';
+    backLink.href = '../';
+    backLink.onclick = null;
+  }
 }
 
 // ===== Book: page flip =====
