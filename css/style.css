@@ -63,6 +63,7 @@ body > *:not(.gallery-lightbox) { position: relative; z-index: 1; }
 /* ===== Theme Switch ===== */
 .theme-toggle {
   all: unset;
+  box-sizing: border-box;
   position: fixed;
   top: 20px;
   right: 20px;
