@@ -50,6 +50,8 @@ function openFolder(folderId) {
   folderView.classList.remove('hidden');
   currentSubPile = folderId;
 
+  if (folderId === 'tiktoks') restoreTikToks();
+
   backLink.textContent = '\u2190 Retour';
   backLink.href = '#';
   backLink.onclick = function(e) {
@@ -92,8 +94,31 @@ document.querySelectorAll('.gallery-item img').forEach(function(img) {
   });
 });
 
+function stopTikToks() {
+  var tiktokView = document.getElementById('tiktoks-view');
+  if (!tiktokView) return;
+  var iframes = tiktokView.querySelectorAll('iframe');
+  iframes.forEach(function(iframe) {
+    var src = iframe.src;
+    iframe.src = '';
+    iframe.setAttribute('data-src', src);
+  });
+}
+
+function restoreTikToks() {
+  var tiktokView = document.getElementById('tiktoks-view');
+  if (!tiktokView) return;
+  var iframes = tiktokView.querySelectorAll('iframe');
+  iframes.forEach(function(iframe) {
+    var src = iframe.getAttribute('data-src');
+    if (src && !iframe.src) iframe.src = src;
+  });
+}
+
 function closeFolder() {
   if (currentSubPile) {
+    // Stop TikToks when leaving
+    if (currentSubPile === 'tiktoks') stopTikToks();
     var folderView = document.getElementById(currentSubPile + '-view');
     if (folderView) folderView.classList.add('hidden');
   }
