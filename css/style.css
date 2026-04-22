@@ -299,18 +299,22 @@ a.contact-item:hover {
   .landing-sub { font-size: 10px; margin-top: 2px; }
   .landing-bio { font-size: 10px; padding: 0 10px; line-height: 1.5; margin-top: 2px; }
 
-  .landing-choices { gap: 10px; }
-  .landing-card {
-    width: 100px;
-    height: 140px;
+  .landing-choices {
     gap: 8px;
+    width: 100%;
+  }
+  .landing-card {
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    gap: 12px;
     border-width: 2px;
     box-shadow: 3px 3px 0 0 var(--border);
-    padding: 10px 6px;
+    padding: 0 16px;
   }
-  .landing-card-icon { font-size: 28px; }
+  .landing-card-icon { font-size: 22px; }
   .landing-card-title { font-size: 16px; letter-spacing: 1px; }
-  .landing-card-desc { font-size: 8px; padding: 0 4px; }
+  .landing-card-desc { display: none; }
 
   .cv-card {
     width: 60px;
