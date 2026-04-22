@@ -23,13 +23,24 @@ document.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film').f
     }
     openBook(card.getAttribute('data-book'));
   });
-
-  // Load PDF cover as card thumbnail
-  var pdfUrl = card.getAttribute('data-pdf') || card.getAttribute('data-cover-pdf');
-  if (pdfUrl) {
-    loadPdfCover(pdfUrl, card);
-  }
 });
+
+// Load covers only for cards visible in the main pile (not sub-piles)
+var coversLoaded = {};
+function loadCoversInView(viewId) {
+  var view = viewId ? document.getElementById(viewId + '-view') : document.getElementById('pile-view');
+  if (!view || coversLoaded[viewId || 'main']) return;
+  coversLoaded[viewId || 'main'] = true;
+  view.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film').forEach(function(card) {
+    var pdfUrl = card.getAttribute('data-pdf') || card.getAttribute('data-cover-pdf');
+    if (pdfUrl && !card.classList.contains('has-cover')) {
+      loadPdfCover(pdfUrl, card);
+    }
+  });
+}
+
+// Load main pile covers on start
+loadCoversInView(null);
 
 var folderHistory = [];
 
@@ -50,6 +61,7 @@ function openFolder(folderId) {
   folderView.classList.remove('hidden');
   currentSubPile = folderId;
 
+  loadCoversInView(folderId);
   restoreMediaInFolder(folderId);
 
   backLink.textContent = '\u2190 Retour';
@@ -187,16 +199,23 @@ function closeFolder() {
   }
 }
 
+// Skip heavy PDFs for covers (Carnet Rose 288MB, etc.)
+var heavyPdfs = ['recherche%20ROSE', 'VOITURE', 'SPIRALE%20Sket', 'clown%20final'];
+
 async function loadPdfCover(url, card) {
+  // Skip known heavy PDFs
+  for (var i = 0; i < heavyPdfs.length; i++) {
+    if (url.indexOf(heavyPdfs[i]) !== -1) return;
+  }
   try {
     var pdf = await pdfjsLib.getDocument(url).promise;
     var page = await pdf.getPage(1);
-    var viewport = page.getViewport({ scale: 0.5 });
+    var viewport = page.getViewport({ scale: 0.4 });
     var canvas = document.createElement('canvas');
     canvas.width = viewport.width;
     canvas.height = viewport.height;
     await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
-    card.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
+    card.style.backgroundImage = 'url(' + canvas.toDataURL('image/jpeg', 0.6) + ')';
     card.style.backgroundSize = 'cover';
     card.style.backgroundPosition = 'center';
     card.classList.add('has-cover');
