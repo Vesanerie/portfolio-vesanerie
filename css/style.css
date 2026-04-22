@@ -225,12 +225,15 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 .cv-overlay {
   display: none;
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 999;
   background: rgba(0,0,0,0.3);
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   gap: 16px;
 }
 
@@ -239,7 +242,8 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 }
 
 .cv-overlay canvas {
-  height: 70vh;
+  display: block;
+  height: 72vh;
   width: auto;
   border: 3px solid var(--border);
   box-shadow: 8px 8px 0 0 var(--border);
