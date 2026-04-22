@@ -9,7 +9,7 @@
 
 /* ===== iPod Classic ===== */
 .ipod {
-  width: 280px;
+  width: 380px;
   background: var(--bg-card);
   border: 3px solid var(--border);
   border-radius: 20px;
@@ -159,16 +159,16 @@
 
 /* Click Wheel */
 .ipod-wheel {
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .ipod-wheel-ring {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   border: 3px solid var(--border);
   border-radius: 50%;
   position: relative;
@@ -181,8 +181,8 @@
 .ipod-wheel-center {
   all: unset;
   box-sizing: border-box;
-  width: 60px;
-  height: 60px;
+  width: 76px;
+  height: 76px;
   border: 2px solid var(--border);
   border-radius: 50%;
   background: var(--bg-card);
