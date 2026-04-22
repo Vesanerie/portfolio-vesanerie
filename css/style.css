@@ -205,11 +205,11 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 /* ===== CV Card ===== */
 .cv-card {
   position: fixed;
-  top: -20px;
+  top: -40px;
   left: 40px;
   z-index: 998;
-  width: 80px;
-  height: 110px;
+  width: 140px;
+  height: 180px;
   background: var(--bg-card);
   border: 3px solid var(--border);
   display: flex;
@@ -228,7 +228,7 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 
 .cv-label {
   font-family: 'Bangers', sans-serif;
-  font-size: 24px;
+  font-size: 40px;
   letter-spacing: 3px;
   color: var(--text);
 }
