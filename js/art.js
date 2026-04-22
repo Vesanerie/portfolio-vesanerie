@@ -152,7 +152,12 @@ function restoreTikToks() {
   });
 }
 
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
 function closeFolder() {
+  closeLightbox();
   if (currentSubPile) {
     // Stop TikToks when leaving
     if (currentSubPile === 'tiktoks') stopTikToks();
@@ -415,6 +420,7 @@ async function loadPdfAsBook(url, container, forceSingle) {
 }
 
 function closeBook() {
+  closeLightbox();
   bookView.classList.add('hidden');
 
   // Clean up PDF
