@@ -65,16 +65,16 @@
 .app-tooltip {
   display: none;
   position: absolute;
-  bottom: calc(100% + 12px);
+  top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
+  width: 180px;
   background: var(--bg-card);
   border: 2px solid var(--border);
-  box-shadow: 4px 4px 0 0 var(--border);
-  padding: 10px 12px;
+  box-shadow: 3px 3px 0 0 var(--border);
+  padding: 8px 10px;
   font-family: 'Special Elite', serif;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1.5;
   color: var(--text);
   text-align: center;
@@ -85,11 +85,11 @@
 .app-tooltip::after {
   content: '';
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
   border: 6px solid transparent;
-  border-top-color: var(--border);
+  border-bottom-color: var(--border);
 }
 
 .app-icon:hover .app-tooltip {
