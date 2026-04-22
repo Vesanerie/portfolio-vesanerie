@@ -25,7 +25,10 @@
   </button>
 
   <div class="cv-overlay" id="cv-overlay" onclick="if(event.target===this)this.classList.remove('open')">
-    <iframe src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/CV_Valentin.pdf" class="cv-iframe"></iframe>
+    <div class="cv-viewer">
+      <canvas id="cv-canvas"></canvas>
+      <a href="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/CV_Valentin.pdf" download class="cv-download">Telecharger le CV</a>
+    </div>
   </div>
 
   <div class="landing">
@@ -67,6 +70,26 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    var cvLoaded = false;
+    document.querySelector('.cv-card').addEventListener('click', function() {
+      document.getElementById('cv-overlay').classList.add('open');
+      if (cvLoaded) return;
+      cvLoaded = true;
+      pdfjsLib.getDocument('https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/CV_Valentin.pdf').promise.then(function(pdf) {
+        pdf.getPage(1).then(function(page) {
+          var scale = 2;
+          var viewport = page.getViewport({ scale: scale });
+          var canvas = document.getElementById('cv-canvas');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
+        });
+      });
+    });
+  </script>
 </body>
 </html>

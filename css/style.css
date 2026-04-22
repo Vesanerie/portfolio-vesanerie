@@ -237,12 +237,34 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
   display: flex;
 }
 
-.cv-iframe {
-  width: 100%;
-  max-width: 800px;
-  height: 90vh;
+.cv-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.cv-viewer canvas {
+  max-width: 90vw;
+  max-height: 80vh;
   border: 3px solid var(--border);
-  background: #fff;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+.cv-download {
+  font-family: 'Bangers', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--bg);
+  background: var(--border);
+  border: 2px solid var(--border);
+  padding: 8px 20px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.cv-download:hover {
+  opacity: 0.8;
 }
 
 .cv-card:hover {
