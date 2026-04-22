@@ -78,10 +78,9 @@ var tiktokCounter = document.getElementById('tiktok-counter');
 var tiktokUp = document.getElementById('tiktok-up');
 var tiktokDown = document.getElementById('tiktok-down');
 if (tiktokScroll && tiktokCounter) {
-  var tiktokTotal = tiktokScroll.querySelectorAll('.tiktok-embed-wrap').length;
-  var itemH = tiktokWraps[0] ? tiktokWraps[0].offsetHeight : 580;
-
   var tiktokWraps = tiktokScroll.querySelectorAll('.tiktok-embed-wrap');
+  var tiktokTotal = tiktokWraps.length;
+  var itemH = tiktokWraps[0] ? tiktokWraps[0].offsetHeight : 580;
   var currentTiktok = 0;
 
   tiktokScroll.addEventListener('scroll', function() {
