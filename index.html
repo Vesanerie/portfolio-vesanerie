@@ -20,9 +20,13 @@
     <div class="dot"></div>
   </button>
 
-  <a href="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/CV_Valentin.pdf" target="_blank" class="cv-card">
+  <button class="cv-card" onclick="document.getElementById('cv-overlay').classList.add('open')">
     <span class="cv-label">CV</span>
-  </a>
+  </button>
+
+  <div class="cv-overlay" id="cv-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <iframe src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/CV_Valentin.pdf" class="cv-iframe"></iframe>
+  </div>
 
   <div class="landing">
     <div>

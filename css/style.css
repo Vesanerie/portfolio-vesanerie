@@ -222,6 +222,29 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
   transform: rotate(-3deg);
 }
 
+.cv-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.cv-overlay.open {
+  display: flex;
+}
+
+.cv-iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 90vh;
+  border: 3px solid var(--border);
+  background: #fff;
+}
+
 .cv-card:hover {
   transform: rotate(0deg) translateY(10px);
   box-shadow: 6px 6px 0 0 var(--border);
