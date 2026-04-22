@@ -225,40 +225,35 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 .cv-overlay {
   display: none;
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
 }
 
 .cv-overlay.open {
   display: flex;
-}
-
-.cv-viewer {
-  display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
-.cv-viewer canvas {
-  max-width: 90vw;
-  max-height: 80vh;
+.cv-overlay canvas {
+  max-width: 500px;
+  max-height: 75vh;
   border: 3px solid var(--border);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  box-shadow: 8px 8px 0 0 var(--border);
+  background: #fff;
 }
 
 .cv-download {
   font-family: 'Bangers', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: 2px;
   color: var(--bg);
   background: var(--border);
   border: 2px solid var(--border);
-  padding: 8px 20px;
+  padding: 6px 16px;
   text-decoration: none;
   transition: opacity 0.2s;
 }
