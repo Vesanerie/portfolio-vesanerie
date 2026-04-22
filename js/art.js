@@ -99,13 +99,36 @@ if (tiktokScroll && tiktokCounter) {
   });
 }
 
-// Gallery lightbox
-document.querySelectorAll('.gallery-item img').forEach(function(img) {
+// Gallery lightbox with arrow navigation
+var galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
+var lightboxIdx = 0;
+
+function showLightbox(idx) {
+  if (idx < 0 || idx >= galleryImages.length) return;
+  lightboxIdx = idx;
+  document.getElementById('lightbox-img').src = galleryImages[idx].src;
+  document.getElementById('lightbox-img').alt = galleryImages[idx].alt;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+galleryImages.forEach(function(img, i) {
   img.addEventListener('click', function() {
-    document.getElementById('lightbox-img').src = img.src;
-    document.getElementById('lightbox-img').alt = img.alt;
-    document.getElementById('lightbox').classList.add('open');
+    showLightbox(i);
   });
+});
+
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    if (lightboxIdx < galleryImages.length - 1) showLightbox(lightboxIdx + 1);
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    if (lightboxIdx > 0) showLightbox(lightboxIdx - 1);
+  } else if (e.key === 'Escape') {
+    lb.classList.remove('open');
+  }
 });
 
 function stopTikToks() {
