@@ -62,7 +62,7 @@ body::before {
 
 a { color: inherit; text-decoration: none; }
 
-body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card):not(.contact-card):not(.cv-overlay) { position: relative; z-index: 1; }
+.landing, .pile-view, .tech-page, .music-page, .book-view { position: relative; z-index: 1; }
 
 /* ===== Theme Switch ===== */
 .theme-toggle {
@@ -337,6 +337,8 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 
 /* ===== Contact Card ===== */
 .contact-card {
+  all: unset;
+  box-sizing: border-box;
   position: fixed;
   top: 50%;
   right: -210px;

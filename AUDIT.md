@@ -1,8 +1,8 @@
 # Audit complet — Vesanerie-sur-Internet
 
-> Date : 2026-04-22 (5e revision)
+> Date : 2026-04-22 (6e revision)
 > Auteur : Claude (audit automatique)
-> Statut : **bon etat general** — 28 corriges, 8 restants
+> Statut : **bon etat** — 28 corriges, 12 restants (dont 2 bugs)
 
 ---
 
@@ -10,90 +10,106 @@
 
 | Fichier | Lignes | Role |
 |---|---|---|
-| `index.html` | 53 | Landing page (Tech / Art / Musique) + bio |
-| `art/index.html` | 347 | Portfolio art — pile, edition, graphisme, esport, illustration, animation, tiktoks, carnets, PDF viewer, gallery, lightbox |
-| `tech/index.html` | 94 | Page tech — laptop mockup + 5 apps + iframe |
-| `music/index.html` | 67 | **NOUVEAU** — Page musique — iPod classic + player audio |
-| `css/style.css` | 210 | Base + halftone bg + landing + bio + back-link |
-| `css/art.css` | 625 | Styles pile, folder, film, phone, tiktok, gallery, lightbox, anim-grid, book-view, responsive |
-| `css/tech.css` | 231 | Styles page tech |
-| `css/pdf-viewer.css` | 117 | Styles viewer PDF fullscreen (curseurs custom) |
-| `css/music.css` | 213 | **NOUVEAU** — Styles iPod classic |
-| `js/main.js` | 17 | Toggle theme clair/sombre |
-| `js/art.js` | 488 | Logique pile + folders + media stop/restore + PDF + TikTok + lightbox (avec fleches) + gallery-pdf |
-| `js/tech.js` | 25 | Logique bureau → iframe |
-| `js/music.js` | 70 | **NOUVEAU** — Player audio iPod (play, progress, auto-next) |
-
----
-
-## Points CORRIGES (cumul)
-
-1-27. *(voir revisions precedentes)*
-28. ~~Lightbox pas fermable au clavier~~ — handler keydown avec Escape + ArrowLeft/Right `art.js:120-132`
+| `index.html` | 98 | Landing (Tech/Art/Musique) + bio + CV overlay + contact card |
+| `art/index.html` | 354 | Portfolio art — pile, edition, illustration, graphisme, esport, animation, tiktoks, carnets, PDF viewer, lightbox |
+| `tech/index.html` | 99 | Page tech — laptop 5 apps avec tooltips + iframe |
+| `music/index.html` | 67 | Page musique — iPod classic + player audio 3 tracks |
+| `css/style.css` | 467 | Base + halftone + landing + vinyl + CV card + contact card + responsive mobile |
+| `css/art.css` | 693 | Pile, folder, film, phone, gallery, lightbox, tiktok, anim-grid, book-view, responsive |
+| `css/tech.css` | 266 | Laptop + tooltips + responsive |
+| `css/pdf-viewer.css` | 158 | PDF reader fullscreen + curseurs custom + responsive mobile + touch |
+| `css/music.css` | 235 | iPod classic + responsive |
+| `js/main.js` | 17 | Toggle theme |
+| `js/art.js` | 489 | Pile + folders + media stop/restore + PDF + TikTok + lightbox (fleches) + gallery-pdf |
+| `js/tech.js` | 25 | Bureau → iframe |
+| `js/music.js` | 70 | Player audio iPod |
 
 ---
 
 ## Corrections RESTANTES
 
-### 1. PERF — pdf.js `defer` retire (regression)
-
-- **Fichier** : `art/index.html` ligne 18
-- **Probleme** : Le `defer` qui avait ete ajoute sur le `<script>` pdf.js a ete retire. Le script bloque a nouveau le rendu dans le `<head>` (~800KB).
-- **Correction** : Remettre `defer` : `<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" ...>`.
-- **Priorite** : MOYENNE
-
-### 2. JS — `isAnimating` jamais active (garde morte)
-
-- **Fichier** : `js/art.js` ligne 325 et 358
-- **Probleme** : `var isAnimating = false;` est declare et teste (`if (isAnimating) return;`) mais jamais mis a `true`. La garde ne bloque jamais rien.
-- **Correction** : Supprimer `var isAnimating = false;` et `if (isAnimating) return;`.
-- **Priorite** : BASSE
-
-### 3. JS — `var itemH = 580` couple au CSS
+### 1. BUG — `itemH = 580` casse le scroll TikTok sur mobile
 
 - **Fichier** : `js/art.js` ligne 70
-- **Probleme** : Hauteur hardcodee, couplee a `.tiktok-embed-wrap { height: 580px }` en CSS.
+- **Probleme** : `var itemH = 580` est hardcode, mais le CSS change la hauteur de `.tiktok-embed-wrap` a `480px` sous 700px et `400px` sous 400px (`art.css:645-646` et `685-686`). Le calcul de scroll (`scrollTop / itemH`) est faux sur mobile — le compteur et les fleches sautent des videos.
 - **Correction** : Lire dynamiquement : `var itemH = tiktokScroll.querySelector('.tiktok-embed-wrap').offsetHeight || 580;`.
+- **Priorite** : **HAUTE** (bug visible sur mobile)
+
+### 2. BUG — double handler sur le bouton CV
+
+- **Fichier** : `index.html` lignes 23-24 et 81-82
+- **Probleme** : Le bouton `.cv-card` a un `onclick="...classList.toggle('open')"` ET un `addEventListener('click')` en JS qui fait `classList.add('open')`. Au clic pour fermer : l'onclick toggle (retire 'open'), puis le JS le remet ('add'). Resultat : impossible de fermer le CV via le bouton.
+- **Correction** : Retirer le `onclick` du bouton HTML (ligne 23) et laisser uniquement le handler JS.
+- **Priorite** : **HAUTE** (bug fonctionnel)
+
+### 3. SECURITE — pdf.js sans SRI sur index.html
+
+- **Fichier** : `index.html` ligne 76
+- **Probleme** : `<script src="https://cdnjs.cloudflare.com/.../pdf.min.js"></script>` sans `integrity` ni `crossorigin`. La page art a le SRI, mais pas la landing.
+- **Correction** : Ajouter les memes attributs `integrity` et `crossorigin="anonymous"` que sur `art/index.html:18`.
+- **Priorite** : MOYENNE
+
+### 4. PERF — pdf.js charge en synchrone sur la landing
+
+- **Fichier** : `index.html` ligne 76
+- **Probleme** : pdf.js (~800KB) est charge en synchrone dans le body de la landing juste pour le CV. Bloque le rendu.
+- **Correction** : Ajouter `defer` au script. Le code inline qui l'utilise devrait etre dans un `DOMContentLoaded` ou un fichier separe charge apres.
+- **Priorite** : MOYENNE
+
+### 5. PERF — pdf.js sans `defer` sur art/index.html (regression persistante)
+
+- **Fichier** : `art/index.html` ligne 18
+- **Probleme** : Le `defer` a ete ajoute puis retire. Le script bloque toujours le rendu.
+- **Correction** : Ajouter `defer`.
+- **Priorite** : MOYENNE
+
+### 6. A11Y — contact card non accessible
+
+- **Fichier** : `index.html` ligne 61
+- **Probleme** : `<div class="contact-card" onclick="...">` n'est pas navigable au clavier (pas de tabindex, pas de role, pas de keydown).
+- **Correction** : Remplacer par `<button class="contact-card" onclick="...">` ou ajouter `tabindex="0" role="button"` et un handler keydown.
 - **Priorite** : BASSE
 
-### 4. CSS — `.has-cover` couleur texte hardcodee
+### 7. JS — `isAnimating` jamais active
+
+- **Fichier** : `js/art.js` lignes 326 et 359
+- **Probleme** : Garde morte — `isAnimating` est teste mais jamais mis a `true`.
+- **Correction** : Supprimer les 2 lignes.
+- **Priorite** : BASSE
+
+### 8. CSS — `.has-cover` couleur hardcodee
 
 - **Fichier** : `css/art.css` ligne 124
-- **Probleme** : `.pile-book.has-cover .pile-book-title` et `.pile-book-type` ont `color: #f0ece4` en dur. En dark mode, le texte overlay est identique au fond sombre, donc invisible si le background-image ne charge pas.
-- **Correction** : Utiliser `color: var(--bg);` pour que la couleur s'adapte au theme.
+- **Probleme** : `color: #f0ece4` en dur au lieu de `var(--bg)`.
+- **Correction** : Remplacer par `color: var(--bg);`.
 - **Priorite** : BASSE
 
-### 5. SEO — page musique sans Open Graph
+### 9. SEO — page musique sans Open Graph
 
 - **Fichier** : `music/index.html`
-- **Probleme** : Pas de balises `og:title`, `og:description`, `og:type` (presentes sur les 3 autres pages).
-- **Correction** : Ajouter dans le `<head>` :
-  ```html
-  <meta property="og:title" content="Vesanerie — Musique">
-  <meta property="og:description" content="Musique de Valentin Mardoukhaev — Beats, compositions, projets sonores.">
-  <meta property="og:type" content="website">
-  ```
+- **Probleme** : Pas de balises `og:title`, `og:description`, `og:type`.
+- **Correction** : Ajouter les 3 meta OG dans le `<head>`.
 - **Priorite** : BASSE
 
-### 6. CSS — `.gallery-pdf-label` jamais utilise
+### 10. CSS — `.gallery-pdf-label` jamais utilise
 
 - **Fichier** : `css/art.css` lignes 189-201
-- **Probleme** : La classe `.gallery-pdf-label` est definie dans le CSS mais n'existe dans aucun HTML. Code mort.
-- **Correction** : Supprimer le bloc CSS `.gallery-pdf-label`.
+- **Probleme** : Classe CSS definie mais absente du HTML. Code mort.
+- **Correction** : Supprimer le bloc.
 - **Priorite** : BASSE
 
-### 7. A11Y — iPod wheel non navigable au clavier
+### 11. HTML — canvas gallery-pdf sans dimensions
 
-- **Fichier** : `music/index.html` lignes 52-58
-- **Probleme** : Les labels "MENU", ">>", "||", "<<" sur la click wheel sont decoratifs (`<div>`) — pas de boutons, pas d'action. Seul le bouton central (play/pause) est fonctionnel. Les labels suggerent des actions (prev, next, pause) qui ne sont pas implementees.
-- **Correction** : Soit implementer prev/next/menu comme boutons fonctionnels, soit retirer le texte des labels pour eviter la confusion (ou les remplacer par de simples decorations sans texte semantique).
-- **Priorite** : BASSE (cosmetique, le player fonctionne via la liste de tracks et le bouton central)
+- **Fichier** : `art/index.html` ligne 125
+- **Probleme** : `<canvas id="voiture-cover"></canvas>` sans dimensions — layout shift a la gallery.
+- **Correction** : Ajouter `style="aspect-ratio: 3/4;"` ou des attributs `width`/`height`.
+- **Priorite** : BASSE
 
-### 8. HTML — canvas gallery-pdf sans dimensions initiales
+### 12. CSS — selecteur `body > *:not(...)` fragile
 
-- **Fichier** : `art/index.html` ligne 113
-- **Probleme** : `<canvas id="voiture-cover"></canvas>` n'a aucune dimension initiale. Le canvas est invisible (0x0) jusqu'a ce que le PDF se charge, causant un layout shift dans la grille gallery.
-- **Correction** : Ajouter des dimensions par defaut : `<canvas id="voiture-cover" width="300" height="400"></canvas>` ou un style CSS `.gallery-pdf canvas { aspect-ratio: 3/4; }`.
+- **Fichier** : `css/style.css` ligne 65
+- **Probleme** : `body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card):not(.contact-card):not(.cv-overlay)` — chaque nouvel element fixe doit etre exclu manuellement. Fragile et en croissance.
+- **Correction** : Inverser la logique : mettre `position: relative; z-index: 1;` sur `.landing`, `.pile-view`, `.tech-page`, `.music-page`, `.book-view` directement, au lieu d'exclure tous les elements fixes.
 - **Priorite** : BASSE
 
 ---
@@ -102,14 +118,18 @@
 
 | Priorite | Ref | Probleme | Effort |
 |---|---|---|---|
-| **MOYENNE** | 1 | pdf.js `defer` retire (regression) | 1 mot |
-| **BASSE** | 2 | `isAnimating` jamais active | 2 lignes |
-| **BASSE** | 3 | `itemH = 580` couple au CSS | 1 ligne |
-| **BASSE** | 4 | `.has-cover` couleur hardcodee | 1 ligne |
-| **BASSE** | 5 | Page musique sans Open Graph | 3 lignes |
-| **BASSE** | 6 | `.gallery-pdf-label` CSS mort | Suppression |
-| **BASSE** | 7 | iPod wheel labels non fonctionnels | Decision UX |
-| **BASSE** | 8 | Canvas gallery-pdf sans dimensions | 1 ligne |
+| **HAUTE** | 1 | `itemH=580` casse TikTok sur mobile | 1 ligne |
+| **HAUTE** | 2 | Double handler bouton CV (impossible de fermer) | 1 ligne |
+| **MOYENNE** | 3 | pdf.js sans SRI sur index.html | 1 ligne |
+| **MOYENNE** | 4 | pdf.js synchrone sur landing | 1 mot + refacto inline JS |
+| **MOYENNE** | 5 | pdf.js sans `defer` sur art (regression) | 1 mot |
+| **BASSE** | 6 | Contact card non accessible | 1 ligne |
+| **BASSE** | 7 | `isAnimating` garde morte | 2 lignes |
+| **BASSE** | 8 | `.has-cover` couleur hardcodee | 1 ligne |
+| **BASSE** | 9 | OG manquant page musique | 3 lignes |
+| **BASSE** | 10 | `.gallery-pdf-label` CSS mort | Suppression |
+| **BASSE** | 11 | Canvas sans dimensions | 1 ligne |
+| **BASSE** | 12 | Selecteur `body > *:not()` fragile | Refacto |
 
 ---
 
@@ -118,5 +138,6 @@
 - Ne changer **rien d'autre** que ce qui est liste ci-dessus.
 - Ne creer **aucun nouveau fichier**.
 - Garder le style de code existant (vanilla JS, pas de framework).
-- Tester que les 4 pages (`/`, `/art/`, `/tech/`, `/music/`) fonctionnent apres modifications.
-- **Attention au point 1** : c'est une regression, le `defer` avait deja ete ajoute puis retire.
+- Tester les 4 pages (`/`, `/art/`, `/tech/`, `/music/`) apres modifications.
+- **Points 1 et 2 sont des bugs visibles** — a corriger en priorite.
+- **Point 5** est une regression recurrente — surveiller que `defer` ne disparaisse plus.
