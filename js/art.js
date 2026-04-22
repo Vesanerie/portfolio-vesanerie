@@ -86,6 +86,7 @@ if (tiktokScroll && tiktokCounter) {
   var currentTiktok = 0;
 
   tiktokScroll.addEventListener('scroll', function() {
+    itemH = getItemH();
     var idx = Math.floor(tiktokScroll.scrollTop / itemH);
     tiktokCounter.textContent = (idx + 1) + ' / ' + tiktokTotal;
 
@@ -102,11 +103,13 @@ if (tiktokScroll && tiktokCounter) {
   });
 
   tiktokUp.addEventListener('click', function() {
+    itemH = getItemH();
     var idx = Math.floor(tiktokScroll.scrollTop / itemH);
     if (idx > 0) tiktokScroll.scrollTo({ top: (idx - 1) * itemH, behavior: 'smooth' });
   });
 
   tiktokDown.addEventListener('click', function() {
+    itemH = getItemH();
     var idx = Math.floor(tiktokScroll.scrollTop / itemH);
     if (idx < tiktokTotal - 1) tiktokScroll.scrollTo({ top: (idx + 1) * itemH, behavior: 'smooth' });
   });
