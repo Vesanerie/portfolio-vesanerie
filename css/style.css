@@ -493,16 +493,16 @@ a.contact-item:hover {
   /* Contact card en bas sur mobile, pas a droite */
   .contact-card {
     top: auto;
-    bottom: -120px;
+    bottom: -130px;
     right: 10px;
     left: auto;
     width: 200px;
-    transform: rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
   .contact-card.open {
-    bottom: 0;
+    bottom: 60px;
     right: 10px;
-    transform: rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
   .contact-card-label { font-size: 16px; padding: 8px; }
   .contact-card-content { padding: 10px; gap: 6px; }
