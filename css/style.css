@@ -111,13 +111,13 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 
 .landing-title {
   font-family: 'Bangers', sans-serif;
-  font-size: clamp(36px, 8vw, 64px);
+  font-size: clamp(48px, 10vw, 90px);
   letter-spacing: 6px;
   text-align: center;
 }
 
 .landing-sub {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-muted);
   letter-spacing: 2px;
   margin-top: 4px;
@@ -125,7 +125,7 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 }
 
 .landing-bio {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-muted);
   line-height: 1.6;
   text-align: center;
@@ -136,14 +136,14 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 
 .landing-choices {
   display: flex;
-  gap: 24px;
+  gap: 30px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .landing-card {
-  width: 200px;
-  height: 240px;
+  width: 260px;
+  height: 320px;
   border: 3px solid var(--border);
   background: var(--bg-card);
   display: flex;
@@ -164,13 +164,13 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 }
 
 .landing-card-icon {
-  font-size: 48px;
+  font-size: 64px;
   line-height: 1;
 }
 
 .landing-card-title {
   font-family: 'Bangers', sans-serif;
-  font-size: 32px;
+  font-size: 36px;
   letter-spacing: 3px;
   text-transform: uppercase;
 }
@@ -206,11 +206,11 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 /* ===== CV Card ===== */
 .cv-card {
   position: fixed;
-  top: -80px;
+  top: -90px;
   left: 30px;
   z-index: 998;
-  width: 120px;
-  height: 140px;
+  width: 140px;
+  height: 170px;
   background: var(--bg-card);
   border: 3px solid var(--border);
   display: flex;
@@ -229,7 +229,7 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 
 .cv-label {
   font-family: 'Bangers', sans-serif;
-  font-size: 30px;
+  font-size: 36px;
   letter-spacing: 3px;
   color: var(--text);
 }
