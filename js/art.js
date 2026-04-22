@@ -80,11 +80,13 @@ var tiktokDown = document.getElementById('tiktok-down');
 if (tiktokScroll && tiktokCounter) {
   var tiktokWraps = tiktokScroll.querySelectorAll('.tiktok-embed-wrap');
   var tiktokTotal = tiktokWraps.length;
-  var itemH = tiktokWraps[0] ? tiktokWraps[0].offsetHeight : 580;
+  function getItemH() { return tiktokWraps[0] ? tiktokWraps[0].offsetHeight : 580; }
+  var itemH = getItemH();
+  window.addEventListener('resize', function() { itemH = getItemH(); });
   var currentTiktok = 0;
 
   tiktokScroll.addEventListener('scroll', function() {
-    var idx = Math.round(tiktokScroll.scrollTop / itemH);
+    var idx = Math.floor(tiktokScroll.scrollTop / itemH);
     tiktokCounter.textContent = (idx + 1) + ' / ' + tiktokTotal;
 
     if (idx !== currentTiktok) {
@@ -100,12 +102,12 @@ if (tiktokScroll && tiktokCounter) {
   });
 
   tiktokUp.addEventListener('click', function() {
-    var idx = Math.round(tiktokScroll.scrollTop / itemH);
+    var idx = Math.floor(tiktokScroll.scrollTop / itemH);
     if (idx > 0) tiktokScroll.scrollTo({ top: (idx - 1) * itemH, behavior: 'smooth' });
   });
 
   tiktokDown.addEventListener('click', function() {
-    var idx = Math.round(tiktokScroll.scrollTop / itemH);
+    var idx = Math.floor(tiktokScroll.scrollTop / itemH);
     if (idx < tiktokTotal - 1) tiktokScroll.scrollTo({ top: (idx + 1) * itemH, behavior: 'smooth' });
   });
 }
@@ -167,7 +169,7 @@ function restoreMediaInFolder(folderId) {
     var src = iframe.getAttribute('data-src');
     if (src && !iframe.src) iframe.src = src;
   });
-  view.querySelectorAll('video').forEach(function(v) { v.play(); });
+  view.querySelectorAll('video').forEach(function(v) { v.play().catch(function(){}); });
 }
 
 function closeFolder() {
@@ -198,14 +200,9 @@ function closeFolder() {
   }
 }
 
-// Skip heavy PDFs for covers (Carnet Rose 288MB, etc.)
-var heavyPdfs = ['recherche%20ROSE', 'VOITURE', 'SPIRALE%20Sket', 'clown%20final'];
-
 async function loadPdfCover(url, card) {
-  // Skip known heavy PDFs
-  for (var i = 0; i < heavyPdfs.length; i++) {
-    if (url.indexOf(heavyPdfs[i]) !== -1) return;
-  }
+  // Skip if card says no cover
+  if (card.hasAttribute('data-skip-cover')) return;
   try {
     var pdf = await pdfjsLib.getDocument(url).promise;
     var page = await pdf.getPage(1);
@@ -276,7 +273,7 @@ async function loadPdfAsBook(url, container, forceSingle) {
     async function renderPage(idx) {
       if (pdfPages[idx]) return pdfPages[idx];
       var page = await pdf.getPage(idx + 1);
-      var scale = 1.5;
+      var scale = window.innerWidth <= 700 ? 1 : 1.5;
       var viewport = page.getViewport({ scale: scale });
       var canvas = document.createElement('canvas');
       canvas.width = viewport.width;
