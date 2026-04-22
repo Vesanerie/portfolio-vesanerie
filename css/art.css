@@ -335,6 +335,82 @@
   box-shadow: 10px 10px 0 0 var(--border);
 }
 
+/* ===== Film strip card (Animation) ===== */
+.pile-film {
+  all: unset;
+  box-sizing: border-box;
+  width: 220px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
+  background: var(--border);
+  box-shadow: 6px 6px 0 0 var(--border);
+}
+
+.pile-film:hover {
+  transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
+  box-shadow: 10px 10px 0 0 var(--border);
+  z-index: 100;
+}
+
+.film-strip-top,
+.film-strip-bottom {
+  height: 24px;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+}
+
+.film-strip-top::before,
+.film-strip-top::after,
+.film-strip-bottom::before,
+.film-strip-bottom::after {
+  content: '';
+  display: inline-block;
+}
+
+.film-strip-top,
+.film-strip-bottom {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 8px,
+    var(--bg) 8px,
+    var(--bg) 16px,
+    transparent 16px,
+    transparent 22px
+  );
+}
+
+.film-body {
+  background: var(--bg-card);
+  padding: 30px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.film-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 26px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.film-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+}
+
 .tiktok-row {
   display: flex;
   align-items: center;
