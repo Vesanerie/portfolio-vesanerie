@@ -50,7 +50,7 @@ function openFolder(folderId) {
   folderView.classList.remove('hidden');
   currentSubPile = folderId;
 
-  if (folderId === 'tiktoks') restoreTikToks();
+  restoreMediaInFolder(folderId);
 
   backLink.textContent = '\u2190 Retour';
   backLink.href = '#';
@@ -131,36 +131,38 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-function stopTikToks() {
-  var tiktokView = document.getElementById('tiktoks-view');
-  if (!tiktokView) return;
-  var iframes = tiktokView.querySelectorAll('iframe');
-  iframes.forEach(function(iframe) {
-    var src = iframe.src;
-    iframe.src = '';
-    iframe.setAttribute('data-src', src);
-  });
-}
-
-function restoreTikToks() {
-  var tiktokView = document.getElementById('tiktoks-view');
-  if (!tiktokView) return;
-  var iframes = tiktokView.querySelectorAll('iframe');
-  iframes.forEach(function(iframe) {
-    var src = iframe.getAttribute('data-src');
-    if (src && !iframe.src) iframe.src = src;
-  });
-}
 
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
 }
 
+function stopMediaInFolder(folderId) {
+  var view = document.getElementById(folderId + '-view');
+  if (!view) return;
+  // Stop iframes (YouTube, TikTok)
+  view.querySelectorAll('iframe').forEach(function(iframe) {
+    var src = iframe.src;
+    iframe.src = '';
+    iframe.setAttribute('data-src', src);
+  });
+  // Pause videos
+  view.querySelectorAll('video').forEach(function(v) { v.pause(); });
+}
+
+function restoreMediaInFolder(folderId) {
+  var view = document.getElementById(folderId + '-view');
+  if (!view) return;
+  view.querySelectorAll('iframe').forEach(function(iframe) {
+    var src = iframe.getAttribute('data-src');
+    if (src && !iframe.src) iframe.src = src;
+  });
+  view.querySelectorAll('video').forEach(function(v) { v.play(); });
+}
+
 function closeFolder() {
   closeLightbox();
   if (currentSubPile) {
-    // Stop TikToks when leaving
-    if (currentSubPile === 'tiktoks') stopTikToks();
+    stopMediaInFolder(currentSubPile);
     var folderView = document.getElementById(currentSubPile + '-view');
     if (folderView) folderView.classList.add('hidden');
   }
