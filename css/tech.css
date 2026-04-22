@@ -53,12 +53,47 @@
   border: 2px solid transparent;
   border-radius: 8px;
   transition: border-color 0.2s, transform 0.15s, box-shadow 0.15s;
+  position: relative;
 }
 
 .app-icon:hover {
   border-color: var(--border);
   transform: translateY(-4px);
   box-shadow: 4px 4px 0 var(--border);
+}
+
+.app-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  box-shadow: 4px 4px 0 0 var(--border);
+  padding: 10px 12px;
+  font-family: 'Special Elite', serif;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text);
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.app-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--border);
+}
+
+.app-icon:hover .app-tooltip {
+  display: block;
 }
 
 .app-icon:active {
