@@ -339,7 +339,8 @@
 .pile-film {
   all: unset;
   box-sizing: border-box;
-  width: 220px;
+  width: 240px;
+  height: 320px;
   cursor: pointer;
   position: relative;
   display: flex;
@@ -347,6 +348,8 @@
   transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
   background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
   box-shadow: 6px 6px 0 0 var(--border);
 }
 
@@ -358,43 +361,31 @@
 
 .film-strip-top,
 .film-strip-bottom {
-  height: 24px;
+  height: 28px;
   background: var(--border);
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 0 8px;
+  gap: 12px;
+  padding: 0 12px;
+  flex-shrink: 0;
 }
 
-.film-strip-top::before,
-.film-strip-top::after,
-.film-strip-bottom::before,
-.film-strip-bottom::after {
-  content: '';
-  display: inline-block;
-}
-
-.film-strip-top,
-.film-strip-bottom {
-  background-image: repeating-linear-gradient(
-    90deg,
-    transparent 0px,
-    transparent 8px,
-    var(--bg) 8px,
-    var(--bg) 16px,
-    transparent 16px,
-    transparent 22px
-  );
+.film-hole {
+  width: 12px;
+  height: 10px;
+  background: var(--bg);
+  border-radius: 2px;
+  flex-shrink: 0;
 }
 
 .film-body {
+  flex: 1;
   background: var(--bg-card);
-  padding: 30px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .film-title {
