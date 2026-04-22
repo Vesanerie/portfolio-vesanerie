@@ -223,13 +223,13 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 }
 
 .cv-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
+  display: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 9999 !important;
   background: rgba(0,0,0,0.3);
   flex-direction: column;
   justify-content: center;
@@ -238,15 +238,15 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 }
 
 .cv-overlay.open {
-  display: flex;
+  display: flex !important;
 }
 
 .cv-overlay canvas {
   display: block;
   height: 72vh;
   width: auto;
-  border: 3px solid var(--border);
-  box-shadow: 8px 8px 0 0 var(--border);
+  border: 3px solid #111;
+  box-shadow: 8px 8px 0 0 #111;
   background: #fff;
 }
 
