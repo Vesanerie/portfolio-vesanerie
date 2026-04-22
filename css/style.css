@@ -202,6 +202,40 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
   box-shadow: 4px 4px 0 var(--border);
 }
 
+/* ===== Contact ===== */
+.landing-contact {
+  text-align: center;
+  margin-top: -20px;
+}
+
+.landing-contact-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 28px;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.landing-contact-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contact-link {
+  font-family: 'Special Elite', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  border: 2px solid var(--border);
+  padding: 8px 18px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.contact-link:hover {
+  background: var(--border);
+  color: var(--bg);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
   .landing-choices { gap: 20px; }
