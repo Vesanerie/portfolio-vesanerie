@@ -104,23 +104,23 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
   align-items: center;
   justify-content: center;
   height: 100vh;
-  gap: 20px;
-  padding: 20px 20px;
+  gap: 14px;
+  padding: 10px 20px;
   overflow: hidden;
 }
 
 .landing-title {
   font-family: 'Bangers', sans-serif;
-  font-size: clamp(48px, 10vw, 80px);
+  font-size: clamp(36px, 8vw, 64px);
   letter-spacing: 6px;
   text-align: center;
 }
 
 .landing-sub {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--text-muted);
   letter-spacing: 2px;
-  margin-top: 10px;
+  margin-top: 4px;
   text-align: center;
 }
 
@@ -130,7 +130,7 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
   line-height: 1.6;
   text-align: center;
   max-width: 480px;
-  margin: 8px auto 0;
+  margin: 4px auto 0;
   letter-spacing: 0.5px;
 }
 
@@ -142,8 +142,8 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 }
 
 .landing-card {
-  width: 220px;
-  height: 280px;
+  width: 200px;
+  height: 240px;
   border: 3px solid var(--border);
   background: var(--bg-card);
   display: flex;
@@ -164,7 +164,7 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 }
 
 .landing-card-icon {
-  font-size: 64px;
+  font-size: 48px;
   line-height: 1;
 }
 
@@ -206,11 +206,11 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 /* ===== CV Card ===== */
 .cv-card {
   position: fixed;
-  top: -110px;
-  left: 40px;
+  top: -80px;
+  left: 30px;
   z-index: 998;
-  width: 140px;
-  height: 180px;
+  width: 120px;
+  height: 140px;
   background: var(--bg-card);
   border: 3px solid var(--border);
   display: flex;
@@ -229,7 +229,7 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 
 .cv-label {
   font-family: 'Bangers', sans-serif;
-  font-size: 40px;
+  font-size: 30px;
   letter-spacing: 3px;
   color: var(--text);
 }
