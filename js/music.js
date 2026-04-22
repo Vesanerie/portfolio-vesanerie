@@ -9,6 +9,7 @@ var playBtn = document.getElementById('play-btn');
 var currentTrack = null;
 
 function formatTime(s) {
+  if (!s || isNaN(s)) return '0:00';
   var m = Math.floor(s / 60);
   var sec = Math.floor(s % 60);
   return m + ':' + (sec < 10 ? '0' : '') + sec;
@@ -33,7 +34,7 @@ tracks.forEach(function(track) {
 
 // Play/Pause button (center of wheel)
 playBtn.addEventListener('click', function() {
-  if (!audio.src) return;
+  if (!audio.src || !currentTrack) return;
   if (audio.paused) {
     audio.play();
   } else {
