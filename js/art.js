@@ -14,7 +14,7 @@ if (typeof pdfjsLib !== 'undefined') {
 var currentSubPile = null;
 
 // ===== Pile: click to open a book or folder =====
-document.querySelectorAll('.pile-book, .pile-phone, .pile-folder').forEach(function(card) {
+document.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film').forEach(function(card) {
   card.addEventListener('click', function() {
     var folder = card.getAttribute('data-folder');
     if (folder) {
