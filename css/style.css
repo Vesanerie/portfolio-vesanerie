@@ -202,6 +202,37 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
   box-shadow: 4px 4px 0 var(--border);
 }
 
+/* ===== CV Card ===== */
+.cv-card {
+  position: fixed;
+  top: -20px;
+  left: 40px;
+  z-index: 998;
+  width: 80px;
+  height: 110px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+  box-shadow: 4px 4px 0 0 var(--border);
+  transition: transform 0.3s, box-shadow 0.3s;
+  transform: rotate(-3deg);
+}
+
+.cv-card:hover {
+  transform: rotate(0deg) translateY(10px);
+  box-shadow: 6px 6px 0 0 var(--border);
+}
+
+.cv-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 24px;
+  letter-spacing: 3px;
+  color: var(--text);
+}
+
 /* ===== Contact ===== */
 .landing-contact {
   text-align: center;
