@@ -95,8 +95,10 @@
   border-bottom-color: var(--border);
 }
 
-.app-icon:hover .app-tooltip {
-  display: block;
+@media (hover: hover) {
+  .app-icon:hover .app-tooltip {
+    display: block;
+  }
 }
 
 .app-icon:active {
