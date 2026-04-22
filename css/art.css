@@ -121,7 +121,7 @@
 .pile-book.has-cover .pile-book-type {
   position: relative;
   z-index: 2;
-  color: #f0ece4;
+  color: var(--bg);
 }
 
 
@@ -187,19 +187,6 @@
   position: relative;
 }
 
-.gallery-pdf-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--border);
-  color: var(--bg);
-  font-family: 'Bangers', sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-align: center;
-  padding: 4px;
-}
 
 /* Lightbox */
 .gallery-lightbox {

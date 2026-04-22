@@ -79,7 +79,7 @@ var tiktokUp = document.getElementById('tiktok-up');
 var tiktokDown = document.getElementById('tiktok-down');
 if (tiktokScroll && tiktokCounter) {
   var tiktokTotal = tiktokScroll.querySelectorAll('.tiktok-embed-wrap').length;
-  var itemH = 580;
+  var itemH = tiktokWraps[0] ? tiktokWraps[0].offsetHeight : 580;
 
   var tiktokWraps = tiktokScroll.querySelectorAll('.tiktok-embed-wrap');
   var currentTiktok = 0;
@@ -342,7 +342,6 @@ async function loadPdfAsBook(url, container, forceSingle) {
     }
 
     var currentSpread = 0;
-    var isAnimating = false;
 
     function copyCanvas(source) {
       var copy = document.createElement('canvas');
@@ -375,7 +374,6 @@ async function loadPdfAsBook(url, container, forceSingle) {
     }
 
     async function showSpread(idx, direction) {
-      if (isAnimating) return;
       if (idx < 0 || idx >= spreads.length) return;
 
       var newCanvases = await loadSpreadCanvases(idx);
