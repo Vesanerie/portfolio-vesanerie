@@ -234,37 +234,57 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
   color: var(--text);
 }
 
-/* ===== Contact ===== */
-.landing-contact {
-  text-align: center;
+/* ===== Contact Card ===== */
+.contact-card {
+  position: fixed;
+  bottom: -140px;
+  right: 40px;
+  z-index: 998;
+  width: 260px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  box-shadow: 4px 4px 0 0 var(--border);
+  cursor: pointer;
+  transition: bottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s;
+  transform: rotate(2deg);
 }
 
-.landing-contact-title {
+.contact-card:hover {
+  transform: rotate(0deg);
+}
+
+.contact-card.open {
+  bottom: 0;
+  transform: rotate(0deg);
+}
+
+.contact-card-label {
   font-family: 'Bangers', sans-serif;
   font-size: 22px;
   letter-spacing: 3px;
-  margin-bottom: 10px;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 2px solid var(--border);
 }
 
-.landing-contact-links {
+.contact-card-content {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
 }
 
-.contact-link {
+.contact-item {
   font-family: 'Special Elite', serif;
-  font-size: 13px;
-  letter-spacing: 1px;
-  border: 2px solid var(--border);
-  padding: 8px 18px;
-  transition: background 0.2s, color 0.2s;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
 }
 
-.contact-link:hover {
-  background: var(--border);
-  color: var(--bg);
+a.contact-item:hover {
+  color: var(--text-muted);
 }
 
 /* ===== Responsive ===== */
