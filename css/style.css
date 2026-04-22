@@ -225,25 +225,32 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card)
 .cv-overlay {
   display: none;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
   z-index: 999;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
 }
 
 .cv-overlay.open {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+}
+
+.cv-overlay canvas,
+.cv-overlay .cv-download {
+  pointer-events: auto;
 }
 
 .cv-overlay canvas {
-  max-width: min(420px, 85vw);
-  max-height: 70vh;
+  width: min(420px, 85vw);
+  height: auto;
+  max-height: 75vh;
   border: 3px solid var(--border);
   box-shadow: 8px 8px 0 0 var(--border);
   background: #fff;
+  object-fit: contain;
 }
 
 .cv-download {
