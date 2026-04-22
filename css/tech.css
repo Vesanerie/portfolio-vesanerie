@@ -35,11 +35,8 @@
 .desktop {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: start;
-  gap: 12px;
-  padding: 28px 24px;
+  position: relative;
+  padding: 20px;
 }
 
 .app-icon {
@@ -53,8 +50,14 @@
   border: 2px solid transparent;
   border-radius: 8px;
   transition: border-color 0.2s, transform 0.15s, box-shadow 0.15s;
-  position: relative;
+  position: absolute;
 }
+
+.app-icon:nth-child(1) { top: 8%; left: 5%; }
+.app-icon:nth-child(2) { top: 12%; right: 25%; }
+.app-icon:nth-child(3) { top: 45%; left: 15%; }
+.app-icon:nth-child(4) { top: 50%; right: 10%; }
+.app-icon:nth-child(5) { top: 5%; right: 5%; }
 
 .app-icon:hover {
   border-color: var(--border);
@@ -226,13 +229,18 @@
   }
 
   .desktop {
-    padding: 16px 12px;
-    gap: 8px;
+    padding: 10px;
   }
 
   .app-icon {
-    padding: 10px 14px;
+    padding: 8px 10px;
   }
+
+  .app-icon:nth-child(1) { top: 5%; left: 3%; }
+  .app-icon:nth-child(2) { top: 10%; right: 15%; }
+  .app-icon:nth-child(3) { top: 40%; left: 8%; }
+  .app-icon:nth-child(4) { top: 45%; right: 5%; }
+  .app-icon:nth-child(5) { top: 5%; right: 3%; }
 
   .app-icon-img {
     font-size: 34px;
