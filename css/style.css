@@ -237,46 +237,57 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 /* ===== Contact Card ===== */
 .contact-card {
   position: fixed;
-  bottom: -140px;
-  right: 40px;
+  top: 50%;
+  right: -260px;
+  transform: translateY(-50%) rotate(0deg);
   z-index: 998;
-  width: 260px;
+  width: 300px;
   background: var(--bg-card);
   border: 3px solid var(--border);
-  box-shadow: 4px 4px 0 0 var(--border);
+  box-shadow: -6px 6px 0 0 var(--border);
   cursor: pointer;
-  transition: bottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s;
-  transform: rotate(2deg);
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.contact-card:hover {
-  transform: rotate(0deg);
+.contact-card::before {
+  content: 'CONTACT';
+  position: absolute;
+  left: -44px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: var(--text);
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  padding: 6px 16px;
+  white-space: nowrap;
 }
 
 .contact-card.open {
-  bottom: 0;
-  transform: rotate(0deg);
+  right: 0;
 }
 
 .contact-card-label {
   font-family: 'Bangers', sans-serif;
-  font-size: 22px;
-  letter-spacing: 3px;
+  font-size: 28px;
+  letter-spacing: 4px;
   text-align: center;
-  padding: 10px;
-  border-bottom: 2px solid var(--border);
+  padding: 16px;
+  border-bottom: 3px solid var(--border);
 }
 
 .contact-card-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 14px;
+  gap: 12px;
+  padding: 20px;
 }
 
 .contact-item {
   font-family: 'Special Elite', serif;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.5px;
   color: var(--text);
   text-decoration: none;
