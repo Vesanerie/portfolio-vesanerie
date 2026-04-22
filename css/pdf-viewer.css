@@ -114,3 +114,43 @@
   border: 2px solid var(--border);
   padding: 4px 16px;
 }
+
+/* ===== Mobile PDF ===== */
+@media (max-width: 700px) {
+  .pdf-spread canvas {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+
+  .pdf-spread-single canvas {
+    max-width: 95vw;
+  }
+
+  /* Single page on mobile for double spreads */
+  .pdf-spread {
+    max-width: 95vw;
+  }
+
+  .pdf-counter {
+    bottom: 10px;
+    font-size: 13px;
+    padding: 3px 12px;
+  }
+
+  /* Hide custom cursors on touch */
+  .pdf-zone-left {
+    cursor: pointer;
+  }
+
+  .pdf-zone-right {
+    cursor: pointer;
+  }
+}
+
+@media (hover: none) {
+  /* Touch devices: no custom cursor */
+  .pdf-zone-left,
+  .pdf-zone-right {
+    cursor: default;
+  }
+}
