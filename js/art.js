@@ -424,6 +424,26 @@ function closeBook() {
   }
 }
 
+// Gallery PDF items — load cover + click to open
+document.querySelectorAll('.gallery-pdf').forEach(function(item) {
+  var pdfUrl = item.getAttribute('data-pdf');
+  var canvas = item.querySelector('canvas');
+  if (pdfUrl && canvas) {
+    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+      pdf.getPage(1).then(function(page) {
+        var viewport = page.getViewport({ scale: 0.5 });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
+      });
+    }).catch(function(e) { console.warn('Gallery PDF cover failed:', e); });
+  }
+  item.addEventListener('click', function() {
+    var bookId = item.getAttribute('data-book');
+    if (bookId) openBook(bookId);
+  });
+});
+
 // Keyboard: Escape to close book
 document.addEventListener('keydown', function(e) {
   if (bookView.classList.contains('hidden')) return;
