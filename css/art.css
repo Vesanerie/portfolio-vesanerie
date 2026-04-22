@@ -124,9 +124,6 @@
   color: #f0ece4;
 }
 
-.pile-book.has-cover .pile-book-type {
-  border-color: #f0ece4;
-}
 
 .pile-book-icon {
   font-size: 48px;
@@ -147,7 +144,7 @@
   color: var(--text-muted);
   letter-spacing: 2px;
   text-transform: uppercase;
-  border: 2px solid var(--border);
+  border: none;
   padding: 4px 12px;
 }
 
