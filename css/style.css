@@ -492,9 +492,9 @@ a.contact-item:hover {
 
   /* Contact card en bas sur mobile, pas a droite */
   .contact-card {
-    top: 50%;
+    top: 40%;
     bottom: auto;
-    right: -140px;
+    right: -148px;
     left: auto;
     width: 200px;
     transform: translateY(-50%) rotate(0deg);
@@ -503,6 +503,15 @@ a.contact-item:hover {
     right: 0;
     transform: translateY(-50%) rotate(0deg);
   }
+  .contact-card-label {
+    font-size: 16px;
+    padding: 8px;
+  }
+  .contact-card-content {
+    padding: 10px;
+    gap: 6px;
+  }
+  .contact-item { font-size: 10px; }
   .contact-card-label { font-size: 16px; padding: 8px; }
   .contact-card-content { padding: 10px; gap: 6px; }
   .contact-item { font-size: 10px; }
