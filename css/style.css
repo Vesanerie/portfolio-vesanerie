@@ -393,6 +393,61 @@ a.contact-item:hover {
   color: var(--text-muted);
 }
 
+/* ===== Tools Card ===== */
+.tools-card {
+  all: unset;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 20px;
+  right: -180px;
+  z-index: 998;
+  width: 240px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  box-shadow: -4px 4px 0 0 var(--border);
+  cursor: pointer;
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s;
+  transform: rotate(-2deg);
+}
+
+.tools-card:hover {
+  right: -170px;
+}
+
+.tools-card.open {
+  right: 0;
+  transform: rotate(0deg);
+}
+
+.tools-card-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.tools-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+}
+
+.tools-item {
+  font-family: 'Special Elite', serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.tools-item:last-child {
+  border-bottom: none;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
   .landing {
