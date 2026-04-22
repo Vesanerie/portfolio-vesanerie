@@ -1,8 +1,8 @@
 # Audit complet — Vesanerie-sur-Internet
 
-> Date : 2026-04-22 (6e revision)
+> Date : 2026-04-22 (8e revision)
 > Auteur : Claude (audit automatique)
-> Statut : **bon etat** — 28 corriges, 12 restants (dont 2 bugs)
+> Statut : **1 bug critique**, sinon tres propre
 
 ---
 
@@ -10,106 +10,72 @@
 
 | Fichier | Lignes | Role |
 |---|---|---|
-| `index.html` | 98 | Landing (Tech/Art/Musique) + bio + CV overlay + contact card |
-| `art/index.html` | 354 | Portfolio art — pile, edition, illustration, graphisme, esport, animation, tiktoks, carnets, PDF viewer, lightbox |
-| `tech/index.html` | 99 | Page tech — laptop 5 apps avec tooltips + iframe |
-| `music/index.html` | 67 | Page musique — iPod classic + player audio 3 tracks |
-| `css/style.css` | 467 | Base + halftone + landing + vinyl + CV card + contact card + responsive mobile |
-| `css/art.css` | 693 | Pile, folder, film, phone, gallery, lightbox, tiktok, anim-grid, book-view, responsive |
-| `css/tech.css` | 266 | Laptop + tooltips + responsive |
-| `css/pdf-viewer.css` | 158 | PDF reader fullscreen + curseurs custom + responsive mobile + touch |
-| `css/music.css` | 235 | iPod classic + responsive |
+| `index.html` | 101 | Landing (Tech/Art/Musique) + bio + email + CV overlay (pdf.js defer+SRI) + contact card |
+| `art/index.html` | 368 | Portfolio art — edition, graphisme, illustration, esport, animation, tiktoks, carnets, PDF viewer, lightbox, tools-card |
+| `tech/index.html` | 109 | Page tech — laptop 5 apps (position absolue) + tooltips (hover:hover) + iframe + tools-card |
+| `music/index.html` | 77 | Page musique — iPod classic + player 3 tracks + tools-card |
+| `css/style.css` | 580 | Base + halftone + landing (animations fadeInUp/cardDrop) + vinyl + CV + contact + tools-card + responsive |
+| `css/art.css` | 692 | Pile, folder, film, phone, gallery (content-visibility), lightbox, tiktok, anim-grid, book-view, responsive |
+| `css/tech.css` | 282 | Laptop + tooltips (hover:hover + mobile hide) + positions absolues + responsive |
+| `css/pdf-viewer.css` | 158 | PDF reader + curseurs custom + responsive + touch |
+| `css/music.css` | 235 | iPod classic (380px) + responsive |
 | `js/main.js` | 17 | Toggle theme |
-| `js/art.js` | 489 | Pile + folders + media stop/restore + PDF + TikTok + lightbox (fleches) + gallery-pdf |
+| `js/art.js` | 506 | Pile + lazy covers (skip heavy PDFs) + folders + media stop/restore + PDF (mobile single) + TikTok + lightbox (fleches) + gallery-pdf |
 | `js/tech.js` | 25 | Bureau → iframe |
 | `js/music.js` | 70 | Player audio iPod |
 
 ---
 
+## Points corriges depuis la derniere revision
+
+- ~~`.tools-card` sans CSS~~ — styles ajoutes dans `style.css:442-494` (slide-in depuis la droite, comme contact-card)
+
+---
+
 ## Corrections RESTANTES
 
-### 1. BUG — `itemH = 580` casse le scroll TikTok sur mobile
+### 1. BUG CRITIQUE — `tiktokWraps` utilise avant assignation
 
-- **Fichier** : `js/art.js` ligne 70
-- **Probleme** : `var itemH = 580` est hardcode, mais le CSS change la hauteur de `.tiktok-embed-wrap` a `480px` sous 700px et `400px` sous 400px (`art.css:645-646` et `685-686`). Le calcul de scroll (`scrollTop / itemH`) est faux sur mobile — le compteur et les fleches sautent des videos.
-- **Correction** : Lire dynamiquement : `var itemH = tiktokScroll.querySelector('.tiktok-embed-wrap').offsetHeight || 580;`.
-- **Priorite** : **HAUTE** (bug visible sur mobile)
+- **Fichier** : `js/art.js` lignes 82-84
+- **Probleme** : Ligne 82 utilise `tiktokWraps[0]` mais `tiktokWraps` est declare ligne 84. Le `var` hoisting fait que la variable existe mais vaut `undefined` au moment de l'acces. `undefined[0]` lance un `TypeError` qui casse tout le bloc TikTok (compteur, fleches, stop au scroll).
+- **Correction** : Deplacer la ligne 84 **avant** la ligne 82 :
+  ```js
+  var tiktokWraps = tiktokScroll.querySelectorAll('.tiktok-embed-wrap');
+  var itemH = tiktokWraps[0] ? tiktokWraps[0].offsetHeight : 580;
+  ```
+- **Priorite** : **CRITIQUE**
 
-### 2. BUG — double handler sur le bouton CV
-
-- **Fichier** : `index.html` lignes 23-24 et 81-82
-- **Probleme** : Le bouton `.cv-card` a un `onclick="...classList.toggle('open')"` ET un `addEventListener('click')` en JS qui fait `classList.add('open')`. Au clic pour fermer : l'onclick toggle (retire 'open'), puis le JS le remet ('add'). Resultat : impossible de fermer le CV via le bouton.
-- **Correction** : Retirer le `onclick` du bouton HTML (ligne 23) et laisser uniquement le handler JS.
-- **Priorite** : **HAUTE** (bug fonctionnel)
-
-### 3. SECURITE — pdf.js sans SRI sur index.html
-
-- **Fichier** : `index.html` ligne 76
-- **Probleme** : `<script src="https://cdnjs.cloudflare.com/.../pdf.min.js"></script>` sans `integrity` ni `crossorigin`. La page art a le SRI, mais pas la landing.
-- **Correction** : Ajouter les memes attributs `integrity` et `crossorigin="anonymous"` que sur `art/index.html:18`.
-- **Priorite** : MOYENNE
-
-### 4. PERF — pdf.js charge en synchrone sur la landing
-
-- **Fichier** : `index.html` ligne 76
-- **Probleme** : pdf.js (~800KB) est charge en synchrone dans le body de la landing juste pour le CV. Bloque le rendu.
-- **Correction** : Ajouter `defer` au script. Le code inline qui l'utilise devrait etre dans un `DOMContentLoaded` ou un fichier separe charge apres.
-- **Priorite** : MOYENNE
-
-### 5. PERF — pdf.js sans `defer` sur art/index.html (regression persistante)
+### 2. PERF — pdf.js sans `defer` sur art/index.html
 
 - **Fichier** : `art/index.html` ligne 18
-- **Probleme** : Le `defer` a ete ajoute puis retire. Le script bloque toujours le rendu.
-- **Correction** : Ajouter `defer`.
+- **Probleme** : Regression persistante — le `defer` a ete ajoute puis retire a plusieurs reprises. Le script (~800KB) bloque le rendu du `<head>`.
+- **Correction** : Ajouter `defer` : `<script defer src="...pdf.min.js" integrity="..." crossorigin="anonymous"></script>`.
 - **Priorite** : MOYENNE
 
-### 6. A11Y — contact card non accessible
+### 3. CSS — proprietes dupliquees dans `.landing`
 
-- **Fichier** : `index.html` ligne 61
-- **Probleme** : `<div class="contact-card" onclick="...">` n'est pas navigable au clavier (pas de tabindex, pas de role, pas de keydown).
-- **Correction** : Remplacer par `<button class="contact-card" onclick="...">` ou ajouter `tabindex="0" role="button"` et un handler keydown.
+- **Fichier** : `css/style.css` lignes 109 et 114
+- **Probleme** : `.landing` declare `justify-content: center;` deux fois (ligne 109 dans le bloc principal, ligne 114 en redeclaration). Le `padding` a aussi des valeurs qui s'ecrasent (ligne 112 : `padding: 10px 20px;` puis lignes 115-116 : `padding-top: 40px; padding-bottom: 30px;`).
+- **Correction** : Fusionner en un seul bloc coherent :
+  ```css
+  .landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 10px;
+    padding: 40px 20px 30px;
+    overflow: hidden;
+  }
+  ```
 - **Priorite** : BASSE
 
-### 7. JS — `isAnimating` jamais active
+### 4. CSS — regles contact-card mobile dupliquees
 
-- **Fichier** : `js/art.js` lignes 326 et 359
-- **Probleme** : Garde morte — `isAnimating` est teste mais jamais mis a `true`.
-- **Correction** : Supprimer les 2 lignes.
-- **Priorite** : BASSE
-
-### 8. CSS — `.has-cover` couleur hardcodee
-
-- **Fichier** : `css/art.css` ligne 124
-- **Probleme** : `color: #f0ece4` en dur au lieu de `var(--bg)`.
-- **Correction** : Remplacer par `color: var(--bg);`.
-- **Priorite** : BASSE
-
-### 9. SEO — page musique sans Open Graph
-
-- **Fichier** : `music/index.html`
-- **Probleme** : Pas de balises `og:title`, `og:description`, `og:type`.
-- **Correction** : Ajouter les 3 meta OG dans le `<head>`.
-- **Priorite** : BASSE
-
-### 10. CSS — `.gallery-pdf-label` jamais utilise
-
-- **Fichier** : `css/art.css` lignes 189-201
-- **Probleme** : Classe CSS definie mais absente du HTML. Code mort.
-- **Correction** : Supprimer le bloc.
-- **Priorite** : BASSE
-
-### 11. HTML — canvas gallery-pdf sans dimensions
-
-- **Fichier** : `art/index.html` ligne 125
-- **Probleme** : `<canvas id="voiture-cover"></canvas>` sans dimensions — layout shift a la gallery.
-- **Correction** : Ajouter `style="aspect-ratio: 3/4;"` ou des attributs `width`/`height`.
-- **Priorite** : BASSE
-
-### 12. CSS — selecteur `body > *:not(...)` fragile
-
-- **Fichier** : `css/style.css` ligne 65
-- **Probleme** : `body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link):not(.cv-card):not(.contact-card):not(.cv-overlay)` — chaque nouvel element fixe doit etre exclu manuellement. Fragile et en croissance.
-- **Correction** : Inverser la logique : mettre `position: relative; z-index: 1;` sur `.landing`, `.pile-view`, `.tech-page`, `.music-page`, `.book-view` directement, au lieu d'exclure tous les elements fixes.
+- **Fichier** : `css/style.css` lignes 551-562 (dans `@media max-width: 600px`)
+- **Probleme** : `.contact-card-label`, `.contact-card-content`, et `.contact-item` sont declares deux fois dans le meme media query (lignes 551-553 puis 560-562, identiques).
+- **Correction** : Supprimer les lignes 560-562 (le second bloc duplique).
 - **Priorite** : BASSE
 
 ---
@@ -118,26 +84,17 @@
 
 | Priorite | Ref | Probleme | Effort |
 |---|---|---|---|
-| **HAUTE** | 1 | `itemH=580` casse TikTok sur mobile | 1 ligne |
-| **HAUTE** | 2 | Double handler bouton CV (impossible de fermer) | 1 ligne |
-| **MOYENNE** | 3 | pdf.js sans SRI sur index.html | 1 ligne |
-| **MOYENNE** | 4 | pdf.js synchrone sur landing | 1 mot + refacto inline JS |
-| **MOYENNE** | 5 | pdf.js sans `defer` sur art (regression) | 1 mot |
-| **BASSE** | 6 | Contact card non accessible | 1 ligne |
-| **BASSE** | 7 | `isAnimating` garde morte | 2 lignes |
-| **BASSE** | 8 | `.has-cover` couleur hardcodee | 1 ligne |
-| **BASSE** | 9 | OG manquant page musique | 3 lignes |
-| **BASSE** | 10 | `.gallery-pdf-label` CSS mort | Suppression |
-| **BASSE** | 11 | Canvas sans dimensions | 1 ligne |
-| **BASSE** | 12 | Selecteur `body > *:not()` fragile | Refacto |
+| **CRITIQUE** | 1 | `tiktokWraps` avant assignation — TypeError | Inverser 2 lignes |
+| **MOYENNE** | 2 | pdf.js sans `defer` sur art (regression recurrente) | 1 mot |
+| **BASSE** | 3 | `.landing` proprietes dupliquees | Fusionner |
+| **BASSE** | 4 | Contact-card mobile regles dupliquees | Supprimer 3 lignes |
 
 ---
 
 ## Consignes pour l'agent qui corrige
 
-- Ne changer **rien d'autre** que ce qui est liste ci-dessus.
-- Ne creer **aucun nouveau fichier**.
-- Garder le style de code existant (vanilla JS, pas de framework).
+- **Point 1 est un crash JavaScript** — le scroll TikTok, le compteur, et les fleches ne fonctionnent pas du tout. A corriger immediatement.
+- **Point 2** revient a chaque iteration. Quand on modifie `art/index.html`, verifier que `defer` est toujours present.
+- Points 3 et 4 sont cosmetiques — aucun impact visuel, juste de la proprete CSS.
+- Ne changer **rien d'autre** que ce qui est liste.
 - Tester les 4 pages (`/`, `/art/`, `/tech/`, `/music/`) apres modifications.
-- **Points 1 et 2 sont des bugs visibles** — a corriger en priorite.
-- **Point 5** est une regression recurrente — surveiller que `defer` ne disparaisse plus.
