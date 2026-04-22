@@ -64,6 +64,28 @@ a { color: inherit; text-decoration: none; }
 
 .landing, .pile-view, .tech-page, .music-page, .book-view { position: relative; z-index: 1; }
 
+/* ===== Background Slideshow ===== */
+.bg-slideshow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.bg-slideshow img.active {
+  opacity: 0.08;
+}
+
 /* ===== Theme Switch ===== */
 .theme-toggle {
   all: unset;
