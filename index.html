@@ -79,7 +79,7 @@
       cvLoaded = true;
       pdfjsLib.getDocument('https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/CV_Valentin.pdf').promise.then(function(pdf) {
         pdf.getPage(1).then(function(page) {
-          var scale = 2;
+          var scale = 1.5;
           var viewport = page.getViewport({ scale: scale });
           var canvas = document.getElementById('cv-canvas');
           canvas.width = viewport.width;
