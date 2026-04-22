@@ -206,7 +206,7 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 /* ===== CV Card ===== */
 .cv-card {
   position: fixed;
-  top: -40px;
+  top: -110px;
   left: 40px;
   z-index: 998;
   width: 140px;
