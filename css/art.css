@@ -402,6 +402,43 @@
   letter-spacing: 2px;
 }
 
+/* ========================================
+   ANIMATION GRID
+   ======================================== */
+
+.anim-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 960px;
+  padding: 0 20px 40px;
+}
+
+.anim-item {
+  border: 3px solid var(--border);
+  box-shadow: 6px 6px 0 0 var(--border);
+  overflow: hidden;
+  max-width: 500px;
+}
+
+.anim-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.anim-label {
+  background: var(--border);
+  color: var(--bg);
+  font-family: 'Bangers', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 6px;
+}
+
 .tiktok-row {
   display: flex;
   align-items: center;
