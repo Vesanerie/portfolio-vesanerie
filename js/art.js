@@ -174,7 +174,7 @@ async function loadPdfCover(url, card) {
 }
 
 function openBook(bookId) {
-  var card = document.querySelector('.pile-book[data-book="' + bookId + '"]');
+  var card = document.querySelector('[data-book="' + bookId + '"]');
   if (!card) return;
 
   var pdfUrl = card.getAttribute('data-pdf');
