@@ -103,9 +103,10 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  gap: 60px;
-  padding: 40px 20px;
+  height: 100vh;
+  gap: 20px;
+  padding: 20px 20px;
+  overflow: hidden;
 }
 
 .landing-title {
@@ -124,25 +125,25 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 }
 
 .landing-bio {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
-  line-height: 1.8;
+  line-height: 1.6;
   text-align: center;
   max-width: 480px;
-  margin: 20px auto 0;
+  margin: 8px auto 0;
   letter-spacing: 0.5px;
 }
 
 .landing-choices {
   display: flex;
-  gap: 40px;
+  gap: 24px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .landing-card {
-  width: 260px;
-  height: 340px;
+  width: 220px;
+  height: 280px;
   border: 3px solid var(--border);
   background: var(--bg-card);
   display: flex;
@@ -236,14 +237,13 @@ body > *:not(.gallery-lightbox):not(.theme-toggle):not(.back-link) { position: r
 /* ===== Contact ===== */
 .landing-contact {
   text-align: center;
-  margin-top: -20px;
 }
 
 .landing-contact-title {
   font-family: 'Bangers', sans-serif;
-  font-size: 28px;
+  font-size: 22px;
   letter-spacing: 3px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .landing-contact-links {
