@@ -290,43 +290,55 @@ a.contact-item:hover {
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
   .landing {
-    gap: 10px;
-    padding: 10px 12px;
+    gap: 12px;
+    padding: 10px 16px;
+    justify-content: center;
   }
 
   .landing-title { font-size: 28px; letter-spacing: 3px; }
   .landing-sub { font-size: 10px; margin-top: 2px; }
   .landing-bio { font-size: 10px; padding: 0 10px; line-height: 1.5; margin-top: 2px; }
 
-  .landing-choices { gap: 12px; }
+  .landing-choices { gap: 10px; }
   .landing-card {
     width: 100px;
     height: 140px;
     gap: 8px;
     border-width: 2px;
-    box-shadow: 4px 4px 0 0 var(--border);
+    box-shadow: 3px 3px 0 0 var(--border);
+    padding: 10px 6px;
   }
   .landing-card-icon { font-size: 28px; }
-  .landing-card-title { font-size: 18px; letter-spacing: 1px; }
-  .landing-card-desc { font-size: 8px; padding: 0 6px; }
+  .landing-card-title { font-size: 16px; letter-spacing: 1px; }
+  .landing-card-desc { font-size: 8px; padding: 0 4px; }
 
   .cv-card {
-    width: 70px;
-    height: 90px;
-    top: -50px;
+    width: 60px;
+    height: 70px;
+    top: -30px;
     left: 10px;
-    padding-bottom: 8px;
+    padding-bottom: 6px;
+    border-width: 2px;
   }
-  .cv-label { font-size: 18px; }
+  .cv-label { font-size: 16px; }
 
+  /* Contact card en bas sur mobile, pas a droite */
   .contact-card {
-    width: 220px;
-    right: -140px;
+    top: auto;
+    bottom: -120px;
+    right: 10px;
+    left: auto;
+    width: 200px;
+    transform: rotate(0deg);
   }
-  .contact-card.open { right: 0; }
-  .contact-card-label { font-size: 20px; padding: 10px; }
-  .contact-card-content { padding: 12px; gap: 8px; }
-  .contact-item { font-size: 11px; }
+  .contact-card.open {
+    bottom: 0;
+    right: 10px;
+    transform: rotate(0deg);
+  }
+  .contact-card-label { font-size: 16px; padding: 8px; }
+  .contact-card-content { padding: 10px; gap: 6px; }
+  .contact-item { font-size: 10px; }
 
   .back-link { font-size: 12px; padding: 3px 8px; top: 10px; left: 10px; }
   .theme-toggle { top: 10px; right: 10px; width: 44px; height: 24px; }
@@ -335,12 +347,12 @@ a.contact-item:hover {
 }
 
 @media (max-width: 380px) {
-  .landing-title { font-size: 22px; }
+  .landing-title { font-size: 24px; }
   .landing-card {
     width: 90px;
     height: 120px;
   }
-  .landing-card-icon { font-size: 24px; }
+  .landing-card-icon { font-size: 22px; }
   .landing-card-title { font-size: 14px; }
   .landing-card-desc { display: none; }
 }
