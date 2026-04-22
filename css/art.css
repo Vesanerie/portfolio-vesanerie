@@ -293,7 +293,7 @@
 }
 
 .folder-tab {
-  width: 100px;
+  width: 110px;
   height: 28px;
   background: var(--bg-card);
   border: 3px solid var(--border);
@@ -314,6 +314,17 @@
   border: 3px solid var(--border);
   border-radius: 0 8px 8px 8px;
   box-shadow: 6px 6px 0 0 var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.folder-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 22px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text);
 }
 
 .pile-folder:hover .folder-body {
