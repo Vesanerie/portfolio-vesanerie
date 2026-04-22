@@ -198,8 +198,13 @@ function openPdfBook(pdfUrl, singlePage) {
   pdfContainer.style.width = '100%';
   pdfContainer.innerHTML = '<div class="book-loading">Chargement du PDF...</div>';
 
-  // Switch views
-  pileView.classList.add('hidden');
+  // Hide current view (sub-pile or main pile)
+  if (currentSubPile) {
+    var currentView = document.getElementById(currentSubPile + '-view');
+    if (currentView) currentView.classList.add('hidden');
+  } else {
+    pileView.classList.add('hidden');
+  }
   bookView.classList.remove('hidden');
 
   // Update back link
