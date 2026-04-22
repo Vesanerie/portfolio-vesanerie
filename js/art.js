@@ -301,10 +301,11 @@ async function loadPdfAsBook(url, container, forceSingle) {
     // Detect if pages are landscape (already double-page spreads)
     var firstCanvas = pdfPages[0];
     var isLandscape = firstCanvas.width > firstCanvas.height;
+    var isMobile = window.innerWidth <= 700;
 
     // Build spreads
     var spreads = [];
-    if (isLandscape || forceSingle) {
+    if (isLandscape || forceSingle || isMobile) {
       // Each PDF page is already a spread — show one at a time
       for (var s = 0; s < numPages; s++) {
         spreads.push([s]);

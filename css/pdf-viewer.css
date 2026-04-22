@@ -122,6 +122,7 @@
     max-height: 80vh;
   }
 
+  .pdf-spread canvas,
   .pdf-spread-single canvas {
     max-width: 95vw;
   }
