@@ -454,6 +454,24 @@
   padding: 6px;
 }
 
+.tiktok-cta {
+  font-family: 'Bangers', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--bg);
+  background: var(--border);
+  border: 3px solid var(--border);
+  padding: 12px 20px;
+  text-decoration: none;
+  text-align: center;
+  transition: opacity 0.2s;
+  align-self: center;
+}
+
+.tiktok-cta:hover {
+  opacity: 0.85;
+}
+
 .tiktok-row {
   display: flex;
   align-items: center;
