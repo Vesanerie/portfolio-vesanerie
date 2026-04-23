@@ -150,16 +150,15 @@
 /* ===== Graphisme: 2x2 grid ===== */
 #graphisme-view .pile-stack {
   display: grid !important;
-  grid-template-columns: repeat(2, 280px);
-  justify-content: center;
-  justify-items: center;
-  max-width: 620px;
+  grid-template-columns: repeat(2, 1fr) !important;
+  flex-wrap: unset !important;
+  max-width: 600px !important;
   margin: 0 auto;
 }
 
-#graphisme-view .pile-book {
-  width: 240px;
-  height: 300px;
+#graphisme-view .pile-stack > * {
+  width: 240px !important;
+  height: 300px !important;
 }
 
 /* ========================================
