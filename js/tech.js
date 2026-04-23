@@ -45,6 +45,20 @@ var projects = {
   }
 };
 
+// Description au hover
+var appDesc = document.getElementById('app-desc');
+document.querySelectorAll('.app-icon').forEach(function(btn) {
+  btn.addEventListener('mouseenter', function() {
+    var proj = projects[this.dataset.url];
+    if (!proj) return;
+    appDesc.textContent = proj.desc;
+    appDesc.classList.add('visible');
+  });
+  btn.addEventListener('mouseleave', function() {
+    appDesc.classList.remove('visible');
+  });
+});
+
 // Ouvrir la fiche projet
 document.querySelectorAll('.app-icon').forEach(function(btn) {
   btn.addEventListener('click', function() {
@@ -59,7 +73,7 @@ document.querySelectorAll('.app-icon').forEach(function(btn) {
     document.getElementById('fiche-type').textContent = proj.type;
     document.getElementById('fiche-demo').dataset.url = url;
 
-    desktop.style.display = 'none';
+    desktop.classList.add('hidden');
     ficheView.classList.remove('hidden');
   });
 });
@@ -76,7 +90,7 @@ document.getElementById('fiche-demo').addEventListener('click', function() {
 // Retour fiche → bureau
 ficheBack.addEventListener('click', function() {
   ficheView.classList.add('hidden');
-  desktop.style.display = '';
+  desktop.classList.remove('hidden');
 });
 
 // Retour site → fiche
