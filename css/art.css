@@ -149,14 +149,16 @@
 
 /* ===== Graphisme: 2x2 grid ===== */
 #graphisme-view .pile-stack {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: grid !important;
+  grid-template-columns: repeat(2, 280px);
+  justify-content: center;
   justify-items: center;
-  max-width: 700px;
+  max-width: 620px;
+  margin: 0 auto;
 }
 
 #graphisme-view .pile-book {
-  width: 260px;
+  width: 240px;
   height: 300px;
 }
 
