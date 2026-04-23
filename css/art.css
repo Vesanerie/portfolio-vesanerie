@@ -174,12 +174,17 @@
   box-shadow: 8px 8px 0 0 var(--border);
 }
 
-.gallery-item img,
-.gallery-item canvas {
+.gallery-item img {
   display: block;
   width: 100%;
   height: auto;
   content-visibility: auto;
+}
+
+.gallery-item canvas {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .gallery-pdf {
