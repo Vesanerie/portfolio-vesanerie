@@ -59,43 +59,21 @@ document.querySelectorAll('.app-icon').forEach(function(btn) {
   });
 });
 
-// Ouvrir la fiche projet
+// Clic sur icone → lance la demo directement
 document.querySelectorAll('.app-icon').forEach(function(btn) {
   btn.addEventListener('click', function() {
     var url = this.dataset.url;
-    var proj = projects[url];
-    if (!proj) return;
-
-    document.getElementById('fiche-name').textContent = proj.name;
-    document.getElementById('fiche-desc').textContent = proj.desc;
-    document.getElementById('fiche-stack').textContent = proj.stack;
-    document.getElementById('fiche-year').textContent = proj.year;
-    document.getElementById('fiche-type').textContent = proj.type;
-    document.getElementById('fiche-demo').dataset.url = url;
-
+    if (!url) return;
+    siteIframe.src = url;
+    siteUrl.textContent = url;
     desktop.classList.add('hidden');
-    ficheView.classList.remove('hidden');
+    siteView.classList.remove('hidden');
   });
 });
 
-// Lancer la demo depuis la fiche
-document.getElementById('fiche-demo').addEventListener('click', function() {
-  var url = this.dataset.url;
-  siteIframe.src = url;
-  siteUrl.textContent = url;
-  ficheView.classList.add('hidden');
-  siteView.classList.remove('hidden');
-});
-
-// Retour fiche → bureau
-ficheBack.addEventListener('click', function() {
-  ficheView.classList.add('hidden');
-  desktop.classList.remove('hidden');
-});
-
-// Retour site → fiche
+// Retour site → bureau
 siteBack.addEventListener('click', function() {
   siteView.classList.add('hidden');
   siteIframe.src = '';
-  ficheView.classList.remove('hidden');
+  desktop.classList.remove('hidden');
 });
