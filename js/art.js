@@ -236,7 +236,10 @@ function restoreMediaInFolder(folderId) {
   if (!view) return;
   view.querySelectorAll('iframe').forEach(function(iframe) {
     var src = iframe.getAttribute('data-src');
-    if (src && !iframe.src) iframe.src = src;
+    if (src) {
+      iframe.src = src;
+      iframe.removeAttribute('data-src');
+    }
   });
   view.querySelectorAll('video').forEach(function(v) { v.play().catch(function(){}); });
 }
