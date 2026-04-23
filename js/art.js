@@ -34,8 +34,6 @@ var artFicheTitle = document.getElementById('art-fiche-title');
 var artFicheFormat = document.getElementById('art-fiche-format');
 var artFicheDate = document.getElementById('art-fiche-date');
 var artFicheIntent = document.getElementById('art-fiche-intent');
-var artFicheOpen = document.getElementById('art-fiche-open');
-var pendingBookId = null;
 
 function showArtFiche(bookId, title) {
   var info = artProjects[bookId];
@@ -44,22 +42,13 @@ function showArtFiche(bookId, title) {
   artFicheFormat.textContent = info.format;
   artFicheDate.textContent = info.date;
   artFicheIntent.textContent = info.intent;
-  pendingBookId = bookId;
-  artFiche.classList.remove('hidden');
+  artFiche.classList.add('open');
+  openBook(bookId);
 }
 
-artFicheOpen.addEventListener('click', function() {
-  artFiche.classList.add('hidden');
-  if (pendingBookId) openBook(pendingBookId);
-  pendingBookId = null;
-});
-
-artFiche.addEventListener('click', function(e) {
-  if (e.target === artFiche) {
-    artFiche.classList.add('hidden');
-    pendingBookId = null;
-  }
-});
+function hideArtFiche() {
+  artFiche.classList.remove('open');
+}
 
 // ===== Pile: click to open a book or folder =====
 document.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film').forEach(function(card) {
@@ -200,6 +189,7 @@ document.addEventListener('keydown', function(e) {
 
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
+  hideArtFiche();
 }
 
 function stopMediaInFolder(folderId) {
@@ -490,6 +480,7 @@ async function loadPdfAsBook(url, container, forceSingle) {
 
 function closeBook() {
   closeLightbox();
+  hideArtFiche();
   bookView.classList.add('hidden');
 
   // Clean up PDF
