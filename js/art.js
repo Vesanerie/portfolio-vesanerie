@@ -6,9 +6,35 @@ var backLink = document.getElementById('back-link');
 var pdfContainer = document.getElementById('pdf-container');
 var isPdfMode = false;
 
-// PDF.js worker
-if (typeof pdfjsLib !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+// PDF.js worker — defer: init apres DOMContentLoaded
+function initPdfJs() {
+  if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+  // Gallery PDF covers (besoin de pdfjsLib charge)
+  document.querySelectorAll('.gallery-pdf').forEach(function(item) {
+    var pdfUrl = item.getAttribute('data-pdf');
+    var canvas = item.querySelector('canvas');
+    if (pdfUrl && canvas && typeof pdfjsLib !== 'undefined') {
+      pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+        pdf.getPage(1).then(function(page) {
+          var viewport = page.getViewport({ scale: 0.5 });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
+        });
+      }).catch(function(e) { console.warn('Gallery PDF cover failed:', e); });
+    }
+    item.addEventListener('click', function() {
+      var bookId = item.getAttribute('data-book');
+      if (bookId) openBook(bookId);
+    });
+  });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPdfJs);
+} else {
+  initPdfJs();
 }
 
 var currentSubPile = null;
@@ -517,26 +543,6 @@ function closeBook() {
     backLink.onclick = null;
   }
 }
-
-// Gallery PDF items — load cover + click to open
-document.querySelectorAll('.gallery-pdf').forEach(function(item) {
-  var pdfUrl = item.getAttribute('data-pdf');
-  var canvas = item.querySelector('canvas');
-  if (pdfUrl && canvas) {
-    pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
-      pdf.getPage(1).then(function(page) {
-        var viewport = page.getViewport({ scale: 0.5 });
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
-      });
-    }).catch(function(e) { console.warn('Gallery PDF cover failed:', e); });
-  }
-  item.addEventListener('click', function() {
-    var bookId = item.getAttribute('data-book');
-    if (bookId) openBook(bookId);
-  });
-});
 
 // Keyboard: Escape to close book
 document.addEventListener('keydown', function(e) {
