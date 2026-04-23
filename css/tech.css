@@ -37,6 +37,10 @@
   height: 100%;
   position: relative;
   padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 12px 24px;
 }
 
 .app-icon {
@@ -50,14 +54,7 @@
   border: 2px solid transparent;
   border-radius: 8px;
   transition: border-color 0.2s, transform 0.15s, box-shadow 0.15s;
-  position: absolute;
 }
-
-.app-icon:nth-child(1) { top: 8%; left: 5%; }
-.app-icon:nth-child(2) { top: 12%; right: 25%; }
-.app-icon:nth-child(3) { top: 45%; left: 15%; }
-.app-icon:nth-child(4) { top: 50%; right: 10%; }
-.app-icon:nth-child(5) { top: 5%; right: 5%; }
 
 .app-icon:hover {
   border-color: var(--border);
@@ -356,11 +353,9 @@
     padding: 8px 10px;
   }
 
-  .app-icon:nth-child(1) { top: 5%; left: 3%; }
-  .app-icon:nth-child(2) { top: 10%; right: 15%; }
-  .app-icon:nth-child(3) { top: 40%; left: 8%; }
-  .app-icon:nth-child(4) { top: 45%; right: 5%; }
-  .app-icon:nth-child(5) { top: 5%; right: 3%; }
+  .desktop {
+    gap: 8px 12px;
+  }
 
   .app-icon-img {
     font-size: 34px;
