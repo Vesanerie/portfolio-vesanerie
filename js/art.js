@@ -534,7 +534,7 @@ document.querySelectorAll('.gallery-pdf').forEach(function(item) {
   }
   item.addEventListener('click', function() {
     var bookId = item.getAttribute('data-book');
-    if (bookId) showArtFiche(bookId, bookId);
+    if (bookId) openBook(bookId);
   });
 });
 
