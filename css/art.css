@@ -688,3 +688,82 @@
     columns: 1;
   }
 }
+
+/* ===== Fiche projet art ===== */
+.art-fiche {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.art-fiche.hidden {
+  display: none;
+}
+
+.art-fiche-inner {
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  box-shadow: 6px 6px 0 var(--border);
+  padding: 28px 32px;
+  max-width: 380px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.art-fiche-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 28px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.art-fiche-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.art-fiche-row {
+  display: flex;
+  gap: 12px;
+  font-family: 'Special Elite', serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.art-fiche-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+.art-fiche-open {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 10px 20px;
+  border: 3px solid var(--border);
+  background: var(--border);
+  color: var(--bg);
+  transition: opacity 0.2s;
+}
+
+.art-fiche-open:hover {
+  opacity: 0.85;
+}
