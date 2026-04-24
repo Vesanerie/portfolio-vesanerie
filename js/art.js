@@ -602,6 +602,25 @@ document.addEventListener('keydown', function(e) {
   });
 })();
 
+// ===== 3D tilt on pile items (desktop only) =====
+if (window.matchMedia('(hover: hover)').matches) {
+  document.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var rect = this.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width;
+      var y = (e.clientY - rect.top) / rect.height;
+      var rotY = (x - 0.5) * 16;
+      var rotX = (0.5 - y) * 16;
+      this.style.transform = 'rotate(0deg) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateZ(8px)';
+      this.style.setProperty('--mx', (x * 100) + '%');
+      this.style.setProperty('--my', (y * 100) + '%');
+    });
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+    });
+  });
+}
+
 // Browser back button: navigate through folder/book layers
 window.addEventListener('popstate', function() {
   if (historyDepth <= 0) return;

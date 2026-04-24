@@ -43,6 +43,34 @@
   width: 100%;
   max-width: 1100px;
   padding: 0 20px;
+  perspective: 800px;
+}
+
+/* Iridescent sheen on pile items */
+.pile-book::after,
+.pile-folder .folder-body::after,
+.pile-film .film-body::after,
+.pile-phone::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255,255,255,0.25) 0%,
+    rgba(255,255,255,0.08) 30%,
+    transparent 60%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 10;
+}
+.pile-book:hover::after,
+.pile-folder:hover .folder-body::after,
+.pile-film:hover .film-body::after,
+.pile-phone:hover::after {
+  opacity: 1;
 }
 
 .pile-book {
@@ -59,9 +87,10 @@
   gap: 16px;
   cursor: pointer;
   position: relative;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
   transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
   box-shadow: 8px 8px 0 0 var(--border);
+  transform-style: preserve-3d;
 }
 
 /* Size variants */
@@ -81,7 +110,6 @@
 .pile-sq { width: 260px; height: 260px; }
 
 .pile-book:hover {
-  transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
   box-shadow: 12px 12px 0 0 var(--border);
   z-index: 100;
 }
@@ -264,13 +292,12 @@
   cursor: pointer;
   justify-self: center;
   position: relative;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.35s;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
   transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
+  transform-style: preserve-3d;
 }
 
 .pile-phone:hover {
-  transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
   box-shadow: 12px 12px 0 0 var(--border);
   z-index: 100;
 }
@@ -316,12 +343,12 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.15s ease-out;
   transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
+  transform-style: preserve-3d;
 }
 
 .pile-folder:hover {
-  transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
   z-index: 100;
 }
 
@@ -350,6 +377,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .folder-title {
@@ -374,8 +403,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
   transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
+  transform-style: preserve-3d;
   background: var(--border);
   border-radius: 4px;
   overflow: hidden;
@@ -383,7 +413,6 @@
 }
 
 .pile-film:hover {
-  transform: translate(var(--ox), var(--oy)) rotate(0deg) translateY(-20px) scale(1.04);
   box-shadow: 10px 10px 0 0 var(--border);
   z-index: 100;
 }
@@ -414,6 +443,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
   gap: 12px;
 }
 
