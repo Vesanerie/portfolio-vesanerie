@@ -605,6 +605,9 @@ document.addEventListener('keydown', function(e) {
 // ===== 3D tilt on pile items (desktop only) =====
 if (window.matchMedia('(hover: hover)').matches) {
   document.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film').forEach(function(card) {
+    card.addEventListener('mouseenter', function() {
+      this.style.transition = 'none';
+    });
     card.addEventListener('mousemove', function(e) {
       var rect = this.getBoundingClientRect();
       var x = (e.clientX - rect.left) / rect.width;
@@ -616,6 +619,7 @@ if (window.matchMedia('(hover: hover)').matches) {
       this.style.setProperty('--my', (y * 100) + '%');
     });
     card.addEventListener('mouseleave', function() {
+      this.style.transition = '';
       this.style.transform = '';
     });
   });
