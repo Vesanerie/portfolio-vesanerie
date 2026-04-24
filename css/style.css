@@ -557,6 +557,11 @@ a.contact-item:hover {
   border-bottom: none;
 }
 
+/* ===== Tools Trigger (mobile only) ===== */
+.tools-trigger {
+  display: none;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
   /* ---- Landing ---- */
@@ -642,6 +647,28 @@ a.contact-item:hover {
   .theme-toggle { top: 12px; right: 12px; width: 48px; height: 28px; }
   .theme-toggle .dot { width: 20px; height: 20px; }
   [data-theme="dark"] .theme-toggle .dot { transform: translateX(20px); }
+
+  /* ---- Tools trigger mobile ---- */
+  .tools-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    z-index: 998;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--border);
+    background: var(--bg-card);
+    cursor: pointer;
+    padding: 0;
+  }
+  .tools-trigger-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
 
   /* ---- Tools card mobile : bottom-sheet ---- */
   .tools-card {
