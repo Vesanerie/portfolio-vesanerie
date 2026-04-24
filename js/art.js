@@ -5,6 +5,8 @@ var bookView = document.getElementById('book-view');
 var backLink = document.getElementById('back-link');
 var pdfContainer = document.getElementById('pdf-container');
 var isPdfMode = false;
+var historyDepth = 0;
+var poppingState = false;
 
 // Back link helper
 function setBackLink(label, href, onclick) {
@@ -137,6 +139,8 @@ function openFolder(folderId) {
   restoreMediaInFolder(folderId);
 
   setBackLink('Art', '#', function() { closeFolder(); });
+  history.pushState({view: 'folder', id: folderId}, '');
+  historyDepth++;
 }
 
 // TikTok scroll counter + arrows
@@ -271,6 +275,10 @@ function closeFolder() {
     pileView.classList.remove('hidden');
     setBackLink('Accueil', '../', null);
   }
+  if (!poppingState && historyDepth > 0) {
+    historyDepth--;
+    history.back();
+  }
 }
 
 async function loadPdfCover(url, card) {
@@ -336,6 +344,8 @@ function openPdfBook(pdfUrl, singlePage) {
 
   // Load PDF and render pages into flip-through
   loadPdfAsBook(pdfUrl, pdfContainer, singlePage);
+  history.pushState({view: 'book'}, '');
+  historyDepth++;
 }
 
 async function loadPdfAsBook(url, container, forceSingle) {
@@ -540,10 +550,27 @@ function closeBook() {
     pileView.classList.remove('hidden');
     setBackLink('Accueil', '../', null);
   }
+  if (!poppingState && historyDepth > 0) {
+    historyDepth--;
+    history.back();
+  }
 }
 
 // Keyboard: Escape to close book
 document.addEventListener('keydown', function(e) {
   if (bookView.classList.contains('hidden')) return;
   if (e.key === 'Escape') closeBook();
+});
+
+// Browser back button: navigate through folder/book layers
+window.addEventListener('popstate', function() {
+  if (historyDepth <= 0) return;
+  historyDepth--;
+  poppingState = true;
+  if (isPdfMode || !bookView.classList.contains('hidden')) {
+    closeBook();
+  } else if (currentSubPile) {
+    closeFolder();
+  }
+  poppingState = false;
 });
