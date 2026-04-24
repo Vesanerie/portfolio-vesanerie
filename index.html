@@ -217,6 +217,13 @@
       });
     }
 
+    // Clear cardDrop animation after it finishes so JS transform can take over
+    document.querySelectorAll('.landing-card').forEach(function(card) {
+      card.addEventListener('animationend', function() {
+        card.style.animation = 'none';
+      });
+    });
+
     // 3D tilt effect on landing cards (desktop only)
     if (window.matchMedia('(hover: hover)').matches) {
       document.querySelectorAll('.landing-card').forEach(function(card) {
