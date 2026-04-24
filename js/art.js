@@ -562,6 +562,57 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeBook();
 });
 
+// ===== Scroll reveal on pile items =====
+(function() {
+  var items = document.querySelectorAll('#pile-stack > *');
+  if (!items.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        // Stagger delay based on index
+        var idx = Array.prototype.indexOf.call(items, entry.target);
+        entry.target.style.transitionDelay = (idx * 0.08) + 's';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  items.forEach(function(el) {
+    el.classList.add('pile-reveal');
+    observer.observe(el);
+  });
+
+  // Also reveal gallery items when a folder opens
+  var galleryObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        galleryObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  // Observe gallery items when folder views become visible
+  var mutObs = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.type === 'attributes' && m.attributeName === 'class') {
+        var view = m.target;
+        if (!view.classList.contains('hidden')) {
+          view.querySelectorAll('.gallery-item, .anim-item, .pile-book, .pile-folder, .pile-film, .pile-phone').forEach(function(el) {
+            if (!el.classList.contains('pile-reveal')) {
+              el.classList.add('pile-reveal');
+              galleryObserver.observe(el);
+            }
+          });
+        }
+      }
+    });
+  });
+  document.querySelectorAll('[id$="-view"]').forEach(function(view) {
+    mutObs.observe(view, { attributes: true, attributeFilter: ['class'] });
+  });
+})();
+
 // Browser back button: navigate through folder/book layers
 window.addEventListener('popstate', function() {
   if (historyDepth <= 0) return;
