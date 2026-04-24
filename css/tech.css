@@ -324,14 +324,11 @@
 
   .desktop {
     padding: 10px;
+    gap: 8px 12px;
   }
 
   .app-icon {
     padding: 8px 10px;
-  }
-
-  .desktop {
-    gap: 8px 12px;
   }
 
   .app-icon-img {
