@@ -99,18 +99,20 @@ document.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film').f
   });
 });
 
-// Load covers only for cards visible in the main pile (not sub-piles)
+// Load covers sequentially (one at a time to avoid jank)
 var coversLoaded = {};
-function loadCoversInView(viewId) {
+async function loadCoversInView(viewId) {
   var view = viewId ? document.getElementById(viewId + '-view') : document.getElementById('pile-view');
   if (!view || coversLoaded[viewId || 'main']) return;
   coversLoaded[viewId || 'main'] = true;
-  view.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film').forEach(function(card) {
+  var cards = view.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film');
+  for (var i = 0; i < cards.length; i++) {
+    var card = cards[i];
     var pdfUrl = card.getAttribute('data-pdf') || card.getAttribute('data-cover-pdf');
     if (pdfUrl && !card.classList.contains('has-cover')) {
-      loadPdfCover(pdfUrl, card);
+      await loadPdfCover(pdfUrl, card);
     }
-  });
+  }
 }
 
 // Load main pile covers on start
@@ -156,21 +158,23 @@ if (tiktokScroll && tiktokCounter) {
   window.addEventListener('resize', function() { itemH = getItemH(); });
   var currentTiktok = 0;
 
+  var tiktokScrollTimer = null;
   tiktokScroll.addEventListener('scroll', function() {
-    itemH = getItemH();
-    var idx = Math.floor(tiktokScroll.scrollTop / itemH);
-    tiktokCounter.textContent = (idx + 1) + ' / ' + tiktokTotal;
-
-    if (idx !== currentTiktok) {
-      // Stop previous video
-      var prevIframe = tiktokWraps[currentTiktok].querySelector('iframe');
-      if (prevIframe) {
-        var src = prevIframe.src;
-        prevIframe.src = '';
-        prevIframe.src = src;
+    if (tiktokScrollTimer) return;
+    tiktokScrollTimer = setTimeout(function() {
+      tiktokScrollTimer = null;
+      var idx = Math.floor(tiktokScroll.scrollTop / itemH);
+      tiktokCounter.textContent = (idx + 1) + ' / ' + tiktokTotal;
+      if (idx !== currentTiktok) {
+        var prevIframe = tiktokWraps[currentTiktok].querySelector('iframe');
+        if (prevIframe) {
+          var src = prevIframe.src;
+          prevIframe.src = '';
+          prevIframe.src = src;
+        }
+        currentTiktok = idx;
       }
-      currentTiktok = idx;
-    }
+    }, 100);
   });
 
   tiktokUp.addEventListener('click', function() {
@@ -569,7 +573,6 @@ document.addEventListener('keydown', function(e) {
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        // Stagger delay based on index
         var idx = Array.prototype.indexOf.call(items, entry.target);
         entry.target.style.transitionDelay = (idx * 0.08) + 's';
         entry.target.classList.add('visible');
@@ -580,36 +583,6 @@ document.addEventListener('keydown', function(e) {
   items.forEach(function(el) {
     el.classList.add('pile-reveal');
     observer.observe(el);
-  });
-
-  // Also reveal gallery items when a folder opens
-  var galleryObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        galleryObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.05 });
-
-  // Observe gallery items when folder views become visible
-  var mutObs = new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
-      if (m.type === 'attributes' && m.attributeName === 'class') {
-        var view = m.target;
-        if (!view.classList.contains('hidden')) {
-          view.querySelectorAll('.gallery-item, .anim-item, .pile-book, .pile-folder, .pile-film, .pile-phone').forEach(function(el) {
-            if (!el.classList.contains('pile-reveal')) {
-              el.classList.add('pile-reveal');
-              galleryObserver.observe(el);
-            }
-          });
-        }
-      }
-    });
-  });
-  document.querySelectorAll('[id$="-view"]').forEach(function(view) {
-    mutObs.observe(view, { attributes: true, attributeFilter: ['class'] });
   });
 })();
 
