@@ -247,6 +247,22 @@ if (cmpVideo) {
   cmpVideo.volume = 0.5;
 }
 
+// Animation cards: load YouTube iframe on click
+document.querySelectorAll('.anim-card[data-yt]').forEach(function(card) {
+  card.addEventListener('click', function() {
+    var id = this.getAttribute('data-yt');
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    iframe.setAttribute('allowfullscreen', '');
+    this.querySelector('img').remove();
+    this.querySelector('.anim-play').remove();
+    this.insertBefore(iframe, this.querySelector('.anim-label'));
+    this.style.cursor = 'default';
+    this.removeAttribute('data-yt');
+  });
+});
+
 function restoreMediaInFolder(folderId) {
   var view = document.getElementById(folderId + '-view');
   if (!view) return;
