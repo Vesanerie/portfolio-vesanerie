@@ -1,8 +1,8 @@
 # Audit complet — Vesanerie-sur-Internet
 
-> Date : 2026-04-24 (14e revision)
+> Date : 2026-04-24 (15e revision)
 > Auteur : Claude (audit automatique)
-> Statut : **PROPRE** — 0 bug, 1 point mineur
+> Statut : **5 bugs, 2 points mineurs**
 
 ---
 
@@ -12,79 +12,121 @@ Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Ass
 
 | Fichier | Lignes | Role |
 |---|---|---|
-| `index.html` | 222 | Landing (h1 nom, bio, CTA contact), slideshow bg, CV overlay (pdf.js defer+SRI), section A propos (formation, XP, langues), scroll-to-top, contact card, JSON-LD Person, skip-intro sessionStorage |
-| `art/index.html` | 499 | Portfolio art — edition (5 PDFs), illustration (3 carnets + gallery 16 + 1 PDF), graphisme (Vesanerie, covers album, 404, esport), motion design (CMP video), animation (6 YT + 1 video), tiktoks (4 embeds + CTA), lightbox, tools-card |
-| `tech/index.html` | 108 | Laptop, 5 apps flex-wrap, hover desc, fiche projet, demo iframe, tools-card |
-| `music/index.html` | 96 | iPod (320px), 7 tracks, tools-card |
-| `mentions-legales.html` | 62 | Mentions legales (editeur, hebergement, PI, RGPD), layout 2 colonnes avec image |
-| `404.html` | 29 | Page 404 personnalisee (code + message + bouton retour) |
+| `index.html` | 220 | Landing (h1 nom, bio, CTA contact), slideshow bg, CV overlay (pdf.js defer+SRI), section A propos (formation, XP, langues), scroll-to-top, contact card, JSON-LD Person + WebSite, skip-intro sessionStorage |
+| `art/index.html` | 503 | Portfolio art — edition (5 PDFs), illustration (3 carnets + gallery 16 + 1 PDF), graphisme (Vesanerie, covers album, 404, esport, RK Brand, Flyer Perth), motion design (CMP video), animation (6 YT + 1 video), tiktoks (4 embeds + CTA), lightbox, tools-card |
+| `tech/index.html` | 112 | Laptop, 5 apps grid, hover desc, fiche projet, demo iframe, tools-card |
+| `music/index.html` | 98 | iPod (320px), 7 tracks, tools-card |
+| `mentions-legales.html` | 63 | Mentions legales (editeur, hebergement, PI, RGPD), layout 2 colonnes avec image |
+| `404.html` | 30 | Page 404 personnalisee (code + message + bouton retour) |
 | `sitemap.xml` | 28 | Sitemap XML (5 URLs avec priorites) |
 | `robots.txt` | 5 | Allow all sauf /dist/, pointe vers sitemap |
 | `.htaccess` | 1 | ErrorDocument 404 |
-| `css/style.css` | 884 | Base, halftone, slideshow, anims, vinyl, CV, contact, tools-card, back-link, about, scroll-top, scroll-reveal, error-page, mentions, no-intro, responsive |
-| `css/art.css` | 825 | Pile (5 variantes), has-cover, gallery masonry, lightbox, phone/folder/film, tiktok + CTA, anim-grid, book-view, fiche art, motion-desc, gallery-item-link, responsive |
-| `css/tech.css` | 365 | Laptop, desktop flex-wrap, app-desc hover, fiche projet, site-iframe, clavier, responsive |
+| `css/style.css` | 1005 | Base, halftone, slideshow, anims, vinyl, CV, contact, tools-card, back-link, about, scroll-top, scroll-reveal, error-page, mentions, no-intro, responsive |
+| `css/art.css` | 920 | Pile (5 variantes), has-cover, gallery masonry, lightbox, phone/folder/film, tiktok + CTA, anim-grid, book-view, fiche art, motion-desc, gallery-item-link, responsive |
+| `css/tech.css` | 463 | Laptop, desktop flex-wrap, app-desc hover, fiche projet, site-iframe, clavier, responsive |
 | `css/pdf-viewer.css` | 157 | PDF reader, curseurs SVG, responsive, hover:none |
-| `css/music.css` | 234 | iPod, LCD vert, click wheel, responsive |
-| `js/main.js` | 16 | Theme toggle |
-| `js/art.js` | 553 | `initPdfJs()`, `artProjects{}`, fiche art, pile/folders, lazy covers, media stop/restore, TikTok scroll, lightbox, PDF viewer, `setBackLink()` dynamique |
+| `css/music.css` | 262 | iPod, LCD vert, click wheel, responsive |
+| `js/main.js` | 61 | Theme toggle, scroll-to-top, close cards on outside click, Escape shortcuts |
+| `js/art.js` | 567 | `initPdfJs()`, `artProjects{}`, fiche art, pile/folders, lazy covers, media stop/restore, TikTok scroll, lightbox, PDF viewer, `setBackLink()` dynamique |
 | `js/tech.js` | 79 | `projects{}` (5 apps), hover desc, fiche -> demo -> retour |
 | `js/music.js` | 70 | Player iPod, auto-next, formatTime guard |
 
 ---
 
-## Nouveautes depuis le dernier audit
+## Corrections RESTANTES
 
-### SEO
-- **Titres enrichis** : "Valentin Mardoukhaev — Designer graphique..." sur toutes les pages (au lieu de juste "Vesanerie")
-- **JSON-LD Person** : schema structure sur la homepage (nom, job, sameAs LinkedIn/Malt/Instagram/TikTok/YouTube/Gesturo, formation, competences)
-- **URL canonique** (`<link rel="canonical">`) sur les 4 pages principales
-- **og:url** ajoute sur toutes les pages
-- **Meta descriptions** enrichies avec mots-cles
-- **`<h1>` semantique** pour le nom sur la homepage (au lieu de `<div>`)
-- **sitemap.xml** + **robots.txt** crees
-- **Alt texts** ajoutes sur les images du slideshow homepage
-- **Lazy loading** (`loading="lazy"`) sur les images slideshow (sauf la 1re)
+### 1. BUG — CSS tech.css : duplications massives dans le media query mobile
 
-### Contenu
-- **Section A propos** sur la homepage : bio (Metal Hurlant, profil hybride), blocs Formation, Experience (Sauvages/Cesar, Gesturo, Culture Hot Mag, branding), Langues. Logo en signature en bas.
-- **Page mentions legales** : editeur, hebergement O2Switch, PI, pas de cookies. Layout 2 colonnes avec image.
-- **Page 404 personnalisee** : "404 / Page introuvable" avec bouton retour accueil + `.htaccess`
+- **Fichier** : `css/tech.css`, `@media (max-width: 600px)`
+- **Probleme** : `.desktop`, `.screen-shell`, `.screen-inner`, `.base-shell`, `.app-icon`, `.app-icon-img`, `.app-icon-name` sont chacun declares **deux fois** dans le meme media query. Les premiers blocs (lignes 310-360) sont du code mort car ecrases par les seconds (lignes 365-463).
+- **Correction** : Fusionner chaque paire en un seul bloc, en gardant les valeurs finales.
+- **Priorite** : MOYENNE
 
-### UX
-- **Scroll-to-top** : bouton fleche fixe en bas a droite, apparait apres 400px de scroll
-- **Scroll reveal** : blocs A propos apparaissent en fondu au scroll (IntersectionObserver)
-- **Skip intro** : les animations landing ne jouent qu'une fois par session (sessionStorage)
-- **Back-link dynamique** : `setBackLink()` dans art.js — affiche "← Art" dans un dossier, "← Edition" en lecture PDF, "← Accueil" sur la pile principale
+### 2. BUG — CSS style.css : landing-card cassee a 380px
 
-### Corrections
-- **Back-link simplifie** : supprime le breadcrumb multi-niveaux (trop verbeux), retour au simple lien contextuel
-- **Transition de page supprimee** : effet wipe retire (raté visuellement)
+- **Fichier** : `css/style.css`, lignes 948-957, `@media (max-width: 380px)`
+- **Probleme** : `.landing-card { width: 90px; height: 120px; }` — les cartes deviennent minuscules (90px de large) sur petit ecran, alors qu'elles sont en `flex-direction: column` depuis le breakpoint 600px. Visuellement casse.
+- **Correction** : Garder `width: 100%` et reduire seulement le `height` (ex: `height: 110px`).
+- **Priorite** : HAUTE (affecte le mobile)
+
+### 3. BUG — JS art.js : selecteur `.section-title` inexistant
+
+- **Fichier** : `js/art.js`, ligne 335
+- **Probleme** : `fv.querySelector('.section-title')` — cette classe n'existe nulle part dans le HTML. Devrait etre `.pile-title`. Consequence : le back-link en mode PDF depuis un sous-dossier affiche le slug brut (ex: "edition") au lieu du nom affiche ("Edition").
+- **Correction** : Remplacer `.section-title` par `.pile-title`.
+- **Priorite** : BASSE
+
+### 4. BUG — HTML : `<button>` imbriquant des `<a>` (invalid HTML)
+
+- **Fichier** : `index.html` (ligne 143, contact-card) et toutes les pages avec tools-card
+- **Probleme** : La carte contact est un `<button>` qui contient des `<a>`. Imbriquer des elements interactifs est invalide en HTML5. De plus, cliquer un lien dans la carte declenche aussi le `toggle('open')` du bouton parent, ce qui ferme la carte en meme temps.
+- **Correction** : Remplacer le `<button class="contact-card">` par un `<div>`, et ajouter un bouton separe pour toggler. Idem pour tools-card.
+- **Priorite** : MOYENNE (accessibilite + UX mobile)
+
+### 5. BUG — Contact card : clic sur un lien ferme la carte
+
+- **Fichier** : `index.html`, lien direct avec le bug #4
+- **Probleme** : Le `onclick="this.classList.toggle('open')"` sur le `<button>` parent fait que cliquer sur un lien (`mailto:`, Instagram, etc.) ferme aussi la carte immediatement. Sur mobile (bottom-sheet), c'est particulierement genant.
+- **Correction** : Ajouter `e.stopPropagation()` sur les liens, ou restructurer en `<div>` avec un bouton toggle separe.
+- **Priorite** : HAUTE (UX mobile)
 
 ---
 
-## Corrections RESTANTES
+## Points mineurs
 
-### 1. CSS — `.desktop` declare deux fois dans le media query
+### 6. JS main.js : handler Escape lightbox mort
 
-- **Fichier** : `css/tech.css` (dans `@media max-width: 600px`)
-- **Probleme** : `.desktop` declare deux fois avec des proprietes differentes
-- **Correction** : Fusionner en un seul bloc.
+- **Fichier** : `js/main.js`, ligne 58
+- **Probleme** : Le test `lb.style.display !== 'none'` ne marchera jamais car la lightbox utilise la classe `.open` (geree par art.js qui a son propre handler Escape). Code mort.
+- **Correction** : Supprimer le bloc lightbox dans main.js (deja gere par art.js ligne 218).
 - **Priorite** : BASSE
+
+### 7. Meta theme-color manquant
+
+- **Probleme** : Aucune page ne declare `<meta name="theme-color">`. Sur mobile (Chrome, Safari), la barre d'adresse ne prend pas la couleur du site.
+- **Correction** : Ajouter `<meta name="theme-color" content="#f0ece4">` dans le `<head>` de chaque page. Bonus : le changer en JS quand le theme dark est actif.
+- **Priorite** : BASSE
+
+---
+
+## Points corriges (depuis l'audit precedent)
+
+- ~~`.desktop` declare deux fois~~ → englobes dans le bug #1 (probleme plus large que prevu)
 
 ---
 
 ## Verifications
 
-- pdf.js `defer` sur art : **present** (ligne 19)
+- pdf.js `defer` sur art : **present** (ligne 22)
 - pdf.js `defer` + SRI sur index : **present**
 - `initPdfJs()` gere le timing defer : **OK**
 - TikTok `getItemH()` dynamique : **OK**
-- JSON-LD Person valide : **OK** (schema.org)
+- JSON-LD Person + WebSite valide : **OK**
 - Canonical URLs coherentes avec sitemap : **OK**
-- sessionStorage skip-intro : **OK** (se reinit a la fermeture d'onglet)
-- setBackLink() remplace tous les anciens backLink.textContent : **OK**
+- sessionStorage skip-intro : **OK**
+- setBackLink() contextuel : **OK** (sauf bug #3)
 - .htaccess 404 : **OK**
+- Contact card fermeture clic exterieur : **OK** (main.js)
+- Lightbox fleches clavier : **OK** (art.js)
+- Musique auto-next : **OK**
+- Tech demo iframe retour : **OK**
+
+---
+
+## Audit mobile specifique
+
+| Page | Breakpoint 600px | Breakpoint 400px | Breakpoint 380px | Verdict |
+|---|---|---|---|---|
+| **Accueil** | OK (cards column, bio reduite) | OK | **KO** : landing-card 90px de large = casse (bug #2) | A corriger |
+| **Art** | OK (pile 2 colonnes, gallery 2 col) | OK (pile 130px, gallery 1 col) | OK | OK |
+| **Tech** | OK sauf CSS dead code (bug #1) | - | - | A nettoyer |
+| **Music** | OK (ipod 290px) | - | OK (ipod 250px) | OK |
+| **Mentions** | OK (1 colonne) | - | - | OK |
+| **404** | OK (taille reduite) | - | - | OK |
+| **Contact card** | **KO** : clic lien ferme la carte (bug #5) | idem | idem | A corriger |
+| **CV overlay** | OK | OK | OK | OK |
+| **PDF viewer** | OK (single page, touch swipe) | OK | OK | OK |
+| **TikTok** | OK (column layout, phone 280px) | OK (phone 240px) | - | OK |
 
 ---
 
@@ -95,6 +137,5 @@ Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Ass
 - Deploy **O2Switch** via **GitHub Actions FTP**. Toujours push apres commit.
 - Quand on modifie `art/index.html`, **verifier que `defer` est present** sur pdf.js.
 - Les PDFs lourds peuvent utiliser `data-skip-cover` pour eviter le telechargement en thumbnail.
-- Les PDFs comprimes sont dans `/Art/Fanzine/` avec suffixe `_compressé` ou `_compressed`.
-- Le titre de chaque page doit commencer par "Valentin Mardoukhaev" pour le SEO.
+- Les PDFs comprimes sont dans `/Art/Fanzine/` avec suffixe `_compresse` ou `_compressed`.
 - Le JSON-LD Person est sur la homepage — mettre a jour si nouveaux reseaux/projets.
