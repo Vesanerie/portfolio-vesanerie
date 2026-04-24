@@ -190,18 +190,6 @@
         observer.observe(el);
       });
     }
-
-    // Page transitions on internal links
-    document.querySelectorAll('a[href^="tech/"], a[href^="art/"], a[href^="music/"]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        var href = this.getAttribute('href');
-        var overlay = document.createElement('div');
-        overlay.className = 'page-transition entering';
-        document.body.appendChild(overlay);
-        setTimeout(function() { window.location.href = href; }, 350);
-      });
-    });
   </script>
 </body>
 </html>
