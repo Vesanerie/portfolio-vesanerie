@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f0ece4">
   <link rel="icon" type="image/png" sizes="32x32" href="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png">
   <link rel="apple-touch-icon" href="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png">
   <title>Vesanerie — Valentin Mardoukhaev | Designer graphique, d&eacute;veloppeur, auto-&eacute;diteur</title>
@@ -140,15 +141,15 @@
 
   <button class="scroll-top" id="scroll-top" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
-  <button class="contact-card" id="contact-card" onclick="this.classList.toggle('open')" aria-label="Contact">
-    <div class="contact-card-label"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="card-logo">Contact</div>
+  <div class="contact-card" id="contact-card">
+    <div class="contact-card-label" onclick="this.parentElement.classList.toggle('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="card-logo">Contact</div>
     <div class="contact-card-content">
       <a href="mailto:mardouv2@gmail.com" class="contact-item">Mail : mardouv2@gmail.com</a>
       <a href="https://www.tiktok.com/@culture.hot.mag" target="_blank" class="contact-item">TikTok : @culture.hot.mag</a>
       <a href="https://www.instagram.com/culture.hot.mag" target="_blank" class="contact-item">Instagram : @culture.hot.mag</a>
       <a href="https://www.youtube.com/@Culture_hot" target="_blank" class="contact-item">YouTube : @Culture_hot</a>
     </div>
-  </button>
+  </div>
 
   <a href="mentions-legales.html" class="legal-link">Mentions l&eacute;gales</a>
 

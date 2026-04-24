@@ -336,7 +336,7 @@ function openPdfBook(pdfUrl, singlePage) {
   // Update back link
   if (currentSubPile) {
     var fv = document.getElementById(currentSubPile + '-view');
-    var ft = fv && fv.querySelector('.section-title') ? fv.querySelector('.section-title').textContent : currentSubPile;
+    var ft = fv && fv.querySelector('.pile-title') ? fv.querySelector('.pile-title').textContent : currentSubPile;
     setBackLink(ft, '#', function() { closeBook(); });
   } else {
     setBackLink('Art', '#', function() { closeBook(); });

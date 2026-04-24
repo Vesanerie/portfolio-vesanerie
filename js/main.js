@@ -1,8 +1,14 @@
 // ===== Theme Toggle =====
+function updateThemeColor(theme) {
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', theme === 'dark' ? '#0e0e0e' : '#f0ece4');
+}
+
 function initTheme() {
   const saved = localStorage.getItem('theme');
   const theme = saved || 'light';
   document.documentElement.setAttribute('data-theme', theme);
+  updateThemeColor(theme);
 }
 
 function toggleTheme() {
@@ -10,6 +16,7 @@ function toggleTheme() {
   const next = current === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
+  updateThemeColor(next);
 }
 
 // Init on load
@@ -53,8 +60,8 @@ document.addEventListener('keydown', function(e) {
     // Close contact card
     var contact = document.getElementById('contact-card');
     if (contact && contact.classList.contains('open')) { contact.classList.remove('open'); return; }
-    // Close lightbox (art page)
-    var lb = document.getElementById('lightbox');
-    if (lb && lb.style.display !== 'none' && lb.style.display !== '') { lb.style.display = 'none'; return; }
+    // Close tools card
+    var tools = document.querySelector('.tools-card.open');
+    if (tools) { tools.classList.remove('open'); return; }
   }
 });

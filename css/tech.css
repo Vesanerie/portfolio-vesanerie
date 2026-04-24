@@ -312,57 +312,6 @@
     padding: 60px 10px 20px;
   }
 
-  .screen-shell {
-    padding: 12px 10px 14px;
-    border-width: 3px;
-    border-radius: 12px 12px 0 0;
-  }
-
-  .screen-inner {
-    border-width: 2px;
-  }
-
-  .desktop {
-    padding: 10px;
-    gap: 8px 12px;
-  }
-
-  .app-icon {
-    padding: 8px 10px;
-  }
-
-  .app-icon-img {
-    font-size: 34px;
-  }
-
-  .app-icon-name {
-    font-size: 13px;
-  }
-
-  .base-shell {
-    padding: 14px 14px 12px;
-    gap: 10px;
-    border-width: 3px;
-  }
-
-  .key {
-    height: 26px;
-    border-width: 2px;
-    border-radius: 4px;
-  }
-
-  .kb-row { gap: 4px; }
-  .keyboard { gap: 4px; }
-
-  .trackpad {
-    display: none;
-  }
-
-  .keyboard {
-    display: none;
-  }
-
-  /* ---- Laptop mobile : ecran seulement ---- */
   .laptop {
     max-width: 100%;
   }
@@ -386,7 +335,9 @@
     border-radius: 0 0 10px 10px;
   }
 
-  /* ---- Desktop icons mobile ---- */
+  .keyboard { display: none; }
+  .trackpad { display: none; }
+
   .desktop {
     padding: 12px;
     gap: 8px;
