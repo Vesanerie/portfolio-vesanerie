@@ -327,15 +327,12 @@ a { color: inherit; text-decoration: none; }
   background: var(--border);
 }
 
-/* ===== Breadcrumb ===== */
-.breadcrumb {
+/* ===== Back Link / Breadcrumb ===== */
+.breadcrumb, .back-link {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 999;
-  display: flex;
-  align-items: center;
-  gap: 0;
   font-family: 'Bangers', sans-serif;
   font-size: 18px;
   letter-spacing: 2px;
@@ -343,44 +340,15 @@ a { color: inherit; text-decoration: none; }
   background: var(--bg-card);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-.breadcrumb:hover {
+.breadcrumb:hover, .back-link:hover {
   transform: translateY(-2px);
   box-shadow: 4px 4px 0 var(--border);
 }
-.breadcrumb a, .breadcrumb span {
+.breadcrumb a, .back-link {
+  display: block;
   text-decoration: none;
   color: var(--text);
-  padding: 10px 14px;
-}
-.breadcrumb a:first-child {
-  padding-left: 18px;
-}
-.breadcrumb .bc-sep {
-  padding: 0;
-  color: var(--text-muted);
-}
-.breadcrumb .bc-current {
-  color: var(--text-muted);
-  padding-right: 18px;
-}
-
-/* Legacy back-link (mentions legales) */
-.back-link {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 999;
-  font-family: 'Bangers', sans-serif;
-  font-size: 18px;
-  letter-spacing: 2px;
-  border: 2px solid var(--border);
   padding: 10px 18px;
-  background: var(--bg-card);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.back-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 4px 4px 0 var(--border);
 }
 
 /* ===== CV Card ===== */
@@ -675,7 +643,7 @@ a.contact-item:hover {
 }
 .mentions-img {
   flex-shrink: 0;
-  width: 180px;
+  width: 260px;
 }
 .mentions-img img {
   width: 100%;
