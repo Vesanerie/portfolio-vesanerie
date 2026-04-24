@@ -26,13 +26,18 @@ initTheme();
 (function() {
   var btn = document.getElementById('scroll-top');
   if (!btn) return;
+  var scrollTimer = null;
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 400) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
-  });
+    if (scrollTimer) return;
+    scrollTimer = setTimeout(function() {
+      scrollTimer = null;
+      if (window.scrollY > 400) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    }, 100);
+  }, { passive: true });
 })();
 
 // ===== Close cards on outside tap =====
