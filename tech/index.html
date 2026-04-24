@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f0ece4">
   <link rel="icon" type="image/png" sizes="32x32" href="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png">
   <link rel="apple-touch-icon" href="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png">
   <title>Valentin Mardoukhaev — Tech | Gesturo, outils web, IA g&eacute;n&eacute;rative</title>
@@ -94,15 +95,15 @@
   </div>
 
   <button class="tools-trigger" aria-label="Outils" onclick="document.querySelector('.tools-card').classList.add('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="tools-trigger-icon"></button>
-  <button class="tools-card" onclick="this.classList.toggle('open')" aria-label="Outils">
-    <div class="tools-card-label"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="card-logo">Outils</div>
+  <div class="tools-card">
+    <div class="tools-card-label" onclick="this.parentElement.classList.toggle('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="card-logo">Outils</div>
     <div class="tools-card-content">
       <div class="tools-item">VS Code</div>
       <div class="tools-item">Claude Code</div>
       <div class="tools-item">React</div>
       <div class="tools-item">Node.js</div>
     </div>
-  </button>
+  </div>
 
   <button class="scroll-top" id="scroll-top" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
