@@ -358,11 +358,9 @@ a { color: inherit; text-decoration: none; }
 .breadcrumb .bc-sep {
   padding: 0;
   color: var(--text-muted);
-  font-size: 14px;
 }
 .breadcrumb .bc-current {
   color: var(--text-muted);
-  font-size: 14px;
   padding-right: 18px;
 }
 
