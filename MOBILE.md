@@ -103,6 +103,7 @@
 6. **Box-shadow** : reduire sur mobile (3-4px au lieu de 6-8px)
 7. **Border-width** : reduire a `2-3px` sur mobile
 8. **Videos** : jamais d'`autoplay` sur les vues cachees — lancer via JS a l'ouverture
+9. **CSS modulaire** : le responsive de chaque composant est dans son propre fichier `css/components/*.css` (pas de bloc @media partage)
 
 ---
 
