@@ -645,11 +645,7 @@
   /* ---- Pile view ---- */
   .pile-view {
     padding: 56px 16px 30px;
-    gap: 20px;
-  }
-  .pile-stack {
     gap: 16px;
-    max-width: 100%;
   }
   .pile-title {
     font-size: clamp(32px, 8vw, 80px);
@@ -658,42 +654,80 @@
     font-size: 12px;
   }
 
-  /* ---- Pile items ---- */
+  /* ---- Pile stack : grille uniforme ---- */
+  .pile-stack {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  /* ---- Tous les items : meme taille, pas de rotation ---- */
   .pile-book,
   .pile-sm,
   .pile-md,
   .pile-lg,
   .pile-wide,
-  .pile-sq {
-    width: 150px;
-    height: 210px;
-    box-shadow: 4px 4px 0 var(--border);
+  .pile-sq,
+  .pile-phone,
+  .pile-folder,
+  .pile-film {
+    width: 100% !important;
+    height: 160px !important;
+    transform: none !important;
+    box-shadow: 3px 3px 0 var(--border);
+    border-width: 2px;
   }
-  .pile-book-title { font-size: 16px; }
-  .pile-book-icon { font-size: 28px; }
-  .pile-book-type { font-size: 10px; }
+  .pile-book:hover,
+  .pile-phone:hover,
+  .pile-folder:hover,
+  .pile-film:hover {
+    transform: none !important;
+    box-shadow: 3px 3px 0 var(--border);
+  }
+  .pile-book-title { font-size: 16px; letter-spacing: 2px; }
+  .pile-book-icon { font-size: 24px; }
+  .pile-book-type { font-size: 9px; }
 
+  /* Phone : reset border-radius pour uniformiser */
+  .pile-phone {
+    border-radius: 12px;
+  }
+  .phone-notch { display: none; }
+  .phone-home-bar { display: none; }
+  .phone-screen-label { font-size: 16px; }
+  .phone-sub-label { font-size: 9px; }
+
+  /* Folder : reset pour uniformiser */
+  .pile-folder { border-radius: 0; }
+  .folder-tab { display: none; }
+  .folder-body {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Film : reset pour uniformiser */
+  .pile-film { border-radius: 0; }
+  .film-strip-top,
+  .film-strip-bottom {
+    height: 18px;
+    gap: 8px;
+    padding: 0 8px;
+  }
+  .film-hole {
+    width: 8px;
+    height: 6px;
+  }
+  .film-title { font-size: 16px; letter-spacing: 2px; }
+  .film-sub { font-size: 9px; }
+
+  /* Graphisme sub-grid */
   #graphisme-view .pile-stack {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .pile-phone {
-    width: 130px;
-    height: 240px;
-    border-radius: 16px;
-    border-width: 3px;
-  }
-  .phone-screen-label { font-size: 18px; }
-
-  .pile-folder {
-    width: 160px;
-    height: 130px;
-  }
-  .pile-film {
-    width: 160px;
-    height: 220px;
-  }
-  .film-title { font-size: 20px; }
 
   /* ---- Book view ---- */
   .book-view {
@@ -767,33 +801,26 @@
 
 @media (max-width: 400px) {
   .pile-view {
-    padding: 52px 12px 24px;
+    padding: 52px 10px 24px;
+  }
+  .pile-stack {
+    gap: 10px;
   }
   .pile-book,
   .pile-sm,
   .pile-md,
   .pile-lg,
   .pile-wide,
-  .pile-sq {
-    width: 130px;
-    height: 180px;
-    gap: 6px;
+  .pile-sq,
+  .pile-phone,
+  .pile-folder,
+  .pile-film {
+    height: 130px !important;
   }
   .pile-book-title { font-size: 14px; }
-  .pile-book-icon { font-size: 24px; }
-  .pile-phone {
-    width: 110px;
-    height: 200px;
-  }
-  .pile-folder {
-    width: 140px;
-    height: 110px;
-  }
-  .pile-film {
-    width: 140px;
-    height: 190px;
-  }
-  .film-title { font-size: 16px; }
+  .pile-book-icon { font-size: 20px; }
+  .film-title { font-size: 14px; }
+  .phone-screen-label { font-size: 14px; }
   .tiktok-phone { width: 240px; }
   .tiktok-scroll,
   .tiktok-embed-wrap { height: 400px; }
