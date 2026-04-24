@@ -643,13 +643,35 @@ a.contact-item:hover {
   .theme-toggle .dot { width: 20px; height: 20px; }
   [data-theme="dark"] .theme-toggle .dot { transform: translateX(20px); }
 
-  /* ---- Tools card mobile ---- */
+  /* ---- Tools card mobile : bottom-sheet ---- */
   .tools-card {
+    top: auto;
     bottom: 0;
     right: 0;
-    left: auto;
-    width: auto;
-    border-radius: 8px 0 0 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 0 0 var(--border);
+  }
+  .tools-card:hover {
+    right: 0;
+  }
+  .tools-card.open {
+    transform: translateY(0);
+  }
+  .tools-card-label {
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
+  }
+  .tools-card-content {
+    padding: 16px 20px 24px;
+    gap: 0;
+  }
+  .tools-item {
+    font-size: 13px;
+    padding: 14px 0;
   }
 
   /* ---- Legal link ---- */
