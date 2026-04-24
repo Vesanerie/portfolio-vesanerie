@@ -28,6 +28,17 @@ initTheme();
   });
 })();
 
+// ===== Close contact card on outside tap (mobile) =====
+(function() {
+  var contact = document.getElementById('contact-card');
+  if (!contact) return;
+  document.addEventListener('click', function(e) {
+    if (contact.classList.contains('open') && !contact.contains(e.target) && !e.target.classList.contains('landing-cta')) {
+      contact.classList.remove('open');
+    }
+  });
+})();
+
 // ===== Keyboard Shortcuts =====
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
