@@ -220,6 +220,9 @@
     // 3D tilt effect on landing cards (desktop only)
     if (window.matchMedia('(hover: hover)').matches) {
       document.querySelectorAll('.landing-card').forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+          this.style.transition = 'none';
+        });
         card.addEventListener('mousemove', function(e) {
           var rect = this.getBoundingClientRect();
           var x = (e.clientX - rect.left) / rect.width;
@@ -231,6 +234,7 @@
           this.style.setProperty('--my', (y * 100) + '%');
         });
         card.addEventListener('mouseleave', function() {
+          this.style.transition = '';
           this.style.transform = '';
         });
       });
