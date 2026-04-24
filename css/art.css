@@ -726,6 +726,35 @@
   .pile-title {
     font-size: clamp(36px, 8vw, 80px);
   }
+
+  /* Fiche art mobile */
+  .art-fiche {
+    width: 200px;
+    left: -210px;
+    bottom: 10px;
+  }
+  .art-fiche-title {
+    font-size: 16px;
+    padding: 8px;
+  }
+  .art-fiche-meta {
+    padding: 10px;
+    gap: 4px;
+  }
+  .art-fiche-row {
+    font-size: 11px;
+  }
+
+  /* Motion desc mobile */
+  .motion-desc {
+    font-size: 12px;
+  }
+
+  /* Gallery links touch target */
+  .gallery-item-link {
+    padding: 8px 0;
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 400px) {

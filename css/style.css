@@ -775,8 +775,38 @@ a.contact-item:hover {
 }
 
 @media (max-width: 600px) {
+  .about {
+    padding: 40px 16px 40px;
+  }
+  .about-title {
+    font-size: 28px;
+  }
   .about-content {
     flex-direction: column;
+    gap: 20px;
+  }
+  .about-text p {
+    font-size: 12px;
+  }
+  .about-block-title {
+    font-size: 16px;
+  }
+  .scroll-top {
+    bottom: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+  .error-code {
+    font-size: 72px;
+  }
+  .error-msg {
+    font-size: 20px;
+  }
+  .error-btn {
+    font-size: 14px;
+    padding: 10px 20px;
   }
 }
 
