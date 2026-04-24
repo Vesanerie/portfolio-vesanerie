@@ -233,14 +233,10 @@ function stopMediaInFolder(folderId) {
   view.querySelectorAll('video').forEach(function(v) { v.pause(); });
 }
 
-// CMP video: unmute at 50% volume on first user interaction
+// CMP video: play only when motion-design view is open, unmute on interaction
 var cmpVideo = document.getElementById('cmp-video');
 if (cmpVideo) {
   cmpVideo.volume = 0.5;
-  document.addEventListener('click', function unmuteCmp() {
-    cmpVideo.muted = false;
-    document.removeEventListener('click', unmuteCmp);
-  }, { once: true });
 }
 
 function restoreMediaInFolder(folderId) {
