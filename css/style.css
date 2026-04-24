@@ -617,6 +617,62 @@ a.contact-item:hover {
   [data-theme="dark"] .theme-toggle .dot { transform: translateX(20px); }
 }
 
+/* ===== Mentions legales ===== */
+.mentions-page {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+.mentions-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 32px;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+}
+.mentions-block {
+  margin-bottom: 24px;
+}
+.mentions-block h2 {
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.mentions-block p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.mentions-block a {
+  color: var(--text);
+  border-bottom: 1px dashed var(--text-muted);
+}
+.mentions-footer {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 2px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.legal-link {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 998;
+  font-family: 'Special Elite', serif;
+  font-size: 10px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.legal-link:hover {
+  opacity: 1;
+}
+
 @media (max-width: 380px) {
   .landing-title { font-size: 24px; }
   .landing-card {
