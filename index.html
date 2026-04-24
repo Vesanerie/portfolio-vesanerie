@@ -190,18 +190,6 @@
       });
     });
 
-    // Scroll to top button
-    var scrollBtn = document.getElementById('scroll-top');
-    if (scrollBtn) {
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 400) {
-          scrollBtn.classList.add('visible');
-        } else {
-          scrollBtn.classList.remove('visible');
-        }
-      });
-    }
-
     // Scroll reveal for about section
     var reveals = document.querySelectorAll('.about-block, .about-text');
     if (reveals.length) {

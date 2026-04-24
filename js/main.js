@@ -14,3 +14,31 @@ function toggleTheme() {
 
 // Init on load
 initTheme();
+
+// ===== Scroll to Top =====
+(function() {
+  var btn = document.getElementById('scroll-top');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+})();
+
+// ===== Keyboard Shortcuts =====
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    // Close CV overlay
+    var cv = document.getElementById('cv-overlay');
+    if (cv && cv.classList.contains('open')) { cv.classList.remove('open'); return; }
+    // Close contact card
+    var contact = document.getElementById('contact-card');
+    if (contact && contact.classList.contains('open')) { contact.classList.remove('open'); return; }
+    // Close lightbox (art page)
+    var lb = document.getElementById('lightbox');
+    if (lb && lb.style.display !== 'none' && lb.style.display !== '') { lb.style.display = 'none'; return; }
+  }
+});
