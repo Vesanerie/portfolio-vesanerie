@@ -615,11 +615,8 @@ a.contact-item:hover {
   }
   .contact-item { font-size: 10px; }
 
-  .breadcrumb { font-size: 14px; top: 10px; left: 10px; }
-  .breadcrumb a, .breadcrumb span { padding: 8px 10px; }
-  .breadcrumb a:first-child { padding-left: 14px; }
-  .breadcrumb .bc-current { padding-right: 14px; }
-  .back-link { font-size: 14px; padding: 8px 14px; top: 10px; left: 10px; }
+  .breadcrumb, .back-link { font-size: 14px; top: 10px; left: 10px; }
+  .breadcrumb a, .back-link { padding: 8px 14px; }
   .theme-toggle { top: 10px; right: 10px; width: 44px; height: 24px; }
   .theme-toggle .dot { width: 16px; height: 16px; }
   [data-theme="dark"] .theme-toggle .dot { transform: translateX(20px); }
