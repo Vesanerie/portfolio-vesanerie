@@ -73,6 +73,36 @@
 
   </div>
 
+  <section class="about" id="about">
+    <h2 class="about-title">A propos</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>Designer graphique form&eacute; aux beaux-arts et &agrave; l'animation, j'am&egrave;ne une touche de science-fiction dans le r&eacute;el. J'ai grandi avec M&eacute;tal Hurlant, et quand j'ai d&eacute;couvert le code, j'y ai vu l'outil qui me manquait pour cr&eacute;er les exp&eacute;riences que j'avais en t&ecirc;te.</p>
+        <p>Mon profil est volontairement hybride : graphiste, motion designer, cr&eacute;ateur de contenu, d&eacute;veloppeur. J'ai tra&icirc;n&eacute; dans beaucoup de milieux diff&eacute;rents &mdash; beaux-arts, animation, esport, code, &eacute;dition, spectacle vivant, r&eacute;seaux sociaux &mdash; et ma vraie valeur, c'est de faire dialoguer ces mondes entre eux.</p>
+      </div>
+      <div class="about-details">
+        <div class="about-block">
+          <div class="about-block-title">Formation</div>
+          <div class="about-block-item">Master en Art &mdash; Animation &amp; Marionnette, TALM Angers</div>
+          <div class="about-block-item">Licence &mdash; EESAB Lorient</div>
+        </div>
+        <div class="about-block">
+          <div class="about-block-title">Exp&eacute;rience</div>
+          <div class="about-block-item">D&eacute;cors stop-motion &mdash; &laquo; Sauvages &raquo; de Claude Barras (C&eacute;sar 2025)</div>
+          <div class="about-block-item">Gesturo.art &mdash; Plateforme de dessin assist&eacute;e par IA</div>
+          <div class="about-block-item">Culture Hot Mag &mdash; Magazine auto-&eacute;dit&eacute;</div>
+          <div class="about-block-item">Branding &mdash; &Eacute;quipe esport, charpentier (Perth, Australie)</div>
+        </div>
+        <div class="about-block">
+          <div class="about-block-title">Langues</div>
+          <div class="about-block-item">Fran&ccedil;ais &middot; Russe &middot; Anglais</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
   <button class="contact-card" id="contact-card" onclick="this.classList.toggle('open')" aria-label="Contact">
     <div class="contact-card-label"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="card-logo">Contact</div>
     <div class="contact-card-content">
@@ -123,6 +153,46 @@
             page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
           });
         });
+      });
+    });
+
+    // Scroll to top button
+    var scrollBtn = document.getElementById('scroll-top');
+    if (scrollBtn) {
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 400) {
+          scrollBtn.classList.add('visible');
+        } else {
+          scrollBtn.classList.remove('visible');
+        }
+      });
+    }
+
+    // Scroll reveal for about section
+    var reveals = document.querySelectorAll('.about-block, .about-text');
+    if (reveals.length) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+      reveals.forEach(function(el) {
+        el.classList.add('reveal');
+        observer.observe(el);
+      });
+    }
+
+    // Page transitions on internal links
+    document.querySelectorAll('a[href^="tech/"], a[href^="art/"], a[href^="music/"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var href = this.getAttribute('href');
+        var overlay = document.createElement('div');
+        overlay.className = 'page-transition entering';
+        document.body.appendChild(overlay);
+        setTimeout(function() { window.location.href = href; }, 350);
       });
     });
   </script>
