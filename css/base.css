@@ -7,7 +7,6 @@ body {
   color: var(--text);
   font-family: 'Special Elite', serif;
   min-height: 100vh;
-  transition: background 0.4s, color 0.4s;
   position: relative;
 }
 
@@ -17,23 +16,9 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    radial-gradient(circle, var(--halftone) 1.5px, transparent 1.5px),
-    radial-gradient(circle, var(--halftone) 1px, transparent 1px),
-    radial-gradient(circle, var(--halftone) 0.5px, transparent 0.5px);
-  background-size:
-    20px 20px,
-    15px 15px,
-    10px 10px;
-  background-position:
-    0 0,
-    7px 7px,
-    3px 3px;
-  opacity: 0.1;
-}
-
-[data-theme="dark"] body::before {
-  opacity: 0.06;
+  background: url('https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Texture_landscape.png') repeat;
+  background-size: 600px;
+  opacity: 1;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -56,13 +41,11 @@ a { color: inherit; text-decoration: none; }
   object-fit: cover;
   opacity: 0;
   transition: opacity 1.5s ease;
+  will-change: opacity;
+  contain: strict;
 }
 
 .bg-slideshow img.active {
-  opacity: 0.07;
-}
-
-[data-theme="dark"] .bg-slideshow img.active {
   opacity: 0.06;
 }
 
@@ -92,7 +75,7 @@ a { color: inherit; text-decoration: none; }
 .legal-link {
   position: fixed;
   bottom: 10px;
-  left: 10px;
+  right: 10px;
   z-index: 998;
   font-family: 'Special Elite', serif;
   font-size: 10px;
@@ -121,5 +104,5 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 600px) {
   .back-link { font-size: 14px; padding: 10px 16px; top: 10px; left: 10px; }
-  .legal-link { bottom: 6px; left: 6px; font-size: 9px; }
+  .legal-link { bottom: 6px; right: 6px; font-size: 9px; }
 }

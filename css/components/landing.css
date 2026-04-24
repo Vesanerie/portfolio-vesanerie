@@ -116,6 +116,23 @@
   transform-style: preserve-3d;
 }
 
+/* Paper fold texture */
+.landing-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Paper%20Fold.jpeg') center / cover no-repeat;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  opacity: 0.15;
+  z-index: 5;
+}
+
+[data-theme="dark"] .landing-card::before {
+  mix-blend-mode: screen;
+  opacity: 0.08;
+}
+
 /* Iridescent sheen overlay */
 .landing-card::after {
   content: '';

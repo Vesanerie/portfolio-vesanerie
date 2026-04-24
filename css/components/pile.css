@@ -42,6 +42,17 @@
   perspective: 800px;
 }
 
+/* Paper fold texture — all pile cards */
+.pile-book:not(.has-cover)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Paper%20Fold.jpeg') center / cover no-repeat;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Iridescent sheen on pile items */
 .pile-book::after,
 .pile-folder .folder-body::after,
@@ -104,6 +115,33 @@
 .pile-wide .pile-book-icon { font-size: 40px; }
 
 .pile-sq { width: 260px; height: 260px; }
+
+/* Deal cards animation on first load */
+@keyframes dealCard {
+  0% {
+    opacity: 0;
+    transform: translate(0, 100vh) rotate(15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(var(--ox, 0), var(--oy, 0)) rotate(var(--rot, 0deg));
+  }
+}
+
+.pile-stack > * {
+  animation: dealCard 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.pile-stack.no-anim > * {
+  animation: none;
+}
+
+.pile-stack > *:nth-child(1) { animation-delay: 0.1s; }
+.pile-stack > *:nth-child(2) { animation-delay: 0.25s; }
+.pile-stack > *:nth-child(3) { animation-delay: 0.4s; }
+.pile-stack > *:nth-child(4) { animation-delay: 0.55s; }
+.pile-stack > *:nth-child(5) { animation-delay: 0.7s; }
+.pile-stack > *:nth-child(6) { animation-delay: 0.85s; }
 
 .pile-book:hover {
   box-shadow: 12px 12px 0 0 var(--border);
