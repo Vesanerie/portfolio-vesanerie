@@ -767,6 +767,16 @@ a.contact-item:hover {
 .about-block-item:last-child {
   border-bottom: none;
 }
+.about-logo {
+  display: block;
+  width: 40px;
+  margin: 40px auto 0;
+  filter: brightness(0);
+  opacity: 0.4;
+}
+[data-theme="dark"] .about-logo {
+  filter: brightness(0) invert(1);
+}
 
 @media (max-width: 600px) {
   .about-content {
