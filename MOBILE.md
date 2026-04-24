@@ -104,6 +104,9 @@
 7. **Border-width** : reduire a `2-3px` sur mobile
 8. **Videos** : jamais d'`autoplay` sur les vues cachees — lancer via JS a l'ouverture
 9. **CSS modulaire** : le responsive de chaque composant est dans son propre fichier `css/components/*.css` (pas de bloc @media partage)
+10. **Theme switch** : pas de transition sur body — le switch dark/light doit etre instantane
+11. **Scroll-to-top** : positionne en bas a gauche (pas a droite, conflit tools card)
+12. **Mentions legales** : lien en bas a droite
 
 ---
 

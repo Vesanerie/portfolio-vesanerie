@@ -1,16 +1,181 @@
 /* ========================================
-   ANIMATION GRID
+   CINEMA — Animation viewer
    ======================================== */
 
-.anim-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+.cinema {
   width: 100%;
   max-width: 900px;
   padding: 0 20px 40px;
 }
 
+.cinema-screen {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 3px solid var(--border);
+  box-shadow: 6px 6px 0 0 var(--border);
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.cinema-screen iframe,
+.cinema-screen video {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.cinema-placeholder {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.cinema-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cinema-label {
+  background: var(--border);
+  color: var(--bg);
+  font-family: 'Bangers', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 8px;
+  border: 3px solid var(--border);
+  border-top: none;
+  box-shadow: 6px 6px 0 0 var(--border);
+}
+
+/* ===== Navigation ===== */
+.cinema-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.cinema-arrow {
+  all: unset;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cinema-arrow:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 3px 0 var(--border);
+}
+
+.cinema-counter {
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* ===== Filmstrip thumbnails ===== */
+.cinema-strip {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.cinema-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.cinema-thumb {
+  flex: 0 0 140px;
+  aspect-ratio: 16 / 9;
+  border: 2px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  opacity: 0.6;
+}
+
+.cinema-thumb:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+.cinema-thumb.active {
+  opacity: 1;
+  border-width: 3px;
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+.cinema-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cinema-thumb-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background: var(--border);
+  color: var(--bg);
+  font-family: 'Bangers', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+}
+
+/* ===== Play button (shared) ===== */
+.anim-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  background: var(--border);
+  color: var(--bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  padding-left: 4px;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.cinema-placeholder:hover .anim-play,
+.anim-card:hover .anim-play {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ===== Motion design (standalone card) ===== */
 .anim-card {
   border: 3px solid var(--border);
   box-shadow: 6px 6px 0 0 var(--border);
@@ -36,29 +201,6 @@
   aspect-ratio: 16 / 9;
   border: none;
 }
-.anim-play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 56px;
-  height: 56px;
-  background: var(--border);
-  color: var(--bg);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  padding-left: 4px;
-  opacity: 0.85;
-  transition: opacity 0.2s, transform 0.2s;
-  pointer-events: none;
-}
-.anim-card:hover .anim-play {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1.1);
-}
 
 .anim-label {
   background: var(--border);
@@ -70,7 +212,6 @@
   padding: 6px;
 }
 
-/* ===== Motion Design ===== */
 .motion-single {
   width: 100%;
   max-width: 640px;
@@ -98,9 +239,14 @@
 
 /* ===== Responsive ===== */
 @media (max-width: 700px) {
-  .anim-grid {
-    grid-template-columns: 1fr;
+  .cinema { padding: 0 12px 30px; }
+  .cinema-screen { box-shadow: 3px 3px 0 0 var(--border); }
+  .cinema-label {
+    font-size: 13px;
+    padding: 6px;
+    box-shadow: 3px 3px 0 0 var(--border);
   }
+  .cinema-thumb { flex: 0 0 110px; }
   .anim-label { font-size: 12px; }
   .motion-desc { font-size: 12px; }
   .motion-card-meta { font-size: 11px; }

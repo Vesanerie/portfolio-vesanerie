@@ -12,7 +12,7 @@
   height: 28px;
   background: var(--switch-bg);
   border: 2px solid var(--border);
-  border-radius: 14px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   padding: 2px;
@@ -23,7 +23,7 @@
   width: 20px;
   height: 20px;
   background: var(--switch-dot);
-  border-radius: 50%;
+  border-radius: 2px;
   transition: transform 0.3s;
   display: flex;
   align-items: center;

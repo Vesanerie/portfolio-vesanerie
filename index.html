@@ -68,18 +68,7 @@
     <span class="cv-label">CV</span>
   </button>
 
-  <div class="bg-slideshow" id="bg-slideshow">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/BD%20guerre%20P1.jpg" alt="Illustration BD guerre">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Kevin%20de%20BRUYERE.jpg" alt="Portrait Kevin de Bruyere" loading="lazy">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Portrait%202.jpg" alt="Portrait au crayon" loading="lazy">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Ananas.jpg" alt="Illustration ananas" loading="lazy">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Big%20Brain.jpg" alt="Illustration Big Brain" loading="lazy">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Big%20Ears.jpg" alt="Illustration Big Ears" loading="lazy">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Casse-Toi.jpg" alt="Illustration Casse-Toi" loading="lazy">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Fusil-Moi.jpg" alt="Illustration Fusil-Moi" loading="lazy">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Roger-Rabbit.jpg" alt="Illustration Roger Rabbit" loading="lazy">
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/dessin%202.jpg" alt="Dessin encre de chine" loading="lazy">
-  </div>
+  <div class="bg-slideshow" id="bg-slideshow"></div>
 
   <div class="landing">
     <div>
@@ -174,16 +163,48 @@
       sessionStorage.setItem('visited', '1');
     }
 
-    // Background slideshow
+    // Background slideshow — lazy: only 2 images in DOM at a time
     (function() {
-      var imgs = document.querySelectorAll('#bg-slideshow img');
-      if (!imgs.length) return;
+      var urls = [
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/BD%20guerre%20P1.jpg',
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Kevin%20de%20BRUYERE.jpg',
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Portrait%202.jpg',
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Ananas.jpg',
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Big%20Brain.jpg',
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Big%20Ears.jpg',
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Casse-Toi.jpg',
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Fusil-Moi.jpg',
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/Roger-Rabbit.jpg',
+        'https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Art/dessin%20vrac/dessin%202.jpg'
+      ];
+      var container = document.getElementById('bg-slideshow');
+      if (!container) return;
       var idx = 0;
-      imgs[0].classList.add('active');
+
+      function createImg(src) {
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        return img;
+      }
+
+      var current = createImg(urls[0]);
+      current.classList.add('active');
+      container.appendChild(current);
+
       setInterval(function() {
-        imgs[idx].classList.remove('active');
-        idx = (idx + 1) % imgs.length;
-        imgs[idx].classList.add('active');
+        var nextIdx = (idx + 1) % urls.length;
+        var next = createImg(urls[nextIdx]);
+        container.appendChild(next);
+        // Force reflow then fade in
+        next.offsetHeight;
+        current.classList.remove('active');
+        next.classList.add('active');
+        setTimeout(function() {
+          if (current.parentNode) current.parentNode.removeChild(current);
+          current = next;
+          idx = nextIdx;
+        }, 1600);
       }, 4000);
     })();
 

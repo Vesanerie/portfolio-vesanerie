@@ -1,6 +1,5 @@
 /* ===== Film strip card (Animation) ===== */
 .pile-film {
-  all: unset;
   box-sizing: border-box;
   width: 240px;
   height: 320px;
