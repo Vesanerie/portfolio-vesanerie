@@ -193,6 +193,16 @@ a { color: inherit; text-decoration: none; }
   text-shadow: none;
 }
 
+/* Skip intro animations on revisit */
+.no-intro .landing-title,
+.no-intro .landing-sub,
+.no-intro .landing-bio,
+.no-intro .landing-cta,
+.no-intro .landing-card {
+  opacity: 1;
+  animation: none;
+}
+
 .landing-cta:hover {
   transform: translateY(-3px);
   box-shadow: 6px 6px 0 0 var(--border);

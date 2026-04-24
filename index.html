@@ -123,6 +123,13 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha512-q+4liFwdPC/bNdhUpZx6aXDx/h77yEQtn4I1slHydcbZK34nLaR3cAeYSJshoxIOq3mjEf7xJE8YWIUHMn+oCQ==" crossorigin="anonymous"></script>
   <script src="js/main.js"></script>
   <script>
+    // Skip intro animations on revisit within session
+    if (sessionStorage.getItem('visited')) {
+      document.body.classList.add('no-intro');
+    } else {
+      sessionStorage.setItem('visited', '1');
+    }
+
     // Background slideshow
     (function() {
       var imgs = document.querySelectorAll('#bg-slideshow img');
