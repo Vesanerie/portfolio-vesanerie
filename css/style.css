@@ -803,23 +803,6 @@ a.contact-item:hover {
   box-shadow: 4px 4px 0 var(--border);
 }
 
-/* ===== Page Transition ===== */
-.page-transition {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: var(--border);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  pointer-events: none;
-}
-.page-transition.entering {
-  animation: pageWipeIn 0.4s ease forwards;
-}
-@keyframes pageWipeIn {
-  from { transform: scaleY(0); transform-origin: bottom; }
-  to { transform: scaleY(1); transform-origin: bottom; }
-}
 
 /* ===== Scroll Reveal ===== */
 .reveal {
