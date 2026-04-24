@@ -6,28 +6,12 @@ var backLink = document.getElementById('back-link');
 var pdfContainer = document.getElementById('pdf-container');
 var isPdfMode = false;
 
-// Breadcrumb helper
-function setBreadcrumb(crumbs) {
-  // crumbs = [{label, href, onclick?}, ...] — last one is current (no link)
-  var html = '<a href="../">Accueil</a><span class="bc-sep">/</span>';
-  for (var i = 0; i < crumbs.length; i++) {
-    var c = crumbs[i];
-    if (i === crumbs.length - 1) {
-      html += '<span class="bc-current">' + c.label + '</span>';
-    } else {
-      html += '<a href="' + (c.href || '#') + '" data-bc="' + i + '">' + c.label + '</a><span class="bc-sep">/</span>';
-    }
-  }
-  backLink.innerHTML = html;
-  backLink.onclick = null;
-  // Bind onclick handlers
-  for (var j = 0; j < crumbs.length - 1; j++) {
-    if (crumbs[j].onclick) {
-      (function(fn) {
-        var el = backLink.querySelector('[data-bc="' + j + '"]');
-        if (el) el.addEventListener('click', function(e) { e.preventDefault(); fn(); });
-      })(crumbs[j].onclick);
-    }
+// Back link helper
+function setBackLink(label, href, onclick) {
+  backLink.innerHTML = '<a href="' + (href || '#') + '">\u2190 ' + label + '</a>';
+  var link = backLink.querySelector('a');
+  if (onclick) {
+    link.addEventListener('click', function(e) { e.preventDefault(); onclick(); });
   }
 }
 
@@ -154,10 +138,7 @@ function openFolder(folderId) {
   loadCoversInView(folderId);
   restoreMediaInFolder(folderId);
 
-  setBreadcrumb([
-    {label: 'Art', href: '#', onclick: function() { closeFolder(); }},
-    {label: folderView.querySelector('.section-title') ? folderView.querySelector('.section-title').textContent : folderId}
-  ]);
+  setBackLink('Art', '#', function() { closeFolder(); });
 }
 
 // TikTok scroll counter + arrows
@@ -290,16 +271,11 @@ function closeFolder() {
     currentSubPile = folderHistory.pop();
     var parentView = document.getElementById(currentSubPile + '-view');
     if (parentView) parentView.classList.remove('hidden');
-    var pv = document.getElementById(currentSubPile + '-view');
-    var folderTitle = pv && pv.querySelector('.section-title') ? pv.querySelector('.section-title').textContent : currentSubPile;
-    setBreadcrumb([
-      {label: 'Art', href: '#', onclick: function() { closeFolder(); }},
-      {label: folderTitle}
-    ]);
+    setBackLink('Art', '#', function() { closeFolder(); });
   } else {
     currentSubPile = null;
     pileView.classList.remove('hidden');
-    setBreadcrumb([{label: 'Art'}]);
+    setBackLink('Accueil', '../', null);
   }
 }
 
@@ -355,20 +331,13 @@ function openPdfBook(pdfUrl, singlePage) {
   }
   bookView.classList.remove('hidden');
 
-  // Update breadcrumb
+  // Update back link
   if (currentSubPile) {
     var fv = document.getElementById(currentSubPile + '-view');
     var ft = fv && fv.querySelector('.section-title') ? fv.querySelector('.section-title').textContent : currentSubPile;
-    setBreadcrumb([
-      {label: 'Art', href: '#', onclick: function() { closeBook(); closeFolder(); }},
-      {label: ft, href: '#', onclick: function() { closeBook(); }},
-      {label: 'Lecture'}
-    ]);
+    setBackLink(ft, '#', function() { closeBook(); });
   } else {
-    setBreadcrumb([
-      {label: 'Art', href: '#', onclick: function() { closeBook(); }},
-      {label: 'Lecture'}
-    ]);
+    setBackLink('Art', '#', function() { closeBook(); });
   }
 
   // Load PDF and render pages into flip-through
@@ -572,15 +541,10 @@ function closeBook() {
   if (currentSubPile) {
     var folderView = document.getElementById(currentSubPile + '-view');
     if (folderView) folderView.classList.remove('hidden');
-    var fv2 = document.getElementById(currentSubPile + '-view');
-    var ft2 = fv2 && fv2.querySelector('.section-title') ? fv2.querySelector('.section-title').textContent : currentSubPile;
-    setBreadcrumb([
-      {label: 'Art', href: '#', onclick: function() { closeFolder(); }},
-      {label: ft2}
-    ]);
+    setBackLink('Art', '#', function() { closeFolder(); });
   } else {
     pileView.classList.remove('hidden');
-    setBreadcrumb([{label: 'Art'}]);
+    setBackLink('Accueil', '../', null);
   }
 }
 
