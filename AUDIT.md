@@ -1,8 +1,8 @@
 # Audit complet — Vesanerie-sur-Internet
 
-> Date : 2026-04-24 (15e revision)
+> Date : 2026-04-24 (16e revision)
 > Auteur : Claude (audit automatique)
-> Statut : **5 bugs, 2 points mineurs**
+> Statut : **PROPRE** — 0 bug, 0 point critique
 
 ---
 
@@ -12,121 +12,103 @@ Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Ass
 
 | Fichier | Lignes | Role |
 |---|---|---|
-| `index.html` | 220 | Landing (h1 nom, bio, CTA contact), slideshow bg, CV overlay (pdf.js defer+SRI), section A propos (formation, XP, langues), scroll-to-top, contact card, JSON-LD Person + WebSite, skip-intro sessionStorage |
-| `art/index.html` | 503 | Portfolio art — edition (5 PDFs), illustration (3 carnets + gallery 16 + 1 PDF), graphisme (Vesanerie, covers album, 404, esport, RK Brand, Flyer Perth), motion design (CMP video), animation (6 YT + 1 video), tiktoks (4 embeds + CTA), lightbox, tools-card |
-| `tech/index.html` | 112 | Laptop, 5 apps grid, hover desc, fiche projet, demo iframe, tools-card |
-| `music/index.html` | 98 | iPod (320px), 7 tracks, tools-card |
-| `mentions-legales.html` | 63 | Mentions legales (editeur, hebergement, PI, RGPD), layout 2 colonnes avec image |
-| `404.html` | 30 | Page 404 personnalisee (code + message + bouton retour) |
-| `sitemap.xml` | 28 | Sitemap XML (5 URLs avec priorites) |
-| `robots.txt` | 5 | Allow all sauf /dist/, pointe vers sitemap |
+| `index.html` | 240 | Landing (h1, bio, CTA contact), slideshow bg, CV overlay (pdf.js defer+SRI), section A propos, scroll-to-top, contact card (`<div>`), JSON-LD Person + WebSite, skip-intro, 3D tilt cards |
+| `art/index.html` | 510 | Portfolio art — edition (5 PDFs), illustration (3 carnets + gallery 16 + 1 PDF), graphisme (6 items covers), motion design (CMP video 640px), animation (6 YT thumbnails + 1 video), tiktoks (4 embeds + CTA), lightbox, tools-card (`<div>`) + trigger mobile |
+| `tech/index.html` | 113 | Laptop (ecran seul mobile), 5 apps grid, hover desc, fiche projet, demo iframe, tools-card + trigger mobile |
+| `music/index.html` | 99 | iPod (320px), 7 tracks, tools-card + trigger mobile |
+| `mentions-legales.html` | 64 | Mentions legales, layout 2 colonnes avec image |
+| `404.html` | 31 | Page 404 personnalisee |
+| `sitemap.xml` | 28 | Sitemap XML (5 URLs) |
+| `robots.txt` | 5 | Allow all sauf /dist/ |
 | `.htaccess` | 1 | ErrorDocument 404 |
-| `css/style.css` | 1005 | Base, halftone, slideshow, anims, vinyl, CV, contact, tools-card, back-link, about, scroll-top, scroll-reveal, error-page, mentions, no-intro, responsive |
-| `css/art.css` | 920 | Pile (5 variantes), has-cover, gallery masonry, lightbox, phone/folder/film, tiktok + CTA, anim-grid, book-view, fiche art, motion-desc, gallery-item-link, responsive |
-| `css/tech.css` | 463 | Laptop, desktop flex-wrap, app-desc hover, fiche projet, site-iframe, clavier, responsive |
+| `css/style.css` | 1035 | Base, halftone, slideshow, anims, vinyl, CV, contact (bottom-sheet mobile), tools (bottom-sheet mobile), tools-trigger, back-link, about, scroll-top, scroll-reveal, pile-reveal, error-page, mentions, no-intro, 3D tilt + iridescent sheen, responsive (600px, 380px) |
+| `css/art.css` | 984 | Pile (5 variantes + perspective + iridescent sheen), has-cover, gallery masonry, lightbox, phone/folder/film, tiktok + CTA, anim-card (thumbnail + play button), book-view, fiche art, motion-single, responsive (700px, 400px) |
+| `css/tech.css` | 414 | Laptop, desktop grid 3 colonnes mobile, fiche projet responsive, site-iframe, responsive (600px) |
 | `css/pdf-viewer.css` | 157 | PDF reader, curseurs SVG, responsive, hover:none |
-| `css/music.css` | 262 | iPod, LCD vert, click wheel, responsive |
-| `js/main.js` | 61 | Theme toggle, scroll-to-top, close cards on outside click, Escape shortcuts |
-| `js/art.js` | 567 | `initPdfJs()`, `artProjects{}`, fiche art, pile/folders, lazy covers, media stop/restore, TikTok scroll, lightbox, PDF viewer, `setBackLink()` dynamique |
+| `css/music.css` | 262 | iPod, LCD vert, click wheel, responsive (600px, 380px) |
+| `js/main.js` | 72 | Theme toggle + theme-color meta, scroll-to-top (throttled, passive), close cards on outside click, Escape shortcuts (CV, contact, tools) |
+| `js/art.js` | 635 | `initPdfJs()`, `artProjects{}`, fiche art, pile/folders, lazy covers (sequentiels), media stop/restore, TikTok scroll (throttled), lightbox, PDF viewer, `setBackLink()`, history pushState/popstate, anim-card YT click-to-load, 3D tilt, scroll reveal |
 | `js/tech.js` | 79 | `projects{}` (5 apps), hover desc, fiche -> demo -> retour |
 | `js/music.js` | 70 | Player iPod, auto-next, formatTime guard |
 
 ---
 
+## Nouveautes depuis le dernier audit
+
+### UX / Visuel
+- **3D tilt + reflet iridescent** sur les landing cards (homepage) et toutes les cartes art (pile-book, folder, film, phone) — suit la souris, desktop only
+- **Animation page refaite** : thumbnails YouTube + bouton play custom, iframe charge au clic (6 iframes en moins au chargement)
+- **Motion design** : video CMP limitee a 640px, centree dans `.motion-single`
+- **Scroll reveal cascade** sur les pile items (fade-in avec delai 80ms par item)
+- **History API** : bouton retour navigateur respecte la profondeur (dossier par dossier)
+
+### Performance
+- **MutationObserver supprime** (causait jank sur ouverture de dossiers)
+- **PDF covers sequentiels** au lieu de paralleles (plus de freeze)
+- **Scroll listeners throttles** (TikTok + scroll-to-top, 100ms)
+- **Scroll-to-top passive** pour ne pas bloquer le scroll natif
+
+### Mobile
+- **Contact card** : bottom-sheet pleine largeur avec items espaces (touch 44px)
+- **Tools card** : bottom-sheet pleine largeur + bouton trigger logo en bas a gauche (mobile only)
+- **Grille uniforme** sur art mobile : tous les items meme taille, pas de rotation, 2 colonnes
+- **Covers mobile** : overlay sombre permanent + titres toujours visibles
+- **Tech mobile** : clavier/trackpad caches, ecran plein, grille 3 icones, fiche responsive
+- **iPod** : nouveau breakpoint 600px (taille intermediaire)
+- **Fermeture cards au tap exterieur** (contact + tools)
+
+### Bugs corriges
+- **CSS tech.css** : declarations dupliquees fusionnees
+- **Landing-card 380px** : garde width 100% au lieu de 90px
+- **`.section-title` → `.pile-title`** dans art.js
+- **`<button>` imbriquant `<a>`** → `<div>` sur contact-card et tools-card
+- **Clic lien ferme la carte** : resolu par restructuration en `<div>` + toggle sur le label
+- **Lightbox mort dans main.js** : remplace par fermeture tools-card
+- **`theme-color`** : ajoute sur les 6 pages, dynamique au toggle theme
+
+---
+
 ## Corrections RESTANTES
 
-### 1. BUG — CSS tech.css : duplications massives dans le media query mobile
-
-- **Fichier** : `css/tech.css`, `@media (max-width: 600px)`
-- **Probleme** : `.desktop`, `.screen-shell`, `.screen-inner`, `.base-shell`, `.app-icon`, `.app-icon-img`, `.app-icon-name` sont chacun declares **deux fois** dans le meme media query. Les premiers blocs (lignes 310-360) sont du code mort car ecrases par les seconds (lignes 365-463).
-- **Correction** : Fusionner chaque paire en un seul bloc, en gardant les valeurs finales.
-- **Priorite** : MOYENNE
-
-### 2. BUG — CSS style.css : landing-card cassee a 380px
-
-- **Fichier** : `css/style.css`, lignes 948-957, `@media (max-width: 380px)`
-- **Probleme** : `.landing-card { width: 90px; height: 120px; }` — les cartes deviennent minuscules (90px de large) sur petit ecran, alors qu'elles sont en `flex-direction: column` depuis le breakpoint 600px. Visuellement casse.
-- **Correction** : Garder `width: 100%` et reduire seulement le `height` (ex: `height: 110px`).
-- **Priorite** : HAUTE (affecte le mobile)
-
-### 3. BUG — JS art.js : selecteur `.section-title` inexistant
-
-- **Fichier** : `js/art.js`, ligne 335
-- **Probleme** : `fv.querySelector('.section-title')` — cette classe n'existe nulle part dans le HTML. Devrait etre `.pile-title`. Consequence : le back-link en mode PDF depuis un sous-dossier affiche le slug brut (ex: "edition") au lieu du nom affiche ("Edition").
-- **Correction** : Remplacer `.section-title` par `.pile-title`.
-- **Priorite** : BASSE
-
-### 4. BUG — HTML : `<button>` imbriquant des `<a>` (invalid HTML)
-
-- **Fichier** : `index.html` (ligne 143, contact-card) et toutes les pages avec tools-card
-- **Probleme** : La carte contact est un `<button>` qui contient des `<a>`. Imbriquer des elements interactifs est invalide en HTML5. De plus, cliquer un lien dans la carte declenche aussi le `toggle('open')` du bouton parent, ce qui ferme la carte en meme temps.
-- **Correction** : Remplacer le `<button class="contact-card">` par un `<div>`, et ajouter un bouton separe pour toggler. Idem pour tools-card.
-- **Priorite** : MOYENNE (accessibilite + UX mobile)
-
-### 5. BUG — Contact card : clic sur un lien ferme la carte
-
-- **Fichier** : `index.html`, lien direct avec le bug #4
-- **Probleme** : Le `onclick="this.classList.toggle('open')"` sur le `<button>` parent fait que cliquer sur un lien (`mailto:`, Instagram, etc.) ferme aussi la carte immediatement. Sur mobile (bottom-sheet), c'est particulierement genant.
-- **Correction** : Ajouter `e.stopPropagation()` sur les liens, ou restructurer en `<div>` avec un bouton toggle separe.
-- **Priorite** : HAUTE (UX mobile)
-
----
-
-## Points mineurs
-
-### 6. JS main.js : handler Escape lightbox mort
-
-- **Fichier** : `js/main.js`, ligne 58
-- **Probleme** : Le test `lb.style.display !== 'none'` ne marchera jamais car la lightbox utilise la classe `.open` (geree par art.js qui a son propre handler Escape). Code mort.
-- **Correction** : Supprimer le bloc lightbox dans main.js (deja gere par art.js ligne 218).
-- **Priorite** : BASSE
-
-### 7. Meta theme-color manquant
-
-- **Probleme** : Aucune page ne declare `<meta name="theme-color">`. Sur mobile (Chrome, Safari), la barre d'adresse ne prend pas la couleur du site.
-- **Correction** : Ajouter `<meta name="theme-color" content="#f0ece4">` dans le `<head>` de chaque page. Bonus : le changer en JS quand le theme dark est actif.
-- **Priorite** : BASSE
-
----
-
-## Points corriges (depuis l'audit precedent)
-
-- ~~`.desktop` declare deux fois~~ → englobes dans le bug #1 (probleme plus large que prevu)
+Aucun bug connu.
 
 ---
 
 ## Verifications
 
-- pdf.js `defer` sur art : **present** (ligne 22)
-- pdf.js `defer` + SRI sur index : **present**
-- `initPdfJs()` gere le timing defer : **OK**
-- TikTok `getItemH()` dynamique : **OK**
-- JSON-LD Person + WebSite valide : **OK**
-- Canonical URLs coherentes avec sitemap : **OK**
+- pdf.js `defer` + SRI : **OK** (index + art)
+- `initPdfJs()` timing defer : **OK**
+- TikTok `getItemH()` throttle : **OK** (100ms)
+- JSON-LD Person valide : **OK**
+- Canonical URLs coherentes sitemap : **OK**
 - sessionStorage skip-intro : **OK**
-- setBackLink() contextuel : **OK** (sauf bug #3)
+- setBackLink() avec `.pile-title` : **OK**
+- history pushState/popstate : **OK** (folder + book)
 - .htaccess 404 : **OK**
-- Contact card fermeture clic exterieur : **OK** (main.js)
-- Lightbox fleches clavier : **OK** (art.js)
-- Musique auto-next : **OK**
-- Tech demo iframe retour : **OK**
+- Contact card `<div>` (pas `<button>`) : **OK**
+- Tools card `<div>` + trigger mobile : **OK**
+- Fermeture cards tap exterieur : **OK**
+- theme-color dynamique : **OK**
+- Anim cards click-to-load YouTube : **OK**
+- PDF covers sequentiels : **OK**
+- 3D tilt desktop only (hover: hover) : **OK**
+- Scroll listeners throttles + passive : **OK**
 
 ---
 
-## Audit mobile specifique
+## Audit mobile
 
-| Page | Breakpoint 600px | Breakpoint 400px | Breakpoint 380px | Verdict |
+| Page | 600px | 400px | 380px | Verdict |
 |---|---|---|---|---|
-| **Accueil** | OK (cards column, bio reduite) | OK | **KO** : landing-card 90px de large = casse (bug #2) | A corriger |
-| **Art** | OK (pile 2 colonnes, gallery 2 col) | OK (pile 130px, gallery 1 col) | OK | OK |
-| **Tech** | OK sauf CSS dead code (bug #1) | - | - | A nettoyer |
-| **Music** | OK (ipod 290px) | - | OK (ipod 250px) | OK |
-| **Mentions** | OK (1 colonne) | - | - | OK |
-| **404** | OK (taille reduite) | - | - | OK |
-| **Contact card** | **KO** : clic lien ferme la carte (bug #5) | idem | idem | A corriger |
-| **CV overlay** | OK | OK | OK | OK |
-| **PDF viewer** | OK (single page, touch swipe) | OK | OK | OK |
-| **TikTok** | OK (column layout, phone 280px) | OK (phone 240px) | - | OK |
+| **Accueil** | OK (cards column, about responsive, contact bottom-sheet) | - | OK (cards 100% x 110px) | OK |
+| **Art** | OK (grille 2 col uniforme, covers visibles, fiche compacte) | OK (grille 130px, gallery 1 col) | - | OK |
+| **Tech** | OK (ecran plein, grid 3 icones, fiche responsive) | - | - | OK |
+| **Musique** | OK (iPod 290px, tracks touch-friendly) | - | OK (iPod 250px) | OK |
+| **Mentions** | OK (1 colonne, typo reduite) | - | - | OK |
+| **404** | OK (code 64px, bouton adapte) | - | - | OK |
+| **Contact** | OK (bottom-sheet, liens espaces) | - | - | OK |
+| **Tools** | OK (bottom-sheet + trigger logo) | - | - | OK |
+| **PDF viewer** | OK (single page, touch swipe) | - | - | OK |
 
 ---
 
@@ -136,6 +118,11 @@ Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Ass
 - Assets sur **Cloudflare R2** (`pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev`).
 - Deploy **O2Switch** via **GitHub Actions FTP**. Toujours push apres commit.
 - Quand on modifie `art/index.html`, **verifier que `defer` est present** sur pdf.js.
-- Les PDFs lourds peuvent utiliser `data-skip-cover` pour eviter le telechargement en thumbnail.
-- Les PDFs comprimes sont dans `/Art/Fanzine/` avec suffixe `_compresse` ou `_compressed`.
+- Les PDFs comprimes sont dans `/Art/Fanzine/` avec suffixe `_compressé` ou `_compressed`.
+- Le titre de chaque page doit commencer par "Valentin Mardoukhaev" pour le SEO.
 - Le JSON-LD Person est sur la homepage — mettre a jour si nouveaux reseaux/projets.
+- **Contact et tools cards** sont des `<div>` (pas `<button>`) — le toggle est sur le `.label`.
+- **Animations YouTube** : thumbnails + click-to-load, pas d'iframes au chargement.
+- **3D tilt** : desktop only via `(hover: hover)`, JS dans index.html et art.js.
+- **Scroll listeners** : toujours throttler (100ms min) et utiliser `{ passive: true }`.
+- **PDF covers** : charger sequentiellement (`await`), jamais en parallele.
