@@ -359,4 +359,38 @@
     height: 76px;
     border-width: 2px;
   }
+
+  /* ---- Laptop max-width ---- */
+  .laptop {
+    max-width: 100%;
+  }
+
+  /* ---- Fiche mobile ---- */
+  .fiche-back {
+    padding: 6px 12px;
+    font-size: 16px;
+  }
+  .fiche-content {
+    padding: 16px;
+    gap: 12px;
+  }
+  .fiche-name {
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+  .fiche-desc {
+    font-size: 12px;
+  }
+  .fiche-stack-label {
+    font-size: 12px;
+  }
+  .fiche-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* ---- App desc mobile ---- */
+  .app-desc {
+    font-size: 10px;
+  }
 }

@@ -211,6 +211,34 @@
 .ipod-wheel-label.left { left: 14px; }
 .ipod-wheel-label.right { right: 14px; }
 
+@media (max-width: 600px) {
+  .music-page {
+    padding: 56px 16px 30px;
+  }
+  .ipod {
+    width: 290px;
+    padding: 20px 14px 24px;
+    gap: 20px;
+    box-shadow: 6px 6px 0 0 var(--border);
+  }
+  .ipod-track {
+    padding: 8px 10px;
+    min-height: 36px;
+  }
+  .ipod-wheel {
+    width: 180px;
+    height: 180px;
+  }
+  .ipod-wheel-ring {
+    width: 160px;
+    height: 160px;
+  }
+  .ipod-wheel-center {
+    width: 60px;
+    height: 60px;
+  }
+}
+
 @media (max-width: 380px) {
   .ipod {
     width: 250px;
