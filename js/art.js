@@ -8,11 +8,9 @@ var isPdfMode = false;
 
 // Back link helper
 function setBackLink(label, href, onclick) {
-  backLink.innerHTML = '<a href="' + (href || '#') + '">\u2190 ' + label + '</a>';
-  var link = backLink.querySelector('a');
-  if (onclick) {
-    link.addEventListener('click', function(e) { e.preventDefault(); onclick(); });
-  }
+  backLink.textContent = '\u2190 ' + label;
+  backLink.href = href || '#';
+  backLink.onclick = onclick ? function(e) { e.preventDefault(); onclick(); } : null;
 }
 
 // PDF.js worker — defer: init apres DOMContentLoaded
