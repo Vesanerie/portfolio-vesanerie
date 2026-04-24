@@ -483,30 +483,21 @@
   padding: 6px;
 }
 
-.motion-card {
-  background: var(--bg-card);
-  border: 3px solid var(--border);
-  padding: 16px 20px;
-  margin-top: 12px;
-  box-shadow: 4px 4px 0 0 var(--border);
-}
-.motion-card-title {
-  font-family: 'Bangers', sans-serif;
-  font-size: 18px;
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-}
-.motion-card-desc {
+.motion-desc {
   font-family: 'Special Elite', serif;
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.7;
   color: var(--text-muted);
-  margin-bottom: 10px;
+  text-align: center;
+  padding: 10px 16px 0;
+  margin: 0;
 }
 .motion-card-meta {
   font-family: 'Special Elite', serif;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
+  text-align: center;
+  padding: 6px 16px 10px;
   opacity: 0.7;
 }
 
