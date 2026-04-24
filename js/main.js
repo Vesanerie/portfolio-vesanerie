@@ -28,13 +28,18 @@ initTheme();
   });
 })();
 
-// ===== Close contact card on outside tap (mobile) =====
+// ===== Close cards on outside tap =====
 (function() {
-  var contact = document.getElementById('contact-card');
-  if (!contact) return;
   document.addEventListener('click', function(e) {
-    if (contact.classList.contains('open') && !contact.contains(e.target) && !e.target.classList.contains('landing-cta')) {
+    // Contact card
+    var contact = document.getElementById('contact-card');
+    if (contact && contact.classList.contains('open') && !contact.contains(e.target) && !e.target.classList.contains('landing-cta')) {
       contact.classList.remove('open');
+    }
+    // Tools card
+    var tools = document.querySelector('.tools-card');
+    if (tools && tools.classList.contains('open') && !tools.contains(e.target)) {
+      tools.classList.remove('open');
     }
   });
 })();
