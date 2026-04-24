@@ -559,74 +559,107 @@ a.contact-item:hover {
 
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
+  /* ---- Landing ---- */
   .landing {
     gap: 20px;
-    padding: 40px 16px 30px;
+    padding: 60px 16px 30px;
     justify-content: flex-start;
     height: auto;
     min-height: 100vh;
     overflow: auto;
   }
-
   .landing-title { font-size: 28px; letter-spacing: 3px; }
-  .landing-sub { font-size: 10px; margin-top: 2px; }
-  .landing-bio { font-size: 10px; padding: 0 10px; line-height: 1.5; margin-top: 2px; }
-  .landing-cta { font-size: 14px; padding: 8px 24px; letter-spacing: 2px; }
+  .landing-sub { font-size: 11px; margin-top: 2px; }
+  .landing-bio { font-size: 11px; padding: 0 10px; line-height: 1.6; margin-top: 2px; }
+  .landing-cta { font-size: 14px; padding: 10px 24px; letter-spacing: 2px; }
 
   .landing-choices {
-    gap: 16px;
+    gap: 14px;
     flex-direction: column;
     width: 100%;
     max-width: 280px;
   }
   .landing-card {
     width: 100%;
-    height: 160px;
-    gap: 10px;
+    height: 140px;
+    gap: 8px;
     border-width: 2px;
-    box-shadow: 4px 4px 0 0 var(--border);
+    box-shadow: 3px 3px 0 0 var(--border);
   }
-  .landing-card-icon { font-size: 36px; }
-  .landing-card-title { font-size: 22px; letter-spacing: 2px; }
+  .landing-card-icon { font-size: 32px; }
+  .landing-card-title { font-size: 20px; letter-spacing: 2px; }
   .landing-card-desc { font-size: 10px; padding: 0 10px; }
 
+  /* ---- CV card ---- */
   .cv-card {
-    width: 60px;
-    height: 70px;
-    top: -30px;
+    width: 54px;
+    height: 64px;
+    top: -28px;
     left: 10px;
     padding-bottom: 6px;
     border-width: 2px;
   }
-  .cv-label { font-size: 16px; }
+  .cv-label { font-size: 14px; }
 
-  /* Contact card en bas sur mobile, pas a droite */
+  /* ---- Contact card mobile ---- */
   .contact-card {
-    top: 40%;
-    bottom: auto;
-    right: -148px;
-    left: auto;
-    width: 200px;
-    transform: translateY(-50%) rotate(0deg);
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 0 0 var(--border);
+  }
+  .contact-card:hover {
+    right: 0;
   }
   .contact-card.open {
-    right: 0;
-    transform: translateY(-50%) rotate(0deg);
+    transform: translateY(0);
   }
   .contact-card-label {
-    font-size: 16px;
-    padding: 8px;
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
   }
   .contact-card-content {
-    padding: 10px;
-    gap: 6px;
+    padding: 16px 20px 24px;
+    gap: 0;
   }
-  .contact-item { font-size: 10px; }
+  .contact-item {
+    font-size: 13px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--text-muted);
+    display: block;
+  }
+  .contact-item:last-child {
+    border-bottom: none;
+  }
 
-  .back-link { font-size: 14px; padding: 8px 14px; top: 10px; left: 10px; }
-  .theme-toggle { top: 10px; right: 10px; width: 44px; height: 24px; }
-  .theme-toggle .dot { width: 16px; height: 16px; }
+  /* ---- Nav mobile ---- */
+  .back-link { font-size: 14px; padding: 10px 16px; top: 10px; left: 10px; }
+  .theme-toggle { top: 12px; right: 12px; width: 48px; height: 28px; }
+  .theme-toggle .dot { width: 20px; height: 20px; }
   [data-theme="dark"] .theme-toggle .dot { transform: translateX(20px); }
+
+  /* ---- Tools card mobile ---- */
+  .tools-card {
+    bottom: 0;
+    right: 0;
+    left: auto;
+    width: auto;
+    border-radius: 8px 0 0 0;
+  }
+
+  /* ---- Legal link ---- */
+  .legal-link { bottom: 6px; left: 6px; font-size: 9px; }
+
+  /* ---- Mentions legales ---- */
+  .mentions-page { margin: 60px auto; padding: 16px; }
+  .mentions-title { font-size: 24px; }
+  .mentions-block h2 { font-size: 16px; }
+  .mentions-block p { font-size: 12px; }
 }
 
 /* ===== Mentions legales ===== */
@@ -776,33 +809,45 @@ a.contact-item:hover {
 
 @media (max-width: 600px) {
   .about {
-    padding: 40px 16px 40px;
+    padding: 40px 16px 30px;
   }
   .about-title {
-    font-size: 28px;
+    font-size: 26px;
+    margin-bottom: 24px;
   }
   .about-content {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
   .about-text p {
     font-size: 12px;
+    line-height: 1.7;
+  }
+  .about-block {
+    padding: 12px;
   }
   .about-block-title {
-    font-size: 16px;
+    font-size: 15px;
+  }
+  .about-block-item {
+    font-size: 11px;
+  }
+  .about-logo {
+    width: 32px;
+    margin-top: 24px;
   }
   .scroll-top {
-    bottom: 14px;
-    right: 14px;
-    width: 38px;
-    height: 38px;
-    font-size: 16px;
+    bottom: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
   }
   .error-code {
-    font-size: 72px;
+    font-size: 64px;
   }
   .error-msg {
-    font-size: 20px;
+    font-size: 18px;
   }
   .error-btn {
     font-size: 14px;
