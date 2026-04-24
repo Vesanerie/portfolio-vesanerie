@@ -1,0 +1,308 @@
+/* ========================================
+   PILE VIEW — Stack of books
+   ======================================== */
+
+.pile-view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 50px;
+}
+
+.pile-header {
+  text-align: center;
+}
+
+.pile-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: clamp(48px, 10vw, 80px);
+  letter-spacing: 6px;
+}
+
+.pile-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+/* ===== Scattered Books ===== */
+.pile-stack {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px 30px;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 20px;
+  perspective: 800px;
+}
+
+/* Iridescent sheen on pile items */
+.pile-book::after,
+.pile-folder .folder-body::after,
+.pile-film .film-body::after,
+.pile-phone::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255,255,255,0.25) 0%,
+    rgba(255,255,255,0.08) 30%,
+    transparent 60%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 10;
+}
+.pile-book:hover::after,
+.pile-folder:hover .folder-body::after,
+.pile-film:hover .film-body::after,
+.pile-phone:hover::after {
+  opacity: 1;
+}
+
+.pile-book {
+  all: unset;
+  box-sizing: border-box;
+  width: 240px;
+  height: 320px;
+  border: 3px solid var(--border);
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
+  box-shadow: 8px 8px 0 0 var(--border);
+  transform-style: preserve-3d;
+}
+
+/* Size variants */
+.pile-sm { width: 200px; height: 270px; }
+.pile-sm .pile-book-title { font-size: 20px; }
+.pile-sm .pile-book-icon { font-size: 36px; }
+
+.pile-md { width: 240px; height: 320px; }
+
+.pile-lg { width: 280px; height: 380px; }
+.pile-lg .pile-book-title { font-size: 30px; }
+.pile-lg .pile-book-icon { font-size: 56px; }
+
+.pile-wide { width: 300px; height: 240px; }
+.pile-wide .pile-book-icon { font-size: 40px; }
+
+.pile-sq { width: 260px; height: 260px; }
+
+.pile-book:hover {
+  box-shadow: 12px 12px 0 0 var(--border);
+  z-index: 100;
+}
+
+/* Cards with cover image */
+.pile-book.has-cover .pile-book-icon {
+  display: none;
+}
+
+.pile-book.has-cover .pile-book-title,
+.pile-book.has-cover .pile-book-type {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pile-book.has-cover:hover .pile-book-title,
+.pile-book.has-cover:hover .pile-book-type {
+  opacity: 1;
+}
+
+/* Hover overlay for cards with covers */
+.pile-book.has-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.3s;
+  z-index: 1;
+}
+
+.pile-book.has-cover:hover::before {
+  background: rgba(0,0,0,0.5);
+}
+
+.pile-book.has-cover .pile-book-title,
+.pile-book.has-cover .pile-book-type {
+  position: relative;
+  z-index: 2;
+  color: var(--bg);
+}
+
+.pile-book-icon {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.pile-book-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 26px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 16px;
+}
+
+.pile-book-type {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  padding: 4px 12px;
+}
+
+/* ===== Graphisme: 2x2 grid ===== */
+#graphisme-view .pile-stack {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  flex-wrap: unset !important;
+  max-width: 600px !important;
+  margin: 0 auto;
+}
+
+#graphisme-view .pile-stack > * {
+  width: 240px !important;
+  height: 300px !important;
+}
+
+/* ===== Book View (PDF) ===== */
+.book-view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 30px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 700px) {
+  .pile-view {
+    padding: 56px 16px 30px;
+    gap: 16px;
+  }
+  .pile-title {
+    font-size: clamp(32px, 8vw, 80px);
+  }
+  .pile-sub {
+    font-size: 12px;
+  }
+
+  /* Pile stack : grille uniforme */
+  .pile-stack {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  /* Tous les items : meme taille, pas de rotation */
+  .pile-book,
+  .pile-sm,
+  .pile-md,
+  .pile-lg,
+  .pile-wide,
+  .pile-sq,
+  .pile-phone,
+  .pile-folder,
+  .pile-film {
+    width: 100% !important;
+    height: 160px !important;
+    transform: none !important;
+    box-shadow: 3px 3px 0 var(--border);
+    border-width: 2px;
+  }
+  .pile-book:hover,
+  .pile-phone:hover,
+  .pile-folder:hover,
+  .pile-film:hover {
+    transform: none !important;
+    box-shadow: 3px 3px 0 var(--border);
+  }
+  .pile-book-title { font-size: 16px; letter-spacing: 2px; }
+  .pile-book-icon { font-size: 24px; }
+  .pile-book-type { font-size: 9px; }
+
+  /* Graphisme sub-grid */
+  #graphisme-view .pile-stack {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #graphisme-view .pile-stack > * {
+    width: 100% !important;
+    height: 180px !important;
+  }
+
+  /* Covers mobile : overlay sombre + titres visibles */
+  .pile-book.has-cover {
+    overflow: hidden;
+  }
+  .pile-book.has-cover::before {
+    background: rgba(0,0,0,0.35);
+  }
+  .pile-book.has-cover .pile-book-title,
+  .pile-book.has-cover .pile-book-type {
+    opacity: 1;
+  }
+  .pile-book.has-cover .pile-book-title {
+    font-size: 13px;
+    padding: 0 6px;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+  .pile-book.has-cover .pile-book-type {
+    font-size: 8px;
+    padding: 2px 6px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  /* Book view */
+  .book-view {
+    padding: 56px 16px 30px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .pile-view {
+    padding: 52px 10px 24px;
+  }
+  .pile-stack {
+    gap: 10px;
+  }
+  .pile-book,
+  .pile-sm,
+  .pile-md,
+  .pile-lg,
+  .pile-wide,
+  .pile-sq,
+  .pile-phone,
+  .pile-folder,
+  .pile-film {
+    height: 130px !important;
+  }
+  .pile-book-title { font-size: 14px; }
+  .pile-book-icon { font-size: 20px; }
+  .book-view {
+    padding: 52px 10px 24px;
+  }
+}

@@ -1,0 +1,274 @@
+/* ===== Landing Page ===== */
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 10px;
+  padding: 40px 20px 30px;
+  overflow: hidden;
+}
+
+.landing-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: clamp(48px, 10vw, 90px);
+  letter-spacing: 6px;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.3s forwards;
+  text-shadow: 0 0 20px var(--bg), 0 0 40px var(--bg), 0 0 60px var(--bg);
+}
+
+.landing-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  margin-top: 4px;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease 0.8s forwards;
+  text-shadow: 0 0 10px var(--bg), 0 0 20px var(--bg), 0 0 40px var(--bg), 0 0 60px var(--bg);
+}
+
+.landing-bio {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  text-align: center;
+  max-width: 480px;
+  margin: 4px auto 0;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease 1.1s forwards;
+  text-shadow: 0 0 10px var(--bg), 0 0 20px var(--bg), 0 0 40px var(--bg), 0 0 60px var(--bg);
+}
+
+.landing-cta {
+  all: unset;
+  box-sizing: border-box;
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: var(--bg);
+  background: var(--border);
+  padding: 10px 32px;
+  margin-top: 10px;
+  cursor: pointer;
+  border: 3px solid var(--border);
+  box-shadow: 4px 4px 0 0 var(--border);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease 1.3s forwards;
+  text-shadow: none;
+}
+
+/* Skip intro animations on revisit */
+.no-intro .landing-title,
+.no-intro .landing-sub,
+.no-intro .landing-bio,
+.no-intro .landing-cta,
+.no-intro .landing-card {
+  opacity: 1;
+  animation: none;
+}
+
+.landing-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 6px 6px 0 0 var(--border);
+}
+
+.landing-cta:active {
+  transform: translateY(0);
+  box-shadow: 2px 2px 0 0 var(--border);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.landing-choices {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  perspective: 800px;
+}
+
+.landing-card {
+  width: 260px;
+  height: 320px;
+  border: 3px solid var(--border);
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  cursor: pointer;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 6px 6px 0 0 var(--border);
+  opacity: 1;
+  animation: cardDrop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  transform-style: preserve-3d;
+}
+
+/* Iridescent sheen overlay */
+.landing-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255,255,255,0.25) 0%,
+    rgba(255,255,255,0.08) 30%,
+    transparent 60%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 10;
+}
+.landing-card:hover::after {
+  opacity: 1;
+}
+
+.landing-card:nth-child(1) { animation-delay: 1.6s; }
+.landing-card:nth-child(2) { animation-delay: 1.8s; }
+.landing-card:nth-child(3) { animation-delay: 2.0s; }
+
+@keyframes cardDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-80px) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.landing-card:hover {
+  box-shadow: 10px 10px 0 0 var(--border);
+}
+
+.landing-card-icon {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.landing-card-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 36px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.landing-card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0 20px;
+  letter-spacing: 1px;
+}
+
+/* ===== Vinyl Disc ===== */
+.vinyl-disc {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--border);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: vinyl-spin 4s linear infinite;
+  animation-play-state: paused;
+}
+
+.landing-card-vinyl:hover .vinyl-disc {
+  animation-play-state: running;
+}
+
+@keyframes vinyl-spin {
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-groove {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.vinyl-groove { width: 70px; height: 70px; }
+.vinyl-groove-2 { width: 54px; height: 54px; }
+.vinyl-groove-3 { width: 40px; height: 40px; }
+
+.vinyl-label {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  position: relative;
+}
+
+.vinyl-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .landing {
+    gap: 20px;
+    padding: 60px 16px 30px;
+    justify-content: flex-start;
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+  .landing-title { font-size: 28px; letter-spacing: 3px; }
+  .landing-sub { font-size: 11px; margin-top: 2px; }
+  .landing-bio { font-size: 11px; padding: 0 10px; line-height: 1.6; margin-top: 2px; }
+  .landing-cta { font-size: 14px; padding: 10px 24px; letter-spacing: 2px; }
+
+  .landing-choices {
+    gap: 14px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+  .landing-card {
+    width: 100%;
+    height: 140px;
+    gap: 8px;
+    border-width: 2px;
+    box-shadow: 3px 3px 0 0 var(--border);
+  }
+  .landing-card-icon { font-size: 32px; }
+  .landing-card-title { font-size: 20px; letter-spacing: 2px; }
+  .landing-card-desc { font-size: 10px; padding: 0 10px; }
+}
+
+@media (max-width: 380px) {
+  .landing-title { font-size: 24px; }
+  .landing-card {
+    width: 100%;
+    height: 110px;
+  }
+  .landing-card-icon { font-size: 22px; }
+  .landing-card-title { font-size: 16px; }
+  .landing-card-desc { display: none; }
+}

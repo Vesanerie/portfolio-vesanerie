@@ -1,0 +1,125 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.hidden { display: none !important; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Special Elite', serif;
+  min-height: 100vh;
+  transition: background 0.4s, color 0.4s;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, var(--halftone) 1.5px, transparent 1.5px),
+    radial-gradient(circle, var(--halftone) 1px, transparent 1px),
+    radial-gradient(circle, var(--halftone) 0.5px, transparent 0.5px);
+  background-size:
+    20px 20px,
+    15px 15px,
+    10px 10px;
+  background-position:
+    0 0,
+    7px 7px,
+    3px 3px;
+  opacity: 0.1;
+}
+
+[data-theme="dark"] body::before {
+  opacity: 0.06;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.landing, .pile-view, .tech-page, .music-page, .book-view { position: relative; z-index: 1; }
+
+/* ===== Background Slideshow ===== */
+.bg-slideshow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.bg-slideshow img.active {
+  opacity: 0.07;
+}
+
+[data-theme="dark"] .bg-slideshow img.active {
+  opacity: 0.06;
+}
+
+/* ===== Back Link ===== */
+.back-link {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  border: 2px solid var(--border);
+  background: var(--bg-card);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  padding: 10px 18px;
+}
+.back-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+/* ===== Legal Link ===== */
+.legal-link {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 998;
+  font-family: 'Special Elite', serif;
+  font-size: 10px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.legal-link:hover {
+  opacity: 1;
+}
+
+/* ===== Card Logo (shared) ===== */
+.card-logo {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 4px;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .card-logo {
+  mix-blend-mode: screen;
+}
+
+@media (max-width: 600px) {
+  .back-link { font-size: 14px; padding: 10px 16px; top: 10px; left: 10px; }
+  .legal-link { bottom: 6px; left: 6px; font-size: 9px; }
+}

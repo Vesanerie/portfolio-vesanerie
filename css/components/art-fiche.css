@@ -1,0 +1,82 @@
+/* ===== Fiche projet art (carte laterale gauche) ===== */
+.art-fiche {
+  position: fixed;
+  bottom: 20px;
+  left: -270px;
+  pointer-events: none;
+  z-index: 998;
+  width: 260px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  box-shadow: 4px 4px 0 0 var(--border);
+  transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s;
+  transform: rotate(2deg);
+}
+
+.art-fiche.open {
+  left: 0;
+  transform: rotate(0deg);
+  pointer-events: auto;
+}
+
+.art-fiche-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 2px solid var(--border);
+  color: var(--text);
+}
+
+.art-fiche-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+}
+
+.art-fiche-row {
+  font-family: 'Special Elite', serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.art-fiche-row:last-child {
+  border-bottom: none;
+}
+
+.art-fiche-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 700px) {
+  .art-fiche {
+    width: 180px;
+    left: -190px;
+    bottom: 10px;
+    border-width: 2px;
+    box-shadow: 3px 3px 0 0 var(--border);
+  }
+  .art-fiche-title {
+    font-size: 14px;
+    padding: 8px;
+    border-bottom-width: 2px;
+  }
+  .art-fiche-meta {
+    padding: 10px;
+    gap: 4px;
+  }
+  .art-fiche-row { font-size: 10px; }
+  .art-fiche-label { font-size: 9px; }
+}

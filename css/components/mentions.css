@@ -1,0 +1,74 @@
+/* ===== Mentions legales ===== */
+.mentions-page {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+.mentions-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+.mentions-content {
+  flex: 1;
+}
+.mentions-img {
+  flex-shrink: 0;
+  width: 260px;
+}
+.mentions-img img {
+  width: 100%;
+  height: auto;
+}
+.mentions-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 32px;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+}
+.mentions-block {
+  margin-bottom: 24px;
+}
+.mentions-block h2 {
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.mentions-block p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.mentions-block a {
+  color: var(--text);
+  border-bottom: 1px dashed var(--text-muted);
+}
+.mentions-footer {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 2px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 700px) {
+  .mentions-layout {
+    flex-direction: column;
+  }
+  .mentions-img {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .mentions-page { margin: 60px auto; padding: 16px; }
+  .mentions-title { font-size: 24px; }
+  .mentions-block h2 { font-size: 16px; }
+  .mentions-block p { font-size: 12px; }
+}

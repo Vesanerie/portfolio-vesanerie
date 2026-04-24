@@ -1,0 +1,292 @@
+/* ===== CV Card ===== */
+.cv-card {
+  position: fixed;
+  top: -90px;
+  left: 30px;
+  z-index: 998;
+  width: 140px;
+  height: 170px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+  box-shadow: 4px 4px 0 0 var(--border);
+  transition: transform 0.3s, box-shadow 0.3s;
+  transform: rotate(-3deg);
+}
+
+.cv-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: rgba(0,0,0,0.3);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  display: none;
+}
+
+.cv-overlay.open {
+  display: flex;
+}
+
+.cv-overlay canvas {
+  display: block;
+  height: 72vh;
+  width: auto;
+  border: 3px solid var(--border);
+  box-shadow: 8px 8px 0 0 var(--border);
+  background: #fff;
+}
+
+.cv-download {
+  font-family: 'Bangers', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--bg);
+  background: var(--border);
+  border: 2px solid var(--border);
+  padding: 6px 16px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.cv-download:hover {
+  opacity: 0.8;
+}
+
+.cv-card:hover {
+  transform: rotate(0deg) translateY(10px);
+  box-shadow: 6px 6px 0 0 var(--border);
+}
+
+.cv-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 36px;
+  letter-spacing: 3px;
+  color: var(--text);
+}
+
+/* ===== Contact Card ===== */
+.contact-card {
+  all: unset;
+  box-sizing: border-box;
+  position: fixed;
+  top: 50%;
+  right: -210px;
+  transform: translateY(-50%) rotate(-2deg);
+  z-index: 998;
+  width: 300px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  box-shadow: -4px 4px 0 0 var(--border);
+  cursor: pointer;
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s;
+}
+
+.contact-card:hover {
+  right: -200px;
+}
+
+.contact-card.open {
+  right: 0;
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.contact-card-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 28px;
+  letter-spacing: 4px;
+  text-align: center;
+  padding: 14px;
+  border-bottom: 3px solid var(--border);
+}
+
+.contact-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+}
+
+.contact-item {
+  font-family: 'Special Elite', serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a.contact-item:hover {
+  color: var(--text-muted);
+}
+
+/* ===== Tools Card ===== */
+.tools-card {
+  all: unset;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 20px;
+  right: -180px;
+  z-index: 998;
+  width: 240px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  box-shadow: -4px 4px 0 0 var(--border);
+  cursor: pointer;
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s;
+  transform: rotate(-2deg);
+}
+
+.tools-card:hover {
+  right: -170px;
+}
+
+.tools-card.open {
+  right: 0;
+  transform: rotate(0deg);
+}
+
+.tools-card-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.tools-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+}
+
+.tools-item {
+  font-family: 'Special Elite', serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.tools-item:last-child {
+  border-bottom: none;
+}
+
+/* ===== Tools Trigger (mobile only) ===== */
+.tools-trigger {
+  display: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  /* ---- CV card ---- */
+  .cv-card {
+    width: 54px;
+    height: 64px;
+    top: -28px;
+    left: 10px;
+    padding-bottom: 6px;
+    border-width: 2px;
+  }
+  .cv-label { font-size: 14px; }
+
+  /* ---- Contact card mobile : bottom-sheet ---- */
+  .contact-card {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 0 0 var(--border);
+  }
+  .contact-card:hover {
+    right: 0;
+  }
+  .contact-card.open {
+    transform: translateY(0);
+  }
+  .contact-card-label {
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
+  }
+  .contact-card-content {
+    padding: 16px 20px 24px;
+    gap: 0;
+  }
+  .contact-item {
+    font-size: 13px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--text-muted);
+    display: block;
+  }
+  .contact-item:last-child {
+    border-bottom: none;
+  }
+
+  /* ---- Tools trigger mobile ---- */
+  .tools-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    z-index: 998;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--border);
+    background: var(--bg-card);
+    cursor: pointer;
+    padding: 0;
+  }
+  .tools-trigger-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  /* ---- Tools card mobile : bottom-sheet ---- */
+  .tools-card {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 0 0 var(--border);
+  }
+  .tools-card:hover {
+    right: 0;
+  }
+  .tools-card.open {
+    transform: translateY(0);
+  }
+  .tools-card-label {
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
+  }
+  .tools-card-content {
+    padding: 16px 20px 24px;
+    gap: 0;
+  }
+  .tools-item {
+    font-size: 13px;
+    padding: 14px 0;
+  }
+}

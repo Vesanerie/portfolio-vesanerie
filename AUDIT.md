@@ -1,6 +1,6 @@
 # Audit complet — Vesanerie-sur-Internet
 
-> Date : 2026-04-24 (16e revision)
+> Date : 2026-04-24 (17e revision)
 > Auteur : Claude (audit automatique)
 > Statut : **PROPRE** — 0 bug, 0 point critique
 
@@ -10,22 +10,48 @@
 
 Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Assets Cloudflare R2.
 
+### Pages
+
 | Fichier | Lignes | Role |
 |---|---|---|
-| `index.html` | 240 | Landing (h1, bio, CTA contact), slideshow bg, CV overlay (pdf.js defer+SRI), section A propos, scroll-to-top, contact card (`<div>`), JSON-LD Person + WebSite, skip-intro, 3D tilt cards |
-| `art/index.html` | 510 | Portfolio art — edition (5 PDFs), illustration (3 carnets + gallery 16 + 1 PDF), graphisme (6 items covers), motion design (CMP video 640px), animation (6 YT thumbnails + 1 video), tiktoks (4 embeds + CTA), lightbox, tools-card (`<div>`) + trigger mobile |
-| `tech/index.html` | 113 | Laptop (ecran seul mobile), 5 apps grid, hover desc, fiche projet, demo iframe, tools-card + trigger mobile |
-| `music/index.html` | 99 | iPod (320px), 7 tracks, tools-card + trigger mobile |
-| `mentions-legales.html` | 64 | Mentions legales, layout 2 colonnes avec image |
-| `404.html` | 31 | Page 404 personnalisee |
+| `index.html` | 250 | Landing (h1, bio, CTA contact), slideshow bg, CV overlay (pdf.js defer+SRI), section A propos, scroll-to-top, contact card (`<div>`), JSON-LD Person + WebSite, skip-intro, 3D tilt cards |
+| `art/index.html` | 520 | Portfolio art — edition (5 PDFs), illustration (3 carnets + gallery 16 + 1 PDF), graphisme (6 items covers), motion design (CMP video 640px), animation (6 YT thumbnails + 1 video), tiktoks (4 embeds + CTA), lightbox, tools-card (`<div>`) + trigger mobile |
+| `tech/index.html` | 117 | Laptop (ecran seul mobile), 5 apps grid, hover desc, fiche projet, demo iframe, tools-card + trigger mobile |
+| `music/index.html` | 103 | iPod (320px), 7 tracks, tools-card + trigger mobile |
+| `mentions-legales.html` | 67 | Mentions legales, layout 2 colonnes avec image |
+| `404.html` | 35 | Page 404 personnalisee |
 | `sitemap.xml` | 28 | Sitemap XML (5 URLs) |
 | `robots.txt` | 5 | Allow all sauf /dist/ |
 | `.htaccess` | 1 | ErrorDocument 404 |
-| `css/style.css` | 1035 | Base, halftone, slideshow, anims, vinyl, CV, contact (bottom-sheet mobile), tools (bottom-sheet mobile), tools-trigger, back-link, about, scroll-top, scroll-reveal, pile-reveal, error-page, mentions, no-intro, 3D tilt + iridescent sheen, responsive (600px, 380px) |
-| `css/art.css` | 984 | Pile (5 variantes + perspective + iridescent sheen), has-cover, gallery masonry, lightbox, phone/folder/film, tiktok + CTA, anim-card (thumbnail + play button), book-view, fiche art, motion-single, responsive (700px, 400px) |
-| `css/tech.css` | 414 | Laptop, desktop grid 3 colonnes mobile, fiche projet responsive, site-iframe, responsive (600px) |
-| `css/pdf-viewer.css` | 157 | PDF reader, curseurs SVG, responsive, hover:none |
-| `css/music.css` | 262 | iPod, LCD vert, click wheel, responsive (600px, 380px) |
+
+### CSS — Architecture modulaire
+
+| Fichier | Lignes | Role | Charge par |
+|---|---|---|---|
+| `css/variables.css` | 26 | Custom properties light/dark | toutes les pages |
+| `css/base.css` | 125 | Reset, body, halftone, slideshow, back-link, legal-link, card-logo | toutes les pages |
+| `css/components/theme-toggle.css` | 42 | Switch theme + responsive | toutes les pages |
+| `css/components/landing.css` | 274 | Landing page, cards, vinyl, animations + responsive | index |
+| `css/components/cards.css` | 292 | CV card, contact card, tools card + trigger + responsive | index, art, tech, music |
+| `css/components/about.css` | 93 | Section a propos + responsive | index |
+| `css/components/scroll.css` | 58 | Scroll-to-top, scroll-reveal, pile-reveal + responsive | index, art, tech, music |
+| `css/components/mentions.css` | 74 | Mentions legales + responsive | mentions-legales |
+| `css/components/error-page.css` | 52 | Page 404 + responsive | 404 |
+| `css/components/pile.css` | 308 | Pile view, pile-book, sizes, covers, sheen, book-view + responsive | art |
+| `css/components/gallery.css` | 103 | Gallery masonry, lightbox + responsive | art |
+| `css/components/folder.css` | 71 | Folder card (macOS) + responsive | art |
+| `css/components/film.css` | 89 | Film strip card + responsive | art |
+| `css/components/anim.css` | 107 | Anim grid, motion design + responsive | art |
+| `css/components/tiktok.css` | 224 | Phone card, TikTok scroll/phone/nav + responsive | art |
+| `css/components/art-fiche.css` | 82 | Fiche projet art + responsive | art |
+| `css/tech.css` | 414 | Laptop, desktop grid, fiche projet, responsive | tech |
+| `css/music.css` | 262 | iPod, LCD, click wheel, responsive | music |
+| `css/pdf-viewer.css` | 157 | PDF reader, curseurs SVG, responsive | art |
+
+### JavaScript
+
+| Fichier | Lignes | Role |
+|---|---|---|
 | `js/main.js` | 72 | Theme toggle + theme-color meta, scroll-to-top (throttled, passive), close cards on outside click, Escape shortcuts (CV, contact, tools) |
 | `js/art.js` | 635 | `initPdfJs()`, `artProjects{}`, fiche art, pile/folders, lazy covers (sequentiels), media stop/restore, TikTok scroll (throttled), lightbox, PDF viewer, `setBackLink()`, history pushState/popstate, anim-card YT click-to-load, 3D tilt, scroll reveal |
 | `js/tech.js` | 79 | `projects{}` (5 apps), hover desc, fiche -> demo -> retour |
@@ -35,20 +61,29 @@ Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Ass
 
 ## Nouveautes depuis le dernier audit
 
-### UX / Visuel
+### Architecture CSS (v17)
+- **Refacto CSS modulaire** : `style.css` (1035 lignes) et `art.css` (984 lignes) decomposes en 16 fichiers composants
+- Chaque composant contient son propre responsive (plus de blocs @media de 150 lignes qui melangent tout)
+- `variables.css` : source unique pour les custom properties
+- `base.css` : reset, body, halftone, elements partages
+- `css/components/` : un fichier par composant UI (landing, cards, about, pile, gallery, etc.)
+- Fichiers inchanges : `tech.css`, `music.css`, `pdf-viewer.css` (taille raisonnable)
+- Total CSS identique (2020 vs 2019 lignes) — zero perte, zero ajout
+
+### UX / Visuel (v16)
 - **3D tilt + reflet iridescent** sur les landing cards (homepage) et toutes les cartes art (pile-book, folder, film, phone) — suit la souris, desktop only
 - **Animation page refaite** : thumbnails YouTube + bouton play custom, iframe charge au clic (6 iframes en moins au chargement)
 - **Motion design** : video CMP limitee a 640px, centree dans `.motion-single`
 - **Scroll reveal cascade** sur les pile items (fade-in avec delai 80ms par item)
 - **History API** : bouton retour navigateur respecte la profondeur (dossier par dossier)
 
-### Performance
+### Performance (v16)
 - **MutationObserver supprime** (causait jank sur ouverture de dossiers)
 - **PDF covers sequentiels** au lieu de paralleles (plus de freeze)
 - **Scroll listeners throttles** (TikTok + scroll-to-top, 100ms)
 - **Scroll-to-top passive** pour ne pas bloquer le scroll natif
 
-### Mobile
+### Mobile (v16)
 - **Contact card** : bottom-sheet pleine largeur avec items espaces (touch 44px)
 - **Tools card** : bottom-sheet pleine largeur + bouton trigger logo en bas a gauche (mobile only)
 - **Grille uniforme** sur art mobile : tous les items meme taille, pas de rotation, 2 colonnes
@@ -57,7 +92,7 @@ Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Ass
 - **iPod** : nouveau breakpoint 600px (taille intermediaire)
 - **Fermeture cards au tap exterieur** (contact + tools)
 
-### Bugs corriges
+### Bugs corriges (v16)
 - **CSS tech.css** : declarations dupliquees fusionnees
 - **Landing-card 380px** : garde width 100% au lieu de 90px
 - **`.section-title` → `.pile-title`** dans art.js
@@ -93,6 +128,8 @@ Aucun bug connu.
 - PDF covers sequentiels : **OK**
 - 3D tilt desktop only (hover: hover) : **OK**
 - Scroll listeners throttles + passive : **OK**
+- CSS modulaire : 16 composants, 0 regle perdue : **OK**
+- HTML `<link>` mis a jour (6 pages) : **OK**
 
 ---
 
@@ -117,6 +154,8 @@ Aucun bug connu.
 - Site **vanilla HTML/CSS/JS** — pas de framework, pas de bundler.
 - Assets sur **Cloudflare R2** (`pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev`).
 - Deploy **O2Switch** via **GitHub Actions FTP**. Toujours push apres commit.
+- **CSS modulaire** : `variables.css` → `base.css` → `components/*.css`. Chaque composant contient son propre responsive.
+- Quand on ajoute un nouveau composant CSS, creer un fichier dans `css/components/` et l'ajouter aux `<link>` des pages concernees.
 - Quand on modifie `art/index.html`, **verifier que `defer` est present** sur pdf.js.
 - Les PDFs comprimes sont dans `/Art/Fanzine/` avec suffixe `_compressé` ou `_compressed`.
 - Le titre de chaque page doit commencer par "Valentin Mardoukhaev" pour le SEO.
