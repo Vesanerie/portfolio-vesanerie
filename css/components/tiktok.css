@@ -57,26 +57,26 @@
 
 /* ===== Dark mode: keep phone card light ===== */
 [data-theme="dark"] .pile-phone {
-  background: #f8f5ee;
-  border-color: #111;
-  color: #111;
+  background: var(--card-keep-bg);
+  border-color: var(--card-keep-border);
+  color: var(--card-keep-text);
 }
 
 [data-theme="dark"] .pile-phone:hover {
-  box-shadow: 12px 12px 0 0 #111;
+  box-shadow: 12px 12px 0 0 var(--card-keep-shadow);
 }
 
 [data-theme="dark"] .phone-screen-label {
-  color: #111;
+  color: var(--card-keep-text);
 }
 
 [data-theme="dark"] .phone-sub-label {
-  color: #666;
+  color: var(--card-keep-muted);
 }
 
 [data-theme="dark"] .phone-notch,
 [data-theme="dark"] .phone-home-bar {
-  background: #111;
+  background: var(--card-keep-border);
 }
 
 /* ========================================

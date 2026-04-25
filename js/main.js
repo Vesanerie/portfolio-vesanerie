@@ -17,11 +17,17 @@ function initTheme() {
 }
 
 function toggleTheme() {
+  document.body.classList.add('theme-switching');
   const current = document.documentElement.getAttribute('data-theme');
   const next = current === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
   updateThemeColor(next);
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      document.body.classList.remove('theme-switching');
+    });
+  });
 }
 
 // Init on load

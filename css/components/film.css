@@ -68,15 +68,15 @@
 
 /* ===== Dark mode: keep film body light ===== */
 [data-theme="dark"] .film-body {
-  background: #f8f5ee;
+  background: var(--card-keep-bg);
 }
 
 [data-theme="dark"] .film-title {
-  color: #111;
+  color: var(--card-keep-text);
 }
 
 [data-theme="dark"] .film-sub {
-  color: #666;
+  color: var(--card-keep-muted);
 }
 
 /* ===== Responsive ===== */
