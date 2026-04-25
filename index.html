@@ -79,37 +79,34 @@
       <p class="landing-bio">Dessinateur et d&eacute;veloppeur bas&eacute; en France.<br>Fanzines, identit&eacute;s visuelles, outils num&eacute;riques.<br>Entre encre de chine et lignes de code.</p>
     </div>
 
-    <div class="landing-choices">
-      <a href="tech/" class="landing-card">
-        <div class="landing-card-icon">&lt;/&gt;</div>
-        <div class="landing-card-title">Tech</div>
-        <div class="landing-card-desc">Gesturo, outils web, IA generative</div>
-      </a>
-
-      <a href="art/" class="landing-card">
-        <div class="landing-card-icon">&#9998;</div>
-        <div class="landing-card-title">Art</div>
-        <div class="landing-card-desc">Fanzines, illustration, animation, graphisme</div>
-      </a>
-
-      <a href="music/" class="landing-card landing-card-vinyl">
-        <div class="vinyl-disc">
-          <div class="vinyl-groove"></div>
-          <div class="vinyl-groove vinyl-groove-2"></div>
-          <div class="vinyl-groove vinyl-groove-3"></div>
-          <div class="vinyl-label"></div>
-        </div>
-        <div class="landing-card-title">Musique</div>
-        <div class="landing-card-desc">Beats, instrus, sound design</div>
-      </a>
+    <div class="landing-choices-wrap">
+      <div class="landing-actions">
+        <button class="landing-cta" onclick="document.getElementById('contact-card').classList.add('open')">Me contacter</button>
+        <button class="landing-cta landing-cta-about" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">A propos</button>
+      </div>
+      <div class="landing-choices">
+        <a href="tech/" class="landing-card">
+          <div class="landing-card-icon">&lt;/&gt;</div>
+          <div class="landing-card-title">Tech</div>
+          <div class="landing-card-desc">Gesturo, outils web, IA generative</div>
+        </a>
+        <a href="art/" class="landing-card">
+          <div class="landing-card-icon">&#9998;</div>
+          <div class="landing-card-title">Art</div>
+          <div class="landing-card-desc">Fanzines, illustration, animation, graphisme</div>
+        </a>
+        <a href="music/" class="landing-card landing-card-vinyl">
+          <div class="vinyl-disc">
+            <div class="vinyl-groove"></div>
+            <div class="vinyl-groove vinyl-groove-2"></div>
+            <div class="vinyl-groove vinyl-groove-3"></div>
+            <div class="vinyl-label"></div>
+          </div>
+          <div class="landing-card-title">Musique</div>
+          <div class="landing-card-desc">Beats, instrus, sound design</div>
+        </a>
+      </div>
     </div>
-
-    <div class="landing-actions">
-      <button class="landing-cta" onclick="document.getElementById('contact-card').classList.add('open')">Me contacter</button>
-      <button class="landing-cta landing-cta-about" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">A propos</button>
-    </div>
-
-  </div>
 
   <section class="about" id="about">
     <h2 class="about-title">A propos</h2>
