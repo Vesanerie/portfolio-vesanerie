@@ -104,7 +104,7 @@
     <p class="experiment-desc">Tests et explorations autour de l'intelligence artificielle g&eacute;n&eacute;rative &mdash; animation, mod&eacute;lisation, cr&eacute;ation assist&eacute;e.</p>
     <div class="experiment-row">
       <div class="experiment-card">
-        <div class="experiment-video-wrap">
+        <div class="experiment-video-wrap experiment-media" data-type="video" data-src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/Chibi_Anim%C3%A9_Claude.mp4">
           <video class="experiment-video" autoplay muted loop playsinline>
             <source src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/Chibi_Anim%C3%A9_Claude.mp4" type="video/mp4">
           </video>
@@ -121,7 +121,7 @@
 
     <div class="experiment-row experiment-row-reverse">
       <div class="experiment-card">
-        <div class="experiment-img-wrap">
+        <div class="experiment-img-wrap experiment-media" data-type="img" data-src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/Reference_vers_animation.png">
           <img class="experiment-img" src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/Reference_vers_animation.png" alt="Pipeline Animate 3D — de la vid&eacute;o de r&eacute;f&eacute;rence &agrave; l'animation 3D" loading="lazy">
         </div>
         <div class="experiment-label">Animate 3D &mdash; Motion Capture</div>
@@ -147,9 +147,47 @@
     </div>
   </div>
 
+  <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
+    <div class="lightbox-content" id="lightbox-content"></div>
+  </div>
+
   <button class="scroll-top" id="scroll-top" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
   <script src="../js/main.js"></script>
   <script src="../js/tech.js"></script>
+  <script>
+  (function() {
+    var lb = document.getElementById('lightbox');
+    var lbContent = document.getElementById('lightbox-content');
+    document.querySelectorAll('.experiment-media').forEach(function(el) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function() {
+        lbContent.innerHTML = '';
+        if (el.dataset.type === 'video') {
+          var v = document.createElement('video');
+          v.src = el.dataset.src;
+          v.autoplay = true;
+          v.loop = true;
+          v.muted = true;
+          v.playsInline = true;
+          v.className = 'lightbox-video';
+          lbContent.appendChild(v);
+        } else {
+          var img = document.createElement('img');
+          img.src = el.dataset.src;
+          img.className = 'lightbox-img';
+          lbContent.appendChild(img);
+        }
+        lb.classList.add('open');
+      });
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && lb.classList.contains('open')) {
+        lb.classList.remove('open');
+        lbContent.innerHTML = '';
+      }
+    });
+  })();
+  </script>
 </body>
 </html>
