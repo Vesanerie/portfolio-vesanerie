@@ -405,6 +405,22 @@
   border-top: 2px solid var(--border);
 }
 
+.experiment-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.experiment-img-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 3px solid var(--border);
+  background: var(--bg);
+}
+
+.experiment-img {
+  width: 100%;
+  display: block;
+}
+
 .experiment-video-wrap {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -430,7 +446,8 @@
 
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
-  .experiment-row {
+  .experiment-row,
+  .experiment-row-reverse {
     flex-direction: column;
   }
   .experiment-text {

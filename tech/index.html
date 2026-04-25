@@ -118,6 +118,22 @@
         <div class="experiment-stack">Blender &middot; Python &middot; Claude Code &middot; EEVEE</div>
       </div>
     </div>
+
+    <div class="experiment-row experiment-row-reverse">
+      <div class="experiment-card">
+        <div class="experiment-img-wrap">
+          <img class="experiment-img" src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/Reference_vers_animation.png" alt="Pipeline Animate 3D — de la vid&eacute;o de r&eacute;f&eacute;rence &agrave; l'animation 3D" loading="lazy">
+        </div>
+        <div class="experiment-label">Animate 3D &mdash; Motion Capture</div>
+      </div>
+      <div class="experiment-text">
+        <h3 class="experiment-text-title">De la vid&eacute;o &agrave; l'animation 3D</h3>
+        <p>Animate 3D est une app qui transforme une vid&eacute;o de r&eacute;f&eacute;rence en animation squelettique importable dans Blender. Le pipeline passe par trois &eacute;tapes :</p>
+        <p><strong>Vid&eacute;o &rarr; MediaPipe (2D) &rarr; MotionBERT (3D) &rarr; BVH</strong></p>
+        <p>MediaPipe extrait les poses 2D frame par frame, MotionBERT les convertit en mouvements 3D, et le r&eacute;sultat est export&eacute; en BVH &mdash; un format standard d'animation squelettique. C'est ce pipeline qui a g&eacute;n&eacute;r&eacute; l'armature de 17 os et les 139 frames de donn&eacute;es de mouvement utilis&eacute;es sur le projet chibi ci-dessus.</p>
+        <div class="experiment-stack">MediaPipe &middot; MotionBERT &middot; Python &middot; Blender</div>
+      </div>
+    </div>
   </section>
 
   <button class="tools-trigger" aria-label="Outils" onclick="document.querySelector('.tools-card').classList.add('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="tools-trigger-icon"></button>
