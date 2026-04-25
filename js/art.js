@@ -15,10 +15,19 @@ if (sessionStorage.getItem('art-dealt')) {
 sessionStorage.setItem('art-dealt', '1');
 
 // ===== PDF.js init =====
-function initPdfJs() {
+function waitForPdfJs(callback, retries) {
   if (typeof pdfjsLib !== 'undefined') {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    callback();
+  } else if (retries > 0) {
+    setTimeout(function() { waitForPdfJs(callback, retries - 1); }, 200);
+  } else {
+    console.warn('PDF.js not loaded after retries');
+    callback();
   }
+}
+
+function initPdfJs() {
   document.querySelectorAll('.gallery-pdf').forEach(function(item) {
     var pdfUrl = item.getAttribute('data-pdf');
     var canvas = item.querySelector('canvas');
@@ -38,15 +47,20 @@ function initPdfJs() {
     });
   });
 }
+
+function startPdfInit() {
+  waitForPdfJs(initPdfJs, 15);
+}
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initPdfJs);
+  document.addEventListener('DOMContentLoaded', startPdfInit);
 } else {
-  initPdfJs();
+  startPdfInit();
 }
 
 // ===== PDF covers (sequential loading) =====
 async function loadPdfCover(url, card) {
   if (card.hasAttribute('data-skip-cover')) return;
+  if (typeof pdfjsLib === 'undefined') return;
   try {
     var pdf = await pdfjsLib.getDocument(url).promise;
     var page = await pdf.getPage(1);
