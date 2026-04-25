@@ -355,7 +355,15 @@
   margin-bottom: 28px;
 }
 
+.experiment-row {
+  display: flex;
+  gap: 28px;
+  align-items: start;
+}
+
 .experiment-card {
+  flex: 1;
+  min-width: 0;
   border: 3px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
@@ -366,6 +374,35 @@
 .experiment-card:hover {
   transform: translateY(-4px);
   box-shadow: 6px 6px 0 var(--border);
+}
+
+.experiment-text {
+  flex: 1;
+  min-width: 0;
+  font-family: 'Special Elite', serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.experiment-text-title {
+  font-family: 'Bangers', sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.experiment-stack {
+  font-family: 'Bangers', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  padding-top: 8px;
+  border-top: 2px solid var(--border);
 }
 
 .experiment-video-wrap {
@@ -393,6 +430,19 @@
 
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
+  .experiment-row {
+    flex-direction: column;
+  }
+  .experiment-text {
+    font-size: 12px;
+  }
+  .experiment-text-title {
+    font-size: 18px;
+  }
+  .experiment-section {
+    padding: 40px 14px 30px;
+  }
+
   .tech-page {
     padding: 60px 10px 20px;
   }
