@@ -224,9 +224,9 @@
           galleryImages = el.dataset.gallery.split(',');
           galleryIdx = 0;
           showGalleryImage(0);
-          lbPrev.style.display = '';
-          lbNext.style.display = '';
-          lbCounter.style.display = '';
+          lbPrev.style.display = 'block';
+          lbNext.style.display = 'block';
+          lbCounter.style.display = 'block';
         } else if (el.dataset.type === 'video') {
           var v = document.createElement('video');
           v.src = el.dataset.src;
