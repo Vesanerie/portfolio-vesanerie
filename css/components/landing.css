@@ -128,9 +128,24 @@
   z-index: 5;
 }
 
+[data-theme="dark"] .landing-card {
+  background: #f8f5ee;
+  border-color: #111;
+  box-shadow: 6px 6px 0 0 #111;
+  color: #111;
+}
+
+[data-theme="dark"] .landing-card:hover {
+  box-shadow: 10px 10px 0 0 #111;
+}
+
+[data-theme="dark"] .landing-card .landing-card-desc {
+  color: #666;
+}
+
 [data-theme="dark"] .landing-card::before {
-  mix-blend-mode: screen;
-  opacity: 0.08;
+  mix-blend-mode: multiply;
+  opacity: 0.15;
 }
 
 /* Iridescent sheen overlay */
