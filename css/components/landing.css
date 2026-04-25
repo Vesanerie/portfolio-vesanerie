@@ -66,6 +66,7 @@
 .landing-cta-about {
   background: transparent;
   color: var(--border);
+  margin-left: 12px;
 }
 
 .landing-cta-about:hover {
