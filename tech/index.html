@@ -213,7 +213,8 @@
     });
 
     lb.addEventListener('click', function(e) {
-      if (e.target === lb) closeLightbox();
+      if (e.target.closest('.lightbox-arrow')) return;
+      closeLightbox();
     });
 
     document.querySelectorAll('.experiment-media').forEach(function(el) {
