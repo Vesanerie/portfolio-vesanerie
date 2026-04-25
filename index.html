@@ -154,7 +154,6 @@
     <a href="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/CV_Valentin.pdf" download class="cv-download">Telecharger le CV</a>
   </div>
 
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha512-q+4liFwdPC/bNdhUpZx6aXDx/h77yEQtn4I1slHydcbZK34nLaR3cAeYSJshoxIOq3mjEf7xJE8YWIUHMn+oCQ==" crossorigin="anonymous"></script>
   <script src="js/main.js"></script>
   <script>
     // Skip intro animations on revisit within session
@@ -193,6 +192,10 @@
       current.classList.add('active');
       container.appendChild(current);
 
+      // Preload next image
+      function preloadImg(src) { new Image().src = src; }
+      preloadImg(urls[1]);
+
       function advanceSlide() {
         var nextIdx = (idx + 1) % urls.length;
         var next = createImg(urls[nextIdx]);
@@ -200,6 +203,8 @@
         next.offsetHeight;
         current.classList.remove('active');
         next.classList.add('active');
+        // Preload the one after next
+        preloadImg(urls[(nextIdx + 1) % urls.length]);
         setTimeout(function() {
           if (current.parentNode) current.parentNode.removeChild(current);
           current = next;
@@ -221,8 +226,17 @@
 
     window.addEventListener('DOMContentLoaded', function() {
       var cvLoaded = false;
-      document.getElementById('cv-btn').addEventListener('click', function() {
-        document.getElementById('cv-overlay').classList.toggle('open');
+      var pdfJsLoaded = false;
+
+      function loadPdfJs(callback) {
+        if (pdfJsLoaded) { callback(); return; }
+        var s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+        s.onload = function() { pdfJsLoaded = true; callback(); };
+        document.head.appendChild(s);
+      }
+
+      function renderCV() {
         if (cvLoaded || typeof pdfjsLib === 'undefined') return;
         cvLoaded = true;
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -236,6 +250,11 @@
             page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
           });
         });
+      }
+
+      document.getElementById('cv-btn').addEventListener('click', function() {
+        document.getElementById('cv-overlay').classList.toggle('open');
+        loadPdfJs(renderCV);
       });
     });
 
@@ -258,22 +277,32 @@
     // 3D tilt effect on landing cards (desktop only)
     if (window.matchMedia('(hover: hover)').matches) {
       document.querySelectorAll('.landing-card').forEach(function(card) {
+        var tiltRect = null;
+        var tiltRaf = null;
         card.addEventListener('mouseenter', function() {
           this.style.transition = 'none';
+          tiltRect = this.getBoundingClientRect();
         });
         card.addEventListener('mousemove', function(e) {
-          var rect = this.getBoundingClientRect();
-          var x = (e.clientX - rect.left) / rect.width;
-          var y = (e.clientY - rect.top) / rect.height;
-          var rotY = (x - 0.5) * 20;
-          var rotX = (0.5 - y) * 20;
-          this.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateZ(10px)';
-          this.style.setProperty('--mx', (x * 100) + '%');
-          this.style.setProperty('--my', (y * 100) + '%');
+          if (tiltRaf) return;
+          var self = this;
+          var cx = e.clientX, cy = e.clientY;
+          tiltRaf = requestAnimationFrame(function() {
+            tiltRaf = null;
+            if (!tiltRect) return;
+            var x = (cx - tiltRect.left) / tiltRect.width;
+            var y = (cy - tiltRect.top) / tiltRect.height;
+            var rotY = (x - 0.5) * 20;
+            var rotX = (0.5 - y) * 20;
+            self.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateZ(10px)';
+            self.style.setProperty('--mx', (x * 100) + '%');
+            self.style.setProperty('--my', (y * 100) + '%');
+          });
         });
         card.addEventListener('mouseleave', function() {
           this.style.transition = '';
           this.style.transform = '';
+          tiltRect = null;
         });
       });
     }
