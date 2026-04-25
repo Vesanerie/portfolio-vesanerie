@@ -309,6 +309,7 @@
 /* ===== Bouton Expérimentation dans le laptop ===== */
 .exp-btn {
   position: absolute;
+  z-index: 10;
   bottom: 16px;
   right: 16px;
   cursor: pointer;
@@ -569,13 +570,10 @@
   }
 
   .exp-btn {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 10px;
-    font-size: 12px;
+    bottom: 8px;
+    right: 8px;
+    padding: 8px 12px;
+    font-size: 11px;
   }
 
   /* ---- Fiche mobile ---- */
