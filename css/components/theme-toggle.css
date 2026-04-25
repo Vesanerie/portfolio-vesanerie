@@ -3,8 +3,8 @@
   all: unset;
   box-sizing: border-box;
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: var(--space-2);
+  right: var(--space-2);
   left: auto;
   z-index: 999;
   cursor: pointer;
@@ -17,6 +17,11 @@
   align-items: center;
   padding: 2px;
   transition: background 0.3s;
+}
+
+.theme-toggle:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
 }
 
 .theme-toggle .dot {

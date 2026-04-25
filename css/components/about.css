@@ -4,18 +4,18 @@
   z-index: 1;
   max-width: 800px;
   margin: 0 auto;
-  padding: 80px 20px 60px;
+  padding: var(--space-8) var(--space-2) var(--space-8);
 }
 .about-title {
   font-family: 'Bangers', sans-serif;
   font-size: 42px;
   letter-spacing: 4px;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: var(--space-5);
 }
 .about-content {
   display: flex;
-  gap: 40px;
+  gap: var(--space-5);
   align-items: flex-start;
 }
 .about-text {
@@ -25,24 +25,24 @@
   font-size: 14px;
   line-height: 1.8;
   color: var(--text-muted);
-  margin-bottom: 14px;
+  margin-bottom: var(--space-2);
 }
 .about-details {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--space-3);
 }
 .about-block {
   border: 2px solid var(--border);
-  padding: 16px;
+  padding: var(--space-2);
   background: var(--bg-card);
 }
 .about-block-title {
   font-family: 'Bangers', sans-serif;
   font-size: 18px;
   letter-spacing: 2px;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-1);
 }
 .about-block-item {
   font-size: 12px;
@@ -57,28 +57,28 @@
 .about-logo {
   display: block;
   width: 40px;
-  margin: 40px auto 0;
+  margin: var(--space-5) auto 0;
   opacity: 0.6;
 }
 
 @media (max-width: 600px) {
   .about {
-    padding: 40px 16px 30px;
+    padding: var(--space-5) var(--space-2) var(--space-4);
   }
   .about-title {
     font-size: 26px;
-    margin-bottom: 24px;
+    margin-bottom: var(--space-3);
   }
   .about-content {
     flex-direction: column;
-    gap: 16px;
+    gap: var(--space-2);
   }
   .about-text p {
     font-size: 12px;
     line-height: 1.7;
   }
   .about-block {
-    padding: 12px;
+    padding: var(--space-1);
   }
   .about-block-title {
     font-size: 15px;
@@ -88,6 +88,6 @@
   }
   .about-logo {
     width: 32px;
-    margin-top: 24px;
+    margin-top: var(--space-3);
   }
 }
