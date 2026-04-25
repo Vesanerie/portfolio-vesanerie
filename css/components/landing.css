@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  gap: 6px;
+  gap: 30px;
   padding: 40px 20px 30px;
   overflow: hidden;
 }
@@ -46,11 +46,16 @@
   text-shadow: 0 0 10px var(--bg), 0 0 20px var(--bg), 0 0 40px var(--bg), 0 0 60px var(--bg);
 }
 
+.landing-choices-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
 .landing-actions {
   display: flex;
-  justify-content: center;
   gap: 14px;
-  margin-top: 20px;
 }
 
 .landing-cta {
@@ -294,6 +299,7 @@
   .landing-sub { font-size: 11px; margin-top: 2px; }
   .landing-bio { font-size: 11px; padding: 0 10px; line-height: 1.6; margin-top: 2px; }
   .landing-cta { font-size: 14px; padding: 10px 24px; letter-spacing: 2px; }
+  .landing-choices-wrap { gap: 16px; }
 
   .landing-choices {
     gap: 14px;
