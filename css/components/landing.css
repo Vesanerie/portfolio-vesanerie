@@ -51,11 +51,16 @@
   text-shadow: 0 0 10px var(--bg), 0 0 20px var(--bg), 0 0 40px var(--bg), 0 0 60px var(--bg);
 }
 
+.landing-choices-wrap {
+  width: 100%;
+  max-width: 280px;
+}
+
 .landing-actions {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--space-2);
-  margin-top: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .landing-cta {
@@ -308,6 +313,10 @@
   .landing-bio { font-size: clamp(11px, 0.5vw + 9px, 13px); padding: 0; line-height: 1.71; margin-top: var(--space-2); }
   .landing-cta { font-size: clamp(14px, 0.5vw + 12px, 18px); padding: var(--space-1) var(--space-4); letter-spacing: 3px; }
 
+  .landing-choices-wrap {
+    max-width: none;
+    width: auto;
+  }
   .landing-choices {
     flex-direction: row;
     flex-wrap: wrap;
