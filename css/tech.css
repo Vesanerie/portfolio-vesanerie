@@ -1,32 +1,35 @@
 /* ===== Tech Page ===== */
+/* Mobile-first: base styles are mobile, desktop overrides in @media (min-width: 601px) */
+
 .tech-page {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 60px 20px 40px;
+  padding: 60px 10px 20px;
 }
 
 
 /* ===== Laptop ===== */
 .laptop {
   width: 100%;
-  max-width: 780px;
+  max-width: 100%;
 }
 
-/* ===== Écran ===== */
+/* ===== Ecran ===== */
 .screen-shell {
   background: var(--border);
-  border: 4px solid var(--border);
-  border-radius: 16px 16px 0 0;
-  padding: 20px 20px 24px;
+  border: 3px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 8px 10px;
 }
 
 .screen-inner {
   background: var(--bg-card);
-  border: 3px solid var(--border);
-  border-radius: 4px;
-  aspect-ratio: 16 / 10;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  aspect-ratio: auto;
+  min-height: 60vh;
   overflow: hidden;
   position: relative;
 }
@@ -36,11 +39,11 @@
   width: 100%;
   height: 100%;
   position: relative;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-content: start;
-  gap: 12px 24px;
+  gap: 8px;
 }
 
 .app-icon {
@@ -49,10 +52,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 16px 20px;
+  gap: 6px;
+  padding: 10px 4px;
   border: 2px solid transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   transition: border-color 0.2s, transform 0.15s, box-shadow 0.15s;
 }
 
@@ -65,16 +68,17 @@
 .app-desc {
   width: 100%;
   min-height: 40px;
-  padding: 12px 16px;
+  padding: 8px;
   margin-top: 8px;
   font-family: 'Special Elite', serif;
-  font-size: 12px;
-  line-height: 1.6;
+  font-size: 10px;
+  line-height: 1.5;
   color: var(--text-muted);
   text-align: center;
   border-top: 2px solid var(--border);
   opacity: 0;
   transition: opacity 0.2s;
+  grid-column: 1 / -1;
 }
 
 .app-desc.visible {
@@ -87,14 +91,14 @@
 }
 
 .app-icon-img {
-  font-size: 48px;
+  font-size: 28px;
   line-height: 1;
 }
 
 .app-icon-name {
   font-family: 'Bangers', sans-serif;
-  font-size: 16px;
-  letter-spacing: 2px;
+  font-size: 11px;
+  letter-spacing: 1px;
   color: var(--text);
   text-align: center;
 }
@@ -121,9 +125,9 @@
   all: unset;
   cursor: pointer;
   font-family: 'Bangers', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--text);
-  padding: 2px 8px;
+  padding: 8px 14px;
   border: 2px solid var(--border);
   transition: background 0.15s;
 }
@@ -143,42 +147,42 @@
 
 .fiche-content {
   flex: 1;
-  padding: 20px 24px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   overflow-y: auto;
 }
 
 .fiche-header {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .fiche-name {
   font-family: 'Bangers', sans-serif;
-  font-size: 32px;
-  letter-spacing: 3px;
+  font-size: 20px;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 .fiche-year {
   font-family: 'Special Elite', serif;
-  font-size: 14px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
 .fiche-desc {
   font-family: 'Special Elite', serif;
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.5;
   color: var(--text);
 }
 
 .fiche-stack-label {
   font-family: 'Bangers', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 2px;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -186,7 +190,7 @@
 
 .fiche-stack {
   font-family: 'Special Elite', serif;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text);
   letter-spacing: 0.5px;
 }
@@ -196,11 +200,11 @@
   box-sizing: border-box;
   cursor: pointer;
   font-family: 'Bangers', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 2px;
   text-align: center;
-  padding: 10px 20px;
-  border: 3px solid var(--border);
+  padding: 12px 16px;
+  border: 2px solid var(--border);
   background: var(--border);
   color: var(--bg);
   margin-top: auto;
@@ -236,9 +240,9 @@
 .site-back {
   all: unset;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text);
-  padding: 2px 8px;
+  padding: 6px 10px;
   border: 2px solid var(--border);
   border-radius: 4px;
   background: var(--bg-card);
@@ -250,7 +254,7 @@
 }
 
 .site-url {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-muted);
   letter-spacing: 1px;
 }
@@ -265,10 +269,10 @@
 /* ===== Base / Clavier ===== */
 .base-shell {
   background: var(--bg);
-  border: 4px solid var(--border);
+  border: 3px solid var(--border);
   border-top: none;
   border-radius: 0 0 10px 10px;
-  padding: 20px 28px 16px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -276,10 +280,7 @@
 }
 
 .keyboard {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
+  display: none;
 }
 
 .kb-row {
@@ -298,25 +299,20 @@
 }
 
 .trackpad {
-  width: 200px;
-  height: 110px;
-  border: 3px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg-card);
-  margin-top: 4px;
+  display: none;
 }
 
-/* ===== Bouton Expérimentation dans le laptop ===== */
+/* ===== Bouton Experimentation dans le laptop ===== */
 .exp-btn {
   position: absolute;
   z-index: 10;
-  bottom: 16px;
-  right: 16px;
+  bottom: 8px;
+  right: 8px;
   cursor: pointer;
   font-family: 'Bangers', sans-serif;
-  font-size: 14px;
+  font-size: 11px;
   letter-spacing: 1.5px;
-  padding: 10px 18px;
+  padding: 8px 12px;
   background: var(--border);
   color: var(--bg);
   border: 2px solid var(--border);
@@ -330,18 +326,18 @@
   opacity: 0.8;
 }
 
-/* ===== Expérimentation IA ===== */
+/* ===== Experimentation IA ===== */
 .experiment-section {
   max-width: 780px;
   margin: 0 auto;
-  padding: 60px 20px 40px;
+  padding: 40px 14px 30px;
   position: relative;
   z-index: 2;
 }
 
 .experiment-title {
   font-family: 'Bangers', sans-serif;
-  font-size: 36px;
+  font-size: clamp(24px, 3vw + 10px, 36px);
   letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--text);
@@ -353,14 +349,14 @@
 .experiment-desc {
   font-family: 'Special Elite', serif;
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.71;
   color: var(--text-muted);
   margin-bottom: 28px;
 }
 
 .experiment-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 28px;
   align-items: start;
   margin-bottom: 40px;
@@ -386,8 +382,8 @@
 .experiment-text {
   min-width: 0;
   font-family: 'Special Elite', serif;
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.5;
   color: var(--text);
   display: flex;
   flex-direction: column;
@@ -396,7 +392,7 @@
 
 .experiment-text-title {
   font-family: 'Bangers', sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--text);
@@ -412,11 +408,11 @@
 }
 
 .experiment-row-reverse .experiment-card {
-  order: 2;
+  order: 0;
 }
 
 .experiment-row-reverse .experiment-text {
-  order: 1;
+  order: 0;
 }
 
 .experiment-img-wrap {
@@ -477,150 +473,167 @@
 
 .lightbox-img,
 .lightbox-video {
-  max-width: 60vw;
-  max-height: 70vh;
+  max-width: 92vw;
+  max-height: 80vh;
   display: block;
-  border: 3px solid #f0ece4;
+  border: 3px solid hsl(36, 30%, 92%);
   border-radius: 8px;
 }
 
-@media (max-width: 600px) {
-  .lightbox-img,
-  .lightbox-video {
-    max-width: 92vw;
-    max-height: 80vh;
-  }
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 600px) {
-  .experiment-row {
-    grid-template-columns: 1fr;
-  }
-  .experiment-row-reverse .experiment-card {
-    order: 0;
-  }
-  .experiment-row-reverse .experiment-text {
-    order: 0;
-  }
-  .experiment-text {
-    font-size: 12px;
-  }
-  .experiment-text-title {
-    font-size: 18px;
-  }
-  .experiment-section {
-    padding: 40px 14px 30px;
-  }
-
+/* ===== Desktop overrides ===== */
+@media (min-width: 601px) {
   .tech-page {
-    padding: 60px 10px 20px;
+    padding: 60px 20px 40px;
   }
 
   .laptop {
-    max-width: 100%;
+    max-width: 780px;
   }
 
   .screen-shell {
-    border-radius: 10px;
-    padding: 8px 8px 10px;
-    border-width: 3px;
+    border-width: 4px;
+    border-radius: 16px 16px 0 0;
+    padding: 20px 20px 24px;
   }
 
   .screen-inner {
-    border-width: 2px;
-    border-radius: 6px;
-    aspect-ratio: auto;
-    min-height: 60vh;
-  }
-
-  .base-shell {
-    padding: 8px;
     border-width: 3px;
-    border-radius: 0 0 10px 10px;
+    border-radius: 4px;
+    aspect-ratio: 16 / 10;
+    min-height: auto;
   }
-
-  .keyboard { display: none; }
-  .trackpad { display: none; }
 
   .desktop {
-    padding: 12px;
-    gap: 8px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
     align-content: start;
+    gap: 12px 24px;
   }
 
   .app-icon {
-    padding: 10px 4px;
-    gap: 6px;
-    border-radius: 6px;
+    gap: 8px;
+    padding: 16px 20px;
+    border-radius: 8px;
   }
 
   .app-icon-img {
-    font-size: 28px;
+    font-size: 48px;
   }
 
   .app-icon-name {
-    font-size: 11px;
-    letter-spacing: 1px;
+    font-size: 16px;
+    letter-spacing: 2px;
   }
 
   .app-desc {
-    font-size: 10px;
-    padding: 8px;
-    grid-column: 1 / -1;
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 12px 16px;
+    grid-column: auto;
+  }
+
+  .base-shell {
+    padding: 20px 28px 16px;
+    border-width: 4px;
+  }
+
+  .keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .trackpad {
+    display: block;
+    width: 200px;
+    height: 110px;
+    border: 3px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+    margin-top: 4px;
   }
 
   .exp-btn {
-    bottom: 8px;
-    right: 8px;
-    padding: 8px 12px;
-    font-size: 11px;
-  }
-
-  /* ---- Fiche mobile ---- */
-  .fiche-back {
-    padding: 8px 14px;
-    font-size: 16px;
-  }
-  .fiche-content {
-    padding: 14px;
-    gap: 10px;
-  }
-  .fiche-name {
-    font-size: 20px;
-    letter-spacing: 2px;
-  }
-  .fiche-year {
-    font-size: 12px;
-  }
-  .fiche-desc {
-    font-size: 12px;
-    line-height: 1.6;
-  }
-  .fiche-stack-label {
-    font-size: 12px;
-  }
-  .fiche-stack {
-    font-size: 11px;
-  }
-  .fiche-header {
-    flex-direction: column;
-    gap: 2px;
-  }
-  .fiche-demo-btn {
-    font-size: 16px;
-    padding: 12px 16px;
-    border-width: 2px;
-  }
-
-  /* ---- Site view mobile ---- */
-  .site-back {
-    padding: 6px 10px;
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 18px;
     font-size: 14px;
   }
+
+  .experiment-section {
+    padding: 60px 20px 40px;
+  }
+
+  .experiment-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .experiment-row-reverse .experiment-card {
+    order: 2;
+  }
+  .experiment-row-reverse .experiment-text {
+    order: 1;
+  }
+  .experiment-text {
+    font-size: 13px;
+    line-height: 1.71;
+  }
+  .experiment-text-title {
+    font-size: 22px;
+  }
+
+  /* Fiche desktop */
+  .fiche-back {
+    padding: 2px 8px;
+    font-size: 18px;
+  }
+  .fiche-content {
+    padding: 20px 24px;
+    gap: 14px;
+  }
+  .fiche-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0;
+  }
+  .fiche-name {
+    font-size: 32px;
+    letter-spacing: 3px;
+  }
+  .fiche-year {
+    font-size: 14px;
+  }
+  .fiche-desc {
+    font-size: 13px;
+    line-height: 1.71;
+  }
+  .fiche-stack-label {
+    font-size: 14px;
+  }
+  .fiche-stack {
+    font-size: 12px;
+  }
+  .fiche-demo-btn {
+    font-size: 18px;
+    padding: 10px 20px;
+    border-width: 3px;
+  }
+
+  /* Site view desktop */
+  .site-back {
+    padding: 2px 8px;
+    font-size: 16px;
+  }
   .site-url {
-    font-size: 10px;
+    font-size: 11px;
+  }
+
+  /* Lightbox desktop */
+  .lightbox-img,
+  .lightbox-video {
+    max-width: 60vw;
+    max-height: 70vh;
   }
 }

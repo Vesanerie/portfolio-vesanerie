@@ -1,5 +1,6 @@
 /* ========================================
    PILE VIEW — Stack of books
+   Mobile-first: base styles are mobile, desktop overrides in @media (min-width: 701px)
    ======================================== */
 
 .pile-view {
@@ -8,8 +9,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  gap: 50px;
+  padding: 56px 16px 30px;
+  gap: 16px;
 }
 
 .pile-header {
@@ -18,12 +19,12 @@
 
 .pile-title {
   font-family: 'Bangers', sans-serif;
-  font-size: clamp(48px, 10vw, 80px);
+  font-size: clamp(32px, 8vw, 80px);
   letter-spacing: 6px;
 }
 
 .pile-sub {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--text-muted);
   letter-spacing: 2px;
   margin-top: 10px;
@@ -31,14 +32,12 @@
 
 /* ===== Scattered Books ===== */
 .pile-stack {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 40px 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
   width: 100%;
-  max-width: 1100px;
-  padding: 0 20px;
+  max-width: 100%;
+  padding: 0;
   perspective: 800px;
 }
 
@@ -83,9 +82,9 @@
 .pile-book {
   all: unset;
   box-sizing: border-box;
-  width: 240px;
-  height: 320px;
-  border: 3px solid var(--border);
+  width: 100% !important;
+  height: 160px !important;
+  border: 2px solid var(--border);
   background: var(--bg-card);
   display: flex;
   flex-direction: column;
@@ -95,26 +94,26 @@
   cursor: pointer;
   position: relative;
   transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
-  transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
-  box-shadow: 8px 8px 0 0 var(--border);
+  transform: none !important;
+  box-shadow: 3px 3px 0 var(--border);
   transform-style: preserve-3d;
 }
 
-/* Size variants */
-.pile-sm { width: 200px; height: 270px; }
+/* Size variants (mobile: overridden to uniform) */
+.pile-sm,
+.pile-md,
+.pile-lg,
+.pile-wide,
+.pile-sq {
+  width: 100% !important;
+  height: 160px !important;
+}
+
 .pile-sm .pile-book-title { font-size: 20px; }
 .pile-sm .pile-book-icon { font-size: 36px; }
-
-.pile-md { width: 240px; height: 320px; }
-
-.pile-lg { width: 280px; height: 380px; }
 .pile-lg .pile-book-title { font-size: 30px; }
 .pile-lg .pile-book-icon { font-size: 56px; }
-
-.pile-wide { width: 300px; height: 240px; }
 .pile-wide .pile-book-icon { font-size: 40px; }
-
-.pile-sq { width: 260px; height: 260px; }
 
 /* Deal cards animation on first load */
 @keyframes dealCard {
@@ -144,7 +143,8 @@
 .pile-stack > *:nth-child(6) { animation-delay: 0.85s; }
 
 .pile-book:hover {
-  box-shadow: 12px 12px 0 0 var(--border);
+  transform: none !important;
+  box-shadow: 3px 3px 0 var(--border);
   z-index: 100;
 }
 
@@ -155,13 +155,8 @@
 
 .pile-book.has-cover .pile-book-title,
 .pile-book.has-cover .pile-book-type {
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.pile-book.has-cover:hover .pile-book-title,
-.pile-book.has-cover:hover .pile-book-type {
   opacity: 1;
+  transition: opacity 0.3s;
 }
 
 /* Hover overlay for cards with covers */
@@ -169,7 +164,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0);
+  background: rgba(0,0,0,0.35);
   transition: background 0.3s;
   z-index: 1;
 }
@@ -185,22 +180,38 @@
   color: var(--bg);
 }
 
+.pile-book.has-cover {
+  overflow: hidden;
+}
+
+.pile-book.has-cover .pile-book-title {
+  font-size: 13px;
+  padding: 0 6px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.pile-book.has-cover .pile-book-type {
+  font-size: 8px;
+  padding: 2px 6px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
 .pile-book-icon {
-  font-size: 48px;
+  font-size: 24px;
   line-height: 1;
 }
 
 .pile-book-title {
   font-family: 'Bangers', sans-serif;
-  font-size: 26px;
-  letter-spacing: 3px;
+  font-size: 16px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   text-align: center;
   padding: 0 16px;
 }
 
 .pile-book-type {
-  font-size: 11px;
+  font-size: 9px;
   color: var(--text-muted);
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -218,8 +229,8 @@
 }
 
 #graphisme-view .pile-stack > * {
-  width: 240px !important;
-  height: 300px !important;
+  width: 100% !important;
+  height: 180px !important;
 }
 
 /* ===== Book View (PDF) ===== */
@@ -229,8 +240,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  gap: 30px;
+  padding: 56px 16px 30px;
+  gap: 14px;
 }
 
 /* ===== Dark mode: keep cards light ===== */
@@ -249,90 +260,87 @@
   color: var(--card-keep-muted);
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 700px) {
+/* ===== Desktop overrides ===== */
+@media (min-width: 701px) {
   .pile-view {
-    padding: 56px 16px 30px;
-    gap: 16px;
+    padding: 40px 20px;
+    gap: 50px;
   }
   .pile-title {
-    font-size: clamp(32px, 8vw, 80px);
+    font-size: clamp(48px, 10vw, 80px);
   }
   .pile-sub {
-    font-size: 12px;
+    font-size: 14px;
   }
 
-  /* Pile stack : grille uniforme */
   .pile-stack {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    max-width: 100%;
-    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px 30px;
+    max-width: 1100px;
+    padding: 0 20px;
   }
 
-  /* Tous les items : meme taille, pas de rotation */
-  .pile-book,
-  .pile-sm,
-  .pile-md,
-  .pile-lg,
-  .pile-wide,
-  .pile-sq,
-  .pile-phone,
-  .pile-folder,
-  .pile-film {
-    width: 100% !important;
-    height: 160px !important;
-    transform: none !important;
-    box-shadow: 3px 3px 0 var(--border);
-    border-width: 2px;
-  }
-  .pile-book:hover,
-  .pile-phone:hover,
-  .pile-folder:hover,
-  .pile-film:hover {
-    transform: none !important;
-    box-shadow: 3px 3px 0 var(--border);
-  }
-  .pile-book-title { font-size: 16px; letter-spacing: 2px; }
-  .pile-book-icon { font-size: 24px; }
-  .pile-book-type { font-size: 9px; }
-
-  /* Graphisme sub-grid */
-  #graphisme-view .pile-stack {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  #graphisme-view .pile-stack > * {
-    width: 100% !important;
-    height: 180px !important;
+  .pile-book {
+    width: 240px !important;
+    height: 320px !important;
+    border-width: 3px;
+    transform: translate(var(--ox), var(--oy)) rotate(var(--rot)) !important;
+    box-shadow: 8px 8px 0 0 var(--border);
   }
 
-  /* Covers mobile : overlay sombre + titres visibles */
-  .pile-book.has-cover {
-    overflow: hidden;
+  .pile-sm { width: 200px !important; height: 270px !important; }
+  .pile-md { width: 240px !important; height: 320px !important; }
+  .pile-lg { width: 280px !important; height: 380px !important; }
+  .pile-wide { width: 300px !important; height: 240px !important; }
+  .pile-sq { width: 260px !important; height: 260px !important; }
+
+  .pile-book:hover {
+    box-shadow: 12px 12px 0 0 var(--border);
+    z-index: 100;
+    transform: translate(var(--ox), var(--oy)) rotate(var(--rot)) !important;
   }
-  .pile-book.has-cover::before {
-    background: rgba(0,0,0,0.35);
-  }
+
+  .pile-book-icon { font-size: 48px; }
+  .pile-book-title { font-size: 26px; letter-spacing: 3px; }
+  .pile-book-type { font-size: 11px; }
+
+  /* Cover cards desktop */
   .pile-book.has-cover .pile-book-title,
   .pile-book.has-cover .pile-book-type {
+    opacity: 0;
+  }
+  .pile-book.has-cover:hover .pile-book-title,
+  .pile-book.has-cover:hover .pile-book-type {
     opacity: 1;
   }
+  .pile-book.has-cover::before {
+    background: rgba(0,0,0,0);
+  }
+  .pile-book.has-cover:hover::before {
+    background: rgba(0,0,0,0.5);
+  }
   .pile-book.has-cover .pile-book-title {
-    font-size: 13px;
-    padding: 0 6px;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    font-size: 26px;
+    padding: 0 16px;
+    text-shadow: none;
   }
   .pile-book.has-cover .pile-book-type {
-    font-size: 8px;
-    padding: 2px 6px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    font-size: 11px;
+    padding: 4px 12px;
+    text-shadow: none;
   }
 
-  /* Book view */
+  #graphisme-view .pile-stack > * {
+    width: 240px !important;
+    height: 300px !important;
+  }
+
   .book-view {
-    padding: 56px 16px 30px;
-    gap: 14px;
+    padding: 40px 20px;
+    gap: 30px;
   }
 }
 

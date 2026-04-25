@@ -1,4 +1,6 @@
 /* ===== Film strip card (Animation) ===== */
+/* Mobile-first: base styles are mobile, desktop overrides in @media (min-width: 701px) */
+
 .pile-film {
   box-sizing: border-box;
   width: 240px;
@@ -11,7 +13,7 @@
   transform: translate(var(--ox), var(--oy)) rotate(var(--rot));
   transform-style: preserve-3d;
   background: var(--border);
-  border-radius: 4px;
+  border-radius: 0;
   overflow: hidden;
   box-shadow: 6px 6px 0 0 var(--border);
 }
@@ -23,18 +25,18 @@
 
 .film-strip-top,
 .film-strip-bottom {
-  height: 28px;
+  height: 18px;
   background: var(--border);
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 0 12px;
+  gap: 8px;
+  padding: 0 8px;
   flex-shrink: 0;
 }
 
 .film-hole {
-  width: 12px;
-  height: 10px;
+  width: 8px;
+  height: 6px;
   background: var(--bg);
   border-radius: 2px;
   flex-shrink: 0;
@@ -54,14 +56,14 @@
 
 .film-title {
   font-family: 'Bangers', sans-serif;
-  font-size: 26px;
-  letter-spacing: 3px;
+  font-size: 16px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--text);
 }
 
 .film-sub {
-  font-size: 11px;
+  font-size: 9px;
   color: var(--text-muted);
   letter-spacing: 2px;
 }
@@ -79,21 +81,21 @@
   color: var(--card-keep-muted);
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 700px) {
-  .pile-film { border-radius: 0; }
+/* ===== Desktop overrides ===== */
+@media (min-width: 701px) {
+  .pile-film { border-radius: 4px; }
   .film-strip-top,
   .film-strip-bottom {
-    height: 18px;
-    gap: 8px;
-    padding: 0 8px;
+    height: 28px;
+    gap: 12px;
+    padding: 0 12px;
   }
   .film-hole {
-    width: 8px;
-    height: 6px;
+    width: 12px;
+    height: 10px;
   }
-  .film-title { font-size: 16px; letter-spacing: 2px; }
-  .film-sub { font-size: 9px; }
+  .film-title { font-size: 26px; letter-spacing: 3px; }
+  .film-sub { font-size: 11px; }
 }
 
 @media (max-width: 400px) {

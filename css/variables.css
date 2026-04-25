@@ -2,22 +2,22 @@
 
 :root {
   /* Light mode */
-  --bg: #f0ece4;
-  --bg-card: #f8f5ee;
-  --text: #111;
-  --text-muted: #555;
-  --border: #111;
-  --accent: #333;
-  --accent-cta: #c23616;
-  --switch-bg: #ddd;
-  --switch-dot: #111;
-  --halftone: #111;
+  --bg: hsl(36, 30%, 92%);
+  --bg-card: hsl(40, 42%, 95%);
+  --text: hsl(0, 0%, 7%);
+  --text-muted: hsl(0, 0%, 33%);
+  --border: hsl(0, 0%, 7%);
+  --accent: hsl(0, 0%, 20%);
+  --accent-cta: hsl(13, 79%, 42%);
+  --switch-bg: hsl(0, 0%, 87%);
+  --switch-dot: hsl(0, 0%, 7%);
+  --halftone: hsl(0, 0%, 7%);
   /* Cards that stay light in dark mode */
-  --card-keep-bg: #f8f5ee;
-  --card-keep-text: #111;
-  --card-keep-muted: #555;
-  --card-keep-border: #111;
-  --card-keep-shadow: #111;
+  --card-keep-bg: hsl(40, 42%, 95%);
+  --card-keep-text: hsl(0, 0%, 7%);
+  --card-keep-muted: hsl(0, 0%, 33%);
+  --card-keep-border: hsl(0, 0%, 7%);
+  --card-keep-shadow: hsl(0, 0%, 7%);
   /* 8pt spacing scale */
   --space-1: 8px;
   --space-2: 16px;
@@ -32,21 +32,21 @@
 }
 
 [data-theme="dark"] {
-  --bg: #0e0e0e;
-  --bg-card: #1a1a1a;
-  --text: #f0ece4;
-  --text-muted: #999;
-  --border: #f0ece4;
-  --accent: #ccc;
-  --accent-cta: #e05a3a;
-  --switch-bg: #333;
-  --switch-dot: #f0ece4;
-  --halftone: #f0ece4;
-  --card-keep-bg: #f8f5ee;
-  --card-keep-text: #111;
-  --card-keep-muted: #555;
-  --card-keep-border: #111;
-  --card-keep-shadow: #111;
+  --bg: hsl(0, 0%, 5%);
+  --bg-card: hsl(0, 0%, 10%);
+  --text: hsl(36, 30%, 92%);
+  --text-muted: hsl(0, 0%, 60%);
+  --border: hsl(36, 30%, 92%);
+  --accent: hsl(0, 0%, 80%);
+  --accent-cta: hsl(13, 72%, 55%);
+  --switch-bg: hsl(0, 0%, 20%);
+  --switch-dot: hsl(36, 30%, 92%);
+  --halftone: hsl(36, 30%, 92%);
+  --card-keep-bg: hsl(40, 42%, 95%);
+  --card-keep-text: hsl(0, 0%, 7%);
+  --card-keep-muted: hsl(0, 0%, 33%);
+  --card-keep-border: hsl(0, 0%, 7%);
+  --card-keep-shadow: hsl(0, 0%, 7%);
 }
 
 /* Kill transitions during theme switch to prevent lag */

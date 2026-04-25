@@ -1,10 +1,12 @@
 /* ===== Phone card (TikTok pile item) ===== */
+/* Mobile-first: base styles are mobile, desktop overrides in @media (min-width: 701px) */
+
 .pile-phone {
   box-sizing: border-box;
   width: 180px;
   height: 340px;
   border: 3px solid var(--border);
-  border-radius: 24px;
+  border-radius: 12px;
   background: var(--bg-card);
   display: flex;
   flex-direction: column;
@@ -25,34 +27,24 @@
 }
 
 .phone-notch {
-  width: 50px;
-  height: 8px;
-  background: var(--border);
-  border-radius: 4px;
-  position: absolute;
-  top: 14px;
+  display: none;
 }
 
 .phone-screen-label {
   font-family: 'Bangers', sans-serif;
-  font-size: 28px;
+  font-size: 16px;
   letter-spacing: 3px;
   text-transform: uppercase;
 }
 
 .phone-sub-label {
-  font-size: 11px;
+  font-size: 9px;
   color: var(--text-muted);
   letter-spacing: 2px;
 }
 
 .phone-home-bar {
-  width: 40px;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  position: absolute;
-  bottom: 12px;
+  display: none;
 }
 
 /* ===== Dark mode: keep phone card light ===== */
@@ -85,12 +77,12 @@
 
 .tiktok-cta {
   font-family: 'Bangers', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: 2px;
   color: var(--bg);
   background: var(--border);
   border: 3px solid var(--border);
-  padding: 12px 20px;
+  padding: 12px 16px;
   text-decoration: none;
   text-align: center;
   transition: opacity 0.2s;
@@ -103,14 +95,15 @@
 
 .tiktok-row {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 14px;
 }
 
 .tiktok-phone {
-  width: 340px;
-  border: 4px solid var(--border);
-  border-radius: 36px;
+  width: 280px;
+  border: 3px solid var(--border);
+  border-radius: 28px;
   background: var(--bg-card);
   padding: 12px 8px;
   display: flex;
@@ -142,7 +135,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 580px;
+  height: 480px;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
@@ -158,7 +151,7 @@
 .tiktok-embed-wrap {
   flex: 0 0 100%;
   width: 100%;
-  height: 580px;
+  height: 480px;
   scroll-snap-align: start;
   overflow: hidden;
 }
@@ -171,7 +164,7 @@
 
 .tiktok-nav-arrows {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 16px;
 }
@@ -205,37 +198,53 @@
   letter-spacing: 2px;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 700px) {
+/* ===== Desktop overrides ===== */
+@media (min-width: 701px) {
   /* Phone pile item */
   .pile-phone {
-    border-radius: 12px;
+    border-radius: 24px;
   }
-  .phone-notch { display: none; }
-  .phone-home-bar { display: none; }
-  .phone-screen-label { font-size: 16px; }
-  .phone-sub-label { font-size: 9px; }
+  .phone-notch {
+    display: block;
+    width: 50px;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    position: absolute;
+    top: 14px;
+  }
+  .phone-home-bar {
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    position: absolute;
+    bottom: 12px;
+  }
+  .phone-screen-label { font-size: 28px; }
+  .phone-sub-label { font-size: 11px; }
 
   /* TikTok scroll */
   .tiktok-row {
-    flex-direction: column;
-    gap: 14px;
+    flex-direction: row;
+    gap: 24px;
   }
   .tiktok-phone {
-    width: 280px;
-    border-width: 3px;
-    border-radius: 28px;
+    width: 340px;
+    border-width: 4px;
+    border-radius: 36px;
   }
   .tiktok-scroll,
   .tiktok-embed-wrap {
-    height: 480px;
+    height: 580px;
   }
   .tiktok-nav-arrows {
-    flex-direction: row;
+    flex-direction: column;
   }
   .tiktok-cta {
-    font-size: 14px;
-    padding: 12px 16px;
+    font-size: 16px;
+    padding: 12px 20px;
   }
 }
 

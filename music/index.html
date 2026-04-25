@@ -26,13 +26,15 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Aller au contenu</a>
+
   <button class="theme-toggle" aria-label="Changer le theme" onclick="toggleTheme()">
     <div class="dot"></div>
   </button>
 
   <a href="../" class="back-link">&larr; Accueil</a>
 
-  <div class="music-page">
+  <div class="music-page" id="main-content">
     <div class="ipod">
       <div class="ipod-screen">
         <div class="ipod-header">iPod</div>
@@ -91,9 +93,9 @@
 
   <audio id="audio-player"></audio>
 
-  <button class="tools-trigger" aria-label="Outils" onclick="document.querySelector('.tools-card').classList.add('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="tools-trigger-icon"></button>
+  <button class="tools-trigger" aria-label="Outils" onclick="document.querySelector('.tools-card').classList.add('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="Logo Vesanerie" class="tools-trigger-icon"></button>
   <div class="tools-card">
-    <div class="tools-card-label" onclick="this.parentElement.classList.toggle('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="card-logo">Outils</div>
+    <div class="tools-card-label" onclick="this.parentElement.classList.toggle('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="Logo Vesanerie" class="card-logo">Outils</div>
     <div class="tools-card-content">
       <div class="tools-item">Logic Pro</div>
     </div>

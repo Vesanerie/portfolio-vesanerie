@@ -60,6 +60,8 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Aller au contenu</a>
+
   <button class="theme-toggle" aria-label="Changer le theme" onclick="toggleTheme()">
     <div class="dot"></div>
   </button>
@@ -70,11 +72,11 @@
 
   <div class="bg-slideshow" id="bg-slideshow"></div>
 
-  <div class="landing">
+  <div class="landing" id="main-content">
     <div>
       <h1 class="landing-title">Valentin Mardoukhaev</h1>
       <div class="landing-sub">Dessinateur · Développeur · Auto-éditeur</div>
-      <p class="landing-bio">Dessinateur et développeur basé en France. Je crée des fanzines, des identités visuelles et des outils numériques. Entre encre de chine et lignes de code, mon travail mélange direction artistique, auto-édition et développement.</p>
+      <p class="landing-bio">Dessinateur et d&eacute;veloppeur bas&eacute; en France.<br>Fanzines, identit&eacute;s visuelles, outils num&eacute;riques.<br>Entre encre de chine et lignes de code.</p>
       <div class="landing-actions">
         <button class="landing-cta" onclick="document.getElementById('contact-card').classList.add('open')">Me contacter</button>
         <button class="landing-cta landing-cta-about" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">A propos</button>
@@ -134,13 +136,13 @@
         </div>
       </div>
     </div>
-    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="about-logo">
+    <img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="Logo Vesanerie" class="about-logo">
   </section>
 
   <button class="scroll-top" id="scroll-top" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
   <div class="contact-card" id="contact-card" role="complementary" aria-label="Contact">
-    <div class="contact-card-label" onclick="this.parentElement.classList.toggle('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="card-logo">Contact</div>
+    <div class="contact-card-label" onclick="this.parentElement.classList.toggle('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="Logo Vesanerie" class="card-logo">Contact</div>
     <div class="contact-card-content">
       <a href="mailto:mardouv2@gmail.com" class="contact-item">Mail : mardouv2@gmail.com</a>
       <a href="https://www.tiktok.com/@culture.hot.mag" target="_blank" class="contact-item">TikTok : @culture.hot.mag</a>
@@ -277,6 +279,7 @@
     }
 
     // 3D tilt effect on landing cards (desktop only)
+    // Functional animation: provides hover feedback revealing the card is interactive
     if (window.matchMedia('(hover: hover)').matches) {
       document.querySelectorAll('.landing-card').forEach(function(card) {
         var tiltRect = null;

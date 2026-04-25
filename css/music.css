@@ -1,24 +1,26 @@
 /* ===== Music Page ===== */
+/* Mobile-first: base styles are mobile, desktop overrides in @media (min-width: 601px) */
+
 .music-page {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 60px 20px 40px;
+  padding: 56px 16px 30px;
 }
 
 /* ===== iPod Classic ===== */
 .ipod {
-  width: 320px;
+  width: 290px;
   background: var(--bg-card);
   border: 3px solid var(--border);
   border-radius: 20px;
-  padding: 24px 16px 30px;
+  padding: 20px 14px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
-  box-shadow: 8px 8px 0 0 var(--border);
+  gap: 20px;
+  box-shadow: 6px 6px 0 0 var(--border);
 }
 
 /* Screen — iPod LCD palette */
@@ -79,7 +81,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 8px;
+  padding: 8px 10px;
+  min-height: 36px;
   cursor: pointer;
   font-family: 'Special Elite', serif;
   font-size: 11px;
@@ -160,16 +163,16 @@
 
 /* Click Wheel */
 .ipod-wheel {
-  width: 220px;
-  height: 220px;
+  width: 180px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .ipod-wheel-ring {
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
   border: 3px solid var(--border);
   border-radius: 50%;
   position: relative;
@@ -182,8 +185,8 @@
 .ipod-wheel-center {
   all: unset;
   box-sizing: border-box;
-  width: 76px;
-  height: 76px;
+  width: 60px;
+  height: 60px;
   border: 2px solid var(--border);
   border-radius: 50%;
   background: var(--bg-card);
@@ -212,44 +215,16 @@
 .ipod-wheel-label.left { left: 14px; }
 .ipod-wheel-label.right { right: 14px; }
 
-@media (max-width: 600px) {
-  .music-page {
-    padding: 56px 16px 30px;
-  }
-  .ipod {
-    width: 290px;
-    padding: 20px 14px 24px;
-    gap: 20px;
-    box-shadow: 6px 6px 0 0 var(--border);
-  }
-  .ipod-track {
-    padding: 8px 10px;
-    min-height: 36px;
-  }
-  .ipod-wheel {
-    width: 180px;
-    height: 180px;
-  }
-  .ipod-wheel-ring {
-    width: 160px;
-    height: 160px;
-  }
-  .ipod-wheel-center {
-    width: 60px;
-    height: 60px;
-  }
-}
-
 /* ===== Spotify Button ===== */
 .spotify-btn {
   position: fixed;
-  bottom: 24px;
-  left: 24px;
+  bottom: 14px;
+  left: 14px;
   z-index: 999;
   font-family: 'Bangers', sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   letter-spacing: 2px;
-  padding: 12px 24px;
+  padding: 10px 18px;
   background: var(--border);
   color: var(--bg);
   border: 3px solid var(--border);
@@ -263,12 +238,38 @@
   box-shadow: 6px 6px 0 var(--border);
 }
 
-@media (max-width: 600px) {
+/* ===== Desktop overrides ===== */
+@media (min-width: 601px) {
+  .music-page {
+    padding: 60px 20px 40px;
+  }
+  .ipod {
+    width: 320px;
+    padding: 24px 16px 30px;
+    gap: 24px;
+    box-shadow: 8px 8px 0 0 var(--border);
+  }
+  .ipod-track {
+    padding: 5px 8px;
+    min-height: auto;
+  }
+  .ipod-wheel {
+    width: 220px;
+    height: 220px;
+  }
+  .ipod-wheel-ring {
+    width: 200px;
+    height: 200px;
+  }
+  .ipod-wheel-center {
+    width: 76px;
+    height: 76px;
+  }
   .spotify-btn {
-    bottom: 14px;
-    left: 14px;
-    font-size: 14px;
-    padding: 10px 18px;
+    bottom: 24px;
+    left: 24px;
+    font-size: 18px;
+    padding: 12px 24px;
   }
 }
 
