@@ -63,6 +63,16 @@
   text-shadow: none;
 }
 
+.landing-cta-about {
+  background: transparent;
+  color: var(--border);
+}
+
+.landing-cta-about:hover {
+  background: var(--border);
+  color: var(--bg);
+}
+
 /* Skip intro animations on revisit */
 .no-intro .landing-title,
 .no-intro .landing-sub,
