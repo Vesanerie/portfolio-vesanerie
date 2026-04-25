@@ -5,18 +5,30 @@
   --bg: #f0ece4;
   --bg-card: #f8f5ee;
   --text: #111;
-  --text-muted: #666;
+  --text-muted: #555;
   --border: #111;
   --accent: #333;
+  --accent-cta: #c23616;
   --switch-bg: #ddd;
   --switch-dot: #111;
   --halftone: #111;
   /* Cards that stay light in dark mode */
   --card-keep-bg: #f8f5ee;
   --card-keep-text: #111;
-  --card-keep-muted: #666;
+  --card-keep-muted: #555;
   --card-keep-border: #111;
   --card-keep-shadow: #111;
+  /* 8pt spacing scale */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  /* Focus */
+  --focus-ring: 3px solid var(--accent-cta);
+  --focus-offset: 2px;
 }
 
 [data-theme="dark"] {
@@ -26,12 +38,13 @@
   --text-muted: #999;
   --border: #f0ece4;
   --accent: #ccc;
+  --accent-cta: #e05a3a;
   --switch-bg: #333;
   --switch-dot: #f0ece4;
   --halftone: #f0ece4;
   --card-keep-bg: #f8f5ee;
   --card-keep-text: #111;
-  --card-keep-muted: #666;
+  --card-keep-muted: #555;
   --card-keep-border: #111;
   --card-keep-shadow: #111;
 }
