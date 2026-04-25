@@ -138,7 +138,7 @@
 
     <div class="experiment-row">
       <div class="experiment-card">
-        <div class="experiment-img-wrap experiment-media" data-type="img" data-src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/ImageGen.png">
+        <div class="experiment-img-wrap experiment-media" data-type="gallery" data-gallery="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/ImageGen.png,https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/ImageGen2.png">
           <img class="experiment-img" src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/ImageGen.png" alt="G&eacute;n&eacute;ration de corps pour mod&egrave;le vivant" loading="lazy">
         </div>
         <div class="experiment-label">G&eacute;n&eacute;ration de corps &mdash; LoRA</div>
@@ -164,7 +164,10 @@
   </div>
 
   <div class="lightbox" id="lightbox">
+    <button class="lightbox-arrow lightbox-prev" id="lb-prev" aria-label="Pr&eacute;c&eacute;dent">&#8249;</button>
     <div class="lightbox-content" id="lightbox-content"></div>
+    <button class="lightbox-arrow lightbox-next" id="lb-next" aria-label="Suivant">&#8250;</button>
+    <div class="lightbox-counter" id="lb-counter"></div>
   </div>
 
   <button class="scroll-top" id="scroll-top" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
@@ -175,11 +178,39 @@
   (function() {
     var lb = document.getElementById('lightbox');
     var lbContent = document.getElementById('lightbox-content');
+    var lbPrev = document.getElementById('lb-prev');
+    var lbNext = document.getElementById('lb-next');
+    var lbCounter = document.getElementById('lb-counter');
+    var galleryImages = [];
+    var galleryIdx = 0;
 
     function closeLightbox() {
       lb.classList.remove('open');
       lbContent.innerHTML = '';
+      galleryImages = [];
+      lbPrev.style.display = 'none';
+      lbNext.style.display = 'none';
+      lbCounter.style.display = 'none';
     }
+
+    function showGalleryImage(idx) {
+      galleryIdx = idx;
+      lbContent.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = galleryImages[idx];
+      img.className = 'lightbox-img';
+      lbContent.appendChild(img);
+      lbCounter.textContent = (idx + 1) + ' / ' + galleryImages.length;
+    }
+
+    lbPrev.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (galleryImages.length > 0) showGalleryImage((galleryIdx - 1 + galleryImages.length) % galleryImages.length);
+    });
+    lbNext.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (galleryImages.length > 0) showGalleryImage((galleryIdx + 1) % galleryImages.length);
+    });
 
     lb.addEventListener('click', function(e) {
       if (e.target === lb) closeLightbox();
@@ -189,7 +220,14 @@
       el.style.cursor = 'pointer';
       el.addEventListener('click', function() {
         lbContent.innerHTML = '';
-        if (el.dataset.type === 'video') {
+        if (el.dataset.type === 'gallery') {
+          galleryImages = el.dataset.gallery.split(',');
+          galleryIdx = 0;
+          showGalleryImage(0);
+          lbPrev.style.display = '';
+          lbNext.style.display = '';
+          lbCounter.style.display = '';
+        } else if (el.dataset.type === 'video') {
           var v = document.createElement('video');
           v.src = el.dataset.src;
           v.autoplay = true;
@@ -198,18 +236,27 @@
           v.playsInline = true;
           v.className = 'lightbox-video';
           lbContent.appendChild(v);
+          lbPrev.style.display = 'none';
+          lbNext.style.display = 'none';
+          lbCounter.style.display = 'none';
         } else {
           var img = document.createElement('img');
           img.src = el.dataset.src;
           img.className = 'lightbox-img';
           lbContent.appendChild(img);
+          lbPrev.style.display = 'none';
+          lbNext.style.display = 'none';
+          lbCounter.style.display = 'none';
         }
         lb.classList.add('open');
       });
     });
 
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && lb.classList.contains('open')) closeLightbox();
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft' && galleryImages.length > 0) showGalleryImage((galleryIdx - 1 + galleryImages.length) % galleryImages.length);
+      if (e.key === 'ArrowRight' && galleryImages.length > 0) showGalleryImage((galleryIdx + 1) % galleryImages.length);
     });
   })();
   </script>
