@@ -62,6 +62,7 @@
               <div class="app-icon-name">Vectorio</div>
             </button>
             <div class="app-desc" id="app-desc"></div>
+            <button class="exp-btn" onclick="document.getElementById('experiment').scrollIntoView({behavior:'smooth'})">Exp&eacute;rimentations IA &darr;</button>
           </div>
 
           <!-- Vue site (cachée par défaut) -->
@@ -97,6 +98,19 @@
 
     </div>
   </div>
+
+  <section class="experiment-section" id="experiment">
+    <h2 class="experiment-title">Exp&eacute;rimentation IA</h2>
+    <p class="experiment-desc">Tests et explorations autour de l'intelligence artificielle g&eacute;n&eacute;rative &mdash; animation, mod&eacute;lisation, cr&eacute;ation assist&eacute;e.</p>
+    <div class="experiment-card">
+      <div class="experiment-video-wrap">
+        <video class="experiment-video" autoplay muted loop playsinline>
+          <source src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/Chibi_Anim%C3%A9_Claude.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="experiment-label">Chibi Anim&eacute; &mdash; Claude</div>
+    </div>
+  </section>
 
   <button class="tools-trigger" aria-label="Outils" onclick="document.querySelector('.tools-card').classList.add('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="tools-trigger-icon"></button>
   <div class="tools-card">
