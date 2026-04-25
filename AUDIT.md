@@ -1,6 +1,6 @@
 # Audit complet — Vesanerie-sur-Internet
 
-> Date : 2026-04-24 (18e revision)
+> Date : 2026-04-25 (19e revision)
 > Auteur : Claude (audit automatique)
 > Statut : **PROPRE** — 0 bug, 0 point critique
 
@@ -14,15 +14,16 @@ Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Ass
 
 | Fichier | Lignes | Role |
 |---|---|---|
-| `index.html` | 271 | Landing (h1, bio, CTA contact), slideshow bg lazy (2 img max en DOM), CV overlay (pdf.js defer+SRI), section A propos, scroll-to-top, contact card (`<div>`), JSON-LD Person + WebSite, skip-intro, 3D tilt cards |
-| `art/index.html` | 521 | Portfolio art — edition (5 PDFs), illustration (pile-book), graphisme (6 items covers), motion design (CMP video 640px), animation (cinema mode : ecran + filmstrip thumbnails), tiktoks (4 embeds + CTA), lightbox, tools-card + trigger mobile, deal cards animation |
+| `index.html` | 271 | Landing (h1, bio, CTA contact), slideshow bg lazy (2 img max en DOM), CV overlay (pdf.js defer+SRI, role="dialog"), section A propos, scroll-to-top, contact card (role="complementary"), JSON-LD Person + WebSite, skip-intro, 3D tilt cards |
+| `art/index.html` | 521 | Portfolio art — edition (5 PDFs), illustration (pile-book), graphisme (6 items covers), motion design (CMP video 640px), animation (cinema mode : ecran + filmstrip + ARIA), tiktoks (4 embeds + CTA), lightbox (role="dialog"), tools-card + trigger mobile, deal cards animation |
 | `tech/index.html` | 117 | Laptop (ecran seul mobile), 5 apps grid, hover desc, fiche projet, demo iframe, tools-card + trigger mobile |
 | `music/index.html` | 103 | iPod (320px), 7 tracks, tools-card + trigger mobile |
-| `mentions-legales.html` | 67 | Mentions legales, layout 2 colonnes avec image |
+| `mentions-legales.html` | 67 | Mentions legales, layout 2 colonnes avec image (loading="lazy") |
 | `404.html` | 34 | Page 404 personnalisee |
 | `sitemap.xml` | 28 | Sitemap XML (5 URLs) |
 | `robots.txt` | 5 | Allow all sauf /dist/ |
 | `.htaccess` | 1 | ErrorDocument 404 |
+| `sw.js` | 100 | Service Worker — cache offline (network-first HTML, cache-first assets, R2 images) |
 
 ### CSS — Architecture modulaire
 
@@ -48,12 +49,19 @@ Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Ass
 | `css/music.css` | 262 | iPod, LCD, click wheel, responsive | music |
 | `css/pdf-viewer.css` | 157 | PDF reader, curseurs SVG, responsive | art |
 
-### JavaScript
+### JavaScript — Architecture modulaire ES
 
 | Fichier | Lignes | Role |
 |---|---|---|
-| `js/main.js` | 72 | Theme toggle instantane (pas de transition), theme-color meta, scroll-to-top (throttled, passive), close cards on outside click, Escape shortcuts |
-| `js/art.js` | 701 | `initPdfJs()`, `artProjects{}`, fiche art, pile/folders, lazy covers (sequentiels), media stop/restore, TikTok scroll (throttled), lightbox, PDF viewer, `setBackLink()`, history pushState/popstate, cinema mode (YouTube/video), 3D tilt, scroll reveal, deal animation skip |
+| `js/main.js` | 78 | Service Worker registration, theme toggle instantane, theme-color meta, scroll-to-top (throttled, passive), close cards on outside click, Escape shortcuts |
+| `js/art.js` | 200 | Entry point module — imports tous les sous-modules, pile/folders, openBook/closeBook, covers sequentiels, media control, popstate |
+| `js/art/state.js` | 25 | Shared state (DOM refs, flags) + setBackLink |
+| `js/art/fiche.js` | 35 | artProjects data + showArtFiche/hideArtFiche |
+| `js/art/lightbox.js` | 50 | Gallery lightbox (show/close, click, keyboard, focus) |
+| `js/art/cinema.js` | 80 | Cinema mode (YouTube/video, thumbs, arrows, keyboard) |
+| `js/art/tiktok.js` | 45 | TikTok scroll counter + arrows (throttled) |
+| `js/art/pdf-viewer.js` | 165 | loadPdfAsBook (spreads, navigation, touch, ARIA) |
+| `js/art/tilt.js` | 45 | 3D tilt desktop (hover:hover) + scroll reveal |
 | `js/tech.js` | 79 | `projects{}` (5 apps), hover desc, fiche -> demo -> retour |
 | `js/music.js` | 70 | Player iPod, auto-next, formatTime guard |
 
@@ -71,25 +79,22 @@ Portfolio vanilla HTML/CSS/JS. 6 pages + 404. O2Switch + GitHub Actions FTP. Ass
 
 ## Nouveautes depuis le dernier audit
 
-### Architecture CSS (v17 → v18)
-- **Theme toggle rectangulaire** : `border-radius: 4px` au lieu de `14px`, dot `2px` au lieu de `50%`
-- **Scroll-to-top deplace en bas a gauche** pour eviter le conflit avec la tools card
-- **Mentions legales deplacees en bas a droite**
+### JavaScript modulaire ES (v18 → v19)
+- **art.js decoupe en 8 modules ES** : state, fiche, lightbox, cinema, tiktok, pdf-viewer, tilt + entry point
+- **`<script type="module">`** sur art/index.html — imports natifs sans bundler
+- **Zero dependance circulaire** : topologie en etoile, entry point importe tout
 
-### Performance (v18)
-- **Halftone CSS supprime** (3 radial-gradients) → remplace par texture PNG (508 Ko) en repeat sur `body::before`
-- **Transition body supprimee** — switch dark/light instantane (0 transition sur body)
-- **Slideshow lazy** : max 2 images dans le DOM au lieu de 10. Les images sont creees/supprimees dynamiquement via JS
-- **Texture/slideshow non affectes par le theme** — pas de changement d'opacite au switch, zero repaint sur les layers lourds
-- **Selection de texte fluide** — plus de lag grace a la suppression du halftone CSS et des transitions body
+### Accessibilite ARIA (v19)
+- **Lightbox** : `role="dialog"`, `aria-modal="true"`, `aria-label`, `tabindex="-1"`, focus automatique a l'ouverture
+- **Cinema mode** : `role="region"`, `aria-label` sur ecran/fleches/compteur, `aria-live="polite"` sur label et compteur, keyboard navigation (fleches)
+- **PDF viewer** : `role="document"`, `aria-label` sur zones de clic, `aria-live="polite"` sur compteur de pages
+- **CV overlay** : `role="dialog"`, `aria-modal="true"`
+- **Contact card** : `role="complementary"`, `aria-label`
+- **Art fiche** : `role="complementary"`, `aria-label`
 
-### UX / Visuel (v18)
-- **Animation "distribution de cartes"** sur la page Art : les 6 cards arrivent du bas avec rotation et rebond, delai 150ms entre chaque
-- **Animation jouee une seule fois** par session (`sessionStorage`)
-- **Cinema mode pour Animation** : grand ecran video + filmstrip de thumbnails en bas + fleches navigation + compteur "1/7"
-- **Paper fold texture** sur les landing cards (homepage) et les pile-book cards (edition, graphisme, illustration)
-- **Illustration** : passe de folder a pile-book pile-lg, tilt vers la droite
-- **iPhone (Video)** repositionne entre Motion Design et Animation
+### Performance (v19)
+- **loading="lazy"** sur l'image mentions legales
+- **Service Worker** : cache offline pour toutes les pages, CSS, JS. Images R2 mises en cache au premier chargement. HTML network-first, assets cache-first.
 
 ---
 
@@ -126,6 +131,11 @@ Aucun bug connu.
 - Texture background fixe (pas de changement dark/light) : **OK**
 - Deal cards animation + skip session : **OK**
 - Scroll-top bas gauche, mentions bas droite : **OK**
+- JS modules ES (art.js → 8 modules) : **OK**
+- ARIA lightbox/cinema/pdf/cv/contact/fiche : **OK**
+- Service Worker registration (main.js) : **OK**
+- Service Worker cache strategy (sw.js) : **OK**
+- loading="lazy" images : **OK**
 
 ---
 
@@ -151,18 +161,22 @@ Aucun bug connu.
 - Assets sur **Cloudflare R2** (`pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev`).
 - Deploy **O2Switch** via **GitHub Actions FTP**. Push seulement quand l'utilisateur valide.
 - **CSS modulaire** : `variables.css` → `base.css` → `components/*.css`. Chaque composant contient son propre responsive.
+- **JS modulaire ES** : `js/art.js` est un entry point `type="module"` qui importe depuis `js/art/*.js`. Les autres scripts (main, tech, music) restent en `<script>` classique.
 - **Theme switch instantane** : pas de `transition` sur `background`, `color` ou `opacity` des layers lourds (texture, slideshow). Seules les CSS custom properties changent.
 - **Texture background** : image PNG sur `body::before`, opacite fixe (ne change PAS au switch dark/light).
 - **Slideshow lazy** : max 2 images dans le DOM, creees/supprimees dynamiquement.
+- **Service Worker** (`sw.js`) : HTML network-first, CSS/JS cache-first, images R2 cache-on-first-load. Incrementer `CACHE_NAME` a chaque mise a jour significative des assets.
 - Quand on ajoute un nouveau composant CSS, creer un fichier dans `css/components/` et l'ajouter aux `<link>` des pages concernees.
+- Quand on ajoute un nouveau module JS art, creer dans `js/art/` et importer dans `js/art.js`.
 - Quand on modifie `art/index.html`, **verifier que `defer` est present** sur pdf.js.
 - Les PDFs comprimes sont dans `/Art/Fanzine/` avec suffixe `_compressé` ou `_compressed`.
 - Le titre de chaque page doit commencer par "Valentin Mardoukhaev" pour le SEO.
 - Le JSON-LD Person est sur la homepage — mettre a jour si nouveaux reseaux/projets.
 - **Contact et tools cards** sont des `<div>` (pas `<button>`) — le toggle est sur le `.label`.
-- **Cinema mode** (Animation) : ecran + filmstrip thumbnails + fleches/compteur. Click thumbnail = load YouTube iframe.
-- **3D tilt** : desktop only via `(hover: hover)`, JS dans index.html et art.js.
+- **Cinema mode** (Animation) : ecran + filmstrip thumbnails + fleches/compteur + ARIA. Click thumbnail = load YouTube iframe.
+- **3D tilt** : desktop only via `(hover: hover)`, module `js/art/tilt.js`.
 - **Scroll listeners** : toujours throttler (100ms min) et utiliser `{ passive: true }`.
 - **PDF covers** : charger sequentiellement (`await`), jamais en parallele.
 - **Deal animation** : jouee une seule fois par session via `sessionStorage('art-dealt')`.
 - **Paper fold** : texture sur pile-book (edition, graphisme, illustration) et landing cards. Pas sur film/phone.
+- **ARIA** : lightbox et CV overlay = `role="dialog"` + `aria-modal="true"`. Cinema = `role="region"`. Compteurs et labels dynamiques = `aria-live="polite"`.

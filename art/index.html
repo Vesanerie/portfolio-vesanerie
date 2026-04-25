@@ -405,18 +405,18 @@
       <div class="pile-title">Animation</div>
       <div class="pile-sub">Courts-m&eacute;trages &amp; clips</div>
     </div>
-    <div class="cinema">
+    <div class="cinema" role="region" aria-label="Lecteur d'animations">
       <div class="cinema-screen">
-        <div class="cinema-placeholder" id="cinema-placeholder">
-          <img src="https://img.youtube.com/vi/CEEBCOzCBj8/hqdefault.jpg" alt="">
-          <div class="anim-play">&#9654;</div>
+        <div class="cinema-placeholder" id="cinema-placeholder" role="button" aria-label="Lancer la video" tabindex="0">
+          <img src="https://img.youtube.com/vi/CEEBCOzCBj8/hqdefault.jpg" alt="Apercu video Jeu d'enfant">
+          <div class="anim-play" aria-hidden="true">&#9654;</div>
         </div>
       </div>
-      <div class="cinema-label" id="cinema-label">Jeu d'enfant &middot; 2023</div>
+      <div class="cinema-label" id="cinema-label" aria-live="polite">Jeu d'enfant &middot; 2023</div>
       <div class="cinema-nav">
-        <button class="cinema-arrow cinema-arrow-left">&#8249;</button>
-        <span class="cinema-counter">1 / 7</span>
-        <button class="cinema-arrow cinema-arrow-right">&#8250;</button>
+        <button class="cinema-arrow cinema-arrow-left" aria-label="Video precedente">&#8249;</button>
+        <span class="cinema-counter" aria-live="polite">1 / 7</span>
+        <button class="cinema-arrow cinema-arrow-right" aria-label="Video suivante">&#8250;</button>
       </div>
       <div class="cinema-strip">
         <div class="cinema-thumb active" data-yt="CEEBCOzCBj8" data-label="Jeu d'enfant &middot; 2023">
@@ -482,7 +482,7 @@
 
 
   <!-- ===== FICHE PROJET ART ===== -->
-  <div class="art-fiche" id="art-fiche">
+  <div class="art-fiche" id="art-fiche" role="complementary" aria-label="Fiche projet">
     <div class="art-fiche-title" id="art-fiche-title"></div>
     <div class="art-fiche-meta">
       <div class="art-fiche-row"><span class="art-fiche-label">Format</span><span id="art-fiche-format"></span></div>
@@ -493,11 +493,11 @@
 
   <!-- ===== VUE PDF ===== -->
   <div class="book-view hidden" id="book-view">
-    <div id="pdf-container" class="book-viewer" style="display:none;"></div>
+    <div id="pdf-container" class="book-viewer" role="document" aria-label="Lecteur PDF" style="display:none;"></div>
   </div>
 
   <!-- Lightbox -->
-  <div class="gallery-lightbox" id="lightbox" onclick="this.classList.remove('open')">
+  <div class="gallery-lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visionneuse d'images" tabindex="-1">
     <img id="lightbox-img" src="" alt="">
   </div>
 
@@ -516,6 +516,6 @@
   <button class="scroll-top" id="scroll-top" aria-label="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
   <script src="../js/main.js"></script>
-  <script src="../js/art.js"></script>
+  <script type="module" src="../js/art.js"></script>
 </body>
 </html>
