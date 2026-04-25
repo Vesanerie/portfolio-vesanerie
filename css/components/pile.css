@@ -235,18 +235,18 @@
 
 /* ===== Dark mode: keep cards light ===== */
 [data-theme="dark"] .pile-book:not(.has-cover) {
-  background: #f8f5ee;
-  border-color: #111;
-  box-shadow: 8px 8px 0 0 #111;
-  color: #111;
+  background: var(--card-keep-bg);
+  border-color: var(--card-keep-border);
+  box-shadow: 8px 8px 0 0 var(--card-keep-shadow);
+  color: var(--card-keep-text);
 }
 
 [data-theme="dark"] .pile-book:not(.has-cover):hover {
-  box-shadow: 12px 12px 0 0 #111;
+  box-shadow: 12px 12px 0 0 var(--card-keep-shadow);
 }
 
 [data-theme="dark"] .pile-book:not(.has-cover) .pile-book-type {
-  color: #666;
+  color: var(--card-keep-muted);
 }
 
 /* ===== Responsive ===== */
