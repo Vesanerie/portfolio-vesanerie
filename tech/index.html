@@ -102,13 +102,21 @@
   <section class="experiment-section" id="experiment">
     <h2 class="experiment-title">Exp&eacute;rimentation IA</h2>
     <p class="experiment-desc">Tests et explorations autour de l'intelligence artificielle g&eacute;n&eacute;rative &mdash; animation, mod&eacute;lisation, cr&eacute;ation assist&eacute;e.</p>
-    <div class="experiment-card">
-      <div class="experiment-video-wrap">
-        <video class="experiment-video" autoplay muted loop playsinline>
-          <source src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/Chibi_Anim%C3%A9_Claude.mp4" type="video/mp4">
-        </video>
+    <div class="experiment-row">
+      <div class="experiment-card">
+        <div class="experiment-video-wrap">
+          <video class="experiment-video" autoplay muted loop playsinline>
+            <source src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Tech/Experimentation/Chibi_Anim%C3%A9_Claude.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="experiment-label">Chibi Anim&eacute; &mdash; Claude</div>
       </div>
-      <div class="experiment-label">Chibi Anim&eacute; &mdash; Claude</div>
+      <div class="experiment-text">
+        <h3 class="experiment-text-title">Rigging &amp; animation par IA</h3>
+        <p>Un personnage chibi mod&eacute;lis&eacute; sur Blender dont l'armature Mixamo avait &eacute;t&eacute; perdue. Avec Claude Code, on a reconstruit le squelette de 25 os en analysant les vertex groups existants et en calculant la position de chaque os par moyenne pond&eacute;r&eacute;e des vertices.</p>
+        <p>Le cycle de marche a &eacute;t&eacute; enti&egrave;rement g&eacute;n&eacute;r&eacute; en Python &mdash; 8 poses cl&eacute;s sur 30 frames, avec rebond vertical et modificateurs cycliques pour une boucle infinie. Aucune intervention manuelle dans Blender : tout a &eacute;t&eacute; pilot&eacute; depuis le terminal.</p>
+        <div class="experiment-stack">Blender &middot; Python &middot; Claude Code &middot; EEVEE</div>
+      </div>
     </div>
   </section>
 
