@@ -55,6 +55,30 @@
   bottom: 12px;
 }
 
+/* ===== Dark mode: keep phone card light ===== */
+[data-theme="dark"] .pile-phone {
+  background: #f8f5ee;
+  border-color: #111;
+  color: #111;
+}
+
+[data-theme="dark"] .pile-phone:hover {
+  box-shadow: 12px 12px 0 0 #111;
+}
+
+[data-theme="dark"] .phone-screen-label {
+  color: #111;
+}
+
+[data-theme="dark"] .phone-sub-label {
+  color: #666;
+}
+
+[data-theme="dark"] .phone-notch,
+[data-theme="dark"] .phone-home-bar {
+  background: #111;
+}
+
 /* ========================================
    TIKTOK SCROLL
    ======================================== */

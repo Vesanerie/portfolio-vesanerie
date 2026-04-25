@@ -66,6 +66,19 @@
   letter-spacing: 2px;
 }
 
+/* ===== Dark mode: keep film body light ===== */
+[data-theme="dark"] .film-body {
+  background: #f8f5ee;
+}
+
+[data-theme="dark"] .film-title {
+  color: #111;
+}
+
+[data-theme="dark"] .film-sub {
+  color: #666;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 700px) {
   .pile-film { border-radius: 0; }
