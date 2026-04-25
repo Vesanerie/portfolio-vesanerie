@@ -309,10 +309,10 @@
 /* ===== Bouton Expérimentation dans le laptop ===== */
 .exp-btn {
   all: unset;
-  cursor: pointer;
   position: absolute;
   bottom: 16px;
   right: 16px;
+  cursor: pointer;
   font-family: 'Bangers', sans-serif;
   font-size: 14px;
   letter-spacing: 1.5px;
