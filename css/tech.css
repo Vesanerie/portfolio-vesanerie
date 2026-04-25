@@ -467,8 +467,8 @@
 
 .lightbox-img,
 .lightbox-video {
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 60vw;
+  max-height: 70vh;
   display: block;
   border: 3px solid var(--border);
   border-radius: 8px;
