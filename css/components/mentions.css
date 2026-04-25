@@ -1,13 +1,16 @@
 /* ===== Mentions legales ===== */
+/* Mobile-first: base styles are mobile, desktop overrides in @media (min-width: 601px) */
+
 .mentions-page {
   max-width: 900px;
-  margin: 80px auto;
-  padding: 20px;
+  margin: 60px auto;
+  padding: 16px;
   position: relative;
   z-index: 1;
 }
 .mentions-layout {
   display: flex;
+  flex-direction: column;
   gap: 40px;
   align-items: flex-start;
 }
@@ -16,7 +19,9 @@
 }
 .mentions-img {
   flex-shrink: 0;
-  width: 260px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
 }
 .mentions-img img {
   width: 100%;
@@ -24,7 +29,7 @@
 }
 .mentions-title {
   font-family: 'Bangers', sans-serif;
-  font-size: 32px;
+  font-size: 24px;
   letter-spacing: 3px;
   margin-bottom: 30px;
 }
@@ -33,13 +38,13 @@
 }
 .mentions-block h2 {
   font-family: 'Bangers', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 2px;
   margin-bottom: 8px;
 }
 .mentions-block p {
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.5;
   color: var(--text-muted);
   margin-bottom: 6px;
 }
@@ -55,20 +60,21 @@
   color: var(--text-muted);
 }
 
-@media (max-width: 700px) {
-  .mentions-layout {
-    flex-direction: column;
-  }
-  .mentions-img {
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-  }
+/* ===== Desktop overrides ===== */
+@media (min-width: 601px) {
+  .mentions-page { margin: 80px auto; padding: 20px; }
+  .mentions-title { font-size: 32px; }
+  .mentions-block h2 { font-size: 18px; }
+  .mentions-block p { font-size: 13px; line-height: 1.71; }
 }
 
-@media (max-width: 600px) {
-  .mentions-page { margin: 60px auto; padding: 16px; }
-  .mentions-title { font-size: 24px; }
-  .mentions-block h2 { font-size: 16px; }
-  .mentions-block p { font-size: 12px; }
+@media (min-width: 701px) {
+  .mentions-layout {
+    flex-direction: row;
+  }
+  .mentions-img {
+    width: 260px;
+    max-width: none;
+    margin: 0;
+  }
 }

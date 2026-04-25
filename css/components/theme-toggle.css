@@ -1,14 +1,16 @@
 /* ===== Theme Switch ===== */
+/* Mobile-first: base styles are mobile, desktop overrides in @media (min-width: 601px) */
+
 .theme-toggle {
   all: unset;
   box-sizing: border-box;
   position: fixed;
-  top: var(--space-2);
-  right: var(--space-2);
+  top: 12px;
+  right: 12px;
   left: auto;
   z-index: 999;
   cursor: pointer;
-  width: 52px;
+  width: 48px;
   height: 28px;
   background: var(--switch-bg);
   border: 2px solid var(--border);
@@ -37,11 +39,12 @@
 }
 
 [data-theme="dark"] .theme-toggle .dot {
-  transform: translateX(24px);
+  transform: translateX(20px);
 }
 
-@media (max-width: 600px) {
-  .theme-toggle { top: 12px; right: 12px; width: 48px; height: 28px; }
+/* ===== Desktop overrides ===== */
+@media (min-width: 601px) {
+  .theme-toggle { top: var(--space-2); right: var(--space-2); width: 52px; height: 28px; }
   .theme-toggle .dot { width: 20px; height: 20px; }
-  [data-theme="dark"] .theme-toggle .dot { transform: translateX(20px); }
+  [data-theme="dark"] .theme-toggle .dot { transform: translateX(24px); }
 }
