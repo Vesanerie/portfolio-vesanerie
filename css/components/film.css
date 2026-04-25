@@ -81,16 +81,21 @@
 
 /* ===== Responsive ===== */
 @media (max-width: 700px) {
-  .pile-film { border-radius: 0; }
+  .pile-film {
+    border-radius: 0;
+    width: 100% !important;
+  }
   .film-strip-top,
   .film-strip-bottom {
     height: 18px;
-    gap: 8px;
     padding: 0 8px;
+    justify-content: space-between;
+    gap: 0;
   }
   .film-hole {
     width: 8px;
     height: 6px;
+    flex-shrink: 1;
   }
   .film-title { font-size: 16px; letter-spacing: 2px; }
   .film-sub { font-size: 9px; }
