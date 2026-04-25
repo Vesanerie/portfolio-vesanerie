@@ -193,11 +193,10 @@
       current.classList.add('active');
       container.appendChild(current);
 
-      setInterval(function() {
+      function advanceSlide() {
         var nextIdx = (idx + 1) % urls.length;
         var next = createImg(urls[nextIdx]);
         container.appendChild(next);
-        // Force reflow then fade in
         next.offsetHeight;
         current.classList.remove('active');
         next.classList.add('active');
@@ -206,7 +205,18 @@
           current = next;
           idx = nextIdx;
         }, 1600);
-      }, 4000);
+      }
+
+      var slideshowTimer = setInterval(advanceSlide, 4000);
+
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          clearInterval(slideshowTimer);
+          slideshowTimer = null;
+        } else if (!slideshowTimer) {
+          slideshowTimer = setInterval(advanceSlide, 4000);
+        }
+      });
     })();
 
     window.addEventListener('DOMContentLoaded', function() {
