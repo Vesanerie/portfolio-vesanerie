@@ -1,3 +1,8 @@
+// ===== Service Worker =====
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').catch(function() {});
+}
+
 // ===== Theme Toggle =====
 function updateThemeColor(theme) {
   var meta = document.querySelector('meta[name="theme-color"]');
