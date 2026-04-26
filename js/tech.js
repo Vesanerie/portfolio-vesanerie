@@ -4,8 +4,6 @@ var siteView = document.getElementById('site-view');
 var siteIframe = document.getElementById('site-iframe');
 var siteUrl = document.getElementById('site-url');
 var siteBack = document.getElementById('site-back');
-var ficheView = document.getElementById('fiche-view');
-var ficheBack = document.getElementById('fiche-back');
 
 var projects = {
   'https://gesturo.fr/': {
