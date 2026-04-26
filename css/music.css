@@ -83,7 +83,7 @@
   cursor: pointer;
   font-family: 'Special Elite', serif;
   font-size: 11px;
-  color: #333;
+  color: var(--text);
   border-radius: 3px;
   transition: background 0.15s;
 }

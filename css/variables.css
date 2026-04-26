@@ -7,10 +7,8 @@
   --text: #111;
   --text-muted: #666;
   --border: #111;
-  --accent: #333;
   --switch-bg: #ddd;
   --switch-dot: #111;
-  --halftone: #111;
   /* Cards that stay light in dark mode */
   --card-keep-bg: #f8f5ee;
   --card-keep-text: #111;
@@ -25,10 +23,8 @@
   --text: #f0ece4;
   --text-muted: #999;
   --border: #f0ece4;
-  --accent: #ccc;
   --switch-bg: #333;
   --switch-dot: #f0ece4;
-  --halftone: #f0ece4;
   --card-keep-bg: #f8f5ee;
   --card-keep-text: #111;
   --card-keep-muted: #666;
