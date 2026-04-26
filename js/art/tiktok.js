@@ -1,4 +1,4 @@
-// ===== TikTok video scroll counter + arrows =====
+// ===== TikTok infinite scroll + arrows =====
 
 var tiktokScroll = document.querySelector('.tiktok-scroll');
 var tiktokCounter = document.getElementById('tiktok-counter');
@@ -6,18 +6,46 @@ var tiktokUp = document.getElementById('tiktok-up');
 var tiktokDown = document.getElementById('tiktok-down');
 
 if (tiktokScroll && tiktokCounter) {
-  var tiktokWraps = tiktokScroll.querySelectorAll('.tiktok-embed-wrap');
-  var tiktokTotal = tiktokWraps.length;
-  function getItemH() { return tiktokWraps[0] ? tiktokWraps[0].offsetHeight : 580; }
+  var originalWraps = Array.from(tiktokScroll.querySelectorAll('.tiktok-embed-wrap'));
+  var tiktokTotal = originalWraps.length;
+  function getItemH() { return tiktokScroll.querySelector('.tiktok-embed-wrap') ? tiktokScroll.querySelector('.tiktok-embed-wrap').offsetHeight : 580; }
   var itemH = getItemH();
   window.addEventListener('resize', function() { itemH = getItemH(); });
   var currentTiktok = 0;
 
+  function getCurrentIndex() {
+    return Math.round(tiktokScroll.scrollTop / itemH);
+  }
+
+  function getDisplayIndex(idx) {
+    return ((idx % tiktokTotal) + tiktokTotal) % tiktokTotal;
+  }
+
+  function ensureWraps() {
+    var allWraps = tiktokScroll.querySelectorAll('.tiktok-embed-wrap');
+    var idx = getCurrentIndex();
+    var needed = idx + 4;
+    if (allWraps.length < needed) {
+      for (var i = allWraps.length; i < needed; i++) {
+        var srcIdx = i % tiktokTotal;
+        var clone = originalWraps[srcIdx].cloneNode(true);
+        var video = clone.querySelector('video');
+        if (video) {
+          video.removeAttribute('src');
+          video.pause();
+        }
+        tiktokScroll.appendChild(clone);
+      }
+    }
+  }
+
   function playCurrentVideo() {
-    tiktokWraps.forEach(function(wrap, i) {
+    var allWraps = tiktokScroll.querySelectorAll('.tiktok-embed-wrap');
+    var idx = getCurrentIndex();
+    allWraps.forEach(function(wrap, i) {
       var video = wrap.querySelector('video');
       if (!video) return;
-      if (i === currentTiktok) {
+      if (i === idx) {
         if (!video.src && video.dataset.src) video.src = video.dataset.src;
         video.play().catch(function(){});
       } else {
@@ -31,8 +59,10 @@ if (tiktokScroll && tiktokCounter) {
     if (tiktokScrollTimer) return;
     tiktokScrollTimer = setTimeout(function() {
       tiktokScrollTimer = null;
-      var idx = Math.floor(tiktokScroll.scrollTop / itemH);
-      tiktokCounter.textContent = (idx + 1) + ' / ' + tiktokTotal;
+      var idx = getCurrentIndex();
+      var display = getDisplayIndex(idx);
+      tiktokCounter.textContent = (display + 1) + ' / ' + tiktokTotal;
+      ensureWraps();
       if (idx !== currentTiktok) {
         currentTiktok = idx;
         playCurrentVideo();
@@ -42,15 +72,14 @@ if (tiktokScroll && tiktokCounter) {
 
   tiktokUp.addEventListener('click', function() {
     itemH = getItemH();
-    var idx = Math.floor(tiktokScroll.scrollTop / itemH);
-    var prev = idx > 0 ? idx - 1 : tiktokTotal - 1;
-    tiktokScroll.scrollTo({ top: prev * itemH, behavior: 'smooth' });
+    var idx = getCurrentIndex();
+    if (idx > 0) tiktokScroll.scrollTo({ top: (idx - 1) * itemH, behavior: 'smooth' });
   });
 
   tiktokDown.addEventListener('click', function() {
     itemH = getItemH();
-    var idx = Math.floor(tiktokScroll.scrollTop / itemH);
-    var next = idx < tiktokTotal - 1 ? idx + 1 : 0;
-    tiktokScroll.scrollTo({ top: next * itemH, behavior: 'smooth' });
+    var idx = getCurrentIndex();
+    ensureWraps();
+    tiktokScroll.scrollTo({ top: (idx + 1) * itemH, behavior: 'smooth' });
   });
 }
