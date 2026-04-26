@@ -26,3 +26,8 @@ jobs:
             src/**
             package*.json
             rsbuild.config.ts
+            *.md
+            dist/**
+            public/**
+            slideshow_optimized/**
+            images/**
