@@ -42,6 +42,13 @@ var projects = {
     stack: 'JavaScript vanilla, Potrace',
     year: '2025',
     type: 'Outil web'
+  },
+  'monvpn': {
+    name: 'MonVPN',
+    desc: 'App desktop Electron pour se connecter a son propre serveur VPN WireGuard. Dashboard avec IP, latence, trafic temps reel, speed test. Zero logs, chiffrement ChaCha20-Poly1305.',
+    stack: 'Electron, WireGuard, Python, Oracle Cloud',
+    year: '2026',
+    type: 'Application desktop'
   }
 };
 
@@ -49,7 +56,8 @@ var projects = {
 var appDesc = document.getElementById('app-desc');
 document.querySelectorAll('.app-icon').forEach(function(btn) {
   btn.addEventListener('mouseenter', function() {
-    var proj = projects[this.dataset.url];
+    var key = this.dataset.url || (this.dataset.img ? this.querySelector('.app-icon-name').textContent.toLowerCase().replace(/\s/g, '') : null);
+    var proj = projects[key];
     if (!proj) return;
     appDesc.textContent = proj.desc;
     appDesc.classList.add('visible');
@@ -59,9 +67,24 @@ document.querySelectorAll('.app-icon').forEach(function(btn) {
   });
 });
 
-// Clic sur icone → lance la demo directement
+// Clic sur icone → lance la demo ou affiche l'image
 document.querySelectorAll('.app-icon').forEach(function(btn) {
   btn.addEventListener('click', function() {
+    var imgSrc = this.dataset.img;
+    if (imgSrc) {
+      var lb = document.getElementById('lightbox');
+      var lbContent = document.getElementById('lightbox-content');
+      lbContent.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = imgSrc;
+      img.className = 'lightbox-img';
+      lbContent.appendChild(img);
+      document.getElementById('lb-prev').style.display = 'none';
+      document.getElementById('lb-next').style.display = 'none';
+      document.getElementById('lb-counter').style.display = 'none';
+      lb.classList.add('open');
+      return;
+    }
     var url = this.dataset.url;
     if (!url) return;
     siteIframe.src = url;
