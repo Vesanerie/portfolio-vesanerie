@@ -67,21 +67,16 @@ document.querySelectorAll('.app-icon').forEach(function(btn) {
   });
 });
 
+var siteImg = document.getElementById('site-img');
+
 // Clic sur icone → lance la demo ou affiche l'image dans l'ecran
 document.querySelectorAll('.app-icon').forEach(function(btn) {
   btn.addEventListener('click', function() {
     var imgSrc = this.dataset.img;
     if (imgSrc) {
       siteIframe.style.display = 'none';
-      var img = document.getElementById('site-img');
-      if (!img) {
-        img = document.createElement('img');
-        img.id = 'site-img';
-        img.style.cssText = 'width:100%;height:100%;object-fit:contain;background:#000;';
-        siteIframe.parentElement.appendChild(img);
-      }
-      img.src = imgSrc;
-      img.style.display = 'block';
+      siteImg.src = imgSrc;
+      siteImg.style.display = '';
       siteUrl.textContent = 'MonVPN';
       desktop.classList.add('hidden');
       siteView.classList.remove('hidden');
@@ -89,8 +84,7 @@ document.querySelectorAll('.app-icon').forEach(function(btn) {
     }
     var url = this.dataset.url;
     if (!url) return;
-    var existingImg = document.getElementById('site-img');
-    if (existingImg) existingImg.style.display = 'none';
+    siteImg.style.display = 'none';
     siteIframe.style.display = '';
     siteIframe.src = url;
     siteUrl.textContent = url;
@@ -99,17 +93,11 @@ document.querySelectorAll('.app-icon').forEach(function(btn) {
   });
 });
 
-// Retour site → bureau (nettoyage image aussi)
-var origBack = siteBack.onclick;
-siteBack.addEventListener('click', function() {
-  var existingImg = document.getElementById('site-img');
-  if (existingImg) existingImg.style.display = 'none';
-  siteIframe.style.display = '';
-});
-
 // Retour site → bureau
 siteBack.addEventListener('click', function() {
   siteView.classList.add('hidden');
   siteIframe.src = '';
+  siteIframe.style.display = '';
+  siteImg.style.display = 'none';
   desktop.classList.remove('hidden');
 });
