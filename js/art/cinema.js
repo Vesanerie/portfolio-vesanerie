@@ -80,13 +80,12 @@ if (arrowRight) arrowRight.addEventListener('click', function() {
 document.addEventListener('keydown', function(e) {
   var animView = document.getElementById('animation-view');
   if (!animView || animView.classList.contains('hidden')) return;
+  var idx = cinemaActiveIndex();
   if (e.key === 'ArrowRight') {
     e.preventDefault();
-    var i = cinemaActiveIndex();
-    cinemaSelect(i < cinemaThumbs.length - 1 ? i + 1 : 0);
+    cinemaSelect(idx < cinemaThumbs.length - 1 ? idx + 1 : 0);
   } else if (e.key === 'ArrowLeft') {
     e.preventDefault();
-    var i = cinemaActiveIndex();
-    cinemaSelect(i > 0 ? i - 1 : cinemaThumbs.length - 1);
+    cinemaSelect(idx > 0 ? idx - 1 : cinemaThumbs.length - 1);
   }
 });
