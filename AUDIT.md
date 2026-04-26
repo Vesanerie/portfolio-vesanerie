@@ -143,7 +143,7 @@ Constat : pas de JSON-LD sur les sous-pages (art, tech, music). Pas de schema `C
 - `images/` : 6 JPEG Carnet-Rouge, 244-645 Ko (total 2,7 Mo) -- **non referencees dans le HTML actuel**
 - `favicon.png` : 95 octets -- tres petit, potentiellement un placeholder ou icone minimale
 
-**Images distantes (R2)** : toutes les images du portfolio sont servies depuis `pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev`. Formats utilises : .webp, .png, .jpg, .pdf.
+**Images distantes (R2)** : toutes les images du portfolio sont servies depuis `pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev`. Toutes les images ont ete converties en WebP (228 Mo → 35 Mo, -85%). Tous les assets R2 (images, PDFs, videos) ont un header `Cache-Control: public, max-age=31536000, immutable`.
 
 ### 3.3 Lazy loading
 
@@ -178,7 +178,7 @@ Constat : pas de JSON-LD sur les sous-pages (art, tech, music). Pas de schema `C
 - **`slideshow_optimized/` et `images/` sont des fichiers locaux non utilises** -- poids mort dans le repo (5,3 Mo)
 - **favicon.png = 95 octets** -- le vrai favicon est charge depuis R2 (`Logo.png`). Le fichier local est probablement un reliquat.
 - **Paper Fold texture** chargee 2 fois : dans `landing.css` L148 et dans `pile.css` L50 (meme URL R2, donc cache navigateur fait le travail)
-- **Texture_landscape.png** (508 Ko) chargee en `background` sur `body::before` (`base.css` L19) -- fichier lourd pour une texture de fond
+- **Texture_landscape.webp** (263 Ko, convertie depuis PNG 508 Ko) chargee en `background` sur `body::before` (`base.css` L19)
 
 ---
 
@@ -578,7 +578,7 @@ Les cartes de la pile (edition, illustration, graphisme, animation) **restent en
 
 19. **Tech page demo iframe** : les sites charges dans l'iframe (gesturo.fr etc.) peuvent bloquer le framing via `X-Frame-Options` ou `Content-Security-Policy`. Si c'est le cas, l'iframe sera vide sans message d'erreur visible.
 
-20. **Service Worker `CACHE_NAME = 'vesanerie-v1'`** (`sw.js` L3) : n'a pas ete incremente depuis la creation -- les mises a jour d'assets pourraient etre servies depuis l'ancien cache.
+20. **Service Worker `CACHE_NAME`** (`sw.js` L3) : bumpe de `v1` a `v2` lors de la conversion WebP (2026-04-26). Doit etre incremente a chaque modification d'assets pour forcer le refresh du cache.
 
 ---
 
