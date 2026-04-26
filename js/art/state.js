@@ -12,8 +12,7 @@ export const state = {
   historyDepth: 0,
   poppingState: false,
   currentSubPile: null,
-  folderHistory: [],
-  coversLoaded: {}
+  folderHistory: []
 };
 
 export function setBackLink(label, href, onclick) {
