@@ -57,41 +57,7 @@ if (document.readyState === 'loading') {
   startPdfInit();
 }
 
-// ===== PDF covers (sequential loading) =====
-async function loadPdfCover(url, card) {
-  if (card.hasAttribute('data-skip-cover')) return;
-  if (typeof pdfjsLib === 'undefined') return;
-  try {
-    var pdf = await pdfjsLib.getDocument(url).promise;
-    var page = await pdf.getPage(1);
-    var viewport = page.getViewport({ scale: 0.4 });
-    var canvas = document.createElement('canvas');
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-    await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
-    card.style.backgroundImage = 'url(' + canvas.toDataURL('image/jpeg', 0.6) + ')';
-    card.style.backgroundSize = 'cover';
-    card.style.backgroundPosition = 'center';
-    card.classList.add('has-cover');
-  } catch (e) { console.warn('Cover load failed:', url, e); }
-}
-
-async function loadCoversInView(viewId) {
-  var view = viewId ? document.getElementById(viewId + '-view') : document.getElementById('pile-view');
-  if (!view || state.coversLoaded[viewId || 'main']) return;
-  state.coversLoaded[viewId || 'main'] = true;
-  var cards = view.querySelectorAll('.pile-book, .pile-phone, .pile-folder, .pile-film');
-  for (var i = 0; i < cards.length; i++) {
-    var card = cards[i];
-    var pdfUrl = card.getAttribute('data-pdf') || card.getAttribute('data-cover-pdf');
-    if (pdfUrl && !card.classList.contains('has-cover')) {
-      await loadPdfCover(pdfUrl, card);
-    }
-  }
-}
-
-// Load main pile covers on start
-loadCoversInView(null);
+// PDF covers are now static thumbnails in the HTML (no JS loading needed)
 
 // ===== Media control =====
 function stopMediaInFolder(folderId) {
@@ -151,7 +117,6 @@ function openFolder(folderId) {
   folderView.classList.remove('hidden');
   state.currentSubPile = folderId;
 
-  loadCoversInView(folderId);
   restoreMediaInFolder(folderId);
 
   setBackLink('Art', '#', function() { closeFolder(); });
