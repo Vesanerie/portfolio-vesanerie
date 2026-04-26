@@ -14,48 +14,28 @@ if (sessionStorage.getItem('art-dealt')) {
 }
 sessionStorage.setItem('art-dealt', '1');
 
-// ===== PDF.js init =====
-function waitForPdfJs(callback, retries) {
-  if (typeof pdfjsLib !== 'undefined') {
+// ===== PDF.js lazy load =====
+var pdfJsLoaded = false;
+function loadPdfJs(callback) {
+  if (pdfJsLoaded) { callback(); return; }
+  if (typeof pdfjsLib !== 'undefined') { pdfJsLoaded = true; callback(); return; }
+  var s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+  s.onload = function() {
+    pdfJsLoaded = true;
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     callback();
-  } else if (retries > 0) {
-    setTimeout(function() { waitForPdfJs(callback, retries - 1); }, 200);
-  } else {
-    console.warn('PDF.js not loaded after retries');
-    callback();
-  }
+  };
+  document.head.appendChild(s);
 }
 
-function initPdfJs() {
-  document.querySelectorAll('.gallery-pdf').forEach(function(item) {
-    var pdfUrl = item.getAttribute('data-pdf');
-    var canvas = item.querySelector('canvas');
-    if (pdfUrl && canvas && typeof pdfjsLib !== 'undefined') {
-      pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
-        pdf.getPage(1).then(function(page) {
-          var viewport = page.getViewport({ scale: 0.5 });
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-          page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport });
-        });
-      }).catch(function(e) { console.warn('Gallery PDF cover failed:', e); });
-    }
-    item.addEventListener('click', function() {
-      var bookId = item.getAttribute('data-book');
-      if (bookId) openBook(bookId);
-    });
+// Gallery PDF click handlers
+document.querySelectorAll('.gallery-pdf').forEach(function(item) {
+  item.addEventListener('click', function() {
+    var bookId = item.getAttribute('data-book');
+    if (bookId) openBook(bookId);
   });
-}
-
-function startPdfInit() {
-  waitForPdfJs(initPdfJs, 15);
-}
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', startPdfInit);
-} else {
-  startPdfInit();
-}
+});
 
 // PDF covers are now static thumbnails in the HTML (no JS loading needed)
 
@@ -189,7 +169,9 @@ function openPdfBook(pdfUrl, singlePage) {
     setBackLink('Art', '#', function() { closeBook(); });
   }
 
-  loadPdfAsBook(pdfUrl, dom.pdfContainer, singlePage);
+  loadPdfJs(function() {
+    loadPdfAsBook(pdfUrl, dom.pdfContainer, singlePage);
+  });
   history.pushState({view: 'book'}, '');
   state.historyDepth++;
 }
