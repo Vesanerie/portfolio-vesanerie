@@ -43,12 +43,14 @@ if (tiktokScroll && tiktokCounter) {
   tiktokUp.addEventListener('click', function() {
     itemH = getItemH();
     var idx = Math.floor(tiktokScroll.scrollTop / itemH);
-    if (idx > 0) tiktokScroll.scrollTo({ top: (idx - 1) * itemH, behavior: 'smooth' });
+    var prev = idx > 0 ? idx - 1 : tiktokTotal - 1;
+    tiktokScroll.scrollTo({ top: prev * itemH, behavior: 'smooth' });
   });
 
   tiktokDown.addEventListener('click', function() {
     itemH = getItemH();
     var idx = Math.floor(tiktokScroll.scrollTop / itemH);
-    if (idx < tiktokTotal - 1) tiktokScroll.scrollTo({ top: (idx + 1) * itemH, behavior: 'smooth' });
+    var next = idx < tiktokTotal - 1 ? idx + 1 : 0;
+    tiktokScroll.scrollTo({ top: next * itemH, behavior: 'smooth' });
   });
 }
