@@ -528,44 +528,37 @@ Les cartes de la pile (edition, illustration, graphisme, animation) **restent en
 
 ## 10. Bugs potentiels et incoherences
 
-### 10.1 Bugs restants
+### 10.1 Incoherences acceptees
 
-1. **`all: unset` supprime l'outline de focus** sur de nombreux boutons interactifs (`pile-book`, `ipod-track`, `cinema-arrow`, `tiktok-arrow`, `fiche-back`, `site-back`, `lightbox-arrow`). Les utilisateurs clavier ne voient pas quel element est focus.
+1. **Breakpoints 600px vs 700px** : les composants de la page Art utilisent 700px tandis que les composants partages utilisent 600px. Changer casserait le rendu sur d'autres pages.
 
-2. **iPod track couleur hardcodee** : `music.css` L87 `color: #333` -- fonctionne car override en dark, mais une variable serait plus propre.
+2. **Deux systemes de lightbox differents** : art (lightbox.js, `.gallery-lightbox`) et tech (inline script, `.lightbox`). Les unifier serait une refonte importante.
 
-### 10.2 Incoherences restantes
+### 10.2 Corriges (2026-04-26)
 
-3. **Breakpoints 600px vs 700px** : les composants de la page Art utilisent 700px tandis que les composants partages utilisent 600px.
+- `.cpanel.yml` obsolete -- supprime du repo
+- Fichiers internes deployes publiquement -- `.md` exclus du deploy FTP
+- Couleurs hardcodees dans tech.css lightbox -- remplacees par `var(--bg)`
+- `slideshow_optimized/`, `images/`, `public/` inutilises -- supprimes du repo
+- Cinema thumb Toucan Parapluie identique a Bande Demo -- thumbnail unique genere
+- 4 iframes TikTok chargees au load -- lazy load via `data-src`
+- `data-skip-cover` code mort dans art.js -- supprime avec la refonte des covers PDF
+- Service Worker `CACHE_NAME` jamais incremente -- bumpe a v4
+- Contact/tools card divs sans role -- `role="button" tabindex="0"` ajoute
+- Pas de skip-to-content -- lien `.skip-link` ajoute sur toutes les pages
+- Theme-color flash en dark mode -- script inline en haut du body
+- `var i` redeclare dans cinema.js -- variable unique `idx`
+- `all: unset` cassait le focus clavier -- `focus-visible` outline ajoute globalement
+- iPod track couleur hardcodee `#333` -- remplacee par `var(--text)`
+- Variables CSS mortes `--halftone` et `--accent` -- supprimees de variables.css
+- Code mort `ficheView`/`ficheBack` dans tech.js -- supprime
+- Pas de `<h1>` sur sous-pages -- `<h1>` ajoute sur art/, tech/, music/
 
-4. **Deux systemes de lightbox differents** : art (lightbox.js, `.gallery-lightbox`) et tech (inline script, `.lightbox`).
+### 10.3 Points d'attention (non-bugs)
 
-5. **Variables CSS inutilisees** : `--halftone` et `--accent` definies dans `variables.css` mais jamais referencees.
+3. **Tech page demo iframe** : les sites charges dans l'iframe peuvent bloquer le framing via `X-Frame-Options`.
 
-6. **`ficheView` et `ficheBack`** declares dans `tech.js` mais jamais utilises -- code mort.
-
-7. **No `<h1>`** sur `art/index.html`, `tech/index.html` et `music/index.html` -- impact SEO.
-
-### 10.3 Corriges (2026-04-26)
-
-- ~~`.cpanel.yml` obsolete~~ -- supprime du repo
-- ~~Fichiers internes deployes publiquement~~ -- `.md` exclus du deploy FTP
-- ~~Couleurs hardcodees dans tech.css lightbox~~ -- remplacees par `var(--bg)`
-- ~~`slideshow_optimized/`, `images/`, `public/` inutilises~~ -- supprimes du repo
-- ~~Cinema thumb Toucan Parapluie identique a Bande Demo~~ -- thumbnail unique genere
-- ~~4 iframes TikTok chargees au load~~ -- lazy load via `data-src`
-- ~~`data-skip-cover` code mort dans art.js~~ -- supprime avec la refonte des covers PDF
-- ~~Service Worker `CACHE_NAME` jamais incremente~~ -- bumpe a v4
-- ~~Contact/tools card divs sans role~~ -- `role="button" tabindex="0"` ajoute
-- ~~Pas de skip-to-content~~ -- lien `.skip-link` ajoute sur toutes les pages
-- ~~Theme-color flash en dark mode~~ -- script inline en haut du body
-- ~~`var i` redeclare dans cinema.js~~ -- variable unique `idx`
-
-### 10.4 Points d'attention (non-bugs)
-
-8. **Tech page demo iframe** : les sites charges dans l'iframe peuvent bloquer le framing via `X-Frame-Options`.
-
-9. **Service Worker `CACHE_NAME`** (`sw.js` L3) : actuellement `vesanerie-v4`. Doit etre incremente a chaque modification d'assets.
+4. **Service Worker `CACHE_NAME`** (`sw.js` L3) : actuellement `vesanerie-v4`. Doit etre incremente a chaque modification d'assets.
 
 ---
 
@@ -576,11 +569,11 @@ Les cartes de la pile (edition, illustration, graphisme, animation) **restent en
 | Categorie | Etat | Notes |
 |---|---|---|
 | Structure | Propre | Architecture modulaire coherente, CSS/JS bien decoupe, pas de framework |
-| SEO | Bon | JSON-LD, canonical, sitemap, og, Twitter Cards. Manque headings `<h1>` sur sous-pages |
+| SEO | Tres bon | JSON-LD, canonical, sitemap, og, Twitter Cards, `<h1>` sur toutes les pages |
 | Performance | Tres bon | WebP (228→35 Mo), PDFs compresses (153→53 Mo), Cache-Control 1 an sur tous les assets R2, preconnect, preload, lazy load PDF.js et TikTok iframes, thumbnails PDF statiques |
-| Accessibilite | Bon | ARIA, skip-link, role="button" sur divs cliquables, rel="noopener". Reste : `all: unset` casse le focus sur quelques boutons |
-| Mobile | Bon | Responsive complet, touch supporte. Incoherence breakpoints 600/700px |
-| Dark mode | Bon | Variables coherentes, cards keep-light, theme-color instantane (script inline) |
+| Accessibilite | Tres bon | ARIA, skip-link, focus-visible, role="button", rel="noopener" |
+| Mobile | Bon | Responsive complet, touch supporte. Incoherence breakpoints 600/700px (acceptee) |
+| Dark mode | Tres bon | Variables coherentes, cards keep-light, theme-color instantane, pas de couleurs hardcodees |
 | Fonctionnalites | Complet | Slideshow, PDF, lightbox, tilt, cinema, TikTok, iPod -- tout fonctionne |
 | Deploiement | Propre | GitHub Actions FTP, .md exclus, dossiers morts supprimes, manifest.json PWA |
-| Bugs restants | 2 mineurs | Focus invisible (all:unset), variables CSS mortes |
+| Bugs restants | 0 | 2 incoherences acceptees (breakpoints, double lightbox) |
