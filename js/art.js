@@ -63,13 +63,11 @@ function restoreMediaInFolder(folderId) {
   });
   var firstVideo = true;
   view.querySelectorAll('video').forEach(function(v) {
+    v.muted = true;
     if (firstVideo) {
       if (!v.src && v.dataset.src) v.src = v.dataset.src;
-      v.muted = false;
       v.play().catch(function(){});
       firstVideo = false;
-    } else {
-      v.muted = true;
     }
   });
 }
