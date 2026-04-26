@@ -67,31 +67,44 @@ document.querySelectorAll('.app-icon').forEach(function(btn) {
   });
 });
 
-// Clic sur icone → lance la demo ou affiche l'image
+// Clic sur icone → lance la demo ou affiche l'image dans l'ecran
 document.querySelectorAll('.app-icon').forEach(function(btn) {
   btn.addEventListener('click', function() {
     var imgSrc = this.dataset.img;
     if (imgSrc) {
-      var lb = document.getElementById('lightbox');
-      var lbContent = document.getElementById('lightbox-content');
-      lbContent.innerHTML = '';
-      var img = document.createElement('img');
+      siteIframe.style.display = 'none';
+      var img = document.getElementById('site-img');
+      if (!img) {
+        img = document.createElement('img');
+        img.id = 'site-img';
+        img.style.cssText = 'width:100%;height:100%;object-fit:contain;';
+        siteIframe.parentElement.appendChild(img);
+      }
       img.src = imgSrc;
-      img.className = 'lightbox-img';
-      lbContent.appendChild(img);
-      document.getElementById('lb-prev').style.display = 'none';
-      document.getElementById('lb-next').style.display = 'none';
-      document.getElementById('lb-counter').style.display = 'none';
-      lb.classList.add('open');
+      img.style.display = 'block';
+      siteUrl.textContent = 'MonVPN';
+      desktop.classList.add('hidden');
+      siteView.classList.remove('hidden');
       return;
     }
     var url = this.dataset.url;
     if (!url) return;
+    var existingImg = document.getElementById('site-img');
+    if (existingImg) existingImg.style.display = 'none';
+    siteIframe.style.display = '';
     siteIframe.src = url;
     siteUrl.textContent = url;
     desktop.classList.add('hidden');
     siteView.classList.remove('hidden');
   });
+});
+
+// Retour site → bureau (nettoyage image aussi)
+var origBack = siteBack.onclick;
+siteBack.addEventListener('click', function() {
+  var existingImg = document.getElementById('site-img');
+  if (existingImg) existingImg.style.display = 'none';
+  siteIframe.style.display = '';
 });
 
 // Retour site → bureau
