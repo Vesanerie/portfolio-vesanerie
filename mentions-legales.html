@@ -18,6 +18,10 @@
   <link rel="stylesheet" href="css/components/mentions.css">
 </head>
 <body>
+  <script>
+    (function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#0e0e0e':'#f0ece4');})();
+  </script>
+  <a href="#mentions" class="skip-link">Aller au contenu</a>
 
   <button class="theme-toggle" aria-label="Changer le theme" onclick="toggleTheme()">
     <div class="dot"></div>
@@ -25,7 +29,7 @@
 
   <a href="./" class="back-link">&larr; Accueil</a>
 
-  <div class="mentions-page">
+  <div class="mentions-page" id="mentions">
     <h1 class="mentions-title">Mentions l&eacute;gales</h1>
 
     <div class="mentions-layout">

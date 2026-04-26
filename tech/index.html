@@ -32,6 +32,10 @@
   <link rel="stylesheet" href="../css/tech.css">
 </head>
 <body>
+  <script>
+    (function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#0e0e0e':'#f0ece4');})();
+  </script>
+  <a href="#laptop" class="skip-link">Aller au contenu</a>
 
   <button class="theme-toggle" aria-label="Changer le theme" onclick="toggleTheme()">
     <div class="dot"></div>
@@ -40,7 +44,7 @@
   <a href="../" class="back-link">&larr; Accueil</a>
 
   <div class="tech-page">
-    <div class="laptop">
+    <div class="laptop" id="laptop">
 
       <!-- Écran -->
       <div class="screen-shell">
@@ -166,7 +170,7 @@
 
   <button class="tools-trigger" aria-label="Outils" onclick="document.querySelector('.tools-card').classList.add('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="tools-trigger-icon"></button>
   <div class="tools-card">
-    <div class="tools-card-label" onclick="this.parentElement.classList.toggle('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="card-logo">Outils</div>
+    <div class="tools-card-label" role="button" tabindex="0" onclick="this.parentElement.classList.toggle('open')"><img src="https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Logo.png" alt="" class="card-logo">Outils</div>
     <div class="tools-card-content">
       <div class="tools-item">VS Code</div>
       <div class="tools-item">Claude Code</div>

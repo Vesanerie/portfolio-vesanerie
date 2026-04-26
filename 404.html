@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="css/components/error-page.css">
 </head>
 <body>
+  <script>
+    (function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='dark'?'#0e0e0e':'#f0ece4');})();
+  </script>
 
   <button class="theme-toggle" aria-label="Changer le theme" onclick="toggleTheme()">
     <div class="dot"></div>
