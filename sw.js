@@ -1,6 +1,6 @@
 // ===== Service Worker — Cache offline =====
 
-var CACHE_NAME = 'vesanerie-v3';
+var CACHE_NAME = 'vesanerie-v4';
 
 var PRECACHE_URLS = [
   '/',
