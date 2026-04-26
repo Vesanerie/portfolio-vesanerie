@@ -77,7 +77,7 @@ document.querySelectorAll('.app-icon').forEach(function(btn) {
       if (!img) {
         img = document.createElement('img');
         img.id = 'site-img';
-        img.style.cssText = 'width:100%;height:100%;object-fit:contain;';
+        img.style.cssText = 'width:100%;height:100%;object-fit:contain;background:#000;';
         siteIframe.parentElement.appendChild(img);
       }
       img.src = imgSrc;
