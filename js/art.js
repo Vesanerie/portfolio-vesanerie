@@ -61,7 +61,10 @@ function restoreMediaInFolder(folderId) {
       iframe.removeAttribute('data-src');
     }
   });
-  view.querySelectorAll('video').forEach(function(v) { v.play().catch(function(){}); });
+  view.querySelectorAll('video').forEach(function(v) {
+    if (!v.src && v.dataset.src) v.src = v.dataset.src;
+    v.play().catch(function(){});
+  });
 }
 
 // CMP video

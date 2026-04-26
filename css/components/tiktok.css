@@ -163,10 +163,12 @@
   overflow: hidden;
 }
 
-.tiktok-embed-wrap iframe {
+.tiktok-embed-wrap iframe,
+.tiktok-embed-wrap video {
   width: 100%;
   height: 100%;
   border: none;
+  object-fit: cover;
 }
 
 .tiktok-nav-arrows {

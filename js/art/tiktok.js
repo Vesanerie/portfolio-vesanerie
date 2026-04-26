@@ -1,4 +1,4 @@
-// ===== TikTok scroll counter + arrows =====
+// ===== TikTok video scroll counter + arrows =====
 
 var tiktokScroll = document.querySelector('.tiktok-scroll');
 var tiktokCounter = document.getElementById('tiktok-counter');
@@ -13,6 +13,19 @@ if (tiktokScroll && tiktokCounter) {
   window.addEventListener('resize', function() { itemH = getItemH(); });
   var currentTiktok = 0;
 
+  function playCurrentVideo() {
+    tiktokWraps.forEach(function(wrap, i) {
+      var video = wrap.querySelector('video');
+      if (!video) return;
+      if (i === currentTiktok) {
+        if (!video.src && video.dataset.src) video.src = video.dataset.src;
+        video.play().catch(function(){});
+      } else {
+        video.pause();
+      }
+    });
+  }
+
   var tiktokScrollTimer = null;
   tiktokScroll.addEventListener('scroll', function() {
     if (tiktokScrollTimer) return;
@@ -21,13 +34,8 @@ if (tiktokScroll && tiktokCounter) {
       var idx = Math.floor(tiktokScroll.scrollTop / itemH);
       tiktokCounter.textContent = (idx + 1) + ' / ' + tiktokTotal;
       if (idx !== currentTiktok) {
-        var prevIframe = tiktokWraps[currentTiktok].querySelector('iframe');
-        if (prevIframe) {
-          var src = prevIframe.src;
-          prevIframe.src = '';
-          prevIframe.src = src;
-        }
         currentTiktok = idx;
+        playCurrentVideo();
       }
     }, 100);
   }, { passive: true });
