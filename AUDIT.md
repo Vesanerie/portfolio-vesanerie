@@ -115,7 +115,7 @@ Constat : pas de JSON-LD sur les sous-pages (art, tech, music). Pas de schema `C
 - **META description absente** sur `mentions-legales.html` et `404.html` -- acceptable car `noindex`
 - **Canonical absent** sur `mentions-legales.html` et `404.html` -- acceptable car `noindex`
 - **og:image identique** sur toutes les pages -- meme visuel `Vesanerie_portfolio.png`
-- **Pas de Twitter Card** (`twitter:card`, `twitter:title`, etc.) sur aucune page
+- **Twitter Cards** ajoutees sur toutes les pages principales (summary_large_image)
 - **Pas de hreflang** -- site uniquement en francais, pas necessaire sauf si audience internationale visee
 - **Titre index.html** utilise `&eacute;` au lieu de l'accent direct -- fonctionne mais inhabituel
 - **Description sans accents** sur toutes les pages (ex: "developpeur" au lieu de "developpeur") -- delibere pour compatibilite mais peut affecter la lisibilite dans les SERPs
@@ -139,11 +139,14 @@ Constat : pas de JSON-LD sur les sous-pages (art, tech, music). Pas de schema `C
 ### 3.2 Images
 
 **Images locales** :
-- `slideshow_optimized/` : 10 fichiers webp, 165-334 Ko chacun (total 2,6 Mo) -- **non utilisees dans le HTML**, les URLs pointent vers R2
-- `images/` : 6 JPEG Carnet-Rouge, 244-645 Ko (total 2,7 Mo) -- **non referencees dans le HTML actuel**
-- `favicon.png` : 95 octets -- tres petit, potentiellement un placeholder ou icone minimale
+- `favicon.png` : 95 octets -- le vrai favicon est charge depuis R2 (`Logo.png`)
+- Les dossiers `images/` et `public/` ont ete supprimes du repo (2026-04-26)
 
-**Images distantes (R2)** : toutes les images du portfolio sont servies depuis `pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev`. Toutes les images ont ete converties en WebP (228 Mo → 35 Mo, -85%). Tous les assets R2 (images, PDFs, videos) ont un header `Cache-Control: public, max-age=31536000, immutable`.
+**Images distantes (R2)** : toutes les images du portfolio sont servies depuis `pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev`. Toutes les images ont ete converties en WebP (228 Mo → 35 Mo, -85%). Tous les assets R2 (images, PDFs, videos, MP3) ont un header `Cache-Control: public, max-age=31536000, immutable`.
+
+**PDFs compresses** (2026-04-26) : tous les PDFs ont ete compresses via Ghostscript (153 Mo → 53 Mo, -65%). Les gros fichiers comme le Carnet Rose sont passes de 58 Mo a 11.5 Mo.
+
+**OG image** : `Vesanerie_portfolio_og.jpg` (99 Ko) remplace l'ancien PNG de 832 Ko.
 
 ### 3.3 Lazy loading
 
@@ -152,7 +155,7 @@ Constat : pas de JSON-LD sur les sous-pages (art, tech, music). Pas de schema `C
 - `loading="lazy"` sur les thumbnails cinema (L439-458)
 - `loading="lazy"` sur les images d'experimentation tech (L126, L142)
 - **Slideshow landing** : lazy par construction (2 images max en DOM, creees/supprimees dynamiquement, `index.html` L188-216)
-- **PDF covers** : charges sequentiellement avec `await` (`art.js` L61-91)
+- **PDF covers** : thumbnails statiques WebP pre-generes sur R2 (8-38 Ko chacun, plus besoin de charger les PDFs entiers)
 
 ### 3.4 Optimisations
 
@@ -160,9 +163,10 @@ Constat : pas de JSON-LD sur les sous-pages (art, tech, music). Pas de schema `C
 - **`content-visibility: auto`** sur `.gallery-item img` (`gallery.css` L33)
 - **`contain: strict`** sur les images du slideshow (`base.css` L45)
 - **`will-change: opacity`** sur les images du slideshow (`base.css` L44)
-- **`preconnect`** vers fonts.googleapis.com et fonts.gstatic.com (toutes les pages)
-- **PDF.js en `defer`+SRI** sur art/index.html (L33)
-- **PDF.js en chargement paresseux** sur index.html (charge uniquement au clic sur CV, L235-240)
+- **`preconnect`** vers fonts.googleapis.com, fonts.gstatic.com et R2 (toutes les pages)
+- **`preload`** de `Texture_landscape.webp` sur toutes les pages
+- **PDF.js en chargement paresseux** sur toutes les pages (charge uniquement au clic)
+- **manifest.json** pour PWA (ajouter a l'ecran d'accueil)
 - **Scroll listeners** : tous throttles a 100ms et `{ passive: true }` (`main.js` L41, `tiktok.js` L18)
 - **requestAnimationFrame** pour le tilt 3D (`tilt.js` et `index.html` L291-294)
 - **Slideshow pause** quand l'onglet est masque (`index.html` L221-228 via `visibilitychange`)
@@ -172,13 +176,9 @@ Constat : pas de JSON-LD sur les sous-pages (art, tech, music). Pas de schema `C
 
 ### 3.5 Constats performance
 
-- **16 fichiers CSS separees sur art/index.html** -- 16 requetes HTTP distinctes (potentiellement lent sur HTTP/1.1, OK sur HTTP/2+). Pas de concatenation ni minification.
+- **13 fichiers CSS sur art/index.html** -- 13 requetes HTTP distinctes (OK sur HTTP/2+). Pas de concatenation ni minification.
 - **Aucune minification** ni des CSS ni des JS
 - **Pas de cache-busting** (hash) sur les noms de fichiers CSS/JS -- le Service Worker gere le cache mais un deploy FTP ne vide pas le cache navigateur
-- **`slideshow_optimized/` et `images/` sont des fichiers locaux non utilises** -- poids mort dans le repo (5,3 Mo)
-- **favicon.png = 95 octets** -- le vrai favicon est charge depuis R2 (`Logo.png`). Le fichier local est probablement un reliquat.
-- **Paper Fold texture** chargee 2 fois : dans `landing.css` L148 et dans `pile.css` L50 (meme URL R2, donc cache navigateur fait le travail)
-- **Texture_landscape.webp** (263 Ko, convertie depuis PNG 508 Ko) chargee en `background` sur `body::before` (`base.css` L19)
 
 ---
 
@@ -498,11 +498,9 @@ Les cartes de la pile (edition, illustration, graphisme, animation) **restent en
 - Exclusions : `.git*`, `.cpanel.yml`, `node_modules`, `src`, `package*.json`, `rsbuild.config.ts`
 - Constat : exclut `rsbuild.config.ts` qui n'existe pas dans le repo (reliquat d'une ancienne config)
 
-### 9.2 cPanel YAML (`.cpanel.yml`)
+### 9.2 cPanel YAML
 
-- Deploie uniquement `index.html` et `images/` vers `/home/jeke7360/vesanerie.fr/`
-- **Probleme** : ne deploie pas les sous-dossiers (art/, tech/, music/, css/, js/), ni les autres fichiers HTML (mentions-legales, 404), ni robots.txt, ni sitemap.xml, ni sw.js, ni .htaccess
-- **Ce fichier est probablement obsolete** -- le deploy reel passe par GitHub Actions FTP
+- Supprime du repo (2026-04-26). Le deploy passe par GitHub Actions FTP uniquement.
 
 ### 9.3 CNAME
 
@@ -518,80 +516,71 @@ Les cartes de la pile (edition, illustration, graphisme, animation) **restent en
 
 - Enregistre depuis `main.js` L2-4
 - Precache toutes les pages et assets CSS/JS
-- **Le SW utilise des chemins absolus** (`/sw.js`, `/art/`, etc.) -- fonctionne si le site est a la racine du domaine
+- Cache-name : `vesanerie-v4`
 
 ### 9.6 Constats deploiement
 
 - **FTP deploy est lent** et ne supporte pas de cache-busting automatique
-- **Le `.cpanel.yml` est incomplet** et ne devrait probablement pas etre dans le repo s'il n'est plus utilise
-- **`dist/` et `public/` sont des reliquats** d'un ancien build Rsbuild -- inutiles, prennent de la place dans le repo
-- **`AUDIT.md`, `MOBILE.md`, `rapport_web_design_2026.md`** sont deployes sur le serveur via FTP (non exclus) -- fichiers internes exposes publiquement
+- Les fichiers `.md` sont exclus du deploy FTP (corrige 2026-04-26)
+- Les dossiers `images/`, `public/` ont ete supprimes du repo, `.cpanel.yml` retire
 
 ---
 
 ## 10. Bugs potentiels et incoherences
 
-### 10.1 Bugs
+### 10.1 Bugs restants
 
-1. **`all: unset` supprime l'outline de focus** sur de nombreux boutons interactifs (`pile-book`, `ipod-track`, `cinema-arrow`, `tiktok-arrow`, `fiche-back`, `site-back`, `contact-card`, `tools-card`, `lightbox-arrow`). Les utilisateurs clavier ne voient pas quel element est focus. Fichiers concernes : `pile.css` L84, `music.css` L77, `anim.css` L66, `tiktok.css` L179, `tech.css` L122/L237, `cards.css` L78/L132, `tech.css` L496.
+1. **`all: unset` supprime l'outline de focus** sur de nombreux boutons interactifs (`pile-book`, `ipod-track`, `cinema-arrow`, `tiktok-arrow`, `fiche-back`, `site-back`, `lightbox-arrow`). Les utilisateurs clavier ne voient pas quel element est focus.
 
-2. **`.cpanel.yml` deploie uniquement `index.html` et `images/`** (`.cpanel.yml` L3-5) -- si cPanel est encore utilise, les sous-pages ne sont pas deployees. Probablement inactif (FTP Actions fait le vrai deploy).
+2. **iPod track couleur hardcodee** : `music.css` L87 `color: #333` -- fonctionne car override en dark, mais une variable serait plus propre.
 
-3. **`playsinline` mal ecrit** : `art/index.html` L394, L402, L410 utilisent `playsinline` (tout attache) au lieu de `playsinline` -- en fait l'attribut correct est `playsinline` (pas de tiret) pour l'attribut HTML, mais la propriete JavaScript est `playsInline`. L'attribut HTML est correct.
+### 10.2 Incoherences restantes
 
-4. **Fichiers internes deployes publiquement** : `AUDIT.md`, `MOBILE.md`, `rapport_web_design_2026.md` ne sont pas exclus du FTP deploy et sont accessibles a `https://vesanerie.fr/AUDIT.md` etc.
+3. **Breakpoints 600px vs 700px** : les composants de la page Art utilisent 700px tandis que les composants partages utilisent 600px.
 
-5. **iPod track couleur hardcodee** : `music.css` L87 `color: #333` -- fonctionne car override en dark L91-92, mais une variable serait plus propre.
+4. **Deux systemes de lightbox differents** : art (lightbox.js, `.gallery-lightbox`) et tech (inline script, `.lightbox`).
 
-### 10.2 Incoherences
+5. **Variables CSS inutilisees** : `--halftone` et `--accent` definies dans `variables.css` mais jamais referencees.
 
-6. **Breakpoints 600px vs 700px** : les composants de la page Art utilisent 700px tandis que les composants partages (theme-toggle, cards, about) utilisent 600px. Entre 600 et 700px, certains elements sont en mode mobile et d'autres en mode desktop.
+6. **`ficheView` et `ficheBack`** declares dans `tech.js` mais jamais utilises -- code mort.
 
-7. **Deux systemes de lightbox differents** :
-   - `art/index.html` : lightbox simple dans `lightbox.js` (galerie images) -- div avec id `lightbox`, classe `.gallery-lightbox`
-   - `tech/index.html` : lightbox inline script (video + galerie + image) -- div avec id `lightbox`, classe `.lightbox`
-   Ces deux systemes ont des classes CSS differentes et ne partagent pas de code.
+7. **No `<h1>`** sur `art/index.html`, `tech/index.html` et `music/index.html` -- impact SEO.
 
-8. **Variables CSS inutilisees** : `--halftone` et `--accent` sont definies dans `variables.css` L13-14 et L27-28 mais ne sont referencees dans aucun fichier CSS ou JS du projet.
+### 10.3 Corriges (2026-04-26)
 
-9. **Couleurs hardcodees dans tech.css** : la lightbox tech utilise `#f0ece4` directement (L483, L506, L519) au lieu de `var(--bg)` ou `var(--text)`. En light mode `--bg` vaut `#f0ece4` donc ca fonctionne, mais conceptuellement c'est la couleur du dark mode qui est hardcodee dans le lightbox (fond noir + texte clair).
+- ~~`.cpanel.yml` obsolete~~ -- supprime du repo
+- ~~Fichiers internes deployes publiquement~~ -- `.md` exclus du deploy FTP
+- ~~Couleurs hardcodees dans tech.css lightbox~~ -- remplacees par `var(--bg)`
+- ~~`slideshow_optimized/`, `images/`, `public/` inutilises~~ -- supprimes du repo
+- ~~Cinema thumb Toucan Parapluie identique a Bande Demo~~ -- thumbnail unique genere
+- ~~4 iframes TikTok chargees au load~~ -- lazy load via `data-src`
+- ~~`data-skip-cover` code mort dans art.js~~ -- supprime avec la refonte des covers PDF
+- ~~Service Worker `CACHE_NAME` jamais incremente~~ -- bumpe a v4
+- ~~Contact/tools card divs sans role~~ -- `role="button" tabindex="0"` ajoute
+- ~~Pas de skip-to-content~~ -- lien `.skip-link` ajoute sur toutes les pages
+- ~~Theme-color flash en dark mode~~ -- script inline en haut du body
+- ~~`var i` redeclare dans cinema.js~~ -- variable unique `idx`
 
-10. **`slideshow_optimized/` et `images/` sont des copies locales** des assets R2 qui ne sont pas referencees dans le HTML. Elles sont deployees via FTP (non exclues) et prennent 5,3 Mo sur le serveur pour rien.
+### 10.4 Points d'attention (non-bugs)
 
-11. **`dist/` et `public/` dans le repo** : bien que `dist/` soit dans `.gitignore`, `public/` ne l'est pas et contient des duplicatas (CNAME, images, favicon).
+8. **Tech page demo iframe** : les sites charges dans l'iframe peuvent bloquer le framing via `X-Frame-Options`.
 
-12. **`sw.js` precache `/art/` mais art.js est un ES module** : le SW precache `/js/art.js` mais les imports ES (`./art/state.js`, etc.) ne declenchent pas le cache directement -- ils sont precaches individuellement dans `PRECACHE_URLS` donc c'est OK, mais un oubli futur serait silencieux.
-
-13. **`data-skip-cover`** reference dans `art.js` L62 mais **aucun element HTML** ne porte cet attribut -- code mort.
-
-14. **`ficheView` et `ficheBack`** declares dans `tech.js` L7-8 mais jamais utilises (pas de `fiche-view` ni `fiche-back` dans le HTML de tech/index.html, ces elements n'existent pas dans le DOM actuel) -- la fiche projet tech a ete retiree du HTML mais les references JS subsistent.
-
-15. **Cinema thumb Toucan Parapluie** reutilise la meme image que "Bande Demo" (`art/index.html` L457 : `https://img.youtube.com/vi/b65QqvTkKlQ/hqdefault.jpg`) -- thumbnail incorrect pour cette video MP4.
-
-16. **Contact card `<div>` avec `all: unset`** (`cards.css` L78) : le `all: unset` reset aussi `position`, `top`, etc., qui sont ensuite re-declares. Fonctionne mais fragile -- un seul oubli de re-declaration et le layout casse.
-
-17. **No `<h1>`** sur `art/index.html`, `tech/index.html` et `music/index.html` -- la structure heading commence par des `.pile-title` ou equivalents qui sont des `<div>`, pas des headings HTML. SEO impact : les crawlers ne trouvent pas de heading principal sur ces pages.
-
-### 10.3 Points d'attention (non-bugs)
-
-18. **4 iframes TikTok chargees simultanement** sur `art/index.html` L476-486 -- poids reseau significatif, pas de lazy loading. Les iframes ne sont visibles que quand on ouvre le dossier "tiktoks" mais elles sont presentes dans le DOM des le chargement.
-
-19. **Tech page demo iframe** : les sites charges dans l'iframe (gesturo.fr etc.) peuvent bloquer le framing via `X-Frame-Options` ou `Content-Security-Policy`. Si c'est le cas, l'iframe sera vide sans message d'erreur visible.
-
-20. **Service Worker `CACHE_NAME`** (`sw.js` L3) : bumpe de `v1` a `v2` lors de la conversion WebP (2026-04-26). Doit etre incremente a chaque modification d'assets pour forcer le refresh du cache.
+9. **Service Worker `CACHE_NAME`** (`sw.js` L3) : actuellement `vesanerie-v4`. Doit etre incremente a chaque modification d'assets.
 
 ---
 
 ## Resume
 
-| Categorie | Etat | Points critiques |
+> Derniere mise a jour : 2026-04-26
+
+| Categorie | Etat | Notes |
 |---|---|---|
-| Structure | Propre | Architecture modulaire coherente, CSS/JS bien decoupe |
-| SEO | Bon | JSON-LD, canonical, sitemap, og. Manque Twitter Cards et headings sur sous-pages |
-| Performance | Bon | Lazy loading, SW, prefetch. Manque minification et cache-busting |
-| Accessibilite | Moyen | ARIA present mais `all: unset` casse le focus sur ~12 elements |
+| Structure | Propre | Architecture modulaire coherente, CSS/JS bien decoupe, pas de framework |
+| SEO | Bon | JSON-LD, canonical, sitemap, og, Twitter Cards. Manque headings `<h1>` sur sous-pages |
+| Performance | Tres bon | WebP (228→35 Mo), PDFs compresses (153→53 Mo), Cache-Control 1 an sur tous les assets R2, preconnect, preload, lazy load PDF.js et TikTok iframes, thumbnails PDF statiques |
+| Accessibilite | Bon | ARIA, skip-link, role="button" sur divs cliquables, rel="noopener". Reste : `all: unset` casse le focus sur quelques boutons |
 | Mobile | Bon | Responsive complet, touch supporte. Incoherence breakpoints 600/700px |
-| Dark mode | Bon | Variables coherentes, cards keep-light. Variables inutilisees et couleurs hardcodees |
+| Dark mode | Bon | Variables coherentes, cards keep-light, theme-color instantane (script inline) |
 | Fonctionnalites | Complet | Slideshow, PDF, lightbox, tilt, cinema, TikTok, iPod -- tout fonctionne |
-| Deploiement | Fonctionnel | FTP Actions OK. `.cpanel.yml` obsolete, fichiers internes exposes |
-| Bugs | 3 vrais bugs | Focus invisible (all:unset), fichiers internes publics, variables mortes dans tech.js |
+| Deploiement | Propre | GitHub Actions FTP, .md exclus, dossiers morts supprimes, manifest.json PWA |
+| Bugs restants | 2 mineurs | Focus invisible (all:unset), variables CSS mortes |
