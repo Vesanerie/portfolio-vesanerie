@@ -1,6 +1,6 @@
 // ===== Service Worker — Cache offline =====
 
-var CACHE_NAME = 'vesanerie-v2';
+var CACHE_NAME = 'vesanerie-v3';
 
 var PRECACHE_URLS = [
   '/',
@@ -18,7 +18,7 @@ var PRECACHE_URLS = [
   '/css/components/scroll.css',
   '/css/components/pile.css',
   '/css/components/gallery.css',
-  '/css/components/folder.css',
+
   '/css/components/film.css',
   '/css/components/anim.css',
   '/css/components/tiktok.css',
