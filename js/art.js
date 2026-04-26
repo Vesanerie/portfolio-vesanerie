@@ -61,9 +61,16 @@ function restoreMediaInFolder(folderId) {
       iframe.removeAttribute('data-src');
     }
   });
+  var firstVideo = true;
   view.querySelectorAll('video').forEach(function(v) {
-    if (!v.src && v.dataset.src) v.src = v.dataset.src;
-    v.play().catch(function(){});
+    if (firstVideo) {
+      if (!v.src && v.dataset.src) v.src = v.dataset.src;
+      v.muted = false;
+      v.play().catch(function(){});
+      firstVideo = false;
+    } else {
+      v.muted = true;
+    }
   });
 }
 
