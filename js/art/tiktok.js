@@ -47,8 +47,10 @@ if (tiktokScroll && tiktokCounter) {
       if (!video) return;
       if (i === idx) {
         if (!video.src && video.dataset.src) video.src = video.dataset.src;
+        video.muted = false;
         video.play().catch(function(){});
       } else {
+        video.muted = true;
         video.pause();
       }
     });
