@@ -379,19 +379,19 @@ Les cartes de la pile (edition, illustration, graphisme, animation) **restent en
 ### 7.7 Cinema mode (cinema.js)
 
 - Ecran 16:9 avec placeholder cliquable
-- Thumbnails filmstrip horizontaux avec scroll
+- Thumbnails filmstrip horizontaux avec scroll (thumbnails WebP sur R2)
 - Navigation : fleches, clic thumb, clavier (quand animation-view visible)
-- Supporte YouTube (embed) et MP4 direct
-- Badge "MP4" sur les thumbs video locales
-- Compteur "1 / 7"
+- 6 videos MP4 auto-hebergees sur R2 (plus d'iframes YouTube)
+- Compteur "1 / 6"
 
 ### 7.8 TikTok viewer (tiktok.js)
 
-- Scroll snap dans un faux telephone
-- 4 iframes TikTok embed
+- Scroll infini dans un faux telephone (les videos bouclent en continu)
+- 8 videos MP4 compressees sur R2 (plus d'iframes TikTok embed)
+- Son actif sur la video en cours, mute+pause sur les autres
 - Navigation fleches haut/bas
-- Compteur "1 / 4"
-- Reset iframe au changement de video (evite la lecture simultanee)
+- Compteur "1 / 8" (affiche la position dans la boucle)
+- Lazy load : videos chargees uniquement a l'ouverture du dossier
 - CTA vers le profil TikTok
 
 ### 7.9 iPod Music Player (music.js)
@@ -419,11 +419,11 @@ Les cartes de la pile (edition, illustration, graphisme, animation) **restent en
 - 12 projets documentes (format, date, intention)
 - S'ouvre a la selection d'un book, se ferme a la fermeture
 
-### 7.12 Covers PDF (art.js L61-91)
+### 7.12 Covers PDF
 
-- Chargement sequentiel (pas parallele) pour eviter la surcharge
-- Render page 1 a scale 0.4, conversion en dataURL JPEG 60%
-- Application en background-image + classe `has-cover`
+- Thumbnails statiques WebP pre-generes sur R2 (8-38 Ko chacun)
+- Affiches en background-image + classe `has-cover` directement dans le HTML
+- Plus besoin de charger les PDFs entiers pour afficher la couverture
 
 ---
 
@@ -448,8 +448,8 @@ Les cartes de la pile (edition, illustration, graphisme, animation) **restent en
 2. Graphisme (dossier -> 6 items : RK Brand, Esport Team, Vesanerie, Covers d'album, 404 Error Page, Flyer Perth Draw Club)
 3. Illustration (dossier -> 3 carnets PDF + 16 images galerie)
 4. Motion Design (dossier -> 3 videos : CMP, Tatouage Typo, Titanic)
-5. Video/TikToks (dossier -> 4 TikTok embeds)
-6. Animation (dossier -> 7 videos : 6 YouTube + 1 MP4)
+5. Video/TikToks (dossier -> 8 videos MP4 auto-hebergees, scroll infini)
+6. Animation (dossier -> 6 videos MP4 auto-hebergees dans cinema mode)
 
 **Sous-dossiers** :
 - Esport Team : 12 images galerie
