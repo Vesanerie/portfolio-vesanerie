@@ -230,7 +230,16 @@ function closeBook() {
   if (state.currentSubPile) {
     var folderView = document.getElementById(state.currentSubPile + '-view');
     if (folderView) folderView.classList.remove('hidden');
-    setBackLink('Art', '#', function() { closeFolder(); });
+    var backLabel = 'Art';
+    if (state.folderHistory.length > 0) {
+      var gpId = state.folderHistory[state.folderHistory.length - 1];
+      var gpView = document.getElementById(gpId + '-view');
+      if (gpView) {
+        var gpTitle = gpView.querySelector('.pile-title');
+        if (gpTitle) backLabel = gpTitle.textContent;
+      }
+    }
+    setBackLink(backLabel, '#', function() { closeFolder(); });
   } else {
     dom.pileView.classList.remove('hidden');
     setBackLink('Accueil', '../', null);
