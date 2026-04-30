@@ -135,7 +135,17 @@ function closeFolder() {
     state.currentSubPile = state.folderHistory.pop();
     var parentView = document.getElementById(state.currentSubPile + '-view');
     if (parentView) parentView.classList.remove('hidden');
-    setBackLink('Art', '#', function() { closeFolder(); });
+    // Back label = parent du parent, ou "Art" si on est au 1er niveau
+    var backLabel = 'Art';
+    if (state.folderHistory.length > 0) {
+      var gpId = state.folderHistory[state.folderHistory.length - 1];
+      var gpView = document.getElementById(gpId + '-view');
+      if (gpView) {
+        var gpTitle = gpView.querySelector('.pile-title');
+        if (gpTitle) backLabel = gpTitle.textContent;
+      }
+    }
+    setBackLink(backLabel, '#', function() { closeFolder(); });
   } else {
     state.currentSubPile = null;
     dom.pileView.classList.remove('hidden');
@@ -143,9 +153,8 @@ function closeFolder() {
   }
   if (!state.poppingState && state.historyDepth > 0) {
     state.historyDepth--;
-    state.poppingState = true;
+    state.skipPopstate++;
     history.back();
-    setTimeout(function() { state.poppingState = false; }, 0);
   }
 }
 
@@ -228,9 +237,8 @@ function closeBook() {
   }
   if (!state.poppingState && state.historyDepth > 0) {
     state.historyDepth--;
-    state.poppingState = true;
+    state.skipPopstate++;
     history.back();
-    setTimeout(function() { state.poppingState = false; }, 0);
   }
 }
 
@@ -242,6 +250,11 @@ document.addEventListener('keydown', function(e) {
 
 // ===== Browser back button =====
 window.addEventListener('popstate', function() {
+  // Skip popstate events triggered by our own history.back() calls
+  if (state.skipPopstate > 0) {
+    state.skipPopstate--;
+    return;
+  }
   if (state.historyDepth <= 0) return;
   state.historyDepth--;
   state.poppingState = true;
