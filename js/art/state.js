@@ -12,6 +12,7 @@ export const state = {
   historyDepth: 0,
   poppingState: false,
   skipPopstate: 0,
+  closing: false,
   currentSubPile: null,
   folderHistory: []
 };
