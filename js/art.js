@@ -124,6 +124,8 @@ function openFolder(folderId) {
 }
 
 function closeFolder() {
+  if (state.closing) return;
+  state.closing = true;
   closeLightbox();
   if (state.currentSubPile) {
     stopMediaInFolder(state.currentSubPile);
@@ -155,7 +157,10 @@ function closeFolder() {
     state.historyDepth--;
     state.skipPopstate++;
     history.back();
+    // Sécurité : si le popstate ne se déclenche pas (ex: iOS Safari gesture), reset après 200ms
+    setTimeout(function() { if (state.skipPopstate > 0) state.skipPopstate = 0; }, 200);
   }
+  setTimeout(function() { state.closing = false; }, 100);
 }
 
 // ===== Book / PDF open & close =====
@@ -207,6 +212,8 @@ function openPdfBook(pdfUrl, singlePage) {
 }
 
 function closeBook() {
+  if (state.closing) return;
+  state.closing = true;
   closeLightbox();
   hideArtFiche();
   dom.bookView.classList.add('hidden');
@@ -248,7 +255,9 @@ function closeBook() {
     state.historyDepth--;
     state.skipPopstate++;
     history.back();
+    setTimeout(function() { if (state.skipPopstate > 0) state.skipPopstate = 0; }, 200);
   }
+  setTimeout(function() { state.closing = false; }, 100);
 }
 
 // Escape to close book
