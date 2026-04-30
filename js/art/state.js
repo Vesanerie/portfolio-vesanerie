@@ -11,6 +11,7 @@ export const state = {
   isPdfMode: false,
   historyDepth: 0,
   poppingState: false,
+  skipPopstate: 0,
   currentSubPile: null,
   folderHistory: []
 };
