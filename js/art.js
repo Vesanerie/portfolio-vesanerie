@@ -109,7 +109,16 @@ function openFolder(folderId) {
 
   restoreMediaInFolder(folderId);
 
-  setBackLink('Art', '#', function() { closeFolder(); });
+  var backLabel = 'Art';
+  if (state.folderHistory.length > 0) {
+    var parentId = state.folderHistory[state.folderHistory.length - 1];
+    var parentView = document.getElementById(parentId + '-view');
+    if (parentView) {
+      var parentTitle = parentView.querySelector('.pile-title');
+      if (parentTitle) backLabel = parentTitle.textContent;
+    }
+  }
+  setBackLink(backLabel, '#', function() { closeFolder(); });
   history.pushState({view: 'folder', id: folderId}, '');
   state.historyDepth++;
 }
@@ -134,7 +143,9 @@ function closeFolder() {
   }
   if (!state.poppingState && state.historyDepth > 0) {
     state.historyDepth--;
+    state.poppingState = true;
     history.back();
+    setTimeout(function() { state.poppingState = false; }, 0);
   }
 }
 
@@ -217,7 +228,9 @@ function closeBook() {
   }
   if (!state.poppingState && state.historyDepth > 0) {
     state.historyDepth--;
+    state.poppingState = true;
     history.back();
+    setTimeout(function() { state.poppingState = false; }, 0);
   }
 }
 
