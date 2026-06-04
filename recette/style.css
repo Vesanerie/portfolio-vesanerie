@@ -53,7 +53,7 @@ header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 
 .controls select:hover, .controls select:focus { border-color: var(--accent); background-color: rgba(255,255,255,0.1); }
 .controls select option { color: var(--text); }
 
-main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem 6rem; }
 
 .recipe-grid {
   display: grid;
@@ -62,11 +62,23 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
 }
 
 .card {
+  position: relative;
   background: var(--card); border-radius: var(--radius);
   overflow: hidden; cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
+.add-btn {
+  position: absolute; top: 0.6rem; right: 0.6rem; z-index: 3;
+  width: 34px; height: 34px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,0.92); color: var(--accent);
+  font-size: 1.3rem; line-height: 1; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18); transition: all 0.15s;
+}
+.add-btn:hover { transform: scale(1.08); }
+.add-btn.added { background: var(--accent); color: #fff; }
 .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 
 .card-img { width: 100%; height: 180px; object-fit: cover; background: var(--accent-light); }
@@ -115,12 +127,101 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
   padding: 1rem 1.2rem; margin-bottom: 1.5rem;
   display: flex; justify-content: space-between; align-items: center;
 }
-.total-cost .label { font-size: 0.9rem; color: var(--muted); }
-.total-cost .amount { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+.total-cost .label { font-size: 0.9rem; color: var(--muted); flex: 1; }
+.total-cost .amount { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--accent); white-space: nowrap; }
 
 .instructions { background: var(--bg); border-radius: var(--radius); padding: 1.2rem; font-size: 0.95rem; line-height: 1.7; }
 
 .no-results { text-align: center; padding: 4rem 1rem; color: var(--muted); font-size: 1.1rem; }
+
+/* Bouton ajouter dans le détail */
+.modal-add {
+  display: block; width: 100%; padding: 0.85rem 1rem; margin-bottom: 1.5rem;
+  border: 1.5px solid var(--accent); border-radius: 999px; background: transparent;
+  color: var(--accent); font-family: inherit; font-size: 0.95rem; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.modal-add:hover { background: var(--accent-light); }
+.modal-add.added { background: var(--accent); color: #fff; }
+
+/* Barre panier fixe */
+.cart-bar {
+  position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%);
+  z-index: 90; width: calc(100% - 2rem); max-width: 480px;
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.85rem 1.2rem; border: none; border-radius: 999px; cursor: pointer;
+  background: var(--accent); color: #fff; font-family: inherit; font-size: 0.95rem;
+  box-shadow: 0 6px 20px rgba(200,87,42,0.4); transition: transform 0.15s, opacity 0.2s;
+}
+.cart-bar.hidden { display: none; }
+.cart-bar:hover { transform: translateX(-50%) translateY(-2px); }
+.cart-icon { font-size: 1.1rem; }
+.cart-summary { font-weight: 600; }
+.cart-cta { margin-left: auto; opacity: 0.9; font-size: 0.9rem; white-space: nowrap; }
+
+/* Feuille liste de courses (bottom sheet) */
+.sheet { position: fixed; inset: 0; z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
+.sheet.hidden { display: none; }
+.sheet-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+.sheet-content {
+  position: relative; z-index: 1; width: 100%; max-width: 600px;
+  background: #fff; border-radius: 20px 20px 0 0; padding: 0.75rem 1.25rem 1.5rem;
+  max-height: 88vh; overflow-y: auto;
+  animation: sheet-up 0.25s ease;
+}
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.sheet-handle { width: 40px; height: 4px; border-radius: 2px; background: var(--border); margin: 0.25rem auto 0.75rem; }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.sheet-head h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+.sheet-head .close-btn { position: static; }
+
+.sheet-recipes { list-style: none; margin-bottom: 1.25rem; }
+.sheet-recipe { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+.sr-name { flex: 1; font-size: 0.95rem; }
+.sr-cost { color: var(--muted); font-size: 0.85rem; }
+.sr-remove { width: 26px; height: 26px; border-radius: 50%; border: none; background: var(--accent-light); color: var(--accent); font-size: 1.1rem; line-height: 1; cursor: pointer; }
+.sr-remove:hover { background: var(--accent); color: #fff; }
+
+.sl-name { flex: 1; }
+.sl-qty { color: var(--muted); font-size: 0.85rem; margin: 0 0.75rem; text-align: right; }
+.sl-price { font-weight: 600; color: var(--accent); white-space: nowrap; }
+
+/* Suggestions "Complète ta semaine" */
+.sugg-list { list-style: none; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.sugg-item {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.7rem 0.9rem; border: 1px solid var(--border); border-radius: var(--radius);
+}
+.sugg-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.sugg-name { font-size: 0.95rem; font-weight: 600; }
+.sugg-meta { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+.sugg-add {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; border: none;
+  background: var(--accent); color: #fff; font-size: 1.3rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: transform 0.15s;
+}
+.sugg-add:hover { transform: scale(1.08); }
+
+/* Recettes proches sur la fiche */
+.similar-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.25rem; }
+.similar-list li {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+  padding: 0.65rem 0.9rem; border: 1px solid var(--border); border-radius: var(--radius);
+  cursor: pointer; transition: background 0.15s;
+}
+.similar-list li:hover { background: var(--accent-light); }
+.sim-name { font-size: 0.92rem; font-weight: 500; }
+.sim-tag { font-size: 0.75rem; color: var(--accent); font-weight: 600; white-space: nowrap; }
+
+.sheet-actions { display: flex; gap: 0.75rem; }
+.btn-print, .btn-clear {
+  flex: 1; padding: 0.8rem; border-radius: 999px; font-family: inherit;
+  font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
+}
+.btn-print { border: none; background: var(--accent); color: #fff; }
+.btn-print:hover { filter: brightness(1.05); }
+.btn-clear { border: 1.5px solid var(--border); background: transparent; color: var(--muted); }
+.btn-clear:hover { border-color: var(--accent); color: var(--accent); }
 
 @media (max-width: 600px) {
   .recipe-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -129,4 +230,17 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
 }
 @media (max-width: 380px) {
   .recipe-grid { grid-template-columns: 1fr; }
+}
+
+/* Impression : seule la liste de courses sort */
+@media print {
+  header, main, .cart-bar, .modal, .sheet-overlay, .sheet-handle,
+  .sheet-actions, .sr-remove, .sheet-head .close-btn { display: none !important; }
+  body { background: #fff; }
+  .sheet, .sheet-content {
+    position: static; max-height: none; overflow: visible;
+    box-shadow: none; animation: none; padding: 0;
+  }
+  .sheet { display: block; }
+  .total-cost, .ingredient-list, .sheet-recipe { break-inside: avoid; }
 }

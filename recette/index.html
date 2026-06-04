@@ -40,6 +40,26 @@
     <div id="grid" class="recipe-grid"></div>
   </main>
 
+  <!-- Barre panier (sélection de la semaine) -->
+  <button id="cart-bar" class="cart-bar hidden" onclick="openSheet()" aria-label="Voir ma liste de courses">
+    <span class="cart-icon">🛒</span>
+    <span id="cart-summary" class="cart-summary"></span>
+    <span class="cart-cta">Ma liste →</span>
+  </button>
+
+  <!-- Feuille liste de courses cumulée -->
+  <div id="sheet" class="sheet hidden">
+    <div class="sheet-overlay" onclick="closeSheet()"></div>
+    <div class="sheet-content" role="dialog" aria-label="Ma liste de courses">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head">
+        <h2>Ma semaine</h2>
+        <button class="close-btn" onclick="closeSheet()" aria-label="Fermer">×</button>
+      </div>
+      <div id="sheet-body"></div>
+    </div>
+  </div>
+
   <!-- Modal detail -->
   <div id="modal" class="modal hidden">
     <div class="modal-overlay" onclick="closeModal()"></div>
