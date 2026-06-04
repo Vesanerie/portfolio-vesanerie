@@ -13,6 +13,29 @@ try { const a = JSON.parse(localStorage.getItem(STORE)); if (Array.isArray(a)) s
 function saveSelection() { try { localStorage.setItem(STORE, JSON.stringify([...selection])); } catch (e) {} }
 function selectedRecipes() { return recipes.filter(r => selection.has(r.id)); }
 
+// Mon placard : les basiques longue durée qu'on ne finit jamais, marqués "j'ai déjà".
+const PANTRY_STORE = 'recettes_pantry';
+let pantry = new Set();
+try { const a = JSON.parse(localStorage.getItem(PANTRY_STORE)); if (Array.isArray(a)) pantry = new Set(a); } catch (e) {}
+function savePantry() { try { localStorage.setItem(PANTRY_STORE, JSON.stringify([...pantry])); } catch (e) {} }
+
+// Ingrédients longue conservation : seuls ceux-là peuvent être "déjà chez soi".
+const STAPLE_WORDS = ['sel', 'poivre', 'huile', 'vinaigre', 'sucre', 'farine', 'moutarde',
+  'miel', 'levure', 'bouillon', 'muscade', 'cumin', 'paprika', 'cannelle', 'curry',
+  'herbes', 'piment', 'vanille', 'épice', 'sauce soja', 'maïzena'];
+// Périssables qui contiennent un mot de basique par accident (ex: "beurre demi-sel").
+const NOT_STAPLE = ['beurre', 'crème', 'fromage'];
+function isStaple(key) {
+  if (NOT_STAPLE.some(w => key.indexOf(w) !== -1)) return false;
+  return STAPLE_WORDS.some(w => key.indexOf(w) !== -1);
+}
+
+function togglePantry(key) {
+  if (pantry.has(key)) pantry.delete(key); else pantry.add(key);
+  savePantry();
+  renderSheet();
+}
+
 // Normalisation d'un ingrédient (minuscule + pluriel ignoré) pour comparer entre recettes.
 function normIng(name) {
   let k = name.trim().toLowerCase();
@@ -200,9 +223,9 @@ function updateCart() {
     if (!document.getElementById('sheet').classList.contains('hidden')) closeSheet();
     return;
   }
-  const total = selectedRecipes().reduce((s, r) => s + totalCost(r), 0);
+  const buyTotal = buildShoppingList().filter(it => !pantry.has(it.key)).reduce((s, it) => s + it.price, 0);
   document.getElementById('cart-summary').textContent =
-    n + ' recette' + (n > 1 ? 's' : '') + ' · ~' + total.toFixed(2) + ' €';
+    n + ' recette' + (n > 1 ? 's' : '') + ' · ~' + buyTotal.toFixed(2) + ' €';
   bar.classList.remove('hidden');
 }
 
@@ -213,7 +236,7 @@ function buildShoppingList() {
     r.ingredients.forEach(ing => {
       const name = ing[0], qty = ing[1], price = ing[2] || 0;
       const key = name.trim().toLowerCase();
-      if (!map.has(key)) map.set(key, { name: name, qtys: [], price: 0 });
+      if (!map.has(key)) map.set(key, { key: key, name: name, qtys: [], price: 0 });
       const e = map.get(key);
       if (qty) e.qtys.push(qty);
       e.price += price;
@@ -227,8 +250,6 @@ function renderSheet() {
   const body = document.getElementById('sheet-body');
   if (!sel.length) { body.innerHTML = ''; return; }
 
-  const total = sel.reduce((s, r) => s + totalCost(r), 0);
-
   const recipesHtml = sel.map(r =>
     '<li class="sheet-recipe">'
     + '<span class="sr-name">' + r.name + '</span>'
@@ -237,12 +258,35 @@ function renderSheet() {
     + '</li>'
   ).join('');
 
+  // Sépare ce qu'il faut acheter de ce qu'on a déjà au placard.
   const items = buildShoppingList();
-  const listHtml = items.map(it =>
+  const toBuy = items.filter(it => !pantry.has(it.key));
+  const have = items.filter(it => pantry.has(it.key));
+  const buyTotal = toBuy.reduce((s, it) => s + it.price, 0);
+  const haveTotal = have.reduce((s, it) => s + it.price, 0);
+
+  const priceLabel = it => (it.price > 0 ? it.price.toFixed(2) + ' €' : 'gratuit');
+  const homeBtn = it => isStaple(it.key)
+    ? '<button class="home-btn" onclick="togglePantry(\'' + it.key.replace(/'/g, "\\'") + '\')" aria-label="J\'ai déjà ça" title="J\'ai déjà ça">🏠</button>'
+    : '';
+
+  const listHtml = toBuy.map(it =>
     '<li><span class="sl-name">' + it.name + '</span>'
     + '<span class="sl-qty">' + (it.qtys.join(' + ') || '') + '</span>'
-    + '<span class="sl-price">' + (it.price > 0 ? it.price.toFixed(2) + ' €' : 'gratuit') + '</span></li>'
+    + '<span class="sl-price">' + priceLabel(it) + '</span>'
+    + homeBtn(it) + '</li>'
   ).join('');
+
+  let haveHtml = '';
+  if (have.length) {
+    const hItems = have.map(it =>
+      '<li class="have-item"><span class="sl-name">' + it.name + '</span>'
+      + '<span class="sl-price">' + priceLabel(it) + '</span>'
+      + '<button class="home-btn active" onclick="togglePantry(\'' + it.key.replace(/'/g, "\\'") + '\')" aria-label="Je n\'ai plus" title="Remettre dans la liste">🏠</button></li>'
+    ).join('');
+    haveHtml = '<div class="section-title">🏠 Déjà chez toi <span class="saved">−' + haveTotal.toFixed(2) + ' €</span></div>'
+      + '<ul class="ingredient-list have-list">' + hItems + '</ul>';
+  }
 
   const sugg = suggestions(3);
   let suggHtml = '';
@@ -260,9 +304,10 @@ function renderSheet() {
 
   body.innerHTML =
     '<ul class="sheet-recipes">' + recipesHtml + '</ul>'
-    + '<div class="total-cost"><span class="label">Budget de la semaine (tarif Paris)</span><span class="amount">~' + total.toFixed(2) + ' €</span></div>'
+    + '<div class="total-cost"><span class="label">À acheter (tarif Paris)</span><span class="amount">~' + buyTotal.toFixed(2) + ' €</span></div>'
     + '<div class="section-title">🛒 Liste de courses</div>'
     + '<ul class="ingredient-list">' + listHtml + '</ul>'
+    + haveHtml
     + suggHtml
     + '<div class="sheet-actions">'
     + '<button class="btn-print" onclick="window.print()">🖨 Imprimer</button>'
