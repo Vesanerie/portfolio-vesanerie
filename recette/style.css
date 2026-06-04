@@ -117,10 +117,15 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem 6rem; }
 .section-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.8rem; color: var(--text); }
 
 .ingredient-list { list-style: none; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.5rem; }
-.ingredient-list li { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.ingredient-list li {
+  display: grid; grid-template-columns: 1fr auto 4.5rem; align-items: center;
+  column-gap: 0.9rem; padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem;
+}
 .ingredient-list li:last-child { border-bottom: none; }
-.ingredient-list .qty { color: var(--muted); font-size: 0.85rem; }
-.ingredient-list .price { font-weight: 600; color: var(--accent); }
+.ingredient-list .qty, .ingredient-list .sl-qty { color: var(--muted); font-size: 0.85rem; text-align: right; }
+.ingredient-list .price, .ingredient-list .sl-price { font-weight: 600; color: var(--accent); text-align: right; }
+/* Listes du panier : 4e colonne pour le bouton 🏠 (placard) */
+#sheet-body .ingredient-list li { grid-template-columns: 1fr auto 4.5rem auto; }
 
 .total-cost {
   background: var(--accent-light); border-radius: var(--radius);
@@ -182,9 +187,20 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem 6rem; }
 .sr-remove { width: 26px; height: 26px; border-radius: 50%; border: none; background: var(--accent-light); color: var(--accent); font-size: 1.1rem; line-height: 1; cursor: pointer; }
 .sr-remove:hover { background: var(--accent); color: #fff; }
 
-.sl-name { flex: 1; }
-.sl-qty { color: var(--muted); font-size: 0.85rem; margin: 0 0.75rem; text-align: right; }
-.sl-price { font-weight: 600; color: var(--accent); white-space: nowrap; }
+.sl-price { white-space: nowrap; }
+
+/* Placard : bouton "j'ai déjà" sur les basiques + bloc déjà chez toi */
+.home-btn {
+  justify-self: end; width: 28px; height: 28px;
+  border-radius: 50%; border: 1px solid var(--border); background: #fff;
+  font-size: 0.85rem; line-height: 1; cursor: pointer; opacity: 0.55;
+  display: inline-flex; align-items: center; justify-content: center; transition: all 0.15s;
+}
+.home-btn:hover { opacity: 1; border-color: var(--accent); }
+.home-btn.active { opacity: 1; background: var(--accent-light); border-color: var(--accent); }
+.have-list li { opacity: 0.6; }
+.have-list .sl-name { text-decoration: line-through; text-decoration-color: var(--border); }
+.section-title .saved { font-weight: 600; color: var(--accent); font-size: 0.8rem; margin-left: 0.4rem; }
 
 /* Suggestions "Complète ta semaine" */
 .sugg-list { list-style: none; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
