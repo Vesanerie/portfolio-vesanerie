@@ -1,4 +1,3 @@
-const UNSPLASH = 'https://source.unsplash.com/800x600/?';
 const CATS = ['Tout', ...new Set(recipes.map(r => r.cat))];
 let current = 'Tout';
 let query = '';
@@ -8,7 +7,8 @@ function totalCost(r) {
 }
 
 function imgUrl(r) {
-  return UNSPLASH + encodeURIComponent(r.img) + ',food';
+  // Photos Pexels haut de gamme hébergées en local (/recette/img/{id}.jpg).
+  return 'img/' + r.id + '.jpg';
 }
 
 function renderFilters() {
