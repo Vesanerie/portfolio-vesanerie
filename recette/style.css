@@ -40,6 +40,19 @@ header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 
 }
 .filter-btn:hover, .filter-btn.active { background: var(--accent); border-color: var(--accent); }
 
+.controls { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.75rem; }
+.controls select {
+  padding: 0.4rem 2rem 0.4rem 1rem; border-radius: 999px;
+  border: 1.5px solid rgba(255,255,255,0.4); background: transparent;
+  color: white; font-size: 0.85rem; font-family: inherit; cursor: pointer;
+  outline: none; appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.9rem center;
+  transition: all 0.2s;
+}
+.controls select:hover, .controls select:focus { border-color: var(--accent); background-color: rgba(255,255,255,0.1); }
+.controls select option { color: var(--text); }
+
 main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
 
 .recipe-grid {

@@ -16,6 +16,23 @@
         <input type="text" id="search" placeholder="Rechercher une recette..." autocomplete="off">
       </div>
       <div class="filters" id="filters"></div>
+      <div class="controls">
+        <select id="budget" aria-label="Filtrer par budget">
+          <option value="0">Tous les budgets</option>
+          <option value="3">≤ 3 €</option>
+          <option value="5">≤ 5 €</option>
+        </select>
+        <select id="maxtime" aria-label="Filtrer par temps">
+          <option value="0">Tous les temps</option>
+          <option value="15">≤ 15 min</option>
+          <option value="30">≤ 30 min</option>
+        </select>
+        <select id="sort" aria-label="Trier les recettes">
+          <option value="default">Trier</option>
+          <option value="price">Prix croissant</option>
+          <option value="time">Temps croissant</option>
+        </select>
+      </div>
     </div>
   </header>
 
