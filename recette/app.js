@@ -1,9 +1,23 @@
 const CATS = ['Tout', ...new Set(recipes.map(r => r.cat))];
 let current = 'Tout';
 let query = '';
+let maxBudget = 0;
+let maxTime = 0;
+let sortBy = 'default';
 
 function totalCost(r) {
   return r.ingredients.reduce((s, ing) => s + (ing[2] || 0), 0);
+}
+
+// "5 min" -> 5 · "1h" -> 60 · "1h15" -> 75 · "2h30" -> 150
+function totalMinutes(r) {
+  const t = r.time;
+  if (t.indexOf('h') !== -1) {
+    const m = t.match(/(\d+)h(\d*)/);
+    return parseInt(m[1], 10) * 60 + (m[2] ? parseInt(m[2], 10) : 0);
+  }
+  const m = t.match(/(\d+)/);
+  return m ? parseInt(m[1], 10) : 0;
 }
 
 function imgUrl(r) {
@@ -25,12 +39,20 @@ function setFilter(cat) {
 }
 
 function renderGrid() {
-  const filtered = recipes.filter(r => {
+  let filtered = recipes.filter(r => {
     const matchCat = current === 'Tout' || r.cat === current;
     const q = query.toLowerCase();
     const matchQ = !q || r.name.toLowerCase().includes(q) || r.cat.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q);
-    return matchCat && matchQ;
+    const matchBudget = !maxBudget || totalCost(r) <= maxBudget;
+    const matchTime = !maxTime || totalMinutes(r) <= maxTime;
+    return matchCat && matchQ && matchBudget && matchTime;
   });
+
+  if (sortBy === 'price') {
+    filtered = filtered.slice().sort((a, b) => totalCost(a) - totalCost(b));
+  } else if (sortBy === 'time') {
+    filtered = filtered.slice().sort((a, b) => totalMinutes(a) - totalMinutes(b));
+  }
 
   const grid = document.getElementById('grid');
   if (!filtered.length) {
@@ -87,6 +109,21 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 
 document.getElementById('search').addEventListener('input', function(e) {
   query = e.target.value;
+  renderGrid();
+});
+
+document.getElementById('budget').addEventListener('change', function(e) {
+  maxBudget = parseFloat(e.target.value);
+  renderGrid();
+});
+
+document.getElementById('maxtime').addEventListener('change', function(e) {
+  maxTime = parseInt(e.target.value, 10);
+  renderGrid();
+});
+
+document.getElementById('sort').addEventListener('change', function(e) {
+  sortBy = e.target.value;
   renderGrid();
 });
 
