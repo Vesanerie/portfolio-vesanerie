@@ -14,3 +14,7 @@ dist/
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# Repo imbrique distinct (a son propre remote)
+Vesanerie-Production/
+CLAUDE.md
