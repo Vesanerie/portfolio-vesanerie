@@ -217,9 +217,20 @@
         <select id="recQuality">
           <option value="720">720p, fichier léger</option>
           <option value="1080" selected>1080p</option>
-          <option value="max">Le maximum de la caméra</option>
+          <option value="1440">1440p</option>
+          <option value="max">4K si la caméra suit</option>
         </select>
       </label>
+      <label class="row">
+        <span>Images par seconde</span>
+        <select id="recFps">
+          <option value="30" selected>30</option>
+          <option value="60">60 si la caméra suit</option>
+        </select>
+      </label>
+      <p class="capt" id="capt">Capté : en attente de la caméra</p>
+      <button class="btn btn-small" id="btnProbe">Voir ce que cette caméra permet</button>
+      <p class="hint" id="probeOut" hidden></p>
       <label class="row"><span>Lancer le texte avec la prise</span><input type="checkbox" id="recRollsText" checked></label>
       <p class="hint" id="recHint">La vidéo enregistrée ne contient ni le texte ni le miroir : seulement l'image de la caméra.</p>
     </fieldset>
