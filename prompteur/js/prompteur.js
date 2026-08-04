@@ -32,7 +32,8 @@
     lineOn: true, linePos: 38, lineColor: '#ffb020',
     mirrorText: false, flipText: false,
     camOn: true, camMirror: true, camOpacity: 100, camId: '',
-    countdownSec: 3, autoHide: true, wakeLock: true
+    countdownSec: 3, autoHide: true, wakeLock: true,
+    recAudio: true, recQuality: '1080', recRollsText: true
   };
   var DEFAULTS = JSON.parse(JSON.stringify(S));
 
@@ -54,7 +55,9 @@
    'gate','gateNote','startCam','startNoCam','hudTop','hudBottom','tcElapsed','tcRemaining',
    'lampCam','wpm','progress','btnPlay','btnRewind','btnBack','btnFwd','btnMirror','btnEditor',
    'btnSettings','btnFull','speed','speedVal','size','sizeVal','editor','statWords','statTime',
-   'fileIn','btnPaste','btnClear','panelEditor','panelSettings','camSelect','toast','btnReset','stage'
+   'fileIn','btnPaste','btnClear','panelEditor','panelSettings','camSelect','toast','btnReset','stage',
+   'btnRec','recLabel','recHint','take','takePreview','takeDuration','takeSize','takeFormat',
+   'takeDownload','takeDrop','takeClose'
   ].forEach(function (id) { el[id] = $(id); });
 
   // ===== Persistance =====
@@ -330,6 +333,161 @@
     });
   }
 
+  // ===== Enregistrement =====
+  // On enregistre la piste caméra brute : ni le texte, ni le miroir d'affichage
+  // ne se retrouvent dans le fichier.
+
+  var recorder = null, chunks = [], recStart = 0, recTimer = null;
+  var micStream = null, takeURL = null;
+
+  var MIMES = [
+    'video/mp4;codecs=avc1.42E01E,mp4a.40.2',   // lisible partout, priorité au montage
+    'video/mp4',
+    'video/webm;codecs=vp9,opus',
+    'video/webm;codecs=vp8,opus',
+    'video/webm'
+  ];
+
+  function pickMime() {
+    if (typeof MediaRecorder === 'undefined' || !MediaRecorder.isTypeSupported) return '';
+    for (var i = 0; i < MIMES.length; i++) {
+      if (MediaRecorder.isTypeSupported(MIMES[i])) return MIMES[i];
+    }
+    return '';
+  }
+
+  function recSupported() {
+    return typeof MediaRecorder !== 'undefined' && !!navigator.mediaDevices;
+  }
+
+  function applyQuality() {
+    if (!stream) return Promise.resolve();
+    var track = stream.getVideoTracks()[0];
+    if (!track || !track.applyConstraints) return Promise.resolve();
+    var c = S.recQuality === '720' ? { width: { ideal: 1280 }, height: { ideal: 720 } }
+          : S.recQuality === 'max' ? { width: { ideal: 3840 }, height: { ideal: 2160 } }
+          : { width: { ideal: 1920 }, height: { ideal: 1080 } };
+    return track.applyConstraints(c).catch(function () { /* la caméra fait ce qu'elle peut */ });
+  }
+
+  function startRecording() {
+    if (!stream) { toast("Active d'abord la caméra pour enregistrer."); return; }
+    if (!recSupported()) { toast("Ce navigateur ne sait pas enregistrer la vidéo."); return; }
+
+    var mime = pickMime();
+
+    applyQuality().then(function () {
+      return S.recAudio
+        ? navigator.mediaDevices.getUserMedia({ audio: true }).catch(function () {
+            toast("Micro refusé. La prise sera muette.");
+            return null;
+          })
+        : null;
+    }).then(function (audio) {
+      micStream = audio;
+      var tracks = stream.getVideoTracks().slice();
+      if (audio) tracks = tracks.concat(audio.getAudioTracks());
+
+      var opts = {};
+      if (mime) opts.mimeType = mime;
+      opts.videoBitsPerSecond = S.recQuality === '720' ? 3000000
+                              : S.recQuality === 'max' ? 12000000 : 6000000;
+
+      try {
+        recorder = new MediaRecorder(new MediaStream(tracks), opts);
+      } catch (e) {
+        try { recorder = new MediaRecorder(new MediaStream(tracks)); }
+        catch (e2) { toast("Enregistrement impossible sur ce navigateur."); releaseMic(); return; }
+      }
+
+      chunks = [];
+      recorder.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+      recorder.onstop = finishTake;
+      recorder.onerror = function () { toast("L'enregistrement s'est interrompu."); stopRecording(); };
+
+      recorder.start(1000);
+      recStart = Date.now();
+      el.btnRec.classList.add('armed');
+      el.btnRec.setAttribute('aria-label', "Arrêter l'enregistrement");
+      tickRec();
+      recTimer = setInterval(tickRec, 500);
+      requestWake();
+
+      if (S.recRollsText) play();
+    });
+  }
+
+  function tickRec() {
+    var sec = (Date.now() - recStart) / 1000;
+    el.recLabel.textContent = clock(sec);
+    if (sec > 600 && !tickRec.warned) {           // la prise vit en mémoire, on prévient
+      tickRec.warned = true;
+      toast("Plus de 10 minutes enregistrées. Pense à couper et sauvegarder.");
+    }
+  }
+
+  function stopRecording() {
+    if (!recorder || recorder.state === 'inactive') return;
+    try { recorder.stop(); } catch (e) { /* déjà arrêté */ }
+    clearInterval(recTimer);
+    recTimer = null;
+    tickRec.warned = false;
+    el.btnRec.classList.remove('armed');
+    el.recLabel.textContent = 'REC';
+    el.btnRec.setAttribute('aria-label', "Lancer l'enregistrement");
+    pause();
+  }
+
+  function releaseMic() {
+    if (!micStream) return;
+    micStream.getTracks().forEach(function (t) { t.stop(); });  // libère le témoin micro
+    micStream = null;
+  }
+
+  function finishTake() {
+    var seconds = (Date.now() - recStart) / 1000;
+    releaseMic();
+
+    if (!chunks.length) { toast("Rien n'a été enregistré."); return; }
+
+    var type = (recorder && recorder.mimeType) || chunks[0].type || 'video/webm';
+    var blob = new Blob(chunks, { type: type });
+    chunks = [];
+
+    dropTake();                                   // libère une éventuelle prise précédente
+    takeURL = URL.createObjectURL(blob);
+
+    var ext = type.indexOf('mp4') !== -1 ? 'mp4' : 'webm';
+    el.takePreview.src = takeURL;
+    el.takeDownload.href = takeURL;
+    el.takeDownload.download = 'prompteur-' + stamp() + '.' + ext;
+    el.takeDuration.textContent = clock(seconds);
+    el.takeSize.textContent = (blob.size / 1048576).toFixed(1).replace('.', ',') + ' Mo';
+    el.takeFormat.textContent = ext;
+    el.take.hidden = false;
+    showControls();
+  }
+
+  function dropTake() {
+    if (takeURL) { URL.revokeObjectURL(takeURL); takeURL = null; }
+    el.takePreview.removeAttribute('src');
+  }
+
+  function closeTake() {
+    el.take.hidden = true;
+    dropTake();
+  }
+
+  function stamp() {
+    var d = new Date(), p = function (n) { return ('0' + n).slice(-2); };
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) +
+           '-' + p(d.getHours()) + p(d.getMinutes());
+  }
+
+  function toggleRec() {
+    (recorder && recorder.state === 'recording') ? stopRecording() : startRecording();
+  }
+
   // ===== Écran allumé =====
 
   function requestWake() {
@@ -360,8 +518,14 @@
 
   function hideControls() {
     controlsShown = false;
-    el.hudTop.classList.add('hidden');
+    // Pendant une prise, la barre du haut reste : le témoin rouge doit se voir
+    // et le bouton d'arrêt rester atteignable sans réveiller l'interface.
+    if (!isRecording()) el.hudTop.classList.add('hidden');
     el.hudBottom.classList.add('hidden');
+  }
+
+  function isRecording() {
+    return !!recorder && recorder.state === 'recording';
   }
 
   function scheduleHide(delay) {
@@ -535,6 +699,21 @@
     bindCheck('camMirror', 'camMirror');
     bindRange('camOpacity', 'camOpacity', function (v) { return v + ' %'; });
 
+    // Enregistrement
+    el.btnRec.addEventListener('click', toggleRec);
+    el.takeClose.addEventListener('click', closeTake);
+    el.takeDrop.addEventListener('click', closeTake);
+    bindCheck('recAudio', 'recAudio', function () {});
+    bindCheck('recRollsText', 'recRollsText', function () {});
+    bindSelect('recQuality', 'recQuality', function () { applyQuality(); });
+
+    if (!recSupported()) {
+      el.btnRec.disabled = true;
+      el.recHint.textContent = "Ce navigateur ne sait pas enregistrer la vidéo. Le prompteur fonctionne normalement.";
+    }
+
+    window.addEventListener('beforeunload', function () { releaseMic(); });
+
     bindSelect('font', 'font');
     bindCheck('bold', 'bold');
     bindRange('lineHeight', 'lineHeight', function (v) { return (v / 100).toFixed(2).replace('.', ','); });
@@ -590,7 +769,8 @@
         case '-': setSize(S.size - 4); break;
         default:
           var k = e.key.toLowerCase();
-          if (k === 'r') rewind();
+          if (k === 'v') toggleRec();
+          else if (k === 'r') rewind();
           else if (k === 'm') { S.mirrorText = !S.mirrorText; $('mirrorText').checked = S.mirrorText; applySettings(); save(); }
           else if (k === 'e') { pause(); openPanel('panelEditor'); }
           else if (k === 'f') el.btnFull.click();
