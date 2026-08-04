@@ -56,6 +56,26 @@
   <!-- Décompte -->
   <div class="countdown" id="countdown" hidden><span id="countdownValue">3</span></div>
 
+  <!-- Prise terminée -->
+  <aside class="take" id="take" hidden>
+    <div class="take-head">
+      <span class="take-title">Prise enregistrée</span>
+      <button class="icon" id="takeClose" aria-label="Fermer">
+        <svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+    <video class="take-preview" id="takePreview" playsinline controls></video>
+    <div class="take-meta">
+      <span id="takeDuration">0:00</span>
+      <span id="takeSize">0 Mo</span>
+      <span id="takeFormat">webm</span>
+    </div>
+    <div class="take-btns">
+      <a class="btn btn-small btn-major" id="takeDownload" download>Télécharger</a>
+      <button class="btn btn-small btn-warn" id="takeDrop">Jeter</button>
+    </div>
+  </aside>
+
   <!-- Écran d'accueil, le geste utilisateur qui autorise la caméra -->
   <div class="gate" id="gate">
     <div class="gate-inner">
@@ -75,6 +95,10 @@
 
   <!-- ===== Barre haute ===== -->
   <header class="hud hud-top" id="hudTop">
+    <button class="rec" id="btnRec" title="Enregistrer" aria-label="Lancer l'enregistrement">
+      <span class="rec-dot"></span>
+      <span class="rec-label" id="recLabel">REC</span>
+    </button>
     <div class="tc">
       <span class="tc-main" id="tcElapsed">0:00</span>
       <span class="tc-sep">/</span>
@@ -183,6 +207,21 @@
       <label class="row"><span>Retour caméra</span><input type="checkbox" id="camOn" checked></label>
       <label class="row"><span>Image en miroir</span><input type="checkbox" id="camMirror" checked></label>
       <label class="row range"><span>Opacité de l'image</span><input type="range" id="camOpacity" min="5" max="100" value="100"><b id="camOpacityVal">100 %</b></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Enregistrement</legend>
+      <label class="row"><span>Enregistrer le son</span><input type="checkbox" id="recAudio" checked></label>
+      <label class="row">
+        <span>Qualité</span>
+        <select id="recQuality">
+          <option value="720">720p, fichier léger</option>
+          <option value="1080" selected>1080p</option>
+          <option value="max">Le maximum de la caméra</option>
+        </select>
+      </label>
+      <label class="row"><span>Lancer le texte avec la prise</span><input type="checkbox" id="recRollsText" checked></label>
+      <p class="hint" id="recHint">La vidéo enregistrée ne contient ni le texte ni le miroir : seulement l'image de la caméra.</p>
     </fieldset>
 
     <fieldset>
