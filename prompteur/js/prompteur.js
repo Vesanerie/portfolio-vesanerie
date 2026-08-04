@@ -33,7 +33,7 @@
     mirrorText: false, flipText: false,
     camOn: true, camMirror: true, camOpacity: 100, camId: '',
     countdownSec: 3, autoHide: true, wakeLock: true,
-    recAudio: true, recQuality: '1080', recRollsText: true
+    recAudio: true, recQuality: '1080', recFps: '30', recRollsText: true
   };
   var DEFAULTS = JSON.parse(JSON.stringify(S));
 
@@ -57,7 +57,7 @@
    'btnSettings','btnFull','speed','speedVal','size','sizeVal','editor','statWords','statTime',
    'fileIn','btnPaste','btnClear','panelEditor','panelSettings','camSelect','toast','btnReset','stage',
    'btnRec','recLabel','recHint','take','takePreview','takeDuration','takeSize','takeFormat',
-   'takeDownload','takeDrop','takeClose'
+   'takeDownload','takeDrop','takeClose','capt','btnProbe','probeOut','recFps'
   ].forEach(function (id) { el[id] = $(id); });
 
   // ===== Persistance =====
@@ -267,9 +267,12 @@
       toast("Ce navigateur ne donne pas accès à la caméra.");
       return Promise.reject();
     }
-    var constraints = deviceId
-      ? { video: { deviceId: { exact: deviceId } }, audio: false }
-      : { video: { facingMode: 'user', width: { ideal: 1280 } }, audio: false };
+    // On demande d'emblée la définition et la cadence voulues : sur iOS,
+    // reconfigurer une piste déjà ouverte est peu fiable.
+    var video = qualityConstraints();
+    if (deviceId) video.deviceId = { exact: deviceId };
+    else video.facingMode = 'user';
+    var constraints = { video: video, audio: false };
 
     return navigator.mediaDevices.getUserMedia(constraints).then(function (s) {
       stopCamera();
@@ -280,6 +283,7 @@
       el.camVoid.hidden = true;
       S.camId = deviceId || '';
       save();
+      reportCapture();
       return listCameras();
     }).catch(function (err) {
       el.lampCam.classList.remove('live');
@@ -360,14 +364,81 @@
     return typeof MediaRecorder !== 'undefined' && !!navigator.mediaDevices;
   }
 
+  /** Définition et cadence demandées à la caméra. */
+  function qualityConstraints() {
+    var q = S.recQuality;
+    var c = q === '720'  ? { width: { ideal: 1280 }, height: { ideal: 720 } }
+          : q === '1440' ? { width: { ideal: 2560 }, height: { ideal: 1440 } }
+          : q === 'max'  ? { width: { ideal: 3840 }, height: { ideal: 2160 } }
+          :                { width: { ideal: 1920 }, height: { ideal: 1080 } };
+    c.frameRate = { ideal: parseInt(S.recFps, 10) || 30 };
+    return c;
+  }
+
+  function wantedSize() {
+    var q = S.recQuality;
+    return q === '720' ? [1280, 720] : q === '1440' ? [2560, 1440]
+         : q === 'max' ? [3840, 2160] : [1920, 1080];
+  }
+
+  /** Rouvre la caméra avec les nouvelles contraintes. */
   function applyQuality() {
     if (!stream) return Promise.resolve();
-    var track = stream.getVideoTracks()[0];
-    if (!track || !track.applyConstraints) return Promise.resolve();
-    var c = S.recQuality === '720' ? { width: { ideal: 1280 }, height: { ideal: 720 } }
-          : S.recQuality === 'max' ? { width: { ideal: 3840 }, height: { ideal: 2160 } }
-          : { width: { ideal: 1920 }, height: { ideal: 1080 } };
-    return track.applyConstraints(c).catch(function () { /* la caméra fait ce qu'elle peut */ });
+    return startCamera(S.camId || '').catch(function () {});
+  }
+
+  /** iPhone ou iPad, y compris les iPad récents qui se déclarent MacIntel. */
+  function isApplePortable() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+
+  /** Affiche ce que la caméra a réellement fourni, pas ce qu'on a demandé. */
+  function reportCapture() {
+    if (!el.capt) return;
+    var track = stream && stream.getVideoTracks()[0];
+    if (!track || !track.getSettings) { el.capt.textContent = 'Capté : inconnu'; return; }
+
+    var s = track.getSettings();
+    var w = s.width || 0, h = s.height || 0, fps = Math.round(s.frameRate || 0);
+    if (!w) { el.capt.textContent = 'Capté : en attente de la caméra'; return; }
+
+    var txt = 'Capté : ' + w + ' × ' + h + (fps ? ' à ' + fps + ' fps' : '');
+    var want = wantedSize();
+    var wantFps = parseInt(S.recFps, 10) || 30;
+    var short = (h < want[1] - 40) || (fps && fps < wantFps - 5);
+
+    if (short) {
+      txt += '\nC\'est le maximum que cette caméra et ce navigateur acceptent de donner.';
+      if (isApplePortable()) {
+        txt += ' Sur iPhone et iPad, le web n\'atteint ni la 4K ni le 60 fps du capteur : ' +
+               'ils restent réservés aux applications installées.';
+      }
+    }
+    el.capt.textContent = txt;
+    el.capt.classList.toggle('short', !!short);
+    el.capt.style.whiteSpace = 'pre-line';
+  }
+
+  /** Interroge la caméra sur ses capacités déclarées. */
+  function probeCamera() {
+    var track = stream && stream.getVideoTracks()[0];
+    el.probeOut.hidden = false;
+    if (!track) { el.probeOut.textContent = "Active d'abord la caméra."; return; }
+    if (!track.getCapabilities) {
+      el.probeOut.textContent = "Ce navigateur ne dit pas ce que la caméra sait faire. " +
+        "Le champ « Capté » au-dessus reste la vérité de terrain.";
+      return;
+    }
+    var c = track.getCapabilities() || {};
+    var lines = [];
+    if (c.width && c.height) lines.push('Définition annoncée jusqu\'à ' + c.width.max + ' × ' + c.height.max);
+    if (c.frameRate) lines.push('Cadence annoncée jusqu\'à ' + Math.round(c.frameRate.max) + ' fps');
+    if (c.facingMode && c.facingMode.length) lines.push('Faces : ' + c.facingMode.join(', '));
+    el.probeOut.textContent = lines.length
+      ? lines.join('\n')
+      : "La caméra n'annonce aucune capacité exploitable.";
+    el.probeOut.style.whiteSpace = 'pre-line';
   }
 
   function startRecording() {
@@ -376,7 +447,8 @@
 
     var mime = pickMime();
 
-    applyQuality().then(function () {
+    // La caméra est déjà ouverte à la définition voulue : on ne la rouvre pas ici.
+    Promise.resolve().then(function () {
       return S.recAudio
         ? navigator.mediaDevices.getUserMedia({ audio: true }).catch(function () {
             toast("Micro refusé. La prise sera muette.");
@@ -706,6 +778,8 @@
     bindCheck('recAudio', 'recAudio', function () {});
     bindCheck('recRollsText', 'recRollsText', function () {});
     bindSelect('recQuality', 'recQuality', function () { applyQuality(); });
+    bindSelect('recFps', 'recFps', function () { applyQuality(); });
+    el.btnProbe.addEventListener('click', probeCamera);
 
     if (!recSupported()) {
       el.btnRec.disabled = true;
