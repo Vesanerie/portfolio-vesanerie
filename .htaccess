@@ -1,1 +1,10 @@
 ErrorDocument 404 /404.html
+
+# Force HTTPS : la caméra du prompteur (getUserMedia) n'est accordée qu'en
+# contexte sécurisé, une visite en http:// se verrait refuser l'accès.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
