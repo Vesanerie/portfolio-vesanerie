@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0d0e11">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Assiette">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icone.svg">
+<title>Assiette</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="entete">
+  <div class="nav-date">
+    <button id="prec" aria-label="Jour precedent">&#8249;</button>
+    <div class="titre">
+      <span id="dateLbl">Aujourd'hui</span>
+      <small id="semaineLbl">Semaine 1</small>
+    </div>
+    <button id="suiv" aria-label="Jour suivant">&#8250;</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ JOUR ============ -->
+  <section class="vue actif" id="vue-jour">
+
+    <div class="carte">
+      <div class="reste">
+        <div class="chiffre" id="resteKcal">2200</div>
+        <div class="sous" id="resteSous">kcal restantes sur 2200</div>
+      </div>
+      <div class="macros">
+        <div>
+          <div class="macro-l"><span>Proteines</span><span class="v" id="lProt">0 / 175 g</span></div>
+          <div class="jauge j-prot" id="jProt"><i style="width:0%"></i></div>
+        </div>
+        <div>
+          <div class="macro-l"><span>Lipides</span><span class="v" id="lLip">0 / 65 g</span></div>
+          <div class="jauge j-lip" id="jLip"><i style="width:0%"></i></div>
+        </div>
+        <div>
+          <div class="macro-l"><span>Glucides</span><span class="v" id="lGluc">0 / 220 g</span></div>
+          <div class="jauge j-gluc" id="jGluc"><i style="width:0%"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Etat du jour : chips tapables, saisie inline -->
+    <div class="chips" id="etatJour"></div>
+    <div class="saisie-inline" id="saisieInline" hidden></div>
+
+    <!-- Rituels compacts -->
+    <div class="carte compacte">
+      <div class="rituel">
+        <div class="rituel-l"><span>Eau</span><span class="v" id="lEau">0 / 4 L</span></div>
+        <div class="compteur" id="compteurEau"></div>
+      </div>
+      <div class="rituel">
+        <div class="rituel-l"><span>Marche apres repas</span><span class="v" id="lMarches">0 / 3</span></div>
+        <div class="compteur trois" id="compteurMarches"></div>
+      </div>
+    </div>
+
+    <div id="repasListe"></div>
+
+    <button class="rappel-ordre" id="rappelOrdre">
+      Ordre du repas : legumes › proteines › lipides › glucides
+    </button>
+  </section>
+
+  <!-- ============ SUIVI ============ -->
+  <section class="vue" id="vue-suivi">
+    <div id="verdictBloc"></div>
+
+    <div class="carte">
+      <h2>Courbe</h2>
+      <canvas class="courbe" id="courbe"></canvas>
+      <div class="stats-poids">
+        <div class="stat"><div class="v" id="sPoids">-</div><div class="l">Dernier</div></div>
+        <div class="stat"><div class="v" id="sMoy">-</div><div class="l">Moyenne 7j</div></div>
+        <div class="stat"><div class="v" id="sPerdu">-</div><div class="l">Perdu</div></div>
+      </div>
+    </div>
+
+    <div class="carte">
+      <h2>Semaine</h2>
+      <div id="semaineHisto"></div>
+    </div>
+
+    <details class="carte pliable">
+      <summary>Mensurations</summary>
+      <p class="note" style="margin:10px 0 12px">
+        Une fois par semaine. Certains ne bougent pas sur la balance mais perdent une taille de pantalon.
+      </p>
+      <div class="duo">
+        <div class="champ"><label>Taille (cm)</label><input type="number" step="0.5" inputmode="decimal" id="mTaille"></div>
+        <div class="champ"><label>Hanches (cm)</label><input type="number" step="0.5" inputmode="decimal" id="mHanches"></div>
+        <div class="champ"><label>Poitrine (cm)</label><input type="number" step="0.5" inputmode="decimal" id="mPoitrine"></div>
+        <div class="champ"><label>Bras (cm)</label><input type="number" step="0.5" inputmode="decimal" id="mBras"></div>
+      </div>
+      <button class="btn fant" id="mensurOk">Enregistrer</button>
+      <div id="mensurHisto" style="margin-top:12px"></div>
+    </details>
+
+    <details class="carte pliable">
+      <summary>Cardio : ma zone 2</summary>
+      <div id="zone2Bloc" style="margin-top:10px"></div>
+      <p class="note" style="margin-top:12px">
+        45 min minimum, sinon les reserves de glycogene ne sont pas entamees.
+        Velo ou elliptique plutot que course a pied.
+      </p>
+    </details>
+  </section>
+
+  <!-- ============ REGLAGES ============ -->
+  <section class="vue" id="vue-reglages">
+    <div class="carte">
+      <h2>Mes cibles</h2>
+      <div class="quatre">
+        <div class="champ"><label>kcal</label><input type="number" id="cKcal" inputmode="numeric"></div>
+        <div class="champ"><label>Prot. (g)</label><input type="number" id="cProt" inputmode="numeric"></div>
+        <div class="champ"><label>Lip. (g)</label><input type="number" id="cLip" inputmode="numeric"></div>
+        <div class="champ"><label>Gluc. (g)</label><input type="number" id="cGluc" inputmode="numeric"></div>
+      </div>
+      <div class="champ">
+        <label>Age (sert au calcul de la zone 2)</label>
+        <input type="number" id="cAge" inputmode="numeric">
+      </div>
+      <button class="btn" id="ciblesOk">Enregistrer</button>
+      <p class="note" style="margin-top:12px">
+        Tu ne touches a ca <b>que</b> quand le verdict hebdo te le dit, et seulement apres
+        avoir monte la depense. Baisser l'assiette est le dernier levier, jamais le premier.
+      </p>
+    </div>
+
+    <details class="carte pliable">
+      <summary>Mes repas types</summary>
+      <div id="typesListe" style="margin-top:10px"></div>
+      <p class="note" style="margin-top:10px">
+        Pour en creer un : compose un repas dans l'onglet Jour, puis appuie sur l'icone
+        a droite du nom du repas.
+      </p>
+    </details>
+
+    <details class="carte pliable">
+      <summary>Ajouter un aliment</summary>
+      <div class="champ" style="margin-top:10px"><label>Nom</label><input type="text" id="pNom" placeholder="Ex : Barre proteinee X"></div>
+      <div class="quatre">
+        <div class="champ"><label>kcal /100 g</label><input type="number" id="pK" inputmode="decimal"></div>
+        <div class="champ"><label>Prot.</label><input type="number" id="pP" inputmode="decimal"></div>
+        <div class="champ"><label>Lip.</label><input type="number" id="pL" inputmode="decimal"></div>
+        <div class="champ"><label>Gluc.</label><input type="number" id="pG" inputmode="decimal"></div>
+      </div>
+      <button class="btn fant" id="persoOk">Ajouter a ma base</button>
+      <div id="persoListe" style="margin-top:12px"></div>
+    </details>
+
+    <details class="carte pliable">
+      <summary>Sauvegarde</summary>
+      <div style="margin-top:10px"></div>
+      <button class="btn fant" id="exportBtn">Exporter mes donnees (JSON)</button>
+      <div style="height:8px"></div>
+      <button class="btn fant" id="importBtn">Importer une sauvegarde</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+      <p class="note" style="margin-top:12px">
+        Tout est stocke dans ce navigateur uniquement. Rien ne part sur internet.
+        Vider les donnees de site efface tout, donc exporte de temps en temps.
+      </p>
+    </details>
+
+    <details class="carte pliable">
+      <summary>La methode</summary>
+      <div class="note" id="rappelMethode" style="margin-top:10px"></div>
+    </details>
+  </section>
+
+</main>
+
+<!-- Bouton d'ajout unique -->
+<button class="fab" id="fab" aria-label="Ajouter un aliment">+</button>
+
+<!-- ============ Barre du bas ============ -->
+<nav class="barre">
+  <button data-vue="jour" class="on">
+    <svg viewBox="0 0 24 24"><path d="M4 3v8a3 3 0 0 0 3 3v7M7 3v6M10 3v6M17 3c-1.5 2-2 4-2 7h4V3z"/></svg>
+    Jour
+  </button>
+  <button data-vue="suivi">
+    <svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 4-7 5 5"/><path d="M3 21h18"/></svg>
+    Suivi
+  </button>
+  <button data-vue="reglages">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>
+    Reglages
+  </button>
+</nav>
+
+<!-- ============ Panneau d'ajout ============ -->
+<div class="panneau" id="panneau">
+  <div class="panneau-tete">
+    <input type="search" id="recherche" placeholder="Chercher un aliment" autocomplete="off">
+    <button id="fermerPanneau">Fermer</button>
+  </div>
+  <div class="repas-choix" id="repasChoix"></div>
+  <div class="panneau-corps" id="panneauCorps"></div>
+</div>
+
+<!-- ============ Feuille quantite ============ -->
+<div class="feuille" id="feuille">
+  <div class="feuille-in">
+    <h3 id="fNom">Aliment</h3>
+    <div class="p100" id="fP100"></div>
+    <div class="puces" id="fUnites"></div>
+    <div class="qte-ligne">
+      <button class="pas-qte" id="fMoins" aria-label="Moins">&minus;</button>
+      <input type="number" id="fQte" inputmode="decimal" step="1" value="100">
+      <span class="unite">g</span>
+      <button class="pas-qte" id="fPlus" aria-label="Plus">+</button>
+    </div>
+    <div class="apercu">
+      <div><div class="v" id="fK">0</div><div class="l">kcal</div></div>
+      <div><div class="v" id="fP">0</div><div class="l">prot</div></div>
+      <div><div class="v" id="fL">0</div><div class="l">lip</div></div>
+      <div><div class="v" id="fG">0</div><div class="l">gluc</div></div>
+    </div>
+    <button class="btn" id="fValider">Ajouter</button>
+    <div style="height:8px"></div>
+    <button class="btn fant" id="fAnnuler">Annuler</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/dom.js"></script>
+<script src="js/methode.js"></script>
+<script src="js/aliments.js"></script>
+<script src="js/store.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
