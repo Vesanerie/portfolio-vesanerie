@@ -1,0 +1,13 @@
+{
+  "name": "AffinityDB",
+  "short_name": "Affinity",
+  "description": "Les 100 leçons Affinity, rangées, cherchables, avec fiches en français",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#131218",
+  "theme_color": "#131218",
+  "icons": [
+    { "src": "icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
