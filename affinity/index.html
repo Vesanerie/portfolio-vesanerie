@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AffinityDB · 100 leçons Affinity</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#131218">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <span class="mark"></span>
+    <div>
+      <h1>AffinityDB</h1>
+      <p class="sub">Affinity Tutorial Series · TutorTube · 100 leçons</p>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <input id="search" type="search" placeholder="Chercher : hachure, lettrine, isométrique, symbole…" autocomplete="off" spellcheck="false">
+    <span id="search-count" class="search-count"></span>
+  </div>
+
+  <div class="progress-global">
+    <div class="pg-bar"><i id="pg-fill"></i></div>
+    <span id="pg-label">0 / 100</span>
+  </div>
+</header>
+
+<main>
+  <aside class="side">
+    <nav class="views" id="views">
+      <button data-view="themes" class="on">Thèmes</button>
+      <button data-view="list">Liste</button>
+      <button data-view="todo">À voir</button>
+    </nav>
+
+    <div class="filter-block">
+      <h2>Niveau</h2>
+      <div class="chips" id="levels">
+        <button data-level="base">base</button>
+        <button data-level="inter">inter</button>
+        <button data-level="avance">avancé</button>
+      </div>
+    </div>
+
+    <div class="filter-block">
+      <h2>Thèmes</h2>
+      <div id="theme-list" class="theme-list"></div>
+    </div>
+
+    <div class="filter-block">
+      <button id="reset" class="reset">Tout réafficher</button>
+      <p class="hint">Clic sur une leçon pour la fiche. <kbd>/</kbd> pour chercher, <kbd>Esc</kbd> pour fermer.</p>
+    </div>
+
+    <div class="filter-block">
+      <h2>Ma progression</h2>
+      <div class="io">
+        <button id="export">Exporter</button>
+        <button id="import">Importer</button>
+      </div>
+      <input type="file" id="import-file" accept="application/json" hidden>
+      <p class="hint" id="io-hint">Progression et notes stockées sur cet appareil. Exporte pour les passer sur un autre.</p>
+    </div>
+  </aside>
+
+  <section class="results" id="results"></section>
+</main>
+
+<div class="sheet-backdrop" id="backdrop" hidden></div>
+<article class="sheet" id="sheet" hidden></article>
+
+<script src="app.js"></script>
+</body>
+</html>
