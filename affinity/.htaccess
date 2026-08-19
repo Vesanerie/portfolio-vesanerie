@@ -1,0 +1,9 @@
+# Deploye en tant que .htaccess dans /affinity sur O2Switch (voir deploy.sh).
+#
+# O2Switch ne compresse pas application/json par defaut : transcripts.json
+# partait en 285 Ko bruts, ce qui se sent en partage de connexion 4G.
+# Pas de directive de cache : le navigateur revalide (304), donc un nouveau
+# lot de fiches est visible tout de suite apres un deploiement.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE application/json application/manifest+json image/svg+xml
+</IfModule>
