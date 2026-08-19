@@ -332,7 +332,7 @@ window.__LESSONS__ = {
  "playlist_title": "Affinity Tutorial Series",
  "channel": "TutorTube",
  "playlist_url": "https://www.youtube.com/playlist?list=PL_dhPga7ruucfyaDJq9hYQGPTNKkDcNBO",
- "count": 100,
+ "count": 143,
  "lessons": [
   {
    "n": 1,
@@ -4587,6 +4587,1730 @@ window.__LESSONS__ = {
     97
    ],
    "has_transcript": true
+  },
+  {
+   "n": 101,
+   "id": "T6ZH5H63cmw",
+   "title_en": "Burn Brush Tool",
+   "title_fr": "Pinceau Densité + (assombrir)",
+   "duration": 161,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "densité",
+    "assombrir",
+    "retouche locale"
+   ],
+   "resume": "Assombrir une zone au pinceau, en choisissant si l'effet porte sur les hautes lumières, les tons moyens ou les ombres.",
+   "steps": [
+    "Mode pixel, groupe du pinceau de réglage, prendre le Pinceau Densité +",
+    "Choisir la gamme visée : Hautes lumières, Tons moyens ou Ombres",
+    "Régler la taille et le flux, puis peindre",
+    "Hautes lumières pour rattraper un ciel brûlé, Ombres pour creuser les noirs"
+   ],
+   "shortcuts": [
+    {
+     "k": "[ et ]",
+     "d": "taille du pinceau"
+    }
+   ],
+   "piege": "C'est destructif : ça écrit directement dans les pixels, sans calque ni masque, contrairement au pinceau de réglage (leçon 100). Dupliquer le calque avant, ou passer par un calque de réglage si tu veux pouvoir revenir dessus.",
+   "ui": [
+    {
+     "fr": "Densité +",
+     "en": "Burn Brush"
+    },
+    {
+     "fr": "Tons moyens",
+     "en": "Midtones"
+    }
+   ],
+   "related": [
+    102,
+    100,
+    103
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 102,
+   "id": "Df0g8Vm_edQ",
+   "title_en": "Dodge Brush Tool",
+   "title_fr": "Pinceau Densité - (éclaircir)",
+   "duration": 101,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "densité",
+    "éclaircir",
+    "retouche locale"
+   ],
+   "resume": "Éclaircir une zone au pinceau, le pendant exact de la densité +.",
+   "steps": [
+    "Clic droit sur le calque > Pixelliser (obligatoire)",
+    "Mode pixel, prendre le Pinceau Densité -",
+    "Régler la taille et le flux",
+    "Peindre sur les zones à éclaircir, par passes successives"
+   ],
+   "shortcuts": [
+    {
+     "k": "[ et ]",
+     "d": "taille du pinceau"
+    }
+   ],
+   "piege": "Sur un calque non pixellisé, le pinceau ne fait strictement rien et on croit qu'il est cassé. C'est le même piège que la gomme par plage : pixelliser d'abord.",
+   "ui": [
+    {
+     "fr": "Densité -",
+     "en": "Dodge Brush"
+    }
+   ],
+   "related": [
+    101,
+    29,
+    100
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 103,
+   "id": "ijwmntE0Thc",
+   "title_en": "Sponge Brush Tool",
+   "title_fr": "Pinceau Éponge (saturation)",
+   "duration": 143,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "éponge",
+    "saturation",
+    "retouche locale"
+   ],
+   "resume": "Saturer ou désaturer localement, avec un mode Vibrance qui n'agit que sur les couleurs faibles.",
+   "steps": [
+    "Mode pixel, groupe du pinceau de réglage, prendre le Pinceau Éponge",
+    "Mode Saturer ou Désaturer dans la barre du haut",
+    "Régler le flux pour doser",
+    "Activer Vibrance : seules les couleurs peu saturées montent, les couleurs déjà vives sont épargnées",
+    "Sans Vibrance, en mode TSL, l'effet est beaucoup plus brutal"
+   ],
+   "shortcuts": [],
+   "piege": "En mode TSL sans Vibrance, on sature les rouges déjà saturés et les peaux virent immédiatement. Vibrance est presque toujours le bon réglage sur un sujet humain.",
+   "ui": [
+    {
+     "fr": "Pinceau Éponge",
+     "en": "Sponge Brush"
+    },
+    {
+     "fr": "Vibrance",
+     "en": "Vibrance"
+    }
+   ],
+   "related": [
+    101,
+    102,
+    79
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 104,
+   "id": "Svq3tPv2byk",
+   "title_en": "Filter Brush Tool",
+   "title_fr": "Pinceau de filtre",
+   "duration": 191,
+   "theme": "pixel-photo",
+   "level": "avance",
+   "tags": [
+    "filtre",
+    "retouche locale",
+    "non destructif"
+   ],
+   "resume": "Peindre un filtre (flou, grain, débruitage, tramage) sur une zone précise, de façon non destructive et réajustable.",
+   "steps": [
+    "Mode pixel, prendre le Pinceau de filtre",
+    "Choisir le filtre : flou, grain, débruitage, demi-teinte…",
+    "Peindre : le filtre s'applique sous forme de masque",
+    "Modifier le filtre : régler force, taille de cellule, contraste, angle de trame",
+    "Ajouter un second filtre pour empiler les effets",
+    "Mode Effacer pour retirer le filtre là où il déborde"
+   ],
+   "shortcuts": [],
+   "piege": "C'est le seul pinceau de cette famille qui reste modifiable après coup, parce qu'il travaille en masque. Là où le pinceau de flou (leçon 105) grave le flou dans l'image, celui-ci permet de revenir en arrière. Pour un travail sérieux, préférer celui-là.",
+   "ui": [
+    {
+     "fr": "Pinceau de filtre",
+     "en": "Filter Brush"
+    },
+    {
+     "fr": "Demi-teinte",
+     "en": "Halftone"
+    }
+   ],
+   "related": [
+    105,
+    100,
+    79
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 105,
+   "id": "jwBhJRJdXac",
+   "title_en": "Blur Brush Tool",
+   "title_fr": "Pinceau de flou",
+   "duration": 133,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "flou",
+    "profondeur",
+    "retouche locale"
+   ],
+   "resume": "Flouter une zone au pinceau, typiquement pour simuler une profondeur de champ ou masquer un détail.",
+   "steps": [
+    "Mode pixel, prendre le Pinceau de flou",
+    "Régler la taille et le flux",
+    "Peindre sur les zones à reculer, en laissant net le sujet principal",
+    "Le stabilisateur aide sur les grandes surfaces"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘Z",
+     "d": "annuler, l'effet n'est pas modifiable après coup"
+    }
+   ],
+   "piege": "Destructif, directement sur les pixels. Pour un flou récupérable, passer par le pinceau de filtre (leçon 104) qui fait la même chose en masque.",
+   "ui": [
+    {
+     "fr": "Pinceau de flou",
+     "en": "Blur Brush"
+    }
+   ],
+   "related": [
+    104,
+    106,
+    107
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 106,
+   "id": "Q6w8nqes5d4",
+   "title_en": "Sharpen Brush Tool",
+   "title_fr": "Pinceau de netteté",
+   "duration": 130,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "netteté",
+    "détail",
+    "retouche locale"
+   ],
+   "resume": "Accentuer localement le contraste des contours pour faire ressortir un détail.",
+   "steps": [
+    "Mode pixel, prendre le Pinceau de netteté",
+    "Monter le flux, sinon l'effet est presque invisible",
+    "Zoomer et peindre sur les arêtes à faire ressortir",
+    "Combiner avec le flou sur le reste pour accentuer la sensation de profondeur"
+   ],
+   "shortcuts": [],
+   "piege": "À flux élevé et en repassant plusieurs fois, ça crée des halos clairs le long des contours, très laids et irrattrapables (c'est destructif). Une passe légère suffit.",
+   "ui": [
+    {
+     "fr": "Pinceau de netteté",
+     "en": "Sharpen Brush"
+    }
+   ],
+   "related": [
+    105,
+    104,
+    107
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 107,
+   "id": "q1UzY7icRK4",
+   "title_en": "Median Brush Tool",
+   "title_fr": "Pinceau médian",
+   "duration": 113,
+   "theme": "pixel-photo",
+   "level": "avance",
+   "tags": [
+    "médian",
+    "lissage",
+    "peau"
+   ],
+   "resume": "Un flou qui préserve les contours : il aplatit les détails en conservant des zones nettement délimitées, presque un rendu peinture ou sérigraphie.",
+   "steps": [
+    "Mode pixel, prendre le Pinceau médian",
+    "Régler la taille et le flux",
+    "Peindre : le grain disparaît, les aplats se forment, les bords restent nets"
+   ],
+   "shortcuts": [],
+   "piege": "Ne pas le confondre avec le flou classique : là où le flou dissout tout, le médian garde des contours francs. C'est justement ce qui le rend intéressant pour un rendu graphique, pas seulement pour lisser une peau.",
+   "ui": [
+    {
+     "fr": "Pinceau médian",
+     "en": "Median Brush"
+    }
+   ],
+   "related": [
+    105,
+    114,
+    108
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 108,
+   "id": "GIfMSkP7qfk",
+   "title_en": "Smudge Brush Tool",
+   "title_fr": "Pinceau à maculer",
+   "duration": 107,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "maculer",
+    "smudge",
+    "peinture"
+   ],
+   "resume": "Étirer et mélanger les pixels comme un doigt dans de la peinture fraîche.",
+   "steps": [
+    "Mode pixel, prendre le Pinceau à maculer",
+    "Régler la taille et la force",
+    "Faire glisser dans la direction voulue : les pixels suivent le geste",
+    "Force basse pour un effet subtil, force maximale pour tirer franchement la matière"
+   ],
+   "shortcuts": [],
+   "piege": "À force maximale sur une photo, ça vire vite au plastique fondu. C'est plutôt un outil de création graphique que de retouche discrète.",
+   "ui": [
+    {
+     "fr": "Pinceau à maculer",
+     "en": "Smudge Brush"
+    }
+   ],
+   "related": [
+    93,
+    107,
+    105
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 109,
+   "id": "sTkX-Bs9qN0",
+   "title_en": "Clone Brush Tool",
+   "title_fr": "Tampon de duplication",
+   "duration": 140,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "tampon",
+    "clone",
+    "duplication"
+   ],
+   "resume": "Dupliquer une zone de l'image ailleurs, à l'identique, en prélevant une source à la volée.",
+   "steps": [
+    "Mode pixel, prendre le Tampon de duplication",
+    "⌥ + clic sur la zone à prélever : c'est la source",
+    "Peindre ailleurs : la source est recopiée sous le pinceau",
+    "La source se déplace en même temps que le pinceau",
+    "⌥ + clic à nouveau pour changer de source",
+    "Baisser le flux pour un raccord progressif"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌥ + clic",
+     "d": "définir la source de prélèvement"
+    }
+   ],
+   "piege": "La source suit le pinceau : si tu prélèves trop près de la zone à couvrir, tu finis par cloner ce que tu viens de cloner et un motif répétitif apparaît. Reprélever souvent, à des endroits différents.",
+   "ui": [
+    {
+     "fr": "Tampon de duplication",
+     "en": "Clone Brush"
+    }
+   ],
+   "related": [
+    112,
+    111,
+    113
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 110,
+   "id": "aNHH7R4WPFI",
+   "title_en": "History Brush Tool",
+   "title_fr": "Pinceau d'historique",
+   "duration": 209,
+   "theme": "pixel-photo",
+   "level": "avance",
+   "tags": [
+    "historique",
+    "restaurer",
+    "retouche locale"
+   ],
+   "resume": "Peindre pour revenir à un état antérieur de l'image, seulement là où on le veut. Un retour en arrière sélectif.",
+   "steps": [
+    "Panneau Historique, activer le mode avancé pour voir les vignettes des états",
+    "Cliquer sur l'icône pinceau à côté de l'état à restaurer : il devient la source",
+    "Prendre le Pinceau d'historique",
+    "Peindre : cette zone retrouve l'état choisi, le reste garde les modifications"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘Z",
+     "d": "annuler globalement, à l'inverse de cet outil"
+    }
+   ],
+   "piege": "Sans avoir désigné un état source dans le panneau Historique, le pinceau n'a rien à restaurer et ne fait rien. C'est cette petite icône dans la liste des états qui commande tout.",
+   "ui": [
+    {
+     "fr": "Pinceau d'historique",
+     "en": "History Brush"
+    },
+    {
+     "fr": "Panneau Historique",
+     "en": "History panel"
+    }
+   ],
+   "related": [
+    120,
+    100,
+    104
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 111,
+   "id": "OYBo_xBsKzE",
+   "title_en": "Inpainting Brush Tool",
+   "title_fr": "Pinceau de retouche par contenu",
+   "duration": 110,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "inpainting",
+    "suppression",
+    "contenu"
+   ],
+   "resume": "Effacer un élément en peignant dessus : Affinity reconstruit le fond à partir de ce qui l'entoure, sans qu'on ait à désigner de source.",
+   "steps": [
+    "Mode pixel, prendre le Pinceau de retouche par contenu",
+    "Régler la taille un peu plus large que l'élément à supprimer",
+    "Peindre par-dessus : la zone est remplacée par une reconstruction du fond",
+    "Option Calque courant, ou Calque courant et suivants si l'image est répartie sur plusieurs calques"
+   ],
+   "shortcuts": [],
+   "piege": "Excellent sur un fond régulier (ciel, mur, sable), mauvais près d'un contour marqué : il invente une continuité qui n'existe pas et laisse des traînées. Pour un élément posé sur une transition, l'outil Pièce (leçon 113) donne un meilleur résultat.",
+   "ui": [
+    {
+     "fr": "Retouche par contenu",
+     "en": "Inpainting Brush"
+    }
+   ],
+   "related": [
+    113,
+    112,
+    109
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 112,
+   "id": "odGaLlK8ERc",
+   "title_en": "Healing Brush Tool",
+   "title_fr": "Pinceau correcteur",
+   "duration": 153,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "correcteur",
+    "healing",
+    "retouche"
+   ],
+   "resume": "Recopier une TEXTURE d'un endroit à un autre en fondant les couleurs et la luminosité de la destination. La différence avec le tampon, qui recopie tout brutalement.",
+   "steps": [
+    "Mode pixel, sélectionner le calque, prendre le Pinceau correcteur",
+    "⌥ + clic pour prélever une zone de texture propre",
+    "Peindre sur le défaut : la texture est reprise, mais la couleur locale est conservée",
+    "Reprélever régulièrement pour éviter les répétitions"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌥ + clic",
+     "d": "prélever la texture source"
+    }
+   ],
+   "piege": "Sur un bord (ciel contre montagne), le fondu va chercher les deux couleurs et bave. Rester à l'intérieur d'une zone homogène, ou passer par la Pièce.",
+   "ui": [
+    {
+     "fr": "Pinceau correcteur",
+     "en": "Healing Brush"
+    }
+   ],
+   "related": [
+    109,
+    111,
+    114
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 113,
+   "id": "co9JzN6u5UY",
+   "title_en": "Patch Tool",
+   "title_fr": "Outil Pièce",
+   "duration": 180,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "pièce",
+    "patch",
+    "suppression"
+   ],
+   "resume": "Entourer un élément entier et le remplacer d'un glisser, en allant chercher une zone propre ailleurs dans l'image. L'outil pour faire disparaître un gros objet.",
+   "steps": [
+    "Mode pixel, prendre l'outil Pièce",
+    "Détourer grossièrement l'élément à supprimer",
+    "Faire glisser la sélection vers une zone propre : l'aperçu montre le résultat",
+    "Relâcher quand le raccord est bon",
+    "Mode Sélection comme source pour l'inverse : dupliquer l'élément ailleurs",
+    "Options Texture seule ou Transparent pour des raccords particuliers",
+    "Redimensionner et faire pivoter la zone source avant de valider"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘Z",
+     "d": "annuler un raccord raté"
+    }
+   ],
+   "piege": "La zone source doit ressembler à ce qui devrait se trouver derrière l'objet. En glissant vers le bas, on ramène souvent une montagne dans un ciel : c'est le choix de la source qui fait tout le résultat, pas l'outil.",
+   "ui": [
+    {
+     "fr": "Outil Pièce",
+     "en": "Patch Tool"
+    },
+    {
+     "fr": "Sélection comme source",
+     "en": "Selection as source"
+    }
+   ],
+   "related": [
+    111,
+    112,
+    109
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 114,
+   "id": "6GcpBRsbaqs",
+   "title_en": "Blemish Removal Tool",
+   "title_fr": "Suppression des imperfections",
+   "duration": 135,
+   "theme": "pixel-photo",
+   "level": "base",
+   "tags": [
+    "imperfections",
+    "peau",
+    "portrait"
+   ],
+   "resume": "Faire disparaître un bouton ou une tache d'un simple clic-glisser, avec fondu automatique.",
+   "steps": [
+    "Mode pixel, prendre l'outil Suppression des imperfections",
+    "Régler la taille du pinceau LÉGÈREMENT plus grande que le défaut",
+    "Cliquer et faire glisser vers une zone de peau lisse",
+    "Relâcher : la texture propre remplace le défaut"
+   ],
+   "shortcuts": [
+    {
+     "k": "[ et ]",
+     "d": "taille du pinceau"
+    }
+   ],
+   "piege": "Si le pinceau est plus petit que le bouton, il n'en efface qu'une partie et laisse un anneau visible. Ajuster la taille AVANT chaque défaut, c'est la seule chose à surveiller.",
+   "ui": [
+    {
+     "fr": "Suppression des imperfections",
+     "en": "Blemish Removal Tool"
+    }
+   ],
+   "related": [
+    112,
+    107,
+    115
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 115,
+   "id": "LHrYejd6YQQ",
+   "title_en": "Red Eye Removal Tool",
+   "title_fr": "Correction des yeux rouges",
+   "duration": 103,
+   "theme": "pixel-photo",
+   "level": "base",
+   "tags": [
+    "yeux rouges",
+    "portrait",
+    "flash"
+   ],
+   "resume": "Supprimer l'effet yeux rouges du flash, en un clic par œil.",
+   "steps": [
+    "Mode pixel, prendre l'outil Correction des yeux rouges",
+    "Sélectionner le calque de la photo",
+    "Cliquer sur chaque pupille rouge",
+    "La pupille retrouve une couleur naturelle"
+   ],
+   "shortcuts": [],
+   "piege": "Un clic par œil et par calque : sur un montage à plusieurs photos, il faut sélectionner le bon calque avant de cliquer, sinon rien ne se passe.",
+   "ui": [
+    {
+     "fr": "Correction des yeux rouges",
+     "en": "Red Eye Removal Tool"
+    }
+   ],
+   "related": [
+    114,
+    94
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 116,
+   "id": "kmv-BV4GPJQ",
+   "title_en": "QR Code Tool",
+   "title_fr": "Outil Code QR",
+   "duration": 110,
+   "theme": "mise-en-page",
+   "level": "base",
+   "tags": [
+    "qr code",
+    "print",
+    "lien"
+   ],
+   "resume": "Générer un QR code vectoriel directement dans le document, modifiable comme une forme.",
+   "steps": [
+    "Barre d'outils Formes, prendre l'outil Code QR",
+    "Faire glisser pour tracer le code",
+    "Choisir le type de contenu : texte, URL, téléphone, SMS…",
+    "Saisir le contenu : le code se régénère en direct",
+    "Changer sa couleur comme n'importe quelle forme vectorielle"
+   ],
+   "shortcuts": [],
+   "piege": "C'est du vectoriel, donc net à toutes les tailles à l'impression. Mais attention au contraste : un QR trop clair sur fond coloré devient illisible pour les téléphones, garder du foncé sur clair.",
+   "ui": [
+    {
+     "fr": "Outil Code QR",
+     "en": "QR Code Tool"
+    }
+   ],
+   "related": [
+    119,
+    82
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 117,
+   "id": "6FpiGsyWuNc",
+   "title_en": "Layout View Interface",
+   "title_fr": "L'espace Mise en page",
+   "duration": 122,
+   "theme": "mise-en-page",
+   "level": "base",
+   "tags": [
+    "interface",
+    "pages",
+    "édition"
+   ],
+   "resume": "Le troisième espace de travail, dédié aux documents à plusieurs pages : magazine, dossier, livret. Il ajoute la gestion des pages, les gabarits et les tableaux.",
+   "steps": [
+    "Basculer sur l'espace Mise en page",
+    "Panneau des pages à gauche : ajouter, réordonner, naviguer",
+    "Onglet Gabarits juste à côté, pour les modèles de page",
+    "Barre d'outils : outil Tableau, cadres d'image, outil Placer, fusion de données",
+    "Le document reste le même, on peut revenir en Vecteur ou Pixel à tout moment"
+   ],
+   "shortcuts": [],
+   "piege": "Un document créé sans l'option multi-page ne montrera pas de panneau de pages, même en espace Mise en page. Ça se coche à la création (leçon 118) ou dans la configuration du document.",
+   "ui": [
+    {
+     "fr": "Espace Mise en page",
+     "en": "Layout Persona"
+    },
+    {
+     "fr": "Gabarits",
+     "en": "Master pages"
+    }
+   ],
+   "related": [
+    118,
+    122,
+    124
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 118,
+   "id": "XOArUrPqClo",
+   "title_en": "Creating Facing Pages",
+   "title_fr": "Pages en vis-à-vis",
+   "duration": 191,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "double page",
+    "reliure",
+    "livre"
+   ],
+   "resume": "Travailler en double page, comme un livre ouvert, avec le choix du côté de démarrage.",
+   "steps": [
+    "Fichier > Nouveau, activer Multi-page dans les options",
+    "Cocher Pages en vis-à-vis et fixer le nombre de pages",
+    "Sur un document existant : Fichier > Configuration du document, même option",
+    "Choisir si la première page démarre à droite ou à gauche",
+    "Une disposition verticale est aussi possible pour les documents à défilement"
+   ],
+   "shortcuts": [],
+   "piege": "Le côté de démarrage n'est pas un détail cosmétique : en imprimerie, la première page est à droite. Démarrer à gauche décale tout le chemin de fer et l'imposition sera fausse.",
+   "ui": [
+    {
+     "fr": "Pages en vis-à-vis",
+     "en": "Facing pages"
+    },
+    {
+     "fr": "Multi-page",
+     "en": "Multi-page"
+    }
+   ],
+   "related": [
+    117,
+    122,
+    124
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 119,
+   "id": "H4B8PUgPRNU",
+   "title_en": "Adding Hyperlinks",
+   "title_fr": "Ajouter des hyperliens",
+   "duration": 264,
+   "theme": "mise-en-page",
+   "level": "base",
+   "tags": [
+    "hyperlien",
+    "pdf interactif",
+    "lien"
+   ],
+   "resume": "Rendre du texte ou une image cliquable dans le PDF exporté, vers une URL ou une autre page du document.",
+   "steps": [
+    "Sélectionner le texte ou l'objet à rendre cliquable",
+    "Fenêtre > Références > Hyperliens",
+    "Cliquer sur le bouton plus",
+    "Choisir la cible : URL, page, fichier ou section",
+    "Exporter en PDF : les liens sont actifs dans le fichier final"
+   ],
+   "shortcuts": [],
+   "piege": "Les liens n'existent que dans le PDF. Un export JPEG ou PNG les perd sans avertissement, et le document a l'air correct alors que rien n'est cliquable.",
+   "ui": [
+    {
+     "fr": "Hyperliens",
+     "en": "Hyperlinks"
+    }
+   ],
+   "related": [
+    81,
+    116,
+    130
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 120,
+   "id": "_ck-kWYT1yQ",
+   "title_en": "History Panel",
+   "title_fr": "Panneau Historique",
+   "duration": 319,
+   "theme": "interface",
+   "level": "base",
+   "tags": [
+    "historique",
+    "annuler",
+    "étapes"
+   ],
+   "resume": "Remonter dans n'importe quel état antérieur du document, y compris en changeant de branche quand on a repris le travail à partir d'un point ancien.",
+   "steps": [
+    "Fenêtre > Général > Historique",
+    "Activer le mode avancé pour voir les vignettes des états",
+    "Cliquer sur un état, ou faire glisser le curseur pour remonter le temps",
+    "Reprendre le travail depuis un état ancien crée une deuxième branche",
+    "Le bouton de bascule permet de passer d'une branche à l'autre sans rien perdre",
+    "Fichier > Enregistrer l'historique avec le document pour le conserver après fermeture"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘Z",
+     "d": "annuler"
+    },
+    {
+     "k": "⇧⌘Z",
+     "d": "rétablir"
+    }
+   ],
+   "piege": "L'historique est perdu à la fermeture du fichier, sauf à activer sa sauvegarde, qui alourdit nettement le fichier. À réserver aux projets où l'exploration compte vraiment.",
+   "ui": [
+    {
+     "fr": "Panneau Historique",
+     "en": "History panel"
+    },
+    {
+     "fr": "Mode avancé",
+     "en": "Advanced"
+    }
+   ],
+   "related": [
+    110,
+    15
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 121,
+   "id": "DE-a3LtHZrM",
+   "title_en": "Importing PDF Files",
+   "title_fr": "Importer un PDF",
+   "duration": 210,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "pdf",
+    "import",
+    "édition"
+   ],
+   "resume": "Ouvrir un PDF pour le modifier, avec le choix entre fidélité visuelle et texte réellement éditable.",
+   "steps": [
+    "Fichier > Ouvrir, choisir le PDF",
+    "Sélectionner les pages à charger, ou toutes",
+    "Importer en Pages (document éditorial) ou en Plans de travail (approche graphique)",
+    "Régler la résolution et l'espace colorimétrique",
+    "Cocher Privilégier le texte modifiable plutôt que la fidélité si le but est de réécrire",
+    "Grouper les lignes de texte en blocs pour retrouver des paragraphes manipulables"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘O",
+     "d": "ouvrir"
+    }
+   ],
+   "piege": "Privilégier le texte modifiable substitue les polices manquantes et déplace la mise en page. Fidélité conserve l'apparence exacte mais le texte devient presque intouchable. Il faut choisir selon l'objectif, on ne peut pas avoir les deux.",
+   "ui": [
+    {
+     "fr": "Privilégier le texte modifiable",
+     "en": "Favor editable text over fidelity"
+    }
+   ],
+   "related": [
+    117,
+    81,
+    82
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 122,
+   "id": "VWHh8C63CR8",
+   "title_en": "Adding, Duplicating, Deleting and Rearranging Layout Pages",
+   "title_fr": "Ajouter, dupliquer et réorganiser des pages",
+   "duration": 148,
+   "theme": "mise-en-page",
+   "level": "base",
+   "tags": [
+    "pages",
+    "organisation",
+    "panneau Pages"
+   ],
+   "resume": "Gérer le chemin de fer : ajouter, dupliquer, supprimer et réordonner des pages par glisser-déposer.",
+   "steps": [
+    "Espace Mise en page, panneau des pages",
+    "Faire glisser une vignette pour déplacer la page",
+    "Sélection multiple avec ⌘, puis Dupliquer les pages sélectionnées",
+    "Bouton Ajouter des pages : nombre, et position avant ou après une page donnée",
+    "Choisir d'étendre le cahier existant ou de créer un nouveau cahier"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘ + clic",
+     "d": "sélectionner plusieurs pages"
+    }
+   ],
+   "piege": "En pages en vis-à-vis, déposer une page au milieu d'un cahier décale tout le reste du document et inverse les rectos et versos. Vérifier le chemin de fer entier après chaque déplacement.",
+   "ui": [
+    {
+     "fr": "Cahier",
+     "en": "Spread"
+    },
+    {
+     "fr": "Ajouter des pages",
+     "en": "Add pages"
+    }
+   ],
+   "related": [
+    118,
+    124,
+    131
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 123,
+   "id": "-zELLqR7q6w",
+   "title_en": "Changing Layout Thumbnail Size and Scroll with Page Option",
+   "title_fr": "Taille des vignettes et défilement des pages",
+   "duration": 121,
+   "theme": "mise-en-page",
+   "level": "base",
+   "tags": [
+    "vignettes",
+    "navigation",
+    "confort"
+   ],
+   "resume": "Régler la taille des vignettes de pages et le suivi automatique du défilement, pour naviguer confortablement dans un document long.",
+   "steps": [
+    "Espace Mise en page, menu d'options du panneau des pages",
+    "Choisir la taille : petite, moyenne, grande, très grande",
+    "Élargir le panneau pour profiter des grandes vignettes",
+    "Option Défiler avec la vue : la vignette active suit la page affichée",
+    "La désactiver pour garder le panneau fixe pendant qu'on parcourt le document"
+   ],
+   "shortcuts": [],
+   "piege": "Réglage de confort, mais sur un document de cinquante pages, garder les grandes vignettes rend le panneau inutilisable. Petites vignettes plus défilement automatique est le bon couple sur un document long.",
+   "ui": [
+    {
+     "fr": "Défiler avec la vue",
+     "en": "Scroll with page"
+    }
+   ],
+   "related": [
+    122,
+    117
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 124,
+   "id": "dwuAk0aqCU4",
+   "title_en": "Creating and Applying Mater Pages",
+   "title_fr": "Créer et appliquer des gabarits",
+   "duration": 334,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "gabarit",
+    "master",
+    "cohérence"
+   ],
+   "resume": "Créer une page modèle appliquée à plusieurs pages : fonds, cadres, numérotation, tout ce qui doit se répéter à l'identique dans le document.",
+   "steps": [
+    "Onglet Gabarits > Créer un gabarit, en simple page ou en vis-à-vis",
+    "Double-cliquer dessus pour l'éditer comme une page normale",
+    "Y placer les éléments récurrents : fonds, filets, blocs réservés, folio",
+    "Revenir aux pages, clic droit > Appliquer le gabarit",
+    "Choisir la portée : toutes les pages, les paires, les impaires, ou une plage",
+    "Plusieurs gabarits peuvent coexister (couverture, intérieur, chapitre)",
+    "Clic droit > Effacer les gabarits pour en libérer une page"
+   ],
+   "shortcuts": [],
+   "piege": "Le contenu d'un gabarit n'est pas modifiable page par page : il faut le modifier dans le gabarit, ce qui touche toutes les pages concernées. Pour une exception, créer un second gabarit plutôt que de bricoler par-dessus.",
+   "ui": [
+    {
+     "fr": "Gabarit",
+     "en": "Master page"
+    },
+    {
+     "fr": "Appliquer le gabarit",
+     "en": "Apply master"
+    }
+   ],
+   "related": [
+    125,
+    128,
+    131
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 125,
+   "id": "vQ-j99DRngc",
+   "title_en": "Modifying Master Pages",
+   "title_fr": "Modifier un gabarit",
+   "duration": 128,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "gabarit",
+    "master",
+    "mise à jour"
+   ],
+   "resume": "Modifier un gabarit et voir la mise à jour se propager instantanément à toutes les pages qui l'utilisent.",
+   "steps": [
+    "Renommer le gabarit avec un nom parlant plutôt que Gabarit A",
+    "Double-cliquer dessus pour l'ouvrir",
+    "Modifier : toutes les pages concernées suivent en direct",
+    "Faire glisser un gabarit pour le dupliquer et en créer une variante",
+    "Appliquer la variante aux pages voulues"
+   ],
+   "shortcuts": [],
+   "piege": "Renommer paraît anecdotique mais devient vital dès trois gabarits : « Gabarit A, B, C » ne dit rien au moment d'en appliquer un, et on applique le mauvais. Nommer Couverture, Intérieur, Chapitre.",
+   "ui": [
+    {
+     "fr": "Gabarit",
+     "en": "Master page"
+    }
+   ],
+   "related": [
+    124,
+    122,
+    131
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 126,
+   "id": "oGAgJbXA4h8",
+   "title_en": "Adding Filler Text",
+   "title_fr": "Insérer du faux texte",
+   "duration": 172,
+   "theme": "mise-en-page",
+   "level": "base",
+   "tags": [
+    "lorem ipsum",
+    "maquette",
+    "faux texte"
+   ],
+   "resume": "Remplir un bloc de faux texte pour juger une maquette avant d'avoir le contenu réel.",
+   "steps": [
+    "Tracer un bloc de texte en cadre",
+    "Placer le curseur dedans",
+    "Menu Texte > Insérer > Insérer du faux texte",
+    "Le bloc se remplit sur toute sa hauteur",
+    "Régler corps, interligne et graisse pour évaluer la densité réelle"
+   ],
+   "shortcuts": [],
+   "piege": "Le faux texte donne une densité moyenne trompeuse : le vrai texte est souvent plus long ou plus court, et la maquette bouge. À utiliser pour juger le gris typographique, pas pour valider une pagination.",
+   "ui": [
+    {
+     "fr": "Faux texte",
+     "en": "Filler text"
+    }
+   ],
+   "related": [
+    127,
+    137,
+    39
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 127,
+   "id": "o3-HhP4dRMc",
+   "title_en": "Changing Text frame Columns",
+   "title_fr": "Colonnes dans un bloc de texte",
+   "duration": 164,
+   "theme": "typo",
+   "level": "inter",
+   "tags": [
+    "colonnes",
+    "bloc de texte",
+    "gouttière"
+   ],
+   "resume": "Découper un bloc de texte en colonnes, avec largeur et gouttière réglables colonne par colonne.",
+   "steps": [
+    "Sélectionner le bloc de texte",
+    "Régler le nombre de colonnes dans la barre du haut",
+    "Fenêtre > Texte > Bloc de texte pour le détail",
+    "Largeur individuelle de chaque colonne et taille des gouttières",
+    "Option Équilibrer le texte pour répartir également entre les colonnes"
+   ],
+   "shortcuts": [],
+   "piege": "Sans Équilibrer, la dernière colonne se retrouve à moitié vide et le bloc paraît bancal. C'est la case qui fait la différence entre une mise en colonnes propre et un accident.",
+   "ui": [
+    {
+     "fr": "Bloc de texte",
+     "en": "Text frame"
+    },
+    {
+     "fr": "Gouttière",
+     "en": "Gutter"
+    }
+   ],
+   "related": [
+    126,
+    39,
+    43
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 128,
+   "id": "2LN4BW8bt-o",
+   "title_en": "Inserting Page Number",
+   "title_fr": "Insérer la numérotation des pages",
+   "duration": 206,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "folio",
+    "numérotation",
+    "gabarit"
+   ],
+   "resume": "Poser une numérotation automatique qui se met à jour toute seule quand on ajoute ou déplace des pages.",
+   "steps": [
+    "Ouvrir le gabarit (et pas une page ordinaire)",
+    "Tracer un bloc de texte à l'emplacement du folio",
+    "Menu Texte > Insérer > Champs > Numéro de page",
+    "Mettre en forme comme du texte normal",
+    "Appliquer le gabarit à toutes les pages",
+    "Autres champs disponibles : nombre total de pages, page suivante, page précédente"
+   ],
+   "shortcuts": [],
+   "piege": "Inséré sur une page ordinaire, le numéro n'apparaîtra que sur celle-là. Il doit vivre dans le gabarit, sinon il faut le poser cinquante fois à la main.",
+   "ui": [
+    {
+     "fr": "Champs",
+     "en": "Fields"
+    },
+    {
+     "fr": "Numéro de page",
+     "en": "Page number"
+    }
+   ],
+   "related": [
+    124,
+    130,
+    132
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 129,
+   "id": "KFrQhf-RnxU",
+   "title_en": "Inserting Date Fields",
+   "title_fr": "Insérer un champ de date",
+   "duration": 125,
+   "theme": "mise-en-page",
+   "level": "base",
+   "tags": [
+    "date",
+    "champ",
+    "automatique"
+   ],
+   "resume": "Insérer une date qui se met à jour toute seule : date du jour, de création, de dernier enregistrement, d'export.",
+   "steps": [
+    "Placer le curseur dans un bloc de texte",
+    "Menu Texte > Insérer > Champs",
+    "Choisir Date et heure, Date de création, Date d'enregistrement ou Date d'impression et d'export",
+    "Le champ se remplit automatiquement et se met à jour à chaque événement"
+   ],
+   "shortcuts": [],
+   "piege": "Les champs Enregistrement et Export restent vides tant que l'action n'a pas eu lieu : on croit qu'ils ne marchent pas. Enregistrer une fois et le champ apparaît.",
+   "ui": [
+    {
+     "fr": "Champs de date",
+     "en": "Date fields"
+    }
+   ],
+   "related": [
+    130,
+    128
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 130,
+   "id": "hGf_8sUG3xk",
+   "title_en": "Inserting Fields",
+   "title_fr": "Insérer des champs",
+   "duration": 171,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "champs",
+    "variables",
+    "automatique"
+   ],
+   "resume": "Le panneau qui liste tous les champs dynamiques disponibles : auteur, dates, numéros, sections, fusion de données.",
+   "steps": [
+    "Fenêtre > Références > Champs",
+    "Parcourir les catégories : document, dates, numérotation, sections, fusion de données",
+    "Placer le curseur puis double-cliquer sur un champ pour l'insérer",
+    "Les champs posés dans un gabarit se déclinent sur toutes les pages",
+    "La valeur affichée reste liée au document et se met à jour toute seule"
+   ],
+   "shortcuts": [],
+   "piege": "Le panneau montre la valeur du champ pour la page courante : dans un gabarit, elle paraît fausse ou vide. C'est normal, la vraie valeur n'apparaît qu'une fois le gabarit appliqué.",
+   "ui": [
+    {
+     "fr": "Panneau Champs",
+     "en": "Fields panel"
+    }
+   ],
+   "related": [
+    128,
+    129,
+    131
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 131,
+   "id": "g0rrOaJ85-g",
+   "title_en": "Adding Sections",
+   "title_fr": "Créer des sections",
+   "duration": 282,
+   "theme": "mise-en-page",
+   "level": "avance",
+   "tags": [
+    "sections",
+    "chapitres",
+    "structure"
+   ],
+   "resume": "Découper un document en sections nommées (couverture, introduction, chapitres) et afficher automatiquement le nom de la section courante en tête de page.",
+   "steps": [
+    "Clic droit sur la page de début > Démarrer une section",
+    "Nommer la section",
+    "Répéter sur chaque page de début de partie",
+    "Dans un gabarit, poser un bloc de texte et insérer le champ Nom de la section",
+    "Appliquer ce gabarit : chaque page affiche le nom de SA section",
+    "Clic droit > Modifier la section pour renommer, la mise à jour est immédiate"
+   ],
+   "shortcuts": [],
+   "piege": "Le champ de section n'a de sens que dans un gabarit : posé sur une page, il n'affichera qu'un nom figé. C'est le couple section plus gabarit qui produit le titre courant automatique.",
+   "ui": [
+    {
+     "fr": "Démarrer une section",
+     "en": "Start section"
+    },
+    {
+     "fr": "Nom de la section",
+     "en": "Section name"
+    }
+   ],
+   "related": [
+    132,
+    124,
+    130
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 132,
+   "id": "Pe-QQvTMNas",
+   "title_en": "Restarting Page Number in Sections",
+   "title_fr": "Repartir la numérotation par section",
+   "duration": 142,
+   "theme": "mise-en-page",
+   "level": "avance",
+   "tags": [
+    "numérotation",
+    "sections",
+    "folio"
+   ],
+   "resume": "Faire repartir la numérotation à 1 (ou à un autre nombre) au début d'une section, pour ne pas compter la couverture ou les liminaires.",
+   "steps": [
+    "Poser la numérotation automatique dans le gabarit (leçon 128)",
+    "Clic droit sur la page de départ > Démarrer une section",
+    "Clic droit > Modifier la section",
+    "Cocher Recommencer la numérotation et saisir la valeur de départ",
+    "Les pages suivantes se recalculent d'elles-mêmes"
+   ],
+   "shortcuts": [],
+   "piege": "Démarrer une section ne change RIEN à la numérotation tant qu'on n'a pas coché explicitement le redémarrage. La section seule ne fait que découper le document.",
+   "ui": [
+    {
+     "fr": "Recommencer la numérotation",
+     "en": "Restart numbering"
+    }
+   ],
+   "related": [
+    131,
+    128,
+    122
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 133,
+   "id": "7HMEAK_W8Wo",
+   "title_en": "Inserting Special Characters",
+   "title_fr": "Insérer des caractères spéciaux",
+   "duration": 179,
+   "theme": "typo",
+   "level": "base",
+   "tags": [
+    "glyphes",
+    "caractères spéciaux",
+    "symboles"
+   ],
+   "resume": "Insérer un symbole ou un glyphe qui n'est pas au clavier, depuis le menu ou depuis le navigateur de glyphes complet d'une police.",
+   "steps": [
+    "Placer le curseur dans un bloc de texte",
+    "Menu Texte > Insérer > Symboles pour les plus courants (copyright, marque déposée)",
+    "Pour tout le reste : Fenêtre > Texte > Navigateur de glyphes",
+    "Choisir une police et parcourir son jeu de caractères complet",
+    "Double-cliquer sur un glyphe pour l'insérer",
+    "Taper un caractère pour voir ses variantes disponibles dans cette police"
+   ],
+   "shortcuts": [],
+   "piege": "Les glyphes dépendent de la police : un symbole pris dans une police décorative disparaît si tu changes de police ensuite, remplacé par un carré vide. Vérifier après tout changement typographique.",
+   "ui": [
+    {
+     "fr": "Navigateur de glyphes",
+     "en": "Glyph browser"
+    }
+   ],
+   "related": [
+    42,
+    143,
+    135
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 134,
+   "id": "faBMZbTVV1w",
+   "title_en": "Shortcut Keys",
+   "title_fr": "Raccourcis clavier",
+   "duration": 224,
+   "theme": "interface",
+   "level": "base",
+   "tags": [
+    "raccourcis",
+    "productivité",
+    "personnalisation"
+   ],
+   "resume": "Consulter, apprendre et surtout redéfinir les raccourcis clavier, puis exporter son jeu pour le retrouver ailleurs.",
+   "steps": [
+    "Menu Édition > Réglages > Raccourcis",
+    "Parcourir par catégorie : menus, outils, typographie, calques",
+    "Cliquer sur une commande et presser la combinaison voulue pour l'attribuer",
+    "Un point d'exclamation signale une combinaison déjà prise",
+    "Enregistrer le jeu de raccourcis dans un fichier",
+    "Le recharger sur une autre machine ou après réinstallation"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌥ + glisser",
+     "d": "dupliquer un objet"
+    },
+    {
+     "k": "⌘A",
+     "d": "tout sélectionner"
+    },
+    {
+     "k": "⌘Z",
+     "d": "annuler"
+    }
+   ],
+   "piege": "Le clic droit sur un outil affiche son raccourci : c'est le moyen le plus rapide de les apprendre au fil du travail, sans ouvrir les réglages. Et le jeu personnalisé s'exporte, donc il survit à un changement de machine.",
+   "ui": [
+    {
+     "fr": "Réglages > Raccourcis",
+     "en": "Settings > Shortcuts"
+    }
+   ],
+   "related": [
+    1,
+    120
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 135,
+   "id": "t0Js1UUphnc",
+   "title_en": "Spell Check",
+   "title_fr": "Correcteur orthographique",
+   "duration": 224,
+   "theme": "typo",
+   "level": "base",
+   "tags": [
+    "orthographe",
+    "correction",
+    "langue"
+   ],
+   "resume": "Vérifier l'orthographe pendant la frappe ou en passe finale, et enrichir le dictionnaire de ses propres mots.",
+   "steps": [
+    "Menu Texte > Orthographe > Vérifier l'orthographe pendant la saisie",
+    "Les mots douteux se soulignent en direct",
+    "Clic droit sur un mot souligné : suggestions de correction",
+    "Ignorer l'orthographe pour ce document seulement",
+    "Apprendre l'orthographe pour l'ajouter définitivement au dictionnaire",
+    "Texte > Orthographe > Vérifier l'orthographe pour une passe complète guidée"
+   ],
+   "shortcuts": [],
+   "piege": "Apprendre l'orthographe est définitif et global : un mot mal tapé ajouté par erreur ne sera plus jamais signalé, dans aucun document. Ignorer suffit dans la plupart des cas.",
+   "ui": [
+    {
+     "fr": "Apprendre l'orthographe",
+     "en": "Learn spelling"
+    },
+    {
+     "fr": "Ignorer",
+     "en": "Ignore"
+    }
+   ],
+   "related": [
+    136,
+    133
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 136,
+   "id": "bdqGEfEa9nk",
+   "title_en": "Find and Replace",
+   "title_fr": "Rechercher et remplacer",
+   "duration": 176,
+   "theme": "typo",
+   "level": "inter",
+   "tags": [
+    "recherche",
+    "remplacement",
+    "texte"
+   ],
+   "resume": "Rechercher et remplacer dans tout le document, avec en prime la possibilité d'appliquer une mise en forme au remplacement.",
+   "steps": [
+    "Menu Édition > Rechercher > Rechercher",
+    "Saisir le mot cherché et son remplacement",
+    "Définir la portée : document entier, cahier, ou page",
+    "Remplacer une occurrence à la fois, ou Tout remplacer",
+    "Section Format : appliquer un style de caractère, une couleur, un fond, un soulignement au texte remplacé",
+    "Le formatage s'applique en même temps que le remplacement"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘F",
+     "d": "ouvrir Rechercher"
+    }
+   ],
+   "piege": "Tout remplacer avec un format actif repeint toutes les occurrences d'un coup, y compris dans les titres où ça ne convient pas. Faire une première passe sans format, ou remplacer une par une.",
+   "ui": [
+    {
+     "fr": "Rechercher et remplacer",
+     "en": "Find and Replace"
+    },
+    {
+     "fr": "Portée",
+     "en": "Scope"
+    }
+   ],
+   "related": [
+    135,
+    48,
+    47
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 137,
+   "id": "H7T4dpyDpnU",
+   "title_en": "Text Wrap",
+   "title_fr": "Habillage de texte",
+   "duration": 217,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "habillage",
+    "contournement",
+    "image"
+   ],
+   "resume": "Faire contourner une image par le texte, jusqu'à épouser sa silhouette découpée.",
+   "steps": [
+    "Sélectionner l'image (elle doit être au-dessus du bloc de texte)",
+    "Menu Texte > Habillage > Afficher les réglages d'habillage",
+    "Choisir le mode : Aucun, Saut (haut et bas seulement), Carré, Serré, Intérieur",
+    "Serré tient compte de la transparence : le texte épouse la forme découpée",
+    "Régler les distances haut, bas, gauche, droite",
+    "Habillage > Modifier le contour d'habillage pour déplacer les points à la main",
+    "Réinitialiser le contour pour repartir de la forme automatique"
+   ],
+   "shortcuts": [],
+   "piege": "Le mode Serré ne suit la silhouette que si l'image a un vrai fond transparent. Sur un JPEG à fond blanc, il se comporte exactement comme Carré et on ne comprend pas pourquoi le texte reste rectangulaire.",
+   "ui": [
+    {
+     "fr": "Habillage",
+     "en": "Text wrap"
+    },
+    {
+     "fr": "Serré",
+     "en": "Tight"
+    }
+   ],
+   "related": [
+    138,
+    126,
+    35
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 138,
+   "id": "VBVbz6RvquA",
+   "title_en": "Object and Text Pinning",
+   "title_fr": "Ancrer un objet dans le texte",
+   "duration": 158,
+   "theme": "mise-en-page",
+   "level": "avance",
+   "tags": [
+    "ancrage",
+    "objet ancré",
+    "flux"
+   ],
+   "resume": "Attacher un objet au texte pour qu'il le suive quand le texte se déplace : ancrage flottant à côté du bloc, ou ancrage dans le flux comme un caractère.",
+   "steps": [
+    "Fenêtre > Texte > Ancrage",
+    "Sélectionner l'objet",
+    "Mode Flottant : l'objet reste à côté et suit le bloc de texte quand il bouge",
+    "Mode Aligné : l'objet s'insère dans le flux, comme un gros caractère",
+    "Régler le décalage et l'alignement vertical (hauteur de capitale, hauteur d'x…)",
+    "Régler l'échelle et les marges gauche et droite",
+    "Détacher pour rendre l'objet indépendant"
+   ],
+   "shortcuts": [],
+   "piege": "Sans ancrage, tout ajout de texte en amont décale les paragraphes et laisse les images en place : la maquette se désaligne dès la première correction. Ancrer est ce qui rend un document éditorial réellement modifiable.",
+   "ui": [
+    {
+     "fr": "Ancrage",
+     "en": "Pinning"
+    },
+    {
+     "fr": "Flottant / Aligné",
+     "en": "Float / Inline"
+    }
+   ],
+   "related": [
+    137,
+    126,
+    122
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 139,
+   "id": "nnT9pDWeals",
+   "title_en": "Insert Blank Table",
+   "title_fr": "Insérer un tableau vierge",
+   "duration": 104,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "tableau",
+    "lignes",
+    "colonnes"
+   ],
+   "resume": "Créer un tableau en le dessinant : le nombre de lignes et de colonnes suit le geste.",
+   "steps": [
+    "Espace Mise en page, prendre l'outil Tableau",
+    "Faire glisser : plus le cadre est grand, plus il y a de lignes et de colonnes",
+    "Relâcher, puis saisir les données cellule par cellule",
+    "Tirer les bords pour redimensionner le tableau",
+    "Tirer une séparation pour ajuster une ligne ou une colonne isolée"
+   ],
+   "shortcuts": [
+    {
+     "k": "⇥",
+     "d": "passer à la cellule suivante"
+    }
+   ],
+   "piege": "Le nombre de lignes et colonnes se fixe au moment du tracé et suit la taille du geste. Viser la bonne grille dès le départ évite d'avoir à ajouter des lignes après coup.",
+   "ui": [
+    {
+     "fr": "Outil Tableau",
+     "en": "Table Tool"
+    }
+   ],
+   "related": [
+    140,
+    141
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 140,
+   "id": "Omn3j4T-uAc",
+   "title_en": "Copying and Pasting from Excel Table",
+   "title_fr": "Coller un tableau depuis Excel",
+   "duration": 122,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "excel",
+    "tableau",
+    "import"
+   ],
+   "resume": "Récupérer des données d'Excel ou d'un tableur dans un tableau Affinity, en gardant la structure en cellules.",
+   "steps": [
+    "Copier la plage de cellules dans le tableur",
+    "Dans Affinity, créer d'abord un tableau aux bonnes dimensions (outil Tableau)",
+    "Sélectionner les cellules du tableau",
+    "Coller : les données se répartissent dans les cellules"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘V",
+     "d": "coller dans les cellules sélectionnées"
+    }
+   ],
+   "piege": "Coller sans avoir créé et sélectionné un tableau au préalable produit un bloc de texte brut avec des tabulations, et toute la structure est perdue. Le tableau doit exister avant le collage.",
+   "ui": [
+    {
+     "fr": "Tableau",
+     "en": "Table"
+    }
+   ],
+   "related": [
+    139,
+    141
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 141,
+   "id": "HLpLU_Fqyaw",
+   "title_en": "Format Table",
+   "title_fr": "Mettre en forme un tableau",
+   "duration": 313,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "tableau",
+    "bordures",
+    "styles"
+   ],
+   "resume": "Mettre en forme un tableau : fusion de cellules, couleurs de fond, filets intérieurs et extérieurs, alignements, répartition automatique.",
+   "steps": [
+    "Sélectionner des cellules pour agir dessus",
+    "Barre du haut : police, corps, alignement horizontal et vertical",
+    "Couleur de fond des cellules sélectionnées",
+    "Fusionner ou séparer les cellules",
+    "Filets : choisir la portée (tous, contour extérieur, filets intérieurs) puis couleur et épaisseur",
+    "Menu Tableau : insérer ou supprimer une ligne ou une colonne",
+    "Répartir uniformément les lignes et colonnes, ou ajuster automatiquement au contenu"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘Z",
+     "d": "annuler une fusion ratée"
+    }
+   ],
+   "piege": "La portée des filets se choisit AVANT de régler couleur et épaisseur. Sinon on applique à tout le tableau ce qu'on voulait mettre sur une seule bordure, et il faut tout reprendre.",
+   "ui": [
+    {
+     "fr": "Fusionner les cellules",
+     "en": "Merge cells"
+    },
+    {
+     "fr": "Filets",
+     "en": "Stroke"
+    }
+   ],
+   "related": [
+    139,
+    140,
+    5
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 142,
+   "id": "-B8pC0K-FKw",
+   "title_en": "Text Position and Transform",
+   "title_fr": "Position et transformation du texte",
+   "duration": 169,
+   "theme": "typo",
+   "level": "inter",
+   "tags": [
+    "position",
+    "transformation",
+    "bloc"
+   ],
+   "resume": "Régler l'espace entre les lettres, le décalage vertical, l'inclinaison et la déformation d'une sélection de texte.",
+   "steps": [
+    "Fenêtre > Texte > Caractère, section Position et transformation",
+    "Sélectionner les caractères concernés (indispensable)",
+    "Approche pour l'espace entre toutes les lettres, crénage pour une paire",
+    "Décalage de ligne de base pour monter ou descendre les caractères",
+    "Angle d'inclinaison, largeur et hauteur pour déformer",
+    "Exposant et indice depuis la même section",
+    "Option Insécable pour empêcher un mot de passer à la ligne"
+   ],
+   "shortcuts": [],
+   "piege": "Déformer en largeur ou en hauteur revient à fabriquer une fausse graisse, ce qui casse le dessin de la police et se voit immédiatement. Mieux vaut chercher une vraie graisse condensée ou étendue dans la famille.",
+   "ui": [
+    {
+     "fr": "Approche",
+     "en": "Tracking"
+    },
+    {
+     "fr": "Crénage",
+     "en": "Kerning"
+    },
+    {
+     "fr": "Insécable",
+     "en": "No break"
+    }
+   ],
+   "related": [
+    42,
+    143,
+    40
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 143,
+   "id": "9rbdOLBVn2w",
+   "title_en": "Text Decorations",
+   "title_fr": "Décorations de texte",
+   "duration": 147,
+   "theme": "typo",
+   "level": "inter",
+   "tags": [
+    "soulignement",
+    "barré",
+    "décoration"
+   ],
+   "resume": "Habiller les lettres : soulignements simples ou doubles avec leur propre couleur, barrés, et contour de caractère.",
+   "steps": [
+    "Fenêtre > Texte > Caractère, section Décoration",
+    "Soulignement simple ou double, avec réglage d'épaisseur et de couleur",
+    "Barré simple ou double, couleur indépendante",
+    "Contour de caractère : couleur, épaisseur, style de trait",
+    "Position du contour : à l'intérieur ou à l'extérieur des lettres",
+    "Réglage des extrémités du trait"
+   ],
+   "shortcuts": [],
+   "piege": "Le contour posé à l'extérieur épaissit les lettres et bouche les contreformes des petits corps. À l'intérieur, il ronge le dessin mais garde l'encombrement. Sur un titre, extérieur ; sur du texte courant, éviter.",
+   "ui": [
+    {
+     "fr": "Décoration",
+     "en": "Decoration"
+    },
+    {
+     "fr": "Contour",
+     "en": "Outline"
+    }
+   ],
+   "related": [
+    142,
+    42,
+    5
+   ],
+   "has_transcript": true
   }
  ]
 };
@@ -4599,6 +6323,7 @@ const THEMES = {
   vecteur:              { label: "Vecteur & tracés",      color: "#4ab8d8" },
   "formes-booleens":    { label: "Formes & booléens",     color: "#4ec98a" },
   typo:                 { label: "Typographie",           color: "#e8a33d" },
+  "mise-en-page":       { label: "Mise en page",          color: "#3fc4b0" },
   pinceaux:             { label: "Pinceaux",              color: "#e87d9c" },
   "couleur-effets":     { label: "Couleur & effets",      color: "#d868d8" },
   "pixel-photo":        { label: "Pixel & photo",         color: "#6fb6e8" },
