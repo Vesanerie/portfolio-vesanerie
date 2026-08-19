@@ -49,7 +49,7 @@ const LOCAL_HOST = ["localhost", "127.0.0.1"].includes(location.hostname);
 
 async function boot() {
   const [db, prog] = await Promise.all([
-    fetch("lessons.json").then((r) => r.json()),
+    fetch("lessons.js").then((r) => r.json()),
     LOCAL_HOST
       ? fetch("api/progress").then((r) => (r.ok ? r.json() : null)).catch(() => null)
       : Promise.resolve(null),
@@ -85,7 +85,7 @@ const isDone = (n) => !!prog(n).done;
 let bundlePromise = null;
 function loadTranscripts() {
   if (!bundlePromise) {
-    bundlePromise = fetch("transcripts.json")
+    bundlePromise = fetch("transcripts.js")
       .then((r) => (r.ok ? r.json() : {}))
       .catch(() => ({}))
       .then((b) => { state.transcripts = b; state.indexed = true; return b; });
