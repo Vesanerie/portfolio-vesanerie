@@ -1,7 +1,8 @@
 # Deploye en tant que .htaccess dans /affinity sur O2Switch (voir deploy.sh).
 #
-# O2Switch ne compresse pas application/json par defaut : transcripts.json
-# partait en 285 Ko bruts, ce qui se sent en partage de connexion 4G.
+# LiteSpeed gzippe deja text/html et application/javascript, donc index.html
+# (78 Ko inline) et transcripts.js (285 Ko) partent compresses. On ajoute les
+# types qu'il laisse passer en clair, au cas ou un fichier reviendrait.
 # Pas de directive de cache : le navigateur revalide (304), donc un nouveau
 # lot de fiches est visible tout de suite apres un deploiement.
 <IfModule mod_deflate.c>

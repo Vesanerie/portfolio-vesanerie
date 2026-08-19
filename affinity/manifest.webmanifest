@@ -8,6 +8,11 @@
   "background_color": "#131218",
   "theme_color": "#131218",
   "icons": [
-    { "src": "icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM4YjZjZjAiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNGFiOGQ4Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjQyIiBmaWxsPSIjMTMxMjE4Ii8+CiAgPHJlY3QgeD0iMzAiIHk9IjMwIiB3aWR0aD0iMTMyIiBoZWlnaHQ9IjEzMiIgcng9IjI4IiBmaWxsPSJ1cmwoI2cpIi8+CiAgPGcgc3Ryb2tlPSIjMTMxMjE4IiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgICA8cGF0aCBkPSJNNTIgMTE4IEwxMTggNTIiLz4KICAgIDxwYXRoIGQ9Ik01MiA5NiBMOTYgNTIiLz4KICAgIDxwYXRoIGQ9Ik03NCAxNDAgTDE0MCA3NCIvPgogICAgPHBhdGggZD0iTTExOCAxNDAgTDE0MCAxMTgiLz4KICA8L2c+Cjwvc3ZnPgo=",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
   ]
 }
