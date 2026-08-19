@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AffinityDB · 100 leçons Affinity</title>
+<title>AffinityDB · tutoriels Affinity</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#131218">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -268,7 +268,7 @@ mark{background:var(--acc-soft);color:var(--txt);border-radius:3px;padding:0 2px
     <span class="mark"></span>
     <div>
       <h1>AffinityDB</h1>
-      <p class="sub">Affinity Tutorial Series · TutorTube · 100 leçons</p>
+      <p class="sub" id="sub">chargement…</p>
     </div>
   </div>
 
@@ -306,6 +306,11 @@ mark{background:var(--acc-soft);color:var(--txt);border-radius:3px;padding:0 2px
     </div>
 
     <div class="filter-block">
+      <h2>Sources</h2>
+      <div id="source-list" class="theme-list"></div>
+    </div>
+
+    <div class="filter-block">
       <button id="reset" class="reset">Tout réafficher</button>
       <p class="hint">Clic sur une leçon pour la fiche. <kbd>/</kbd> pour chercher, <kbd>Esc</kbd> pour fermer.</p>
     </div>
@@ -329,13 +334,29 @@ mark{background:var(--acc-soft);color:var(--txt);border-radius:3px;padding:0 2px
 
 <script>
 window.__LESSONS__ = {
- "playlist_title": "Affinity Tutorial Series",
- "channel": "TutorTube",
- "playlist_url": "https://www.youtube.com/playlist?list=PL_dhPga7ruucfyaDJq9hYQGPTNKkDcNBO",
- "count": 143,
+ "count": 172,
+ "sources": {
+  "tutortube": {
+   "label": "TutorTube",
+   "code": "L",
+   "lang": "en"
+  },
+  "woow": {
+   "label": "WooW · FR",
+   "code": "W",
+   "lang": "fr"
+  },
+  "greg": {
+   "label": "Greg · EN",
+   "code": "G",
+   "lang": "en"
+  }
+ },
  "lessons": [
   {
    "n": 1,
+   "code": "L1",
+   "source": "tutortube",
    "id": "gkY2brBKx8U",
    "title_en": "Interface Tour",
    "title_fr": "Tour de l'interface",
@@ -378,6 +399,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 2,
+   "code": "L2",
+   "source": "tutortube",
    "id": "QH2Tu7lP1Wk",
    "title_en": "New Document Settings",
    "title_fr": "Réglages d'un nouveau document",
@@ -425,6 +448,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 3,
+   "code": "L3",
+   "source": "tutortube",
    "id": "WMY6LDulVao",
    "title_en": "Changing Existing Project Document Setting",
    "title_fr": "Modifier les réglages d'un document existant",
@@ -466,6 +491,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 4,
+   "code": "L4",
+   "source": "tutortube",
    "id": "eGTDu2MCn8A",
    "title_en": "Using Color Wheel to Change Object Color",
    "title_fr": "Changer la couleur d'un objet avec la roue chromatique",
@@ -507,6 +534,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 5,
+   "code": "L5",
+   "source": "tutortube",
    "id": "rLW4EKE3MUQ",
    "title_en": "Adding Stroke in Shapes and Changing Stroke Color",
    "title_fr": "Ajouter un contour et changer sa couleur",
@@ -552,6 +581,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 6,
+   "code": "L6",
+   "source": "tutortube",
    "id": "NVncM9fwPS8",
    "title_en": "Stroke and Fill Opacity",
    "title_fr": "Opacité du contour et du fond",
@@ -593,6 +624,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 7,
+   "code": "L7",
+   "source": "tutortube",
    "id": "ef09jP9rPnY",
    "title_en": "Adjusting Rectangular Shape Corners",
    "title_fr": "Régler les angles d'un rectangle",
@@ -631,6 +664,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 8,
+   "code": "L8",
+   "source": "tutortube",
    "id": "6lYaY75sXCI",
    "title_en": "Layers",
    "title_fr": "Les calques",
@@ -669,6 +704,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 9,
+   "code": "L9",
+   "source": "tutortube",
    "id": "rC01OdIWwjM",
    "title_en": "Naming, Hiding and Locking Layers",
    "title_fr": "Nommer, masquer et verrouiller les calques",
@@ -708,6 +745,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 10,
+   "code": "L10",
+   "source": "tutortube",
    "id": "vrSPeVITnQU",
    "title_en": "Using Pen Tool to Create Simple Shapes",
    "title_fr": "Plume : créer des formes simples",
@@ -757,6 +796,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 11,
+   "code": "L11",
+   "source": "tutortube",
    "id": "SR7mXQLBAKc",
    "title_en": "Using Pen Tool to Trace Shapes",
    "title_fr": "Plume : détourer et tracer",
@@ -808,6 +849,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 12,
+   "code": "L12",
+   "source": "tutortube",
    "id": "7M8y543A1Ko",
    "title_en": "Convert Shapes to Curve",
    "title_fr": "Convertir une forme en courbes",
@@ -849,6 +892,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 13,
+   "code": "L13",
+   "source": "tutortube",
    "id": "GE4n5yIhPI8",
    "title_en": "Inserting Artboard",
    "title_fr": "Insérer un plan de travail",
@@ -884,6 +929,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 14,
+   "code": "L14",
+   "source": "tutortube",
    "id": "dnjU2c7YPs4",
    "title_en": "Resizing the Artboard",
    "title_fr": "Redimensionner un plan de travail",
@@ -920,6 +967,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 15,
+   "code": "L15",
+   "source": "tutortube",
    "id": "XEDoTvftvFk",
    "title_en": "Copying Layers",
    "title_fr": "Dupliquer des calques",
@@ -964,6 +1013,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 16,
+   "code": "L16",
+   "source": "tutortube",
    "id": "phv-MRSJEco",
    "title_en": "Pencil Tool",
    "title_fr": "Outil Crayon (vecteur)",
@@ -1008,6 +1059,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 17,
+   "code": "L17",
+   "source": "tutortube",
    "id": "CyKz5to0KMc",
    "title_en": "Node Tool",
    "title_fr": "Outil Nœud",
@@ -1054,6 +1107,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 18,
+   "code": "L18",
+   "source": "tutortube",
    "id": "8uwUSoIga5U",
    "title_en": "Adding Fill Color in Open Shapes",
    "title_fr": "Remplir une forme ouverte",
@@ -1089,6 +1144,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 19,
+   "code": "L19",
+   "source": "tutortube",
    "id": "J-Vd6R2tEmw",
    "title_en": "Corner Tool",
    "title_fr": "Outil Angle",
@@ -1125,6 +1182,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 20,
+   "code": "L20",
+   "source": "tutortube",
    "id": "QR5fmIwYSQ4",
    "title_en": "Contour Tool",
    "title_fr": "Outil Contour (décalage de tracé)",
@@ -1160,6 +1219,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 21,
+   "code": "L21",
+   "source": "tutortube",
    "id": "2ss6o5mOrDM",
    "title_en": "Knife Tool",
    "title_fr": "Outil Couteau",
@@ -1201,6 +1262,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 22,
+   "code": "L22",
+   "source": "tutortube",
    "id": "0ABA1CQIwCk",
    "title_en": "Stabilizer in Pen, Path Brush and Knife",
    "title_fr": "Stabilisateur (plume, pinceau vectoriel, couteau)",
@@ -1241,6 +1304,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 23,
+   "code": "L23",
+   "source": "tutortube",
    "id": "NyvMwyRjIo4",
    "title_en": "Stroke Width Tool",
    "title_fr": "Outil Largeur de contour",
@@ -1278,6 +1343,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 24,
+   "code": "L24",
+   "source": "tutortube",
    "id": "oXIwpQzIhRo",
    "title_en": "Stroke Width Profile Save and Use",
    "title_fr": "Enregistrer et réutiliser un profil de largeur",
@@ -1314,6 +1381,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 25,
+   "code": "L25",
+   "source": "tutortube",
    "id": "NpIXlha2Q30",
    "title_en": "Group and Ungroup Objects",
    "title_fr": "Grouper et dégrouper",
@@ -1362,6 +1431,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 26,
+   "code": "L26",
+   "source": "tutortube",
    "id": "rs7ugQj-50M",
    "title_en": "Vector Flood Fill Tool",
    "title_fr": "Pot de peinture vectoriel",
@@ -1399,6 +1470,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 27,
+   "code": "L27",
+   "source": "tutortube",
    "id": "Bs_2fa7u8OA",
    "title_en": "Blending Modes",
    "title_fr": "Modes de fusion",
@@ -1439,6 +1512,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 28,
+   "code": "L28",
+   "source": "tutortube",
    "id": "Es7885ZkJ08",
    "title_en": "Shape Builder Tool",
    "title_fr": "Créateur de formes (Shape Builder)",
@@ -1481,6 +1556,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 29,
+   "code": "L29",
+   "source": "tutortube",
    "id": "kC_8DW6YiCo",
    "title_en": "Rasterize Layer",
    "title_fr": "Pixelliser un calque",
@@ -1520,6 +1597,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 30,
+   "code": "L30",
+   "source": "tutortube",
    "id": "QmPyAFmN_gc",
    "title_en": "Selection Tool",
    "title_fr": "Outil Sélection (pixel)",
@@ -1574,6 +1653,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 31,
+   "code": "L31",
+   "source": "tutortube",
    "id": "yWKg7URGYEk",
    "title_en": "Selection Refine Tool",
    "title_fr": "Affiner une sélection",
@@ -1619,6 +1700,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 32,
+   "code": "L32",
+   "source": "tutortube",
    "id": "3QqrshA2N0s",
    "title_en": "Masking Layer",
    "title_fr": "Masque de calque",
@@ -1664,6 +1747,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 33,
+   "code": "L33",
+   "source": "tutortube",
    "id": "m4-vU-Z9Mvg",
    "title_en": "Object Selection Tool",
    "title_fr": "Sélection d'objet automatique",
@@ -1710,6 +1795,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 34,
+   "code": "L34",
+   "source": "tutortube",
    "id": "x4GvYNP-cBE",
    "title_en": "Exporting File as JPEG",
    "title_fr": "Exporter en JPEG",
@@ -1756,6 +1843,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 35,
+   "code": "L35",
+   "source": "tutortube",
    "id": "GyaRkoA7l00",
    "title_en": "Exporting File as PNG",
    "title_fr": "Exporter en PNG",
@@ -1797,6 +1886,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 36,
+   "code": "L36",
+   "source": "tutortube",
    "id": "dAmO1CtmRjs",
    "title_en": "Flood Fill Tool",
    "title_fr": "Pot de peinture (pixel)",
@@ -1843,6 +1934,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 37,
+   "code": "L37",
+   "source": "tutortube",
    "id": "UJkiuJZeEvY",
    "title_en": "Adding Text",
    "title_fr": "Ajouter du texte",
@@ -1887,6 +1980,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 38,
+   "code": "L38",
+   "source": "tutortube",
    "id": "JNPeb3gdPjI",
    "title_en": "Font Color, Highlight and Basic Text Alignment",
    "title_fr": "Couleur, surlignage et alignement du texte",
@@ -1927,6 +2022,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 39,
+   "code": "L39",
+   "source": "tutortube",
    "id": "dBtchTxWh0c",
    "title_en": "Textbox Link",
    "title_fr": "Chaîner des blocs de texte",
@@ -1963,6 +2060,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 40,
+   "code": "L40",
+   "source": "tutortube",
    "id": "E9_iu_mGEvM",
    "title_en": "Setting Line Spacing",
    "title_fr": "Interlignage",
@@ -2002,6 +2101,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 41,
+   "code": "L41",
+   "source": "tutortube",
    "id": "UxBZ7UM2lDA",
    "title_en": "Ordered and Unordered List",
    "title_fr": "Listes à puces et numérotées",
@@ -2041,6 +2142,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 42,
+   "code": "L42",
+   "source": "tutortube",
    "id": "JqznMNH7h2A",
    "title_en": "Character Panel for Deep Typography Control",
    "title_fr": "Panneau Caractère : contrôle typo fin",
@@ -2086,6 +2189,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 43,
+   "code": "L43",
+   "source": "tutortube",
    "id": "hDwA5VvKHTU",
    "title_en": "Tab Stop and Justification Option",
    "title_fr": "Taquets de tabulation et justification",
@@ -2131,6 +2236,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 44,
+   "code": "L44",
+   "source": "tutortube",
    "id": "4OhbhEcXMqI",
    "title_en": "Bullets and Numbering Styles and Hyphenation",
    "title_fr": "Styles de puces, numérotation et césure",
@@ -2172,6 +2279,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 45,
+   "code": "L45",
+   "source": "tutortube",
    "id": "eUqSHrDxwRY",
    "title_en": "Drop Cap",
    "title_fr": "Lettrine",
@@ -2213,6 +2322,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 46,
+   "code": "L46",
+   "source": "tutortube",
    "id": "uEer_t_xVW0",
    "title_en": "Applying Paragraph Styles",
    "title_fr": "Appliquer des styles de paragraphe",
@@ -2249,6 +2360,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 47,
+   "code": "L47",
+   "source": "tutortube",
    "id": "-mYmd9c8yYw",
    "title_en": "Creating Custom Paragraph Styles",
    "title_fr": "Créer ses styles de paragraphe",
@@ -2290,6 +2403,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 48,
+   "code": "L48",
+   "source": "tutortube",
    "id": "mIKJHc57rww",
    "title_en": "Applying and Creating Character Styles",
    "title_fr": "Styles de caractère",
@@ -2330,6 +2445,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 49,
+   "code": "L49",
+   "source": "tutortube",
    "id": "viRCRTwS0pk",
    "title_en": "General Brush Settings",
    "title_fr": "Réglages généraux du pinceau",
@@ -2381,6 +2498,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 50,
+   "code": "L50",
+   "source": "tutortube",
    "id": "JTMh05mbLbc",
    "title_en": "Dynamics Brush Settings",
    "title_fr": "Dynamique du pinceau",
@@ -2422,6 +2541,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 51,
+   "code": "L51",
+   "source": "tutortube",
    "id": "OVL0xPlgjK4",
    "title_en": "Texturing Brush Settings",
    "title_fr": "Texture du pinceau",
@@ -2462,6 +2583,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 52,
+   "code": "L52",
+   "source": "tutortube",
    "id": "HmEdAu0brIg",
    "title_en": "Sub Brush Settings",
    "title_fr": "Sous-pinceaux",
@@ -2499,6 +2622,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 53,
+   "code": "L53",
+   "source": "tutortube",
    "id": "GJcxv5-qf2I",
    "title_en": "Keeping Image on Text",
    "title_fr": "Mettre une image dans du texte",
@@ -2536,6 +2661,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 54,
+   "code": "L54",
+   "source": "tutortube",
    "id": "hZGNVz5I5GQ",
    "title_en": "Text on a Path",
    "title_fr": "Texte sur un tracé",
@@ -2578,6 +2705,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 55,
+   "code": "L55",
+   "source": "tutortube",
    "id": "-gSjV_YxAjU",
    "title_en": "Convert Text to Curves",
    "title_fr": "Convertir le texte en courbes",
@@ -2619,6 +2748,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 56,
+   "code": "L56",
+   "source": "tutortube",
    "id": "CyTDLtt9f7s",
    "title_en": "Boolean Operations",
    "title_fr": "Opérations booléennes",
@@ -2672,6 +2803,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 57,
+   "code": "L57",
+   "source": "tutortube",
    "id": "yTXnAVA1atY",
    "title_en": "Creating Symbols",
    "title_fr": "Créer des symboles",
@@ -2716,6 +2849,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 58,
+   "code": "L58",
+   "source": "tutortube",
    "id": "LM8XIcmaNWQ",
    "title_en": "Detaching and Sync Symbols",
    "title_fr": "Détacher et synchroniser les symboles",
@@ -2754,6 +2889,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 59,
+   "code": "L59",
+   "source": "tutortube",
    "id": "a3JIH7D7OoE",
    "title_en": "Alignment & Distribution",
    "title_fr": "Alignement et distribution",
@@ -2799,6 +2936,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 60,
+   "code": "L60",
+   "source": "tutortube",
    "id": "o6-NEjaaj54",
    "title_en": "Enabling and Using Grid",
    "title_fr": "Activer et utiliser la grille",
@@ -2839,6 +2978,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 61,
+   "code": "L61",
+   "source": "tutortube",
    "id": "CUXKi0MtzZk",
    "title_en": "Enabling and Using Guide",
    "title_fr": "Activer et utiliser les repères",
@@ -2889,6 +3030,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 62,
+   "code": "L62",
+   "source": "tutortube",
    "id": "aUDbiEkrI1c",
    "title_en": "Enabling and Using Baseline Grid",
    "title_fr": "Grille de ligne de base",
@@ -2925,6 +3068,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 63,
+   "code": "L63",
+   "source": "tutortube",
    "id": "wYo_JnJTA3M",
    "title_en": "Snapping Manager",
    "title_fr": "Gestionnaire de magnétisme",
@@ -2965,6 +3110,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 64,
+   "code": "L64",
+   "source": "tutortube",
    "id": "rQewsN-mQzM",
    "title_en": "Using Pre existing Assets",
    "title_fr": "Utiliser les ressources fournies",
@@ -3001,6 +3148,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 65,
+   "code": "L65",
+   "source": "tutortube",
    "id": "cCMpnFHpTmQ",
    "title_en": "Creating Custom Assets",
    "title_fr": "Créer ses propres ressources",
@@ -3042,6 +3191,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 66,
+   "code": "L66",
+   "source": "tutortube",
    "id": "raNhFAoYxcg",
    "title_en": "Layer Effects FX",
    "title_fr": "Effets de calque (FX)",
@@ -3104,6 +3255,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 67,
+   "code": "L67",
+   "source": "tutortube",
    "id": "b1K8mXBfoV0",
    "title_en": "Copy Effects Between Layers",
    "title_fr": "Copier des effets d'un calque à l'autre",
@@ -3143,6 +3296,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 68,
+   "code": "L68",
+   "source": "tutortube",
    "id": "ZNqwY5f1HqE",
    "title_en": "Styles Panel",
    "title_fr": "Panneau Styles",
@@ -3184,6 +3339,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 69,
+   "code": "L69",
+   "source": "tutortube",
    "id": "xP96FBGPF-s",
    "title_en": "Advanced Gradient Tool",
    "title_fr": "Dégradé avancé",
@@ -3238,6 +3395,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 70,
+   "code": "L70",
+   "source": "tutortube",
    "id": "3eLuEMqw9aE",
    "title_en": "Adding Bitmap as Fill",
    "title_fr": "Remplir avec une image bitmap",
@@ -3296,6 +3455,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 71,
+   "code": "L71",
+   "source": "tutortube",
    "id": "qpOCgq7VDp8",
    "title_en": "Adding Hatch Fill",
    "title_fr": "Remplissage par hachures",
@@ -3354,6 +3515,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 72,
+   "code": "L72",
+   "source": "tutortube",
    "id": "KPYDq6MtKcc",
    "title_en": "Transparency Tool",
    "title_fr": "Outil Transparence",
@@ -3390,6 +3553,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 73,
+   "code": "L73",
+   "source": "tutortube",
    "id": "AVogkp1Fi3U",
    "title_en": "Clipping Masks",
    "title_fr": "Masques d'écrêtage",
@@ -3435,6 +3600,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 74,
+   "code": "L74",
+   "source": "tutortube",
    "id": "r_ZUayCWeVw",
    "title_en": "Appearance Panel",
    "title_fr": "Panneau Apparence",
@@ -3486,6 +3653,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 75,
+   "code": "L75",
+   "source": "tutortube",
    "id": "MyqBKLNWEOw",
    "title_en": "Path Brush Tool",
    "title_fr": "Pinceau vectoriel (Path Brush)",
@@ -3540,6 +3709,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 76,
+   "code": "L76",
+   "source": "tutortube",
    "id": "t6YJ2xm3BeE",
    "title_en": "Pencil Tool",
    "title_fr": "Outil Crayon (pinceaux)",
@@ -3589,6 +3760,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 77,
+   "code": "L77",
+   "source": "tutortube",
    "id": "ZjPThcbu6Jc",
    "title_en": "Placing Images from Photo",
    "title_fr": "Placer une image depuis Photos",
@@ -3634,6 +3807,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 78,
+   "code": "L78",
+   "source": "tutortube",
    "id": "_bk67EWMNxs",
    "title_en": "Searching for Stock Images and Inserting them",
    "title_fr": "Chercher et insérer des images de stock",
@@ -3670,6 +3845,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 79,
+   "code": "L79",
+   "source": "tutortube",
    "id": "_h3Y4axaUu8",
    "title_en": "Adjustment Layers",
    "title_fr": "Calques de réglage",
@@ -3711,6 +3888,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 80,
+   "code": "L80",
+   "source": "tutortube",
    "id": "lnn7ETWmylM",
    "title_en": "Isometric Grid",
    "title_fr": "Grille isométrique",
@@ -3758,6 +3937,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 81,
+   "code": "L81",
+   "source": "tutortube",
    "id": "GC1Xd1owI_I",
    "title_en": "Export Projects",
    "title_fr": "Exporter un projet",
@@ -3798,6 +3979,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 82,
+   "code": "L82",
+   "source": "tutortube",
    "id": "lOiOHbwdvLE",
    "title_en": "Export for Print",
    "title_fr": "Export pour l'impression",
@@ -3839,6 +4022,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 83,
+   "code": "L83",
+   "source": "tutortube",
    "id": "I6Pvi8etRE8",
    "title_en": "Export for Web & Social Media",
    "title_fr": "Export pour le web et les réseaux",
@@ -3880,6 +4065,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 84,
+   "code": "L84",
+   "source": "tutortube",
    "id": "29jgqI9_BL0",
    "title_en": "Exporting as Canva Project",
    "title_fr": "Exporter vers Canva",
@@ -3915,6 +4102,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 85,
+   "code": "L85",
+   "source": "tutortube",
    "id": "XmZBgc-ABM4",
    "title_en": "Opening Multiple Projects Together",
    "title_fr": "Ouvrir plusieurs projets en même temps",
@@ -3956,6 +4145,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 86,
+   "code": "L86",
+   "source": "tutortube",
    "id": "Qt4DkO4aj00",
    "title_en": "Vector Crop Tool",
    "title_fr": "Recadrage vectoriel",
@@ -3998,6 +4189,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 87,
+   "code": "L87",
+   "source": "tutortube",
    "id": "dOkgAboinF8",
    "title_en": "Measure Tool",
    "title_fr": "Outil Mesure",
@@ -4032,6 +4225,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 88,
+   "code": "L88",
+   "source": "tutortube",
    "id": "j57iUzhvMrg",
    "title_en": "Area Tool",
    "title_fr": "Outil Aire",
@@ -4071,6 +4266,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 89,
+   "code": "L89",
+   "source": "tutortube",
    "id": "kz7NdHVgQ4Q",
    "title_en": "Color Picker Tool",
    "title_fr": "Pipette (couleur)",
@@ -4111,6 +4308,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 90,
+   "code": "L90",
+   "source": "tutortube",
    "id": "v8SuaCPBLns",
    "title_en": "Style Picker Tool",
    "title_fr": "Pipette de style",
@@ -4157,6 +4356,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 91,
+   "code": "L91",
+   "source": "tutortube",
    "id": "MuvuFPwHFys",
    "title_en": "Selection Brush Tool",
    "title_fr": "Pinceau de sélection",
@@ -4204,6 +4405,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 92,
+   "code": "L92",
+   "source": "tutortube",
    "id": "I8Sk4sic_9M",
    "title_en": "Flood Select Tool",
    "title_fr": "Sélection par plage de couleur",
@@ -4250,6 +4453,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 93,
+   "code": "L93",
+   "source": "tutortube",
    "id": "qo5Oxfh1cZ4",
    "title_en": "Paint Mixer Brush",
    "title_fr": "Pinceau mélangeur",
@@ -4291,6 +4496,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 94,
+   "code": "L94",
+   "source": "tutortube",
    "id": "RSwNhdv14wo",
    "title_en": "Color Replacement Brush Tool",
    "title_fr": "Pinceau de remplacement de couleur",
@@ -4337,6 +4544,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 95,
+   "code": "L95",
+   "source": "tutortube",
    "id": "0FR0aJ-_GR8",
    "title_en": "Pixel Brush Tool",
    "title_fr": "Pinceau pixel",
@@ -4378,6 +4587,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 96,
+   "code": "L96",
+   "source": "tutortube",
    "id": "Bz2Y7WxgBD8",
    "title_en": "Using Brush Symmetry Tool",
    "title_fr": "Symétrie de pinceau",
@@ -4424,6 +4635,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 97,
+   "code": "L97",
+   "source": "tutortube",
    "id": "uuOx79HGEJg",
    "title_en": "Erase Brush Tool",
    "title_fr": "Gomme",
@@ -4462,6 +4675,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 98,
+   "code": "L98",
+   "source": "tutortube",
    "id": "J4FcqA2STFU",
    "title_en": "Background Erase Brush",
    "title_fr": "Gomme d'arrière-plan",
@@ -4503,6 +4718,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 99,
+   "code": "L99",
+   "source": "tutortube",
    "id": "B3ow035qW7Q",
    "title_en": "Flood Erase Tool",
    "title_fr": "Gomme par plage de couleur",
@@ -4544,6 +4761,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 100,
+   "code": "L100",
+   "source": "tutortube",
    "id": "QEIZlfE7sEY",
    "title_en": "Adjustment Brush Tool",
    "title_fr": "Pinceau de réglage",
@@ -4590,6 +4809,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 101,
+   "code": "L101",
+   "source": "tutortube",
    "id": "T6ZH5H63cmw",
    "title_en": "Burn Brush Tool",
    "title_fr": "Pinceau Densité + (assombrir)",
@@ -4634,6 +4855,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 102,
+   "code": "L102",
+   "source": "tutortube",
    "id": "Df0g8Vm_edQ",
    "title_en": "Dodge Brush Tool",
    "title_fr": "Pinceau Densité - (éclaircir)",
@@ -4674,6 +4897,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 103,
+   "code": "L103",
+   "source": "tutortube",
    "id": "ijwmntE0Thc",
    "title_en": "Sponge Brush Tool",
    "title_fr": "Pinceau Éponge (saturation)",
@@ -4714,6 +4939,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 104,
+   "code": "L104",
+   "source": "tutortube",
    "id": "Svq3tPv2byk",
    "title_en": "Filter Brush Tool",
    "title_fr": "Pinceau de filtre",
@@ -4755,6 +4982,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 105,
+   "code": "L105",
+   "source": "tutortube",
    "id": "jwBhJRJdXac",
    "title_en": "Blur Brush Tool",
    "title_fr": "Pinceau de flou",
@@ -4795,6 +5024,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 106,
+   "code": "L106",
+   "source": "tutortube",
    "id": "Q6w8nqes5d4",
    "title_en": "Sharpen Brush Tool",
    "title_fr": "Pinceau de netteté",
@@ -4830,6 +5061,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 107,
+   "code": "L107",
+   "source": "tutortube",
    "id": "q1UzY7icRK4",
    "title_en": "Median Brush Tool",
    "title_fr": "Pinceau médian",
@@ -4864,6 +5097,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 108,
+   "code": "L108",
+   "source": "tutortube",
    "id": "GIfMSkP7qfk",
    "title_en": "Smudge Brush Tool",
    "title_fr": "Pinceau à maculer",
@@ -4899,6 +5134,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 109,
+   "code": "L109",
+   "source": "tutortube",
    "id": "sTkX-Bs9qN0",
    "title_en": "Clone Brush Tool",
    "title_fr": "Tampon de duplication",
@@ -4941,6 +5178,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 110,
+   "code": "L110",
+   "source": "tutortube",
    "id": "aNHH7R4WPFI",
    "title_en": "History Brush Tool",
    "title_fr": "Pinceau d'historique",
@@ -4985,6 +5224,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 111,
+   "code": "L111",
+   "source": "tutortube",
    "id": "OYBo_xBsKzE",
    "title_en": "Inpainting Brush Tool",
    "title_fr": "Pinceau de retouche par contenu",
@@ -5020,6 +5261,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 112,
+   "code": "L112",
+   "source": "tutortube",
    "id": "odGaLlK8ERc",
    "title_en": "Healing Brush Tool",
    "title_fr": "Pinceau correcteur",
@@ -5060,6 +5303,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 113,
+   "code": "L113",
+   "source": "tutortube",
    "id": "co9JzN6u5UY",
    "title_en": "Patch Tool",
    "title_fr": "Outil Pièce",
@@ -5107,6 +5352,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 114,
+   "code": "L114",
+   "source": "tutortube",
    "id": "6GcpBRsbaqs",
    "title_en": "Blemish Removal Tool",
    "title_fr": "Suppression des imperfections",
@@ -5147,6 +5394,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 115,
+   "code": "L115",
+   "source": "tutortube",
    "id": "LHrYejd6YQQ",
    "title_en": "Red Eye Removal Tool",
    "title_fr": "Correction des yeux rouges",
@@ -5181,6 +5430,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 116,
+   "code": "L116",
+   "source": "tutortube",
    "id": "kmv-BV4GPJQ",
    "title_en": "QR Code Tool",
    "title_fr": "Outil Code QR",
@@ -5216,6 +5467,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 117,
+   "code": "L117",
+   "source": "tutortube",
    "id": "6FpiGsyWuNc",
    "title_en": "Layout View Interface",
    "title_fr": "L'espace Mise en page",
@@ -5256,6 +5509,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 118,
+   "code": "L118",
+   "source": "tutortube",
    "id": "XOArUrPqClo",
    "title_en": "Creating Facing Pages",
    "title_fr": "Pages en vis-à-vis",
@@ -5296,6 +5551,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 119,
+   "code": "L119",
+   "source": "tutortube",
    "id": "H4B8PUgPRNU",
    "title_en": "Adding Hyperlinks",
    "title_fr": "Ajouter des hyperliens",
@@ -5332,6 +5589,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 120,
+   "code": "L120",
+   "source": "tutortube",
    "id": "_ck-kWYT1yQ",
    "title_en": "History Panel",
    "title_fr": "Panneau Historique",
@@ -5381,6 +5640,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 121,
+   "code": "L121",
+   "source": "tutortube",
    "id": "DE-a3LtHZrM",
    "title_en": "Importing PDF Files",
    "title_fr": "Importer un PDF",
@@ -5423,6 +5684,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 122,
+   "code": "L122",
+   "source": "tutortube",
    "id": "VWHh8C63CR8",
    "title_en": "Adding, Duplicating, Deleting and Rearranging Layout Pages",
    "title_fr": "Ajouter, dupliquer et réorganiser des pages",
@@ -5468,6 +5731,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 123,
+   "code": "L123",
+   "source": "tutortube",
    "id": "-zELLqR7q6w",
    "title_en": "Changing Layout Thumbnail Size and Scroll with Page Option",
    "title_fr": "Taille des vignettes et défilement des pages",
@@ -5503,6 +5768,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 124,
+   "code": "L124",
+   "source": "tutortube",
    "id": "dwuAk0aqCU4",
    "title_en": "Creating and Applying Mater Pages",
    "title_fr": "Créer et appliquer des gabarits",
@@ -5545,6 +5812,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 125,
+   "code": "L125",
+   "source": "tutortube",
    "id": "vQ-j99DRngc",
    "title_en": "Modifying Master Pages",
    "title_fr": "Modifier un gabarit",
@@ -5581,6 +5850,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 126,
+   "code": "L126",
+   "source": "tutortube",
    "id": "oGAgJbXA4h8",
    "title_en": "Adding Filler Text",
    "title_fr": "Insérer du faux texte",
@@ -5617,6 +5888,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 127,
+   "code": "L127",
+   "source": "tutortube",
    "id": "o3-HhP4dRMc",
    "title_en": "Changing Text frame Columns",
    "title_fr": "Colonnes dans un bloc de texte",
@@ -5657,6 +5930,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 128,
+   "code": "L128",
+   "source": "tutortube",
    "id": "2LN4BW8bt-o",
    "title_en": "Inserting Page Number",
    "title_fr": "Insérer la numérotation des pages",
@@ -5698,6 +5973,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 129,
+   "code": "L129",
+   "source": "tutortube",
    "id": "KFrQhf-RnxU",
    "title_en": "Inserting Date Fields",
    "title_fr": "Insérer un champ de date",
@@ -5732,6 +6009,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 130,
+   "code": "L130",
+   "source": "tutortube",
    "id": "hGf_8sUG3xk",
    "title_en": "Inserting Fields",
    "title_fr": "Insérer des champs",
@@ -5768,6 +6047,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 131,
+   "code": "L131",
+   "source": "tutortube",
    "id": "g0rrOaJ85-g",
    "title_en": "Adding Sections",
    "title_fr": "Créer des sections",
@@ -5809,6 +6090,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 132,
+   "code": "L132",
+   "source": "tutortube",
    "id": "Pe-QQvTMNas",
    "title_en": "Restarting Page Number in Sections",
    "title_fr": "Repartir la numérotation par section",
@@ -5845,6 +6128,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 133,
+   "code": "L133",
+   "source": "tutortube",
    "id": "7HMEAK_W8Wo",
    "title_en": "Inserting Special Characters",
    "title_fr": "Insérer des caractères spéciaux",
@@ -5882,6 +6167,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 134,
+   "code": "L134",
+   "source": "tutortube",
    "id": "faBMZbTVV1w",
    "title_en": "Shortcut Keys",
    "title_fr": "Raccourcis clavier",
@@ -5931,6 +6218,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 135,
+   "code": "L135",
+   "source": "tutortube",
    "id": "t0Js1UUphnc",
    "title_en": "Spell Check",
    "title_fr": "Correcteur orthographique",
@@ -5971,6 +6260,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 136,
+   "code": "L136",
+   "source": "tutortube",
    "id": "bdqGEfEa9nk",
    "title_en": "Find and Replace",
    "title_fr": "Rechercher et remplacer",
@@ -6017,6 +6308,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 137,
+   "code": "L137",
+   "source": "tutortube",
    "id": "H7T4dpyDpnU",
    "title_en": "Text Wrap",
    "title_fr": "Habillage de texte",
@@ -6059,6 +6352,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 138,
+   "code": "L138",
+   "source": "tutortube",
    "id": "VBVbz6RvquA",
    "title_en": "Object and Text Pinning",
    "title_fr": "Ancrer un objet dans le texte",
@@ -6101,6 +6396,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 139,
+   "code": "L139",
+   "source": "tutortube",
    "id": "nnT9pDWeals",
    "title_en": "Insert Blank Table",
    "title_fr": "Insérer un tableau vierge",
@@ -6141,6 +6438,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 140,
+   "code": "L140",
+   "source": "tutortube",
    "id": "Omn3j4T-uAc",
    "title_en": "Copying and Pasting from Excel Table",
    "title_fr": "Coller un tableau depuis Excel",
@@ -6180,6 +6479,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 141,
+   "code": "L141",
+   "source": "tutortube",
    "id": "HLpLU_Fqyaw",
    "title_en": "Format Table",
    "title_fr": "Mettre en forme un tableau",
@@ -6227,6 +6528,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 142,
+   "code": "L142",
+   "source": "tutortube",
    "id": "-B8pC0K-FKw",
    "title_en": "Text Position and Transform",
    "title_fr": "Position et transformation du texte",
@@ -6273,6 +6576,8 @@ window.__LESSONS__ = {
   },
   {
    "n": 143,
+   "code": "L143",
+   "source": "tutortube",
    "id": "9rbdOLBVn2w",
    "title_en": "Text Decorations",
    "title_fr": "Décorations de texte",
@@ -6311,12 +6616,1337 @@ window.__LESSONS__ = {
     5
    ],
    "has_transcript": true
+  },
+  {
+   "n": 1001,
+   "code": "W1",
+   "source": "woow",
+   "id": "b1_Px_kXjEM",
+   "title_en": "L'effet chrome le PLUS RÉALISTE dans Affinity by Canva",
+   "title_fr": "Effet chrome ultra réaliste",
+   "duration": 633,
+   "theme": "couleur-effets",
+   "level": "avance",
+   "tags": [
+    "chrome",
+    "effets de calque",
+    "lettrage",
+    "biseau"
+   ],
+   "resume": "Fabriquer un lettrage chromé crédible uniquement avec des effets de calque, sans image ni texture importée. Les valeurs exactes sont données dans la vidéo.",
+   "steps": [
+    "Document FHD 1080p paysage, fond sombre posé sur le plan de travail",
+    "Texte artistique dans une police épaisse, lettres resserrées avec ⌥ et les flèches",
+    "Effets de calque > Biseautage et estampage, type Interne",
+    "Déverrouiller les proportions, rayon 20 px, profondeur 30 px, atténuation 5 px",
+    "Choisir le profil en vague : c'est lui qui donne les reflets alternés du chrome",
+    "Empiler les autres effets par-dessus pour la brillance"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌥ + flèches",
+     "d": "resserrer ou écarter les lettres (crénage)"
+    }
+   ],
+   "piege": "Tout se joue sur le profil de biseau : avec le profil linéaire par défaut, on obtient un relief en plastique. C'est le profil en vague qui crée l'alternance clair-sombre caractéristique du métal.",
+   "ui": [
+    {
+     "fr": "Biseautage et estampage",
+     "en": "Bevel / Emboss"
+    },
+    {
+     "fr": "Profil",
+     "en": "Profile"
+    }
+   ],
+   "related": [
+    66,
+    74,
+    143
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1002,
+   "code": "W2",
+   "source": "woow",
+   "id": "g5oWWCMa6BU",
+   "title_en": "Synchroniser une Identité visuelle Canva dans Affinity : le guide COMPLET",
+   "title_fr": "Synchroniser une identité visuelle Canva",
+   "duration": 1256,
+   "theme": "ecosysteme",
+   "level": "inter",
+   "tags": [
+    "brand kit",
+    "charte",
+    "canva",
+    "logos"
+   ],
+   "resume": "Centraliser logos, couleurs et polices d'une marque dans Canva et y accéder directement depuis Affinity, sans rouvrir Canva à chaque visuel.",
+   "steps": [
+    "Vérifier l'abonnement sur canva.com : l'identité visuelle demande Canva Pro",
+    "Créer l'identité visuelle dans Canva : logos, palette, polices",
+    "Dans Affinity, se connecter au même compte Canva",
+    "Le kit devient accessible depuis Affinity, prêt à appliquer",
+    "La vidéo construit un cas complet, un club de self-défense, de la charte aux supports"
+   ],
+   "shortcuts": [],
+   "piege": "Fonction réservée aux comptes payants. Canva solidaire, gratuit pour les structures éligibles (associations), y donne accès aussi : à vérifier avant de bâtir un process dessus.",
+   "ui": [
+    {
+     "fr": "Identité visuelle",
+     "en": "Brand Kit"
+    }
+   ],
+   "related": [
+    1012,
+    68,
+    65
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1003,
+   "code": "W3",
+   "source": "woow",
+   "id": "VZXRdHZNIXw",
+   "title_en": "Mesurez et travaillez à l'échelle réelle avec l’outil Mesure Affinity by Canva",
+   "title_fr": "Mesurer et travailler à l'échelle réelle",
+   "duration": 1259,
+   "theme": "grilles-alignement",
+   "level": "inter",
+   "tags": [
+    "mesure",
+    "échelle",
+    "enseigne",
+    "cas pratique"
+   ],
+   "resume": "Travailler à l'échelle réelle à partir d'une simple photo dont on ne connaît qu'une seule cote. Le cas pratique du tuto : concevoir une enseigne sur la photo d'une devanture.",
+   "steps": [
+    "Glisser la photo dans Affinity et relever ses dimensions en pixels",
+    "Document > Configuration du document : passer les unités en millimètres",
+    "Utiliser l'outil Mesure pour caler le document sur la cote connue (ici 2,50 m de hauteur sous plafond)",
+    "Tout le reste du document se mesure alors en dimensions réelles",
+    "Dessiner l'enseigne directement aux bonnes cotes"
+   ],
+   "shortcuts": [],
+   "piege": "L'outil Mesure de la leçon 87 mesure des pixels ; il ne devient utile en conception qu'une fois le document réglé en unités réelles et calé sur une cote connue. C'est ce calage qui manque à la plupart des tutos.",
+   "ui": [
+    {
+     "fr": "Configuration du document",
+     "en": "Document Setup"
+    },
+    {
+     "fr": "Outil Mesure",
+     "en": "Measure Tool"
+    }
+   ],
+   "related": [
+    87,
+    88,
+    2
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1004,
+   "code": "W4",
+   "source": "woow",
+   "id": "6O_CExFFSjI",
+   "title_en": "Comment animer un logo Affinity avec Cavalry (by Canva) ?",
+   "title_fr": "Animer un logo avec Cavalry",
+   "duration": 1520,
+   "theme": "ecosysteme",
+   "level": "avance",
+   "tags": [
+    "animation",
+    "cavalry",
+    "logo",
+    "motion"
+   ],
+   "resume": "Animer un logo vectoriel fait dans Affinity avec Cavalry, l'outil de motion design du même écosystème, gratuit pour les particuliers.",
+   "steps": [
+    "Télécharger Cavalry sur cavalry.studio, version gratuite",
+    "Se connecter avec le compte Canva et autoriser l'accès",
+    "Découvrir l'interface, organisée en panneaux comme Affinity",
+    "Importer le logo vectoriel construit dans le Vecteur Studio",
+    "Animer les tracés et exporter"
+   ],
+   "shortcuts": [],
+   "piege": "La version gratuite suffit pour un logo animé ; la version entreprise passe par un devis. Réflexe utile : garder le logo en tracés propres et séparés dans Affinity, un logo aplati ne s'anime pas.",
+   "ui": [
+    {
+     "fr": "Cavalry",
+     "en": "Cavalry"
+    }
+   ],
+   "related": [
+    1011,
+    57,
+    12
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1005,
+   "code": "W5",
+   "source": "woow",
+   "id": "w2srjKtuxXM",
+   "title_en": "Installez les outils de la communauté AFFINITY, SANS coder et SANS IA ! [Scripts]",
+   "title_fr": "Installer les scripts de la communauté",
+   "duration": 719,
+   "theme": "ecosysteme",
+   "level": "avance",
+   "tags": [
+    "scripts",
+    "mcp",
+    "extensions",
+    "dégradé de forme"
+   ],
+   "resume": "Installer des outils développés par la communauté qui comblent des manques du logiciel, sans coder et sans IA. L'exemple montré est un outil de dégradé de forme qui n'existe pas nativement.",
+   "steps": [
+    "Édition > Paramètres > Model Context Protocol, activer le MCP et ses options",
+    "Télécharger le Script Manager pour Affinity (Mac .dmg ou Windows)",
+    "L'installer comme un logiciel classique",
+    "Il se connecte au MCP d'Affinity et donne accès aux scripts de la communauté",
+    "Installer les scripts voulus et les lancer depuis Affinity"
+   ],
+   "shortcuts": [],
+   "piege": "C'est la porte ouverte par le MCP d'Affinity qui rend tout ça possible : sans l'activer dans les paramètres, le gestionnaire de scripts ne voit pas le logiciel. Et les scripts viennent de tiers, donc à installer en connaissance de cause.",
+   "ui": [
+    {
+     "fr": "Protocole de contexte de modèle",
+     "en": "Model Context Protocol"
+    },
+    {
+     "fr": "Script Manager",
+     "en": "Script Manager"
+    }
+   ],
+   "related": [
+    1006,
+    1008,
+    134
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1006,
+   "code": "W6",
+   "source": "woow",
+   "id": "KsYY9htH7sA",
+   "title_en": "Affinity 3.2 | Bien plus que de simples outils (Claude IA m'a bluffé)",
+   "title_fr": "Les nouveautés d'Affinity 3.2",
+   "duration": 1465,
+   "theme": "interface",
+   "level": "inter",
+   "tags": [
+    "nouveautés",
+    "version",
+    "pinceau goutte",
+    "mcp"
+   ],
+   "resume": "Le tour complet de la version 3.2, mineur comme majeur, plutôt que les deux nouveautés vitrine. Nouveaux outils vectoriels et surtout l'ouverture au MCP.",
+   "steps": [
+    "Pinceau goutte vectoriel : trace des formes pleines à main levée, sculptables, sur un seul calque courbe",
+    "Sa version gomme : retire de la matière sur une courbe, y compris sur une forme classique",
+    "Les traits produits sont de vraies formes, avec contour et remplissage",
+    "Ouverture au MCP et aux scripts, développée dans la leçon W5",
+    "Le reste des ajustements de la version passés en revue"
+   ],
+   "shortcuts": [],
+   "piege": "Le pinceau goutte vectoriel ne trace pas une ligne mais une forme fermée : elle se remplit, se contourne et se sculpte. Le confondre avec le pinceau vectoriel de la leçon 75 fait rater tout son intérêt.",
+   "ui": [
+    {
+     "fr": "Pinceau goutte vectoriel",
+     "en": "Vector blob brush"
+    }
+   ],
+   "related": [
+    1005,
+    75,
+    20
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1007,
+   "code": "W7",
+   "source": "woow",
+   "id": "HFbjAZBTOyo",
+   "title_en": "Écrire beaucoup plus vite dans Affinity avec une IA de dictée vocale open source",
+   "title_fr": "Dicter son texte à la voix",
+   "duration": 797,
+   "theme": "ecosysteme",
+   "level": "base",
+   "tags": [
+    "dictée",
+    "voix",
+    "productivité"
+   ],
+   "resume": "Écrire à la voix plutôt qu'au clavier dans Affinity, avec un outil de dictée local et gratuit. La dictée tourne autour de 180 mots par minute contre 50 au clavier.",
+   "steps": [
+    "Récupérer l'outil Murmure sur murmure.app",
+    "Installer la version correspondant au système",
+    "Suivre le tutoriel intégré au premier lancement",
+    "Dicter dans n'importe quel champ de texte, y compris dans Affinity"
+   ],
+   "shortcuts": [],
+   "piege": "Attention à l'homonymie : ce Murmure est signé Al1x-ai, open source, transcription locale et hors ligne, 25 langues. Ce n'est pas le même projet que ton propre outil de dictée du même nom.",
+   "ui": [],
+   "related": [
+    126,
+    135
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1008,
+   "code": "W8",
+   "source": "woow",
+   "id": "szsmku8hn9U",
+   "title_en": "Le meilleur PLUGIN pour obtenir plus de filtres dans Affinity by Canva (seulement pour Windows)",
+   "title_fr": "600 filtres en plus avec G'MIC",
+   "duration": 843,
+   "theme": "ecosysteme",
+   "level": "inter",
+   "tags": [
+    "plugin",
+    "filtres",
+    "gmic",
+    "windows"
+   ],
+   "resume": "Ajouter plus de 600 filtres et effets via G'MIC, un module libre développé par une équipe du GREYC avec le CNRS. Transforme une photo en dessin ou en peinture.",
+   "steps": [
+    "Aller sur la page de téléchargement de G'MIC, section Affinity Photo",
+    "Récupérer le plugin sur GitHub (G'MIC Plugin x64)",
+    "Dézipper et installer le module",
+    "Le lancer depuis Affinity pour accéder à la bibliothèque de filtres"
+   ],
+   "shortcuts": [],
+   "piege": "Windows uniquement. Sur Mac, l'installation n'est pas possible, la vidéo le dit explicitement. À noter avant de perdre du temps dessus.",
+   "ui": [
+    {
+     "fr": "G'MIC",
+     "en": "G'MIC"
+    }
+   ],
+   "related": [
+    104,
+    1005
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1009,
+   "code": "W9",
+   "source": "woow",
+   "id": "rjzSfyU_X-g",
+   "title_en": "Les bases du Pixel Studio dans Affinity by Canva pour la retouche des images",
+   "title_fr": "Les bases du Pixel Studio",
+   "duration": 3242,
+   "theme": "pixel-photo",
+   "level": "base",
+   "tags": [
+    "pixel studio",
+    "retouche",
+    "photomontage",
+    "guide"
+   ],
+   "resume": "Guide complet du Pixel Studio en 54 minutes : la logique des calques image et pixel, les réglages non destructifs, les masques, les sélections, jusqu'à un photomontage complet.",
+   "steps": [
+    "Ouvrir plusieurs images en onglets, détachables en fenêtres séparées",
+    "Comprendre la différence calque image (conserve définition et résolution) et calque pixel (modifiable)",
+    "Tramer (pixelliser) pour pouvoir peindre dessus",
+    "Empiler des calques de réglage, non destructifs, et les limiter à un seul calque par glisser-déposer",
+    "Masque de calque : peindre en noir ou blanc pour révéler ou cacher",
+    "Détourage à la plume, avec l'option Ajouter une nouvelle courbe pour plusieurs tracés sur un même calque",
+    "Sélection d'objet automatique, puis affinage au pinceau de sélection"
+   ],
+   "shortcuts": [
+    {
+     "k": "⇧X",
+     "d": "permuter noir et blanc au pinceau"
+    },
+    {
+     "k": "⌘D",
+     "d": "désélectionner"
+    }
+   ],
+   "piege": "Le mot français employé dans Affinity est « tramer », pas « pixelliser ». Chercher « pixelliser » dans les menus ne donne rien : c'est ce qui bloque le plus de débutants francophones.",
+   "ui": [
+    {
+     "fr": "Tramer",
+     "en": "Rasterize"
+    },
+    {
+     "fr": "Calque image",
+     "en": "Image layer"
+    }
+   ],
+   "related": [
+    29,
+    32,
+    33
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1010,
+   "code": "W10",
+   "source": "woow",
+   "id": "sEfkA2ijaS4",
+   "title_en": "Les bases du studio Mise en Page dans Affinity by Canva",
+   "title_fr": "Les bases du studio Mise en page",
+   "duration": 1276,
+   "theme": "mise-en-page",
+   "level": "base",
+   "tags": [
+    "mise en page",
+    "multipage",
+    "impression",
+    "guide"
+   ],
+   "resume": "Guide du studio Mise en page : créer un document multi-pages destiné à l'impression et comprendre les maquettes, l'équivalent des gabarits d'InDesign.",
+   "steps": [
+    "Nouveau document : préréglage A5, déjà en CMJN car destiné à l'impression",
+    "Activer Multi-page, choisir le côté de démarrage et le nombre de pages",
+    "Marges (10 mm, 15 mm en pied) et fond perdu (3 mm par défaut)",
+    "Découvrir le panneau Pages, cœur du studio",
+    "Fenêtre > Mise en page pour les panneaux spécifiques",
+    "Basculer vers Vecteur ou Pixel sans quitter le document",
+    "Studio Typographie pour le réglage fin des textes"
+   ],
+   "shortcuts": [],
+   "piege": "Le fond perdu à 3 mm est une valeur par défaut, pas une règle : appeler l'imprimeur AVANT et utiliser sa valeur, sinon le massicot coupe dans le visuel.",
+   "ui": [
+    {
+     "fr": "Fond perdu",
+     "en": "Bleed"
+    },
+    {
+     "fr": "Maquettes",
+     "en": "Master pages"
+    }
+   ],
+   "related": [
+    117,
+    124,
+    82
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1011,
+   "code": "W11",
+   "source": "woow",
+   "id": "C9WYlObevZU",
+   "title_en": "Affinity | Guide du débutant(e) avec le Vecteur Studio",
+   "title_fr": "Guide du débutant : Vecteur Studio",
+   "duration": 2375,
+   "theme": "vecteur",
+   "level": "base",
+   "tags": [
+    "vecteur studio",
+    "guide",
+    "formes",
+    "navigation"
+   ],
+   "resume": "Guide du Vecteur Studio par un designer qui l'utilise en production depuis six ans : pourquoi le vectoriel, les formes paramétriques, les préréglages, la navigation.",
+   "steps": [
+    "Comprendre vectoriel contre matriciel : des coordonnées reliées par des courbes, donc agrandissables à l'infini",
+    "Le Vecteur Studio est le successeur direct d'Affinity Designer",
+    "Formes paramétriques : poignées rouges pour sculpter, couleur et contour",
+    "Enregistrer une configuration de forme comme préréglage, réutilisable",
+    "Navigation : ⌘ plus molette zoome là où pointe le curseur",
+    "Clic molette ou barre d'espace pour se déplacer",
+    "Copier-glisser d'un objet avec l'outil Déplacement"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘ + molette",
+     "d": "zoomer sur le point pointé"
+    },
+    {
+     "k": "barre d'espace",
+     "d": "se déplacer dans le document"
+    }
+   ],
+   "piege": "Le zoom sur le curseur (⌘ plus molette) change vraiment la façon de travailler : on zoome sur l'objet visé sans le perdre, au lieu de zoomer au centre puis de recadrer. C'est le geste que la plupart n'apprennent jamais.",
+   "ui": [
+    {
+     "fr": "Vecteur Studio",
+     "en": "Vector Studio"
+    },
+    {
+     "fr": "Préréglage",
+     "en": "Preset"
+    }
+   ],
+   "related": [
+    1012,
+    10,
+    12
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 1012,
+   "code": "W12",
+   "source": "woow",
+   "id": "V3iTr3SgXH0",
+   "title_en": "Vos premiers pas dans Affinity by Canva | Test et découverte",
+   "title_fr": "Premiers pas dans Affinity by Canva",
+   "duration": 4700,
+   "theme": "interface",
+   "level": "base",
+   "tags": [
+    "découverte",
+    "interface",
+    "studios",
+    "prise en main"
+   ],
+   "resume": "Découverte de fond en comble de la version unifiée, par quelqu'un qui suivait la suite depuis six ans. Le regard le plus honnête de la sélection : ce qui plaît et ce qui agace.",
+   "steps": [
+    "Compte Canva désormais obligatoire pour lancer l'application, l'auteur ne s'en cache pas d'être agacé",
+    "Interface épurée, très peu de couleur, un temps d'adaptation d'une heure et demie assumé",
+    "Les trois studios (Vecteur, Pixel, Mise en page) et leurs menus parcourus un par un",
+    "Édition > Paramètres pour ajuster l'interface",
+    "Calque image contre calque pixel, tramage, calques de réglage, masques",
+    "Refus du partage de données proposé au premier lancement",
+    "Ouverture des anciens documents Affinity Designer"
+   ],
+   "shortcuts": [
+    {
+     "k": "⇧X",
+     "d": "permuter les couleurs de premier plan et d'arrière-plan"
+    }
+   ],
+   "piege": "78 minutes, c'est la vidéo la plus longue de ta base côté français. À prendre comme un tour du propriétaire à voir une fois en entier, pas comme une fiche de référence : pour un point précis, les leçons courtes de TutorTube sont plus rapides.",
+   "ui": [
+    {
+     "fr": "Studios",
+     "en": "Personas"
+    }
+   ],
+   "related": [
+    1,
+    1009,
+    1011
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2001,
+   "code": "G1",
+   "source": "greg",
+   "id": "KuGEh1x3Nwo",
+   "title_en": "Affinity for Beginners -- Everything You Need to Know on the Home Screen",
+   "title_fr": "L'écran d'accueil de fond en comble",
+   "duration": 626,
+   "theme": "interface",
+   "level": "base",
+   "tags": [
+    "accueil",
+    "préréglages",
+    "documents récents"
+   ],
+   "resume": "Ce qu'on voit vraiment au lancement : la fenêtre flottante d'accueil, ses onglets, et comment y revenir sans fermer son travail.",
+   "steps": [
+    "La fenêtre d'accueil flotte au-dessus du document : déplaçable, redimensionnable, transportable sur un second écran",
+    "Onglets : documents récents, favoris (étoilés), préréglages, modèles, fichiers d'apprentissage fournis",
+    "Fichier > Nouveau ou l'icône maison pour la rappeler à tout moment",
+    "Saisir des dimensions personnalisées, puis les enregistrer comme préréglage réutilisable",
+    "L'icône dossier ouvre directement un fichier de l'ordinateur"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘N",
+     "d": "rappeler l'écran d'accueil"
+    }
+   ],
+   "piege": "Créer un préréglage plutôt que ressaisir ses dimensions à chaque fois : sur des formats récurrents (story, carrousel, A5), c'est deux minutes gagnées à chaque nouveau document.",
+   "ui": [
+    {
+     "fr": "Écran d'accueil",
+     "en": "Home screen"
+    },
+    {
+     "fr": "Préréglage",
+     "en": "Preset"
+    }
+   ],
+   "related": [
+    2,
+    2002,
+    13
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2002,
+   "code": "G2",
+   "source": "greg",
+   "id": "uZp3fMiJMNo",
+   "title_en": "Affinity for Beginners · Learn the UI Fast (Save Hours of Frustration)",
+   "title_fr": "Maîtriser l'interface et créer ses studios",
+   "duration": 1700,
+   "theme": "interface",
+   "level": "inter",
+   "tags": [
+    "interface",
+    "personnalisation",
+    "studios",
+    "panneaux"
+   ],
+   "resume": "Remodeler l'interface à sa main : barre d'outils, panneaux, et surtout création de studios personnalisés, l'équivalent des espaces de travail enregistrés.",
+   "steps": [
+    "Passer en mode Personnaliser pour pouvoir déplacer les outils dans la barre",
+    "Faire glisser un outil depuis la réserve, le poser où on veut, ou l'imbriquer dans un groupe existant",
+    "Panneaux : double-clic sur leur nom pour les replier, glisser pour les regrouper ailleurs",
+    "Les détacher pour créer une colonne de panneaux supplémentaire",
+    "Créer un studio personnalisé, en le clonant depuis un studio existant",
+    "Garder un studio de référence qu'on ne modifie jamais, pour pouvoir y revenir"
+   ],
+   "shortcuts": [
+    {
+     "k": "double-clic",
+     "d": "sur le nom d'un panneau : le replier ou le déplier"
+    }
+   ],
+   "piege": "Hors mode Personnaliser, impossible de réordonner les outils, et on croit que la barre est figée. Et les studios personnalisés se mettent à jour parfois sans qu'on l'ait voulu : d'où l'intérêt d'en garder un intact comme point de retour.",
+   "ui": [
+    {
+     "fr": "Personnaliser",
+     "en": "Customize"
+    },
+    {
+     "fr": "Studio",
+     "en": "Studio"
+    }
+   ],
+   "related": [
+    1,
+    2014,
+    134
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2003,
+   "code": "G3",
+   "source": "greg",
+   "id": "SsmJv4uqDGI",
+   "title_en": "Affinity for Beginners: Mastering the FULL Power of Layers",
+   "title_fr": "Les calques en profondeur",
+   "duration": 2724,
+   "theme": "interface",
+   "level": "base",
+   "tags": [
+    "calques",
+    "guide",
+    "sélection active",
+    "effets"
+   ],
+   "resume": "Le cours de fond sur les calques : la distinction sélection active contre calque actif, qui explique la moitié des « ça ne marche pas » d'Affinity.",
+   "steps": [
+    "Une sélection définit une ZONE, le calque actif définit SUR QUOI l'opération s'applique",
+    "Couper puis coller des pixels sélectionnés pour les isoler sur leur propre calque",
+    "Fichier > Placer : lié ou incorporé, sujet développé dans la leçon G10",
+    "Effets de calque non destructifs, réactivables par l'icône FX",
+    "Mettre à l'échelle avec l'objet, en bas à gauche du panneau d'effets",
+    "Masque d'écrêtage et masque de calque : deux logiques distinctes",
+    "Options de fusion, sous l'icône réglages du calque"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘X puis ⌘V",
+     "d": "isoler des pixels sur un nouveau calque"
+    },
+    {
+     "k": "⌘Z",
+     "d": "annuler, la commande la plus utilisée"
+    }
+   ],
+   "piege": "Le cadenas de verrouillage est purement cosmétique dans cette version : l'auteur a testé, le calque verrouillé se déplace et se peint quand même. Ne pas compter dessus pour protéger un calque de référence.",
+   "ui": [
+    {
+     "fr": "Sélection active",
+     "en": "Active selection"
+    },
+    {
+     "fr": "Options de fusion",
+     "en": "Blend options"
+    }
+   ],
+   "related": [
+    8,
+    2015,
+    2010
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2004,
+   "code": "G4",
+   "source": "greg",
+   "id": "qI0vf2v3K8s",
+   "title_en": "Affinity for Beginners · The Only Selections & Masking Tutorial You Need",
+   "title_fr": "Sélections et masques : le cours complet",
+   "duration": 3224,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "sélection",
+    "masque",
+    "guide",
+    "détourage"
+   ],
+   "resume": "53 minutes pour comprendre que sélection et masque sont la même chose vue de deux façons. C'est le concept qui fait passer d'utilisateur débutant à utilisateur solide.",
+   "steps": [
+    "Une sélection est un masque temporaire, un masque est une sélection enregistrée",
+    "Grouper des calques change ce que le masque affecte : la portée suit la hiérarchie",
+    "Avec une sélection active, ajouter un calque de réglage y intègre automatiquement le masque",
+    "Masquer un réglage, pas seulement des pixels : la retouche devient locale et réversible",
+    "Pinceau de sélection : peindre pour ajouter, ⌥ enfoncé pour retirer",
+    "Contour progressif désactivé pour un bord franc, activé pour un fondu"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌥ + peindre",
+     "d": "retirer de la sélection au lieu d'ajouter"
+    }
+   ],
+   "piege": "Beaucoup découpent et suppriment là où un masque suffirait. Le masque garde les pixels : on peut revenir, affiner, inverser. Une fois compris, on ne supprime presque plus jamais.",
+   "ui": [
+    {
+     "fr": "Masque de calque",
+     "en": "Layer mask"
+    },
+    {
+     "fr": "Contour progressif",
+     "en": "Feather"
+    }
+   ],
+   "related": [
+    32,
+    2015,
+    31
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2005,
+   "code": "G5",
+   "source": "greg",
+   "id": "pa0u4TFLGi0",
+   "title_en": "Affinity for Beginners · Unlock These Hidden Layer UI Features!",
+   "title_fr": "Deux réglages d'interface introuvables",
+   "duration": 699,
+   "theme": "interface",
+   "level": "inter",
+   "tags": [
+    "étiquettes de couleur",
+    "calque actif",
+    "système",
+    "organisation"
+   ],
+   "resume": "Deux aides visuelles pour s'y retrouver dans une grosse pile de calques, dont une qui ne se règle même pas dans Affinity.",
+   "steps": [
+    "Étiquettes de couleur : les pastilles en bas du panneau Calques, applicables à un calque ou à tout un groupe",
+    "Une étiquette posée individuellement n'est pas écrasée par celle du groupe",
+    "Clic droit > Sélectionner les calques de même couleur d'étiquette, ou de même nom",
+    "Deuxième aide : la surbrillance du calque actif dépend de la couleur d'accentuation du SYSTÈME",
+    "Sur Mac : Réglages système > Apparence > couleur d'accentuation",
+    "Avec la valeur grise par défaut, le calque actif est presque invisible"
+   ],
+   "shortcuts": [],
+   "piege": "Le second réglage n'existe nulle part dans Affinity : c'est le système qui le fournit. Tant qu'il est sur gris, impossible de voir quel calque est actif, et on accuse le logiciel à tort.",
+   "ui": [
+    {
+     "fr": "Étiquette de couleur",
+     "en": "Color label"
+    },
+    {
+     "fr": "Couleur d'accentuation",
+     "en": "Accent color"
+    }
+   ],
+   "related": [
+    9,
+    2014,
+    2003
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2006,
+   "code": "G6",
+   "source": "greg",
+   "id": "c5OkgQfuWos",
+   "title_en": "Affinity for Beginners · Stop Struggling with the Pen Tool!",
+   "title_fr": "Dompter la plume",
+   "duration": 2922,
+   "theme": "vecteur",
+   "level": "inter",
+   "tags": [
+    "plume",
+    "nœuds",
+    "courbes",
+    "guide"
+   ],
+   "resume": "48 minutes sur la plume, avec la méthode qui change tout : l'aller-retour permanent entre l'outil Plume et l'outil Nœud.",
+   "steps": [
+    "La plume produit une forme vectorielle, mais sert tout autant à faire une sélection précise",
+    "Tracer grossièrement à la plume, puis basculer sur l'outil Nœud pour ajuster",
+    "Trois niveaux de contrôle : tirer le segment, déplacer le nœud, orienter les poignées",
+    "⌘ déplace les deux poignées ensemble, ⌥ casse la symétrie pour n'en bouger qu'une",
+    "Ajouter un nœud dès que la courbure change de rythme",
+    "Si un point devient ingérable, le supprimer et refaire la portion"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌥ + glisser",
+     "d": "casser la symétrie d'une poignée"
+    },
+    {
+     "k": "⌘Z",
+     "d": "annuler et réessayer avec l'autre modificateur"
+    }
+   ],
+   "piege": "Même les outils de sélection automatique ne remplacent pas la plume sur une zone que l'IA ne sait pas isoler. C'est l'investissement le plus rentable du logiciel, et celui que tout le monde repousse.",
+   "ui": [
+    {
+     "fr": "Outil Nœud",
+     "en": "Node Tool"
+    },
+    {
+     "fr": "Poignée de contrôle",
+     "en": "Control handle"
+    }
+   ],
+   "related": [
+    10,
+    11,
+    17
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2007,
+   "code": "G7",
+   "source": "greg",
+   "id": "H2Ql8oKd9OQ",
+   "title_en": "Affinity Layout Studio for Beginners: Text Wrap, Text Flow, Master Pages & More (Full Tutorial)",
+   "title_fr": "Le studio Mise en page contre Canva",
+   "duration": 3688,
+   "theme": "mise-en-page",
+   "level": "inter",
+   "tags": [
+    "mise en page",
+    "chaînage",
+    "gabarits",
+    "habillage"
+   ],
+   "resume": "Une heure sur le studio Mise en page, présentée face à Canva : ce que Canva ne sait pas faire sur les documents longs, et comment Affinity le fait.",
+   "steps": [
+    "Démonstration des faux habillages de texte des modèles Canva, qui ne coulent pas vraiment",
+    "Chaînage de texte : cliquer le triangle de sortie d'un bloc, puis le bloc suivant, un trait de liaison apparaît",
+    "L'œil affiché sur un bloc signale du texte caché qui déborde",
+    "Rompre un lien : recliquer le triangle d'entrée, tout le texte remonte dans le premier bloc",
+    "Empiler plusieurs gabarits sur une même page (fond, folio, bordure)",
+    "Clic droit > Appliquer les gabarits en DÉCOCHANT « Remplacer l'existant »",
+    "L'ordre d'application détermine l'ordre d'empilement des gabarits"
+   ],
+   "shortcuts": [],
+   "piege": "Sans décocher « Remplacer l'existant », chaque gabarit appliqué chasse le précédent au lieu de s'ajouter. C'est ce qui fait croire qu'on ne peut en poser qu'un seul par page.",
+   "ui": [
+    {
+     "fr": "Chaînage",
+     "en": "Text flow"
+    },
+    {
+     "fr": "Remplacer l'existant",
+     "en": "Replace existing"
+    }
+   ],
+   "related": [
+    117,
+    124,
+    137
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2008,
+   "code": "G8",
+   "source": "greg",
+   "id": "c-1eUhRPPwU",
+   "title_en": "Turn Photos into Editable Vector Illustrations for Canva (Must Know Rule + Workaround)",
+   "title_fr": "Photo vers vecteur éditable dans Canva",
+   "duration": 1278,
+   "theme": "ecosysteme",
+   "level": "avance",
+   "tags": [
+    "vectorisation",
+    "canva",
+    "svg",
+    "couleurs éditables"
+   ],
+   "resume": "Vectoriser une photo à la plume puis l'exporter vers Canva en gardant les couleurs modifiables. Il y a une règle non documentée, et un contournement.",
+   "steps": [
+    "Oublier la vectorisation automatique (Image trace), elle produit un fouillis de courbes",
+    "Détourer à la plume, forme par forme, une couleur par forme",
+    "Exporter en design Canva : les couleurs restent modifiables dans Canva",
+    "Au-delà de CINQ couleurs, Canva verrouille tout et les couleurs deviennent figées",
+    "Contournement : exporter les couleurs excédentaires dans un second fichier",
+    "Garder Document entier à l'export (pas Sélection) pour conserver les mêmes bords",
+    "Superposer les deux fichiers dans Canva, ils se calent exactement"
+   ],
+   "shortcuts": [],
+   "piege": "La limite de cinq couleurs n'est écrite nulle part, l'auteur l'a trouvée en tâtonnant. Un visuel à six couleurs arrive figé dans Canva sans le moindre message d'erreur.",
+   "ui": [
+    {
+     "fr": "Vectorisation d'image",
+     "en": "Image trace"
+    },
+    {
+     "fr": "Design Canva",
+     "en": "Canva design"
+    }
+   ],
+   "related": [
+    84,
+    2017,
+    11
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2009,
+   "code": "G9",
+   "source": "greg",
+   "id": "uxv1o2PkeC0",
+   "title_en": "Affinity for Beginners -- Artboards: Practical Examples & Hidden Tricks!",
+   "title_fr": "Plans de travail et export en lot",
+   "duration": 2656,
+   "theme": "export",
+   "level": "inter",
+   "tags": [
+    "plans de travail",
+    "export",
+    "slice studio",
+    "réseaux sociaux"
+   ],
+   "resume": "Les plans de travail comme atelier multi-formats, et surtout la façon d'exporter tous les formats d'un coup, qui se cache dans un studio à part.",
+   "steps": [
+    "Activer les plans de travail à la création du document",
+    "Un plan de travail par format : Pinterest, post Facebook 940x788, post Instagram 1080x1350",
+    "Nommer chaque plan selon sa destination",
+    "Pour exporter en lot : activer le studio Découpe (Slice), via les trois points si absent",
+    "Chaque plan de travail y devient automatiquement une tranche",
+    "Le panneau d'export change et permet de tout sortir en une fois"
+   ],
+   "shortcuts": [],
+   "piege": "Le bouton d'export du studio Pixel n'exporte qu'un seul plan de travail. Tout le monde exporte donc ses formats un par un sans savoir que le studio Découpe fait le lot. L'auteur juge lui-même l'interface perfectible sur ce point.",
+   "ui": [
+    {
+     "fr": "Studio Découpe",
+     "en": "Slice Studio"
+    },
+    {
+     "fr": "Tranche",
+     "en": "Slice"
+    }
+   ],
+   "related": [
+    13,
+    81,
+    83
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2010,
+   "code": "G10",
+   "source": "greg",
+   "id": "FnQONDaxQe0",
+   "title_en": "Affinity Linked vs Embedded Files: The Smart Template Workflow Most People Miss",
+   "title_fr": "Fichiers liés ou incorporés : les modèles intelligents",
+   "duration": 1389,
+   "theme": "interface",
+   "level": "avance",
+   "tags": [
+    "lié",
+    "incorporé",
+    "template",
+    "workflow"
+   ],
+   "resume": "La différence entre placer un fichier lié et incorporé, et ce qu'on peut en tirer : des modèles qui se mettent à jour tout seuls, l'équivalent des objets dynamiques.",
+   "steps": [
+    "Fichier > Placer, et juste en dessous la politique de placement : lié ou incorporé",
+    "Lié : le fichier reste dehors, toute modification se répercute dans les documents qui l'utilisent",
+    "Incorporé : le contenu est copié dans le document, indépendant ensuite",
+    "Placer un fichier Affinity plutôt qu'un JPEG : il reste ouvrable et modifiable en double-clic",
+    "Modèle intelligent : un logo lié, mis à jour une fois, se met à jour partout",
+    "Un fichier lié contenant plusieurs plans de travail permet de basculer d'une variante à l'autre en un clic"
+   ],
+   "shortcuts": [],
+   "piege": "La politique de placement est un réglage global qui ne se voit pas et change d'un document à l'autre. On croit poser un fichier lié et on incorpore, ce qui casse silencieusement la chaîne de mise à jour du modèle.",
+   "ui": [
+    {
+     "fr": "Politique de placement",
+     "en": "Placement policy"
+    },
+    {
+     "fr": "Lié / Incorporé",
+     "en": "Linked / Embedded"
+    }
+   ],
+   "related": [
+    77,
+    2009,
+    57
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2011,
+   "code": "G11",
+   "source": "greg",
+   "id": "zIIaNIH8n0A",
+   "title_en": "Affinity Paint Brush Tool Deep Dive · Dynamics, Texture, Sub Brushes and More!",
+   "title_fr": "Le pinceau, exploration complète",
+   "duration": 7698,
+   "theme": "pinceaux",
+   "level": "avance",
+   "tags": [
+    "pinceau",
+    "texture",
+    "accumulation",
+    "guide"
+   ],
+   "resume": "Deux heures et huit minutes uniquement sur le pinceau, l'outil le plus sous-estimé du logiciel selon l'auteur. Pas seulement pour peindre : texture, lumière, matière.",
+   "steps": [
+    "Les mêmes réglages existent en double, dans la barre du haut et dans le panneau Plus : c'est le même réglage",
+    "Opacité, flux et accumulation agissent tous les trois sur la quantité déposée, mais pas au même moment du geste",
+    "La dureté n'est réglable que sur les pinceaux ronds fabriqués dans Affinity, pas sur les pinceaux d'image",
+    "Mode de fusion et bords humides accessibles des deux côtés",
+    "Onglet Texture pour charger une matière dans le pinceau",
+    "Astuce texture : générer des fonds grunge en niveaux de gris sur fond blanc avec l'IA de Canva, format directement exploitable en superposition",
+    "Une fiche récapitulative gratuite est proposée en commentaire de la vidéo, et la vidéo est chapitrée"
+   ],
+   "shortcuts": [
+    {
+     "k": "[ et ]",
+     "d": "taille du pinceau"
+    }
+   ],
+   "piege": "Une texture d'overlay doit être en niveaux de gris sur fond blanc pour se comporter correctement. C'est cette contrainte qui rend le prompt donné dans la vidéo directement réutilisable, et qui fait échouer la plupart des textures récupérées au hasard.",
+   "ui": [
+    {
+     "fr": "Accumulation",
+     "en": "Accumulation"
+    },
+    {
+     "fr": "Bords humides",
+     "en": "Wet edges"
+    }
+   ],
+   "related": [
+    49,
+    50,
+    51
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2012,
+   "code": "G12",
+   "source": "greg",
+   "id": "Ofx4iJE7v3M",
+   "title_en": "What’s New in Affinity (v. 3.1 March 2026 Update) · These Features Are HUGE",
+   "title_fr": "Nouveautés de la version 3.1 (mars 2026)",
+   "duration": 1533,
+   "theme": "interface",
+   "level": "inter",
+   "tags": [
+    "nouveautés",
+    "mode clair",
+    "sélection en courbes",
+    "raw"
+   ],
+   "resume": "Le point sur la mise à jour de mars 2026, avec au moins une nouveauté qui change des méthodes de travail entières.",
+   "steps": [
+    "Mode clair : Édition > Réglages > Interface, bouton clair ou sombre",
+    "Conversion d'une sélection de pixels directement en courbes vectorielles, impossible auparavant",
+    "Sélectionner un sujet, puis Vecteur > Convertir en courbes : le tracé est immédiatement modifiable au nœud",
+    "Groupes de fusion tonale dynamiques : le contenu du groupe s'accorde tout seul au fond",
+    "Module Développement (raw) : nouveaux préréglages de courbe tonale (comprimée, naturelle, contrastée, log)"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌘,",
+     "d": "ouvrir les réglages"
+    },
+    {
+     "k": "⌘⏎",
+     "d": "convertir la sélection en courbes"
+    }
+   ],
+   "piege": "La conversion sélection vers courbes est le raccourci le plus court entre une photo et un vectoriel exploitable : détourage automatique, puis conversion, puis retouche au nœud. Ça remplace une partie du travail à la plume de la leçon G8.",
+   "ui": [
+    {
+     "fr": "Convertir en courbes",
+     "en": "Convert to curves"
+    },
+    {
+     "fr": "Module Développement",
+     "en": "Develop"
+    }
+   ],
+   "related": [
+    2008,
+    33,
+    12
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2013,
+   "code": "G13",
+   "source": "greg",
+   "id": "Li_VHau5C6U",
+   "title_en": "Color in Affinity: Change ANY Color to ANYTHING (Know What Method to Use)",
+   "title_fr": "Changer n'importe quelle couleur en n'importe quoi",
+   "duration": 2004,
+   "theme": "couleur-effets",
+   "level": "inter",
+   "tags": [
+    "couleur",
+    "tsl",
+    "courbes",
+    "méthodes"
+   ],
+   "resume": "Le catalogue des méthodes pour changer une couleur, avec le critère de choix : quelle méthode essayer en premier selon la situation.",
+   "steps": [
+    "Méthode rapide : calque de couleur au-dessus en mode de fusion Incrustation, avec ses limites",
+    "Réglage TSL pour décaler une teinte en gardant la matière",
+    "Courbes pour un contrôle plus fin",
+    "Passer un vêtement en noir ou en blanc : le TSL suffit",
+    "Grouper plusieurs réglages et poser LE masque en haut du groupe : tous les réglages sont masqués ensemble",
+    "Cette méthode laisse plus de liberté qu'un masque intégré à un seul réglage"
+   ],
+   "shortcuts": [],
+   "piege": "Un décalage de teinte violent fait apparaître du banding et des artefacts, surtout en 8 bits sRGB. Sur une transformation de couleur extrême, passer le document en 16 bits avant, sinon les dégradés se cassent en bandes.",
+   "ui": [
+    {
+     "fr": "Incrustation",
+     "en": "Overlay"
+    },
+    {
+     "fr": "TSL",
+     "en": "HSL"
+    }
+   ],
+   "related": [
+    79,
+    94,
+    27
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2014,
+   "code": "G14",
+   "source": "greg",
+   "id": "Ul5UiirQXZk",
+   "title_en": "10 Hidden Affinity Tricks & Features You’re Not Using (That Will Supercharge Your Workflow)",
+   "title_fr": "10 astuces que presque personne n'utilise",
+   "duration": 2681,
+   "theme": "interface",
+   "level": "inter",
+   "tags": [
+    "astuces",
+    "raccourcis",
+    "ressources",
+    "productivité"
+   ],
+   "resume": "Dix fonctions qui existent et que presque personne n'utilise, choisies pour le temps qu'elles font gagner.",
+   "steps": [
+    "Boîte de dialogue Déplacer et dupliquer : créer une grille de copies régulières sans rien aligner à la main",
+    "Raccourcis personnalisés : option Appliquer à tous les studios, sinon le raccourci ne marche que dans un seul",
+    "Un panneau d'avertissement signale une combinaison déjà attribuée",
+    "Panneau Ressources : créer et renommer des catégories, y ranger ses logos",
+    "Importer des ressources cherche un fichier de bibliothèque, pas une image : source de confusion fréquente",
+    "Et six autres fonctions du même genre, passées en revue"
+   ],
+   "shortcuts": [],
+   "piege": "Un raccourci personnalisé créé sans cocher « Appliquer à tous les studios » ne fonctionne que dans le studio où il a été défini. On le croit cassé alors qu'il faut juste changer d'espace de travail.",
+   "ui": [
+    {
+     "fr": "Déplacer et dupliquer",
+     "en": "Move and duplicate"
+    },
+    {
+     "fr": "Ressources",
+     "en": "Assets"
+    }
+   ],
+   "related": [
+    134,
+    65,
+    2002
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2015,
+   "code": "G15",
+   "source": "greg",
+   "id": "bL4rCTFaObk",
+   "title_en": "Affinity Masks & Layer Hierarchy: Finally Make Sense of It All",
+   "title_fr": "Masques et hiérarchie de calques enfin clairs",
+   "duration": 1175,
+   "theme": "pixel-photo",
+   "level": "inter",
+   "tags": [
+    "masque",
+    "écrêtage",
+    "conteneur",
+    "imbrication"
+   ],
+   "resume": "Pourquoi un masque ne fait pas ce qu'on attend : groupes, calques imbriqués, masque d'écrêtage, calque conteneur. Les quatre pièges qui expliquent presque tous les cas.",
+   "steps": [
+    "Imbriquer un calque dans un autre : le calque parent devient le cache du contenu",
+    "L'imbrication est illimitée : un rectangle dans un triangle dans un cercle",
+    "Un masque d'écrêtage appliqué à un groupe est PERDU si on dissocie le groupe",
+    "Pour le garder : libérer d'abord le masque, puis dissocier",
+    "Le calque conteneur est encore autre chose qu'un groupe, avec sa propre icône",
+    "Ordre des calques, groupes et imbrication se combinent : c'est l'ensemble qui décide du rendu"
+   ],
+   "shortcuts": [],
+   "piege": "Dissocier un groupe écrêté détruit le masque au passage, sans confirmation. Le réflexe est de libérer le masque avant toute dissociation, sinon on perd un travail de détourage entier.",
+   "ui": [
+    {
+     "fr": "Calque conteneur",
+     "en": "Container layer"
+    },
+    {
+     "fr": "Libérer",
+     "en": "Release"
+    }
+   ],
+   "related": [
+    73,
+    2004,
+    25
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2016,
+   "code": "G16",
+   "source": "greg",
+   "id": "C2zF9HDf1rY",
+   "title_en": "How Do I Put Something Behind Something Else in Affinity? (Layers & Masking for Beginners)",
+   "title_fr": "Mettre un élément derrière un autre",
+   "duration": 1630,
+   "theme": "pixel-photo",
+   "level": "base",
+   "tags": [
+    "composite",
+    "montage",
+    "masque",
+    "empilement"
+   ],
+   "resume": "Un cas concret de montage : faire passer un personnage derrière des barreaux et un autre devant, par masque et ordre d'empilement.",
+   "steps": [
+    "Trois images de départ : la cellule, et deux personnages",
+    "Détourer chaque sujet, puis appliquer un MASQUE plutôt que supprimer les pixels",
+    "⌥ + clic sur la vignette du masque pour voir le masque lui-même en noir et blanc",
+    "Dupliquer le fond et n'en garder que quelques barreaux sur la copie du dessus",
+    "Placer le personnage entre les deux : il passe derrière les barreaux",
+    "L'autre personnage reste tout en haut de la pile, donc au premier plan",
+    "Vérifier la résolution avant d'agrandir un sujet, sous peine de le pixelliser"
+   ],
+   "shortcuts": [
+    {
+     "k": "⌥ + clic",
+     "d": "sur la vignette du masque : afficher le masque"
+    },
+    {
+     "k": "⌘0",
+     "d": "recentrer la vue sur le document"
+    }
+   ],
+   "piege": "Supprimer les pixels détourés interdit toute reprise, typiquement sur les cheveux. Le masque garde tout et se repeint. C'est le même principe que la leçon G4, appliqué ici à un montage complet.",
+   "ui": [
+    {
+     "fr": "Masque de calque",
+     "en": "Layer mask"
+    },
+    {
+     "fr": "Ordre d'empilement",
+     "en": "Stacking order"
+    }
+   ],
+   "related": [
+    32,
+    2004,
+    2015
+   ],
+   "has_transcript": true
+  },
+  {
+   "n": 2017,
+   "code": "G17",
+   "source": "greg",
+   "id": "nuGuvB8mmtk",
+   "title_en": "Creating Text Frames for Canva (That won't break!)",
+   "title_fr": "Cadres de texte exportables vers Canva",
+   "duration": 1181,
+   "theme": "ecosysteme",
+   "level": "inter",
+   "tags": [
+    "cadre",
+    "texte",
+    "canva",
+    "géométrie"
+   ],
+   "resume": "Fabriquer un cadre en forme de lettres qui reste un vrai cadre une fois arrivé dans Canva. Une étape précise conditionne tout.",
+   "steps": [
+    "Poser le texte dans la police voulue",
+    "Vecteur > Géométrie > Ajouter : le texte devient un calque de courbes (l'étape que tout le monde saute)",
+    "Utiliser ces courbes comme masque d'écrêtage sur l'image placée dessous",
+    "Exporter en design Canva : le cadre est reconnu comme tel et reste remplissable",
+    "Ajouter ombre portée, contour ou réglage de couleur par-dessus",
+    "Laisser un élément déborder du cadre pour casser l'effet bloc"
+   ],
+   "shortcuts": [],
+   "piege": "Sans passer par Géométrie > Ajouter, le texte reste du texte : à l'arrivée dans Canva, ce n'est plus un cadre et le remplissage ne fonctionne pas. Toute la manip tient à cette conversion.",
+   "ui": [
+    {
+     "fr": "Géométrie > Ajouter",
+     "en": "Geometry > Add"
+    },
+    {
+     "fr": "Cadre",
+     "en": "Frame"
+    }
+   ],
+   "related": [
+    55,
+    73,
+    2008
+   ],
+   "has_transcript": true
   }
  ]
 };
 </script>
 <script>
-/* AffinityDB - interface de consultation des 100 lecons Affinity */
+/* AffinityDB - interface de consultation des tutoriels Affinity (plusieurs sources) */
 
 const THEMES = {
   interface:            { label: "Interface & calques",   color: "#8b6cf0" },
@@ -6329,8 +7959,10 @@ const THEMES = {
   "pixel-photo":        { label: "Pixel & photo",         color: "#6fb6e8" },
   "grilles-alignement": { label: "Grilles & alignement",  color: "#9ab84a" },
   export:               { label: "Export",                color: "#c98a5e" },
+  ecosysteme:           { label: "Écosystème & extensions", color: "#e0705a" },
 };
 const LEVELS = { base: "base", inter: "inter", avance: "avancé" };
+const SRC_COLOR = { tutortube: "#8b6cf0", woow: "#4ec98a", greg: "#e8a33d" };
 const THEME_ORDER = Object.keys(THEMES);
 
 const state = {
@@ -6340,6 +7972,8 @@ const state = {
   query: "",
   levels: new Set(),
   themes: new Set(),
+  srcs: new Set(),
+  sources: {},
   closed: new Set(),
   transcripts: {},       // n -> texte (le paquet complet, chargé à la 1re recherche)
   indexed: false,
@@ -6376,9 +8010,13 @@ async function boot() {
       : Promise.resolve(null),
   ]);
   state.lessons = db.lessons;
+  state.sources = db.sources || {};
   state.hasApi = prog !== null;
   state.progress = prog || JSON.parse(localStorage.getItem(LOCAL_KEY) || "{}");
+  const h = Math.round(state.lessons.reduce((t, l) => t + l.duration, 0) / 3600);
+  $("#sub").textContent = `${state.lessons.length} tutoriels · ${Object.values(state.sources).map((s) => s.label).join(" · ")} · ${h} h`;
   buildSidebar();
+  buildSources();
   render();
   wire();
 }
@@ -6400,9 +8038,9 @@ function save() {
 const prog = (n) => state.progress[n] || {};
 const isDone = (n) => !!prog(n).done;
 
-/* les 100 transcripts tiennent dans un seul fichier : une requete au lieu de
-   cent (O2Switch coupe au-dela, et ca evite de charger 500 Ko en 4G tant que
-   personne ne cherche) */
+/* tous les transcripts tiennent dans un seul fichier : une requete au lieu de
+   des centaines (O2Switch coupe au-dela, et ca evite de charger 500 Ko en 4G
+   tant que personne ne cherche) */
 let bundlePromise = null;
 function loadTranscripts() {
   if (!bundlePromise) {
@@ -6424,7 +8062,7 @@ async function indexAll() {
 
 function haystack(l) {
   return norm([
-    l.n, l.title_fr, l.title_en, l.tags.join(" "), l.resume,
+    l.code, state.sources[l.source]?.label, l.title_fr, l.title_en, l.tags.join(" "), l.resume,
     (l.steps || []).join(" "), l.piege,
     (l.ui || []).map((u) => `${u.fr} ${u.en}`).join(" "),
     state.transcripts[l.n] || "",
@@ -6436,6 +8074,7 @@ function filtered() {
   return state.lessons.filter((l) => {
     if (state.levels.size && !state.levels.has(l.level)) return false;
     if (state.themes.size && !state.themes.has(l.theme)) return false;
+    if (state.srcs.size && !state.srcs.has(l.source)) return false;
     if (state.view === "todo" && isDone(l.n)) return false;
     if (q && !haystack(l).includes(q)) return false;
     return true;
@@ -6453,6 +8092,18 @@ function buildSidebar() {
   }).join(""));
 }
 
+function buildSources() {
+  const box = $("#source-list");
+  const ids = Object.keys(state.sources);
+  if (ids.length < 2) { box.closest(".filter-block").hidden = true; return; }
+  paint(box, ids.map((k) => {
+    const n = state.lessons.filter((l) => l.source === k).length;
+    return `<button data-src="${k}">
+      <span class="tdot" style="background:${SRC_COLOR[k] || "#8b6cf0"}"></span>
+      <span>${esc(state.sources[k].label)}</span><span class="tcount">${n}</span></button>`;
+  }).join(""));
+}
+
 function card(l) {
   const done = isDone(l.n);
   const note = prog(l.n).note;
@@ -6462,7 +8113,7 @@ function card(l) {
       <div class="c-title">${esc(l.title_fr || l.title_en)}</div>
       <div class="c-en">${esc(l.title_en)}</div>
       <div class="c-meta">
-        <span class="c-num">L${l.n}</span>
+        <span class="c-num" style="color:${SRC_COLOR[l.source] || "#8b6cf0"}">${esc(l.code)}</span>
         <span>${mmss(l.duration)}</span>
         <span class="lvl ${l.level}">${LEVELS[l.level]}</span>
       </div>
@@ -6534,7 +8185,7 @@ async function openSheet(n) {
 
   paint($("#sheet"), `
     <button class="sh-close" data-close>×</button>
-    <div class="sh-num">LEÇON ${n}</div>
+    <div class="sh-num">${esc(l.code)} · ${esc(state.sources[l.source]?.label || "")}</div>
     <h2 class="sh-title">${esc(l.title_fr || l.title_en)}</h2>
     <div class="sh-en">${esc(l.title_en)}</div>
     <div class="sh-meta">
@@ -6559,7 +8210,7 @@ async function openSheet(n) {
     ${sec("Raccourcis", l.shortcuts?.length ? `<div class="kbds">${l.shortcuts.map((s) => `<div><b>${esc(s.k)}</b><span>${esc(s.d)}</span></div>`).join("")}</div>` : "")}
     ${sec("Piège", l.piege ? `<div class="piege">${esc(l.piege)}</div>` : "")}
     ${sec("Vocabulaire FR / EN", l.ui?.length ? `<div class="ui-terms">${l.ui.map((u) => `<div><b>${esc(u.fr)}</b> <span>= ${esc(u.en)}</span></div>`).join("")}</div>` : "")}
-    ${sec("À enchaîner avec", l.related?.length ? `<div class="related">${l.related.map((r) => { const o = state.lessons.find((x) => x.n === r); return o ? `<button data-goto="${r}">L${r} · ${esc(o.title_fr || o.title_en)}</button>` : ""; }).join("")}</div>` : "")}
+    ${sec("À enchaîner avec", l.related?.length ? `<div class="related">${l.related.map((r) => { const o = state.lessons.find((x) => x.n === r); return o ? `<button data-goto="${r}">${esc(o.code)} · ${esc(o.title_fr || o.title_en)}</button>` : ""; }).join("")}</div>` : "")}
 
     ${sec("Ma note", `<textarea class="note-area" data-note="${n}" placeholder="ce que tu retiens, ton usage a toi...">${esc(p.note || "")}</textarea><div class="note-state" data-notestate></div>`)}
 
@@ -6621,13 +8272,23 @@ function wire() {
     render();
   });
 
+  $("#source-list").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-src]");
+    if (!b) return;
+    if (state.srcs.has(b.dataset.src)) state.srcs.delete(b.dataset.src);
+    else state.srcs.add(b.dataset.src);
+    b.classList.toggle("on");
+    render();
+  });
+
   $("#reset").addEventListener("click", () => {
     state.query = "";
     state.levels.clear();
     state.themes.clear();
+    state.srcs.clear();
     state.view = "themes";
     $("#search").value = "";
-    $$(".chips button, .theme-list button").forEach((b) => b.classList.remove("on"));
+    $$(".chips button, .theme-list button, #source-list button").forEach((b) => b.classList.remove("on"));
     $$("#views button").forEach((x) => x.classList.toggle("on", x.dataset.view === "themes"));
     render();
   });
