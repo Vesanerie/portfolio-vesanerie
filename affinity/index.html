@@ -259,6 +259,10 @@ mark{background:var(--acc-soft);color:var(--txt);border-radius:3px;padding:0 2px
   .sheet{width:100%}
 }
 
+.deep{display:flex;flex-direction:column;gap:2px;font-size:12.5px;color:var(--dim);cursor:pointer}
+.deep input{margin-right:6px;accent-color:var(--acc)}
+.deep small{font:10.5px var(--mono);color:var(--dim2);padding-left:22px}
+
 </style>
 </head>
 <body>
@@ -290,6 +294,12 @@ mark{background:var(--acc-soft);color:var(--txt);border-radius:3px;padding:0 2px
       <button data-view="list">Liste</button>
       <button data-view="todo">À voir</button>
     </nav>
+
+    <div class="filter-block">
+      <h2>Recherche</h2>
+      <label class="deep"><input type="checkbox" id="deep"> aussi dans les transcripts
+        <small id="deep-hint">660 Ko à charger</small></label>
+    </div>
 
     <div class="filter-block">
       <h2>Niveau</h2>
@@ -7977,6 +7987,7 @@ const state = {
   closed: new Set(),
   transcripts: {},       // n -> texte (le paquet complet, chargé à la 1re recherche)
   indexed: false,
+  deep: false,       // chercher aussi dans les transcripts
   hasApi: false,         // vrai en local avec server.py, faux en prod statique
   open: null,
 };
@@ -8038,22 +8049,30 @@ function save() {
 const prog = (n) => state.progress[n] || {};
 const isDone = (n) => !!prog(n).done;
 
-/* tous les transcripts tiennent dans un seul fichier : une requete au lieu de
-   des centaines (O2Switch coupe au-dela, et ca evite de charger 500 Ko en 4G
-   tant que personne ne cherche) */
+/* Deux facons de lire les transcripts, pour ne pas imposer 660 Ko en 4G :
+   - une fiche depliee ne charge QUE son propre fichier (quelques Ko)
+   - la recherche profonde charge le paquet complet, sur demande explicite */
 let bundlePromise = null;
 function loadTranscripts() {
   if (!bundlePromise) {
     bundlePromise = fetch("transcripts.js")
       .then((r) => (r.ok ? r.json() : {}))
       .catch(() => ({}))
-      .then((b) => { state.transcripts = b; state.indexed = true; return b; });
+      .then((b) => { state.transcripts = { ...b, ...state.transcripts }; state.indexed = true; return b; });
   }
   return bundlePromise;
 }
 
+async function loadOne(n) {
+  if (state.transcripts[n] !== undefined) return state.transcripts[n];
+  const txt = await fetch(`transcripts/${String(n).padStart(4, "0")}.txt`)
+    .then((r) => (r.ok ? r.text() : "")).catch(() => "");
+  state.transcripts[n] = txt;
+  return txt;
+}
+
 async function indexAll() {
-  if (state.indexed) return;
+  if (state.indexed || !state.deep) return;
   await loadTranscripts();
   if (state.query) render();
 }
@@ -8065,7 +8084,7 @@ function haystack(l) {
     l.code, state.sources[l.source]?.label, l.title_fr, l.title_en, l.tags.join(" "), l.resume,
     (l.steps || []).join(" "), l.piege,
     (l.ui || []).map((u) => `${u.fr} ${u.en}`).join(" "),
-    state.transcripts[l.n] || "",
+    state.deep ? state.transcripts[l.n] || "" : "",
   ].join(" "));
 }
 
@@ -8179,7 +8198,7 @@ async function openSheet(n) {
   state.open = n;
   const p = prog(n);
   const t = THEMES[l.theme];
-  const txt = l.has_transcript ? (await loadTranscripts())[n] || "" : "";
+  const txt = l.has_transcript ? state.transcripts[n] : undefined;
 
   const sec = (title, markup) => (markup ? `<div class="sh-sec"><h4>${title}</h4>${markup}</div>` : "");
 
@@ -8214,7 +8233,7 @@ async function openSheet(n) {
 
     ${sec("Ma note", `<textarea class="note-area" data-note="${n}" placeholder="ce que tu retiens, ton usage a toi...">${esc(p.note || "")}</textarea><div class="note-state" data-notestate></div>`)}
 
-    ${txt ? `<details${state.query ? " open" : ""}><summary>Transcript brut (EN, sous-titres auto)</summary><div class="trans">${highlight(txt, state.query.trim())}</div></details>` : ""}
+    ${l.has_transcript ? `<details data-trans="${n}"${txt !== undefined && state.query ? " open" : ""}><summary>Transcript brut (sous-titres auto)</summary><div class="trans" data-transbox>${txt === undefined ? "…" : highlight(txt, state.query.trim())}</div></details>` : ""}
   `);
   $("#sheet").hidden = false;
   $("#backdrop").hidden = false;
@@ -8271,6 +8290,26 @@ function wire() {
     b.classList.toggle("on");
     render();
   });
+
+  $("#deep").addEventListener("change", (e) => {
+    state.deep = e.target.checked;
+    if (state.deep) {
+      $("#deep-hint").textContent = "chargement…";
+      loadTranscripts().then(() => { $("#deep-hint").textContent = "transcripts chargés"; render(); });
+    }
+    render();
+  });
+
+  $("#sheet").addEventListener("toggle", async (e) => {
+    const d = e.target.closest("details[data-trans]");
+    if (!d || !d.open) return;
+    const n = +d.dataset.trans;
+    const box = $("[data-transbox]", d);
+    if (!box || box.dataset.done) return;
+    const txt = await loadOne(n);
+    box.dataset.done = "1";
+    paint(box, highlight(txt, state.query.trim()));
+  }, true);
 
   $("#source-list").addEventListener("click", (e) => {
     const b = e.target.closest("button[data-src]");
