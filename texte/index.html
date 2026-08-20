@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0b">
+<meta name="description" content="Outil de mémorisation par masquage progressif, chaînes de rimes et révision espacée.">
+<meta name="robots" content="noindex">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Par Coeur">
+<title>Par Coeur · Nekketsu</title>
+<style>
+/* ============================================================
+   PAR COEUR · outil de mémorisation
+   Autonome : n'importe aucun CSS/JS du site, zéro requête réseau
+   (O2Switch renvoie des 429 dès qu'une page demande trop de fichiers).
+   ============================================================ */
+
+:root{
+  --ink:      #0a0a0b;
+  --paper:    #ece5da;
+  --paper-dim:#8a8579;
+  --paper-low:#4d4a44;
+  --red:      #e0321c;
+  --red-dim:  #7d2117;
+
+  /* familles de rimes */
+  --r1:#e0321c;  /* eur / èr        */
+  --r2:#e8a33d;  /* o  (bushido)    */
+  --r3:#5fb8c9;  /* ch-m / sh-n     */
+  --r4:#8ec07c;  /* ène / veines    */
+  --r5:#c58bd6;  /* ouillan / oyan  */
+  --r6:#e07b9a;  /* kar / kas / mar */
+  --r7:#7f9de0;  /* an / ante       */
+  --r8:#d6c67a;  /* eu (peu/Dieu)   */
+
+  --serif: "Iowan Old Style","Charter","Palatino Linotype",Palatino,Georgia,serif;
+  --disp:  "Futura","Avenir Next Condensed","Avenir Next","Gill Sans",sans-serif;
+  --jp:    "Hiragino Mincho ProN","Hiragino Sans","Yu Mincho",serif;
+
+  --gut: clamp(16px, 4vw, 44px);
+  --bar: 58px;   /* hauteur de la barre de niveaux */
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--serif);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+  position:relative;
+}
+[hidden]{display:none !important}
+
+/* grain + halo lunaire */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:60;
+  opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after{
+  content:"";position:fixed;top:-30vh;right:-20vw;width:75vw;height:75vw;
+  border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle, rgba(224,50,28,.13) 0%, rgba(224,50,28,.04) 40%, transparent 68%);
+}
+
+.kanji{
+  position:fixed;right:-.14em;top:50%;transform:translateY(-50%);
+  font-family:var(--jp);font-size:min(46vh,340px);line-height:.82;
+  color:var(--paper);opacity:.028;writing-mode:vertical-rl;
+  pointer-events:none;z-index:0;user-select:none;
+}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:linear-gradient(to bottom, var(--ink) 72%, rgba(10,10,11,.88) 100%);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(236,229,218,.1);
+  padding:11px var(--gut);
+  padding-top:calc(11px + env(safe-area-inset-top));
+}
+.brand{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.brand h1{
+  font-family:var(--disp);font-size:15px;letter-spacing:.34em;
+  text-transform:uppercase;font-weight:500;white-space:nowrap;
+}
+.brand h1 em{font-style:normal;color:var(--red)}
+.brand .sub{
+  font-family:var(--disp);font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--paper-dim);
+}
+.brand .due{
+  margin-left:auto;font-family:var(--disp);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--red);cursor:pointer;
+  border:1px solid var(--red-dim);padding:7px 11px;border-radius:2px;
+  background:none;transition:.18s;
+}
+.brand .due:hover{background:var(--red);color:var(--ink);border-color:var(--red)}
+
+.opt-toggle{display:none}
+
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+
+.seg{display:flex;border:1px solid rgba(236,229,218,.18);border-radius:2px;overflow:hidden}
+.seg button{
+  font-family:var(--disp);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  background:none;border:0;border-right:1px solid rgba(236,229,218,.12);
+  color:var(--paper-dim);padding:9px 12px;cursor:pointer;transition:.15s;white-space:nowrap;
+}
+.seg button:last-child{border-right:0}
+.seg button:hover{color:var(--paper);background:rgba(236,229,218,.05)}
+.seg button[aria-pressed="true"]{background:var(--red);color:var(--ink);font-weight:600}
+
+.tgl{
+  font-family:var(--disp);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  background:none;border:1px solid rgba(236,229,218,.18);border-radius:2px;
+  color:var(--paper-dim);padding:9px 12px;cursor:pointer;transition:.15s;
+}
+.tgl:hover{color:var(--paper);border-color:rgba(236,229,218,.4)}
+.tgl[aria-pressed="true"]{color:var(--ink);background:var(--paper);border-color:var(--paper)}
+
+/* ---------- scène ---------- */
+main{
+  position:relative;z-index:1;
+  max-width:800px;margin:0 auto;
+  padding:38px var(--gut) 10px;
+}
+
+.sect{
+  font-family:var(--disp);font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--red);margin:52px 0 22px;display:flex;align-items:center;gap:14px;
+}
+.sect::after{content:"";flex:1;height:1px;background:linear-gradient(to right,var(--red-dim),transparent)}
+.sect:first-child{margin-top:0}
+
+.block{
+  margin:0 0 30px;padding:14px 0 14px 20px;
+  border-left:2px solid rgba(236,229,218,.1);
+  transition:border-color .3s;
+}
+.block[data-mastery="1"]{border-left-color:var(--red-dim)}
+.block[data-mastery="2"]{border-left-color:#8a6b1e}
+.block[data-mastery="3"],
+.block[data-mastery="4"]{border-left-color:#3f6b3a}
+.block.due{border-left-color:var(--red);border-left-width:3px}
+
+.bhead{display:flex;align-items:center;gap:10px;margin-bottom:11px;flex-wrap:wrap}
+.bhead .num{
+  font-family:var(--disp);font-size:10px;letter-spacing:.14em;color:var(--paper-low);
+  border:1px solid rgba(236,229,218,.14);padding:2px 6px;border-radius:2px;
+}
+.bhead .lbl{
+  font-family:var(--disp);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--paper-dim);
+}
+.bhead .hint-n{font-family:var(--disp);font-size:10px;letter-spacing:.1em;color:var(--red-dim)}
+.bacts{margin-left:auto;display:flex;gap:6px}
+.bacts button{
+  font-family:var(--disp);font-size:12px;
+  background:none;border:1px solid rgba(236,229,218,.18);border-radius:2px;
+  color:var(--paper-dim);cursor:pointer;transition:.15s;
+  width:38px;height:32px;line-height:1;
+}
+.bacts button:hover{color:var(--paper);border-color:var(--paper-dim)}
+.bacts button.ok:hover{color:#8ec07c;border-color:#8ec07c}
+.bacts button.no:hover{color:var(--red);border-color:var(--red)}
+
+/* ---------- vers ---------- */
+.line{display:flex;gap:13px;align-items:flex-start;padding:3px 0}
+.anim .line{animation:rise .5s cubic-bezier(.2,.7,.3,1) backwards}
+@keyframes rise{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+.line .lno{
+  font-family:var(--disp);font-size:10px;color:var(--paper-low);
+  min-width:22px;text-align:right;padding:.45em 0 .45em 6px;cursor:pointer;
+  user-select:none;-webkit-user-select:none;transition:color .15s;flex-shrink:0;
+}
+.line .lno:hover{color:var(--red)}
+.line .txt{
+  font-size:clamp(16.5px,2.4vw,19px);line-height:1.68;
+  letter-spacing:.004em;flex:1;min-width:0;
+}
+
+.w{cursor:pointer;transition:color .14s, background .14s;border-radius:2px}
+.w.hidden,.w.init{user-select:none;-webkit-user-select:none}
+.w.hidden{
+  color:var(--paper-low);letter-spacing:.14em;
+  border-bottom:1px solid rgba(224,50,28,.3);
+}
+.w.hidden:hover{color:var(--red);background:rgba(224,50,28,.08)}
+.w.init{color:var(--paper-dim);letter-spacing:.1em}
+.w.init b{color:var(--paper);font-weight:600}
+.w.shown{animation:pop .4s ease}
+@keyframes pop{from{color:var(--red);background:rgba(224,50,28,.2)}to{}}
+
+/* rimes */
+body.rimes .w[data-r]{color:var(--rc)}
+body.rimes .w[data-r]:not(.hidden){box-shadow:inset 0 -2px 0 -1px var(--rc)}
+body.rimes .w[data-r].hidden{color:var(--paper-low)}
+body.rimes.solo .w[data-r]:not([data-r-active]){color:inherit;box-shadow:none;opacity:.28}
+
+/* japonais */
+.line.ja .txt{font-size:clamp(16px,2.3vw,18.5px);letter-spacing:.02em}
+.gloss{
+  font-family:var(--disp);font-size:12px;letter-spacing:.05em;
+  color:var(--paper-dim);padding:2px 0 8px 35px;
+}
+.wordbyword{padding:8px 0 12px 35px;display:flex;flex-wrap:wrap;gap:5px 16px}
+.wordbyword span{font-family:var(--disp);font-size:11px;letter-spacing:.04em;color:var(--paper-low)}
+.wordbyword span b{color:var(--paper-dim);font-weight:500}
+
+/* ---------- navigation ---------- */
+.nav{display:flex;align-items:center;gap:12px;justify-content:center;margin:30px 0 0}
+.nav button{
+  font-family:var(--disp);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  background:none;border:1px solid rgba(236,229,218,.2);border-radius:2px;
+  color:var(--paper-dim);padding:12px 18px;cursor:pointer;transition:.15s;min-height:44px;
+}
+.nav button:hover:not(:disabled){color:var(--ink);background:var(--paper);border-color:var(--paper)}
+.nav button:disabled{opacity:.22;cursor:default}
+.nav .pos{font-family:var(--disp);font-size:11px;letter-spacing:.14em;color:var(--paper-low)}
+
+/* ---------- barre de niveaux (flottante) ---------- */
+.levelbar{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:20px;z-index:55;
+}
+.levelbar .seg{
+  border-color:rgba(236,229,218,.22);
+  background:rgba(12,12,14,.94);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 10px 34px rgba(0,0,0,.55);
+}
+.levelbar .seg button{padding:12px 15px;min-height:44px}
+
+/* ---------- légende rimes ---------- */
+.legend{
+  position:relative;z-index:1;max-width:800px;margin:0 auto;
+  padding:26px var(--gut) 0;
+}
+.legend h2{
+  font-family:var(--disp);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--paper-low);margin-bottom:13px;font-weight:500;
+}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-family:var(--disp);font-size:11px;letter-spacing:.06em;
+  border:1px solid;border-radius:2px;padding:9px 12px;cursor:pointer;
+  background:none;transition:.15s;opacity:.65;min-height:36px;
+}
+.chip:hover,.chip[aria-pressed="true"]{opacity:1}
+.chip[aria-pressed="true"]{color:var(--ink) !important}
+
+/* ---------- aide ---------- */
+.help{
+  position:relative;z-index:1;max-width:800px;margin:0 auto;
+  padding:34px var(--gut) calc(var(--bar) + 70px + env(safe-area-inset-bottom));
+  font-family:var(--disp);font-size:12px;line-height:2;letter-spacing:.04em;
+  color:var(--paper-low);
+  border-top:1px solid rgba(236,229,218,.1);margin-top:40px;
+}
+.help b{color:var(--paper-dim);font-weight:500}
+.help summary{
+  cursor:pointer;list-style:none;color:var(--paper-dim);
+  letter-spacing:.22em;text-transform:uppercase;font-size:10.5px;
+  padding:6px 0;user-select:none;-webkit-user-select:none;
+}
+.help summary::-webkit-details-marker{display:none}
+.help summary::before{content:"+ ";color:var(--red)}
+.help[open] summary::before{content:"− ";color:var(--red)}
+.help-body{padding-top:10px}
+.help .keys{display:none}
+kbd{
+  font-family:var(--disp);font-size:10.5px;border:1px solid rgba(236,229,218,.2);
+  border-radius:2px;padding:1px 5px;color:var(--paper-dim);
+}
+
+@media (hover:hover){ .help .keys{display:block} }
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+@media (max-width:680px){
+  .kanji{display:none}
+
+  header{padding:10px 16px}
+  .brand h1{font-size:13px;letter-spacing:.2em}
+  .brand .sub{font-size:10px;letter-spacing:.12em;flex-basis:100%;order:3;margin-top:-2px}
+  .brand .due{
+    order:2;margin-left:auto;font-size:10px;padding:8px 10px;
+  }
+  .opt-toggle{
+    display:block;order:2;margin-left:auto;
+    font-family:var(--disp);font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+    background:none;border:1px solid rgba(236,229,218,.2);border-radius:2px;
+    color:var(--paper-dim);padding:8px 11px;cursor:pointer;min-height:34px;
+  }
+  .opt-toggle[aria-expanded="true"]{color:var(--ink);background:var(--paper);border-color:var(--paper)}
+  .brand .due + .opt-toggle{margin-left:0}
+  .controls{display:none;margin-top:11px}
+  .controls.open{display:flex}
+  .controls .seg{width:100%}
+  .controls .seg button{flex:1;padding:11px 6px;min-height:44px}
+  .controls .tgl{flex:1;padding:11px 6px;min-height:44px}
+
+  main{padding:22px 16px 6px}
+  .block{padding-left:14px;margin-bottom:24px}
+  .line{padding:4px 0}
+  .line .txt{font-size:17px;line-height:1.72}
+  .line .lno{min-width:20px;font-size:10px}
+  .gloss,.wordbyword{padding-left:33px}
+  .bacts button{width:44px;height:38px}
+
+  /* barre de niveaux : pleine largeur, au pouce */
+  .levelbar{
+    left:0;right:0;bottom:0;transform:none;width:100%;
+    background:rgba(10,10,11,.97);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border-top:1px solid rgba(236,229,218,.14);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .levelbar .seg{
+    border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;
+  }
+  .levelbar .seg button{
+    flex:1;padding:16px 2px;font-size:10px;letter-spacing:.03em;min-height:52px;
+  }
+  .help{font-size:11.5px;line-height:1.9;padding-top:28px}
+}
+
+@media (max-width:380px){
+  .brand h1{font-size:12px}
+  .levelbar .seg button{font-size:9.5px;padding:16px 1px}
+  .line .txt{font-size:16.5px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+</style>
+</head>
+<body>
+<div class="kanji">熱血</div>
+
+<header>
+  <div class="brand">
+    <h1>Par <em>Coeur</em></h1>
+    <span class="sub">Nekketsu · Nekfeu ft. Crystal Kay</span>
+    <button class="due" id="dueBtn" hidden></button>
+    <button class="opt-toggle" id="optBtn" aria-expanded="false" aria-controls="controls">Options</button>
+  </div>
+  <div class="controls" id="controls">
+    <div class="seg" id="modes" role="group" aria-label="Mode d'affichage"></div>
+    <button class="tgl" id="rimesBtn" aria-pressed="false">Rimes</button>
+    <button class="tgl" id="transBtn" aria-pressed="false">Trad JP</button>
+    <button class="tgl" id="shuffleBtn">Remélanger</button>
+  </div>
+</header>
+
+<main id="stage"></main>
+
+<section class="legend" id="legend" hidden>
+  <h2>Chaînes de rimes · touche une famille pour l'isoler</h2>
+  <div class="chips" id="chips"></div>
+</section>
+
+<details class="help" id="help" open>
+  <summary>Comment s'en servir</summary>
+  <div class="help-body">
+    Monte le niveau de masquage cran par cran, en bas de l'écran. Touche un mot masqué pour le révéler : chaque coup de pouce est compté par bloc, c'est ton vrai thermomètre. Touche le numéro du vers pour révéler tout le vers.<br>
+    <b>Boule de neige</b> ajoute un bloc à la fois, toujours en repartant du début. <b>Focus</b> isole un bloc, balaye vers la gauche ou la droite pour changer.<br>
+    <b>✓</b> = acquis, ça programme la révision (demain, dans 3 jours, dans 7, dans 16). <b>✗</b> remet le compteur à zéro. Tout est sauvé sur cet appareil.<br>
+    <span class="keys">Raccourcis : <kbd>1</kbd>–<kbd>5</kbd> niveau · <kbd>←</kbd> <kbd>→</kbd> bloc en focus · <kbd>R</kbd> rimes · <kbd>espace</kbd> tout révéler.</span>
+  </div>
+</details>
+
+<div class="levelbar">
+  <div class="seg" id="levels" role="group" aria-label="Niveau de masquage"></div>
+</div>
+
+<script>
+/* ============================================================
+   DONNÉES
+   ============================================================ */
+const SONG = [
+ {sect:"Couplet 1 · Nekfeu"},
+ {id:"c1", lbl:"Le flair", lines:[
+   "Héros de ma vie, maintenant auteur",
+   "Si je m'en sors c'est parce que j'ai du flair",
+   "Dis pas que l'argent n'a pas d'odeur",
+   "Sur cette planète obscure, j'dois protéger mes frères",
+   "Moi j'veux pas être au dessus, je veux être à la hauteur"]},
+ {id:"c2", lbl:"Le père", lines:[
+   "S-Croums t'inquiète on f'ra mal comme le kho de Mekra",
+   "Quand j'vois mon père, j'ai rien à lui dire j'aimerais l'prendre dans mes bras",
+   "Ou peut-être que j'ai trop à lui dire, mais trop de pudeur",
+   "J'l'ai jamais vu s'plaindre, même quand il travaillait jusqu'à plus d'heure"]},
+ {id:"c3", lbl:"La mère", lines:[
+   "Ma mère m'a élevé à la dure, une éducation stricte",
+   "Elle m'a dit : “Les enfants gâtés sont des petits garçons tristes”, hein",
+   "Et c'est maintenant que j'aperçois ces vérités",
+   "J'remercierai jamais assez maman pour sa sévérité, ça c'est d'l'amour"]},
+ {id:"c4", lbl:"Contempler Dieu", lines:[
+   "Grâce à elle, j'me contente de peu",
+   "Un coucher de soleil et je contemple Dieu",
+   "J'ai rien zappé maman",
+   "J'me souviens qu'à cette époque je t'aimais tellement que je cassais tes clopes",
+   "Et Dieu m'est témoin, mon père c'est mon exemple"]},
+ {id:"c5", lbl:"Le bushido", lines:[
+   "J'met les bouchées double, fidèle au bushido",
+   "Un peu de rap pour bercer mon exode",
+   "J'avais la dalle d'un jeune rom, j'inventais des jeux d'rôles",
+   "Maintenant je vis mes rêves comme si j'avais invoqué Shenron"]},
+ {id:"c6", lbl:"Shōnen", lines:[
+   "Choisis bien ton chemin, sans chômer",
+   "Putain c'est chan-mé, j'me voyais pas devenir show-man",
+   "Je vis ma vie comme un shōnen"]},
+ {id:"c7", lbl:"Les veines", lines:[
+   "Les vaines souffrances humaines, t'emmènent de longues semaines au lit",
+   "On veut même s'ouvrir les veines, mais vaut mieux jamais le dire",
+   "Et bien souvent, la peine rappelle de belles mélodies",
+   "Les souvenirs qu'on aime et qui pêle-mêle, se mêlent au disque"]},
+ {id:"c8", lbl:"Goku", lines:[
+   "Et même mes ennemis s'en apercevront",
+   "Moi j'suis comme Goku, j'ai le coeur souffrant",
+   "Nekketsu"]},
+
+ {sect:"Refrain · Crystal Kay"},
+ {id:"rf", lbl:"Nando demo", ja:true, lines:[
+   "Nando demo tachiagare",
+   "Me no mae no yume wo tsukame",
+   "Kujikesō ni natta nara",
+   "Omoidase",
+   "Kimi wa hitori ja nai"],
+  gloss:[
+   "Relève-toi autant de fois qu'il le faudra",
+   "Saisis le rêve qui est devant tes yeux",
+   "Si tu es sur le point de flancher",
+   "Souviens-toi",
+   "Tu n'es pas seul"],
+  wbw:[
+   [["nando","combien de fois"],["demo","même si"],["tachiagare","relève-toi !"]],
+   [["me no","de l'œil"],["mae no","devant"],["yume wo","le rêve"],["tsukame","saisis !"]],
+   [["kujike-sō","sur le point de se briser"],["ni natta","être devenu"],["nara","si"]],
+   [["omoidase","souviens-toi !"]],
+   [["kimi wa","toi"],["hitori","seul"],["ja nai","tu n'es pas"]]]},
+
+ {sect:"Couplet 2 · Nekfeu"},
+ {id:"d1", lbl:"Sang bouillant", lines:[
+   "Hun, devenir pote en s'embrouillant",
+   "Nekketsu, nekketsu, ça veut dire : sang bouillant",
+   "J'relève la visière de ma casquette, la lune est rougeoyante",
+   "Comme le dernier joint que mon pote allume en nous rejoignant"]},
+ {id:"d2", lbl:"Le départ carcéral", lines:[
+   "On l'accompagne le cœur gros pour son départ carcéral",
+   "Soudé avec mes queurs-cro, on s'tape des barres car c'est rare",
+   "Les gars de l'équipe voyagent dans toutes sortes d'embarcations",
+   "Paye plus par cash que par carte, vêtu d'une parka sombre"]},
+ {id:"d3", lbl:"La Haine", lines:[
+   "Grandir sans démarcation, éduqué par Cassel dans La Haine",
+   "D'humeur cassante, face aux manoeuvres des marcassins",
+   "Trop de regards glaçants, sur scène tu remarques la synchro",
+   "S-Croums, des reufs pas des zinc', donc on débarque à cinq, kho"]},
+ {id:"d4", lbl:"Numéro 10", lines:[
+   "Numéro 10, soudés quand c'est sombre",
+   "Dans la lumière aussi, sans concessions",
+   "Tant qu'on a pas notre magasin d'gov'"]},
+ {id:"d5", lbl:"Les âmes errantes", lines:[
+   "Les défis se présentent à toi pour qu'tu tentes",
+   "Beaucoup d'âmes errantes autour du temple",
+   "Y'a que l'apparence qui compte pour toi",
+   "Pourtant c'est pas important"]},
+ {id:"d6", lbl:"Le cours du temps", lines:[
+   "Pourquoi cours-tu tant ? Le destin t'accorde une danse",
+   "Moi j'écrivais mes textes en classe",
+   "Le temps du cours j'inversais le cours du temps"]},
+
+ {sect:"Outro"},
+ {id:"ot", lbl:"Tokyo", ja:true, lines:[
+   "Hayaku Tōkyō ni kite",
+   "Tanoshimi ni matteru yo !"],
+  gloss:[
+   "Viens vite à Tokyo",
+   "J'attends ça avec impatience !"],
+  wbw:[
+   [["hayaku","vite"],["Tōkyō ni","à Tokyo"],["kite","viens !"]],
+   [["tanoshimi ni","avec plaisir"],["matteru","j'attends"],["yo","!"]]]}
+];
+
+/* familles de rimes */
+const RIMES = [
+ {k:"eur", c:"--r1", n:"eur / èr",       w:["auteur","flair","odeur","frères","hauteur","pudeur","heure","dure","humeur"]},
+ {k:"o",   c:"--r2", n:"bushido",        w:["bushido","exode","rôles","Shenron","rom"]},
+ {k:"sh",  c:"--r3", n:"chan-mé",        w:["chemin","chômer","chan-mé","show-man","shōnen"]},
+ {k:"ene", c:"--r4", n:"vaines / veines",w:["vaines","humaines","emmènent","semaines","veines","peine","aime","pêle-mêle","mêlent","jamais","mélodies"]},
+ {k:"eu",  c:"--r8", n:"peu / Dieu",     w:["peu","Dieu","bouchées"]},
+ {k:"ouy", c:"--r5", n:"sang bouillant", w:["s'embrouillant","bouillant","rougeoyante","rejoignant"]},
+ {k:"kar", c:"--r6", n:"kar / kas / mar",w:["carcéral","queurs-cro","barres","car","rare","embarcations","cash","carte","parka","démarcation","Cassel","cassante","marcassins","remarques","débarque","casquette","glaçants"]},
+ {k:"an",  c:"--r7", n:"an / ante",      w:["présentent","tentes","errantes","temple","apparence","compte","important","tant","danse","classe","temps","souffrant","apercevront","sombre"]}
+];
+
+/* ============================================================
+   ÉTAT
+   ============================================================ */
+const LEVELS = [
+  {n:"Lecture",  p:0},
+  {n:"Trous",    p:.3},
+  {n:"Gruyère",  p:.6},
+  {n:"Initiales",p:-1},
+  {n:"Aveugle",  p:-2}
+];
+const MODES = ["Tout","Focus","Boule de neige"];
+const INTERVALS = [1, 3, 7, 16];
+const DAY = 864e5;
+
+const S = {
+  level:0, mode:0, focus:0, snow:1, seed:1,
+  rimes:false, solo:null, trans:false,
+  shown:new Set()
+};
+
+const BLOCKS = SONG.filter(b => b.id);
+
+function norm(s){
+  return s.toLowerCase().replace(/’/g,"'").replace(/[.,;:!?"«»“”()]/g,"").trim();
+}
+const RMAP = new Map();
+RIMES.forEach(f => f.w.forEach(w => RMAP.set(norm(w), f)));
+
+/* ---------- persistance ---------- */
+let mem = {};
+function loadStore(){
+  try{
+    const raw = localStorage.getItem("parcoeur.nekketsu");
+    return raw ? JSON.parse(raw) : {};
+  }catch(e){ return mem; }
+}
+const store = loadStore();
+function saveStore(){
+  try{ localStorage.setItem("parcoeur.nekketsu", JSON.stringify(store)); }
+  catch(e){ mem = store; }
+}
+function rec(id){
+  if(!store[id]) store[id] = {m:0, next:0, hints:0};
+  return store[id];
+}
+function isDue(id){ const r = store[id]; return !!r && r.m > 0 && r.next <= Date.now(); }
+
+/* ---------- utilitaires texte ---------- */
+/* hash entier : distribution plate, contrairement à un sin() qui se répète
+   quand l'index repart de zéro à chaque bloc (le vers 1 n'était jamais masqué) */
+function rnd(i, seed){
+  let x = (i * 2654435761 + seed * 40503) >>> 0;
+  x ^= x >>> 15; x = Math.imul(x, 2246822507); x ^= x >>> 13;
+  return (x >>> 0) / 4294967296;
+}
+function dots(n){ return "·".repeat(Math.max(1, n)); }
+
+/* le token garde ses apostrophes internes : "j'dois" = une unité de flow */
+function tokenize(line){
+  return line.match(/[A-Za-zÀ-ÿ0-9’'\-]+|[^A-Za-zÀ-ÿ0-9’'\-]+/g) || [];
+}
+function isWord(t){ return /[A-Za-zÀ-ÿ0-9]/.test(t); }
+
+/* "d'l'amour" retombe sur la famille de "amour" */
+function rimeOf(tok){
+  const t = norm(tok);
+  if(RMAP.has(t)) return RMAP.get(t);
+  const cut = t.lastIndexOf("'");
+  if(cut > -1 && RMAP.has(t.slice(cut+1))) return RMAP.get(t.slice(cut+1));
+  return null;
+}
+
+function el(tag, cls, txt){
+  const n = document.createElement(tag);
+  if(cls) n.className = cls;
+  if(txt !== undefined) n.textContent = txt;
+  return n;
+}
+
+/* offset global de chaque bloc : l'index d'un mot est unique dans tout le texte,
+   donc le masquage reste identique quel que soit le mode d'affichage */
+const WOFF = {};
+(function(){
+  let n = 0;
+  BLOCKS.forEach(b => {
+    WOFF[b.id] = n;
+    b.lines.forEach(line => { tokenize(line).forEach(t => { if(isWord(t)) n++; }); });
+  });
+})();
+
+/* ============================================================
+   MOTS · peinture ciblée, pas de re-render global
+   ============================================================ */
+function paintWord(sp){
+  const tok = sp.dataset.tok;
+  const lv = LEVELS[S.level];
+  const revealed = S.shown.has(sp.dataset.k);
+  const letters = tok.replace(/[^A-Za-zÀ-ÿ0-9]/g,"").length;
+  let mode = "full";
+
+  if(!revealed){
+    if(lv.p === -1)      mode = "init";
+    else if(lv.p === -2) mode = "hide";
+    /* en masquage partiel les mots de 1-2 lettres restent : la grammaire tient le vers */
+    else if(lv.p > 0 && letters > 2 && rnd(Number(sp.dataset.i), S.seed) < lv.p) mode = "hide";
+  }
+
+  sp.classList.remove("hidden","init","shown");
+  sp.dataset.mode = mode;
+
+  if(mode === "hide"){
+    sp.classList.add("hidden");
+    sp.replaceChildren(document.createTextNode(dots(letters)));
+    sp.title = "Révéler";
+  }else if(mode === "init"){
+    sp.classList.add("init");
+    if(letters <= 1){
+      sp.replaceChildren(document.createTextNode(tok));
+    }else{
+      sp.replaceChildren(el("b", null, tok.charAt(0)), document.createTextNode(dots(letters-1)));
+    }
+    sp.title = "Révéler";
+  }else{
+    sp.replaceChildren(document.createTextNode(tok));
+    sp.removeAttribute("title");
+    if(revealed && lv.p !== 0) sp.classList.add("shown");
+  }
+}
+
+function makeWord(tok, key, i, blockId){
+  const sp = el("span","w");
+  sp.dataset.k = key;
+  sp.dataset.tok = tok;
+  sp.dataset.i = i;
+  sp.dataset.b = blockId;
+
+  const fam = rimeOf(tok);
+  if(fam){
+    sp.dataset.r = fam.k;
+    sp.style.setProperty("--rc", "var(" + fam.c + ")");
+    if(S.solo === fam.k) sp.dataset.rActive = "1";
+  }
+  paintWord(sp);
+  sp.onclick = () => toggleWord(sp);
+  return sp;
+}
+
+function toggleWord(sp){
+  const key = sp.dataset.k;
+  if(sp.dataset.mode === "full"){
+    if(S.shown.has(key)){ S.shown.delete(key); paintWord(sp); }  /* re-masquer */
+    return;
+  }
+  S.shown.add(key);
+  const r = rec(sp.dataset.b);
+  r.hints++;
+  saveStore();
+  paintWord(sp);
+  bumpHint(sp.dataset.b, r.hints);
+}
+
+function bumpHint(blockId, n){
+  const box = stage.querySelector('.block[data-id="' + blockId + '"] .hint-n');
+  if(box) box.textContent = n ? n + " indice" + (n > 1 ? "s" : "") : "";
+}
+
+function revealAll(scope){
+  const words = (scope || stage).querySelectorAll(".w");
+  const touched = {};
+  words.forEach(sp => {
+    if(sp.dataset.mode === "full") return;
+    S.shown.add(sp.dataset.k);
+    const b = sp.dataset.b;
+    touched[b] = (touched[b] || 0) + 1;
+    paintWord(sp);
+  });
+  Object.keys(touched).forEach(b => {
+    const r = rec(b); r.hints += touched[b]; bumpHint(b, r.hints);
+  });
+  if(Object.keys(touched).length) saveStore();
+}
+
+/* ============================================================
+   RENDU
+   ============================================================ */
+const stage = document.getElementById("stage");
+
+function visibleBlocks(){
+  if(S.mode === 1) return [BLOCKS[S.focus]];
+  if(S.mode === 2) return BLOCKS.slice(0, S.snow);
+  return BLOCKS;
+}
+
+function render(opts){
+  const anim = !!(opts && opts.anim);
+  const vis = new Set(visibleBlocks().map(b => b.id));
+  stage.replaceChildren();
+  stage.classList.toggle("anim", anim);
+  const counter = {n:0};
+  let bi = 0;
+
+  SONG.forEach(item => {
+    if(item.sect){
+      if(S.mode === 0) stage.appendChild(el("div","sect",item.sect));
+      return;
+    }
+    const idx = bi++;
+    if(!vis.has(item.id)) return;
+    stage.appendChild(renderBlock(item, idx, counter, anim));
+  });
+
+  if(S.mode === 1) stage.appendChild(navBar());
+  if(S.mode === 2) stage.appendChild(snowBar());
+  updateDue();
+}
+
+function renderBlock(b, idx, counter, anim){
+  const r = rec(b.id);
+  const box = el("article", "block" + (isDue(b.id) ? " due" : ""));
+  box.dataset.mastery = r.m;
+  box.dataset.id = b.id;
+
+  const head = el("div","bhead");
+  head.appendChild(el("span","num", String(idx+1).padStart(2,"0")));
+  head.appendChild(el("span","lbl", b.lbl));
+  head.appendChild(el("span","hint-n", r.hints ? r.hints + " indice" + (r.hints>1?"s":"") : ""));
+
+  const acts = el("div","bacts");
+  const ok = el("button","ok","✓");
+  ok.title = "Acquis · programme la prochaine révision";
+  ok.setAttribute("aria-label","Bloc acquis");
+  ok.onclick = () => {
+    r.m = Math.min(4, r.m + 1);
+    r.next = Date.now() + INTERVALS[Math.min(r.m-1, 3)] * DAY;
+    r.hints = 0; saveStore(); render();
+  };
+  const no = el("button","no","✗");
+  no.title = "Pas acquis · repart de zéro";
+  no.setAttribute("aria-label","Bloc pas acquis");
+  no.onclick = () => { r.m = 0; r.next = 0; r.hints = 0; saveStore(); render(); };
+  acts.append(ok, no);
+  head.appendChild(acts);
+  box.appendChild(head);
+
+  let wi = WOFF[b.id];
+  b.lines.forEach((line, li) => {
+    const row = el("div", "line" + (b.ja ? " ja" : ""));
+    if(anim) row.style.animationDelay = (counter.n++ * 24) + "ms";
+
+    const lno = el("span","lno", String(li+1));
+    lno.title = "Révéler le vers";
+    lno.onclick = () => revealAll(row);
+
+    const txt = el("span","txt");
+    tokenize(line).forEach((tok, ti) => {
+      if(!isWord(tok)){ txt.appendChild(document.createTextNode(tok)); return; }
+      txt.appendChild(makeWord(tok, b.id + ":" + li + ":" + ti, wi++, b.id));
+    });
+
+    row.append(lno, txt);
+    box.appendChild(row);
+
+    if(b.ja && S.trans){
+      box.appendChild(el("div","gloss", b.gloss[li]));
+      if(b.wbw && b.wbw[li]){
+        const w = el("div","wordbyword");
+        b.wbw[li].forEach(pair => {
+          const s = el("span");
+          s.appendChild(el("b", null, pair[0]));
+          s.appendChild(document.createTextNode(" " + pair[1]));
+          w.appendChild(s);
+        });
+        box.appendChild(w);
+      }
+    }
+  });
+  return box;
+}
+
+function navBar(){
+  const n = el("div","nav");
+  const prev = el("button", null, "← Préc.");
+  prev.disabled = S.focus === 0;
+  prev.onclick = () => goFocus(-1);
+  const pos = el("span","pos", (S.focus+1) + " / " + BLOCKS.length);
+  const next = el("button", null, "Suiv. →");
+  next.disabled = S.focus === BLOCKS.length - 1;
+  next.onclick = () => goFocus(1);
+  n.append(prev, pos, next);
+  return n;
+}
+function goFocus(d){
+  const t = S.focus + d;
+  if(t < 0 || t >= BLOCKS.length) return;
+  S.focus = t; S.shown.clear();
+  render({anim:true}); scrollTop();
+}
+function snowBar(){
+  const n = el("div","nav");
+  const less = el("button", null, "− Bloc");
+  less.disabled = S.snow <= 1;
+  less.onclick = () => { S.snow--; render(); };
+  const pos = el("span","pos", S.snow + " / " + BLOCKS.length + " blocs");
+  const more = el("button", null, "+ Bloc");
+  more.disabled = S.snow >= BLOCKS.length;
+  more.onclick = () => { S.snow++; render({anim:true}); };
+  n.append(less, pos, more);
+  return n;
+}
+function scrollTop(){ window.scrollTo({top:0, behavior:"smooth"}); }
+
+/* ============================================================
+   BARRE D'OUTILS
+   ============================================================ */
+const segL = document.getElementById("levels");
+LEVELS.forEach((l, i) => {
+  const b = el("button", null, l.n);
+  b.setAttribute("aria-pressed", String(i === 0));
+  b.onclick = () => setLevel(i);
+  segL.appendChild(b);
+});
+function setLevel(i){
+  S.level = i; S.shown.clear();
+  Array.from(segL.children).forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
+  stage.querySelectorAll(".w").forEach(paintWord);
+  stage.querySelectorAll(".hint-n").forEach(h => { h.textContent = ""; });
+  BLOCKS.forEach(b => { const r = rec(b.id); r.hints = 0; });
+  saveStore();
+}
+
+const segM = document.getElementById("modes");
+MODES.forEach((m, i) => {
+  const b = el("button", null, m);
+  b.setAttribute("aria-pressed", String(i === 0));
+  b.onclick = () => setMode(i);
+  segM.appendChild(b);
+});
+function setMode(i){
+  S.mode = i; S.shown.clear();
+  Array.from(segM.children).forEach((x, j) => x.setAttribute("aria-pressed", String(j === i)));
+  render({anim:true});
+}
+
+const rimesBtn = document.getElementById("rimesBtn");
+rimesBtn.onclick = () => {
+  S.rimes = !S.rimes;
+  rimesBtn.setAttribute("aria-pressed", String(S.rimes));
+  document.body.classList.toggle("rimes", S.rimes);
+  document.getElementById("legend").hidden = !S.rimes;
+  if(!S.rimes){ S.solo = null; document.body.classList.remove("solo"); syncChips(); }
+};
+
+const transBtn = document.getElementById("transBtn");
+transBtn.onclick = () => {
+  S.trans = !S.trans;
+  transBtn.setAttribute("aria-pressed", String(S.trans));
+  render();
+};
+
+document.getElementById("shuffleBtn").onclick = () => {
+  S.seed = S.seed + 7 + Math.floor(Math.abs(Math.sin(S.seed * 7919)) * 97);
+  S.shown.clear();
+  stage.querySelectorAll(".w").forEach(paintWord);
+};
+
+const optBtn = document.getElementById("optBtn");
+const controls = document.getElementById("controls");
+optBtn.onclick = () => {
+  const open = controls.classList.toggle("open");
+  optBtn.setAttribute("aria-expanded", String(open));
+};
+
+/* légende */
+const chips = document.getElementById("chips");
+RIMES.forEach(f => {
+  const c = el("button","chip", f.n);
+  c.style.color = "var(" + f.c + ")";
+  c.style.borderColor = "var(" + f.c + ")";
+  c.setAttribute("aria-pressed","false");
+  c.onclick = () => {
+    S.solo = (S.solo === f.k) ? null : f.k;
+    document.body.classList.toggle("solo", !!S.solo);
+    syncChips();
+    stage.querySelectorAll(".w[data-r]").forEach(sp => {
+      if(S.solo && sp.dataset.r === S.solo) sp.dataset.rActive = "1";
+      else delete sp.dataset.rActive;
+    });
+  };
+  chips.appendChild(c);
+});
+function syncChips(){
+  Array.from(chips.children).forEach((c, i) => {
+    const on = S.solo === RIMES[i].k;
+    c.setAttribute("aria-pressed", String(on));
+    c.style.background = on ? "var(" + RIMES[i].c + ")" : "none";
+  });
+}
+
+/* révisions dues */
+const dueBtn = document.getElementById("dueBtn");
+function updateDue(){
+  const due = BLOCKS.filter(b => isDue(b.id));
+  if(!due.length){ dueBtn.hidden = true; return; }
+  dueBtn.hidden = false;
+  dueBtn.textContent = due.length + " à revoir";
+  dueBtn.onclick = () => {
+    S.focus = BLOCKS.findIndex(b => isDue(b.id));
+    setMode(1); scrollTop();
+  };
+}
+
+/* clavier */
+document.addEventListener("keydown", e => {
+  if(e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key;
+  if(k >= "1" && k <= "5"){ setLevel(Number(k) - 1); return; }
+  if(k === "r" || k === "R"){ rimesBtn.click(); return; }
+  if(k === " "){ e.preventDefault(); revealAll(); return; }
+  if(S.mode === 1){
+    if(k === "ArrowLeft")  goFocus(-1);
+    if(k === "ArrowRight") goFocus(1);
+  }
+});
+
+/* swipe en mode focus */
+let sx = 0, sy = 0;
+stage.addEventListener("touchstart", e => {
+  sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY;
+}, {passive:true});
+stage.addEventListener("touchend", e => {
+  if(S.mode !== 1) return;
+  const dx = e.changedTouches[0].clientX - sx;
+  const dy = e.changedTouches[0].clientY - sy;
+  if(Math.abs(dx) < 70 || Math.abs(dy) > 55) return;
+  goFocus(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+/* sur téléphone, Focus par défaut : on ne révise pas en scrollant 16 blocs,
+   et l'aide est repliée pour rendre l'écran au texte */
+if(window.matchMedia("(max-width:680px)").matches){
+  document.getElementById("help").open = false;
+  setMode(1);
+}else{
+  render({anim:true});
+}
+</script>
+</body>
+</html>
