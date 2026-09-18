@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /dist/
 Disallow: /affinity/
+Disallow: /reference/
 
 Sitemap: https://vesanerie.fr/sitemap.xml
