@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Références d'artistes · Vesanerie</title>
+<meta name="description" content="Bibliothèque de références graphiques : animation, BD, illustration, peinture, sculpture, art pictural. Une œuvre, une carrière, et ce qu'il y a à voler chez chacun.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f0ece4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f0ece4'/%3E%3Crect x='14' y='14' width='72' height='72' fill='none' stroke='%23111' stroke-width='6'/%3E%3Cpath d='M30 68 L48 34 L62 52 L70 42' fill='none' stroke='%23111' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f0ece4;
+  --card:#f8f5ee;
+  --ink:#141210;
+  --ink-soft:#5d564c;
+  --ink-faint:#8f877a;
+  --line:#141210;
+  --accent:#a8422e;
+  --rule:rgba(20,18,16,.16);
+  --shadow:rgba(20,18,16,.13);
+  --hand:'Caveat',ui-rounded,cursive;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#121110;
+  --card:#1b1917;
+  --ink:#f0ece4;
+  --ink-soft:#a9a195;
+  --ink-faint:#7b7469;
+  --line:#f0ece4;
+  --accent:#e0906e;
+  --rule:rgba(240,236,228,.18);
+  --shadow:rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:400 16px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+.wrap{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:0 18px 80px}
+header{padding:38px 0 8px}
+.kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+h1{font:700 clamp(38px,9vw,74px)/0.95 var(--hand);margin:0 0 6px;letter-spacing:.01em}
+.sub{color:var(--ink-soft);font-size:15px;max-width:58ch;margin:0 0 22px}
+.sub b{font-weight:600;color:var(--ink)}
+.backhome{display:inline-block;font-size:13px;color:var(--ink-faint);text-decoration:none;margin-bottom:18px;border-bottom:1px solid var(--rule)}
+.backhome:hover{color:var(--accent)}
+
+.tools{position:sticky;top:0;z-index:30;background:var(--bg);padding:12px 0 10px;margin-bottom:8px;border-bottom:1px solid var(--rule)}
+.searchrow{display:flex;gap:8px;align-items:center}
+#q{
+  flex:1;min-width:0;padding:11px 14px;font-size:15px;font-family:var(--sans);
+  background:var(--card);color:var(--ink);
+  border:1.5px solid var(--line);border-radius:2px;outline:none;
+}
+#q::placeholder{color:var(--ink-faint)}
+#q:focus{border-color:var(--accent)}
+.iconbtn{
+  flex:none;width:44px;height:44px;display:grid;place-items:center;
+  border:1.5px solid var(--line);border-radius:2px;background:var(--card);
+  font-size:17px;line-height:1;
+}
+.iconbtn:hover{background:var(--accent);color:#f8f5ee;border-color:var(--accent)}
+.cats{display:flex;gap:7px;overflow-x:auto;padding:11px 0 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cats::-webkit-scrollbar{display:none}
+.cat{
+  flex:none;padding:6px 13px;font-size:12.5px;letter-spacing:.04em;white-space:nowrap;
+  border:1.5px solid var(--rule);border-radius:100px;color:var(--ink-soft);
+}
+.cat:hover{border-color:var(--line);color:var(--ink)}
+.cat.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cat i{font-style:normal;opacity:.55;margin-left:5px;font-size:11px}
+.count{font-size:12px;color:var(--ink-faint);padding:8px 2px 2px;letter-spacing:.04em}
+
+.grid{display:grid;gap:26px 20px;padding-top:14px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+@media(max-width:560px){.grid{grid-template-columns:repeat(2,1fr);gap:20px 12px}}
+.card{display:flex;flex-direction:column;text-align:center;padding:0}
+.card .name{
+  font:700 clamp(15px,4vw,20px)/1.1 var(--hand);
+  text-transform:uppercase;letter-spacing:.03em;
+  margin:0 0 8px;min-height:2.2em;display:flex;align-items:flex-end;justify-content:center;
+}
+.frame{
+  position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--card);
+  border:2px solid var(--line);box-shadow:3px 3px 0 var(--shadow);
+  transition:transform .16s ease, box-shadow .16s ease;
+}
+.card:hover .frame{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--shadow)}
+.frame img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.97)}
+.ph{position:absolute;inset:0;display:grid;place-items:center;font:700 30px var(--hand);color:var(--ink-faint);background:var(--card)}
+.meta{font-size:11.5px;color:var(--ink-faint);margin-top:8px;letter-spacing:.03em}
+.meta .cur{display:block;color:var(--ink-soft);font-size:11px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.empty{padding:60px 0;text-align:center;color:var(--ink-faint)}
+
+.sheet{position:fixed;inset:0;z-index:100;display:none;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.sheet.open{display:block}
+.sheetin{max-width:1060px;margin:0 auto;padding:16px 18px 90px;position:relative;z-index:1}
+.sheetbar{
+  position:sticky;top:0;z-index:5;background:var(--bg);
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:10px 0 12px;margin-bottom:6px;border-bottom:1px solid var(--rule)
+}
+.navbtns{display:flex;gap:6px}
+.sheet h2{font:700 clamp(30px,7vw,54px)/1 var(--hand);text-transform:uppercase;margin:16px 0 4px;letter-spacing:.02em}
+.ident{color:var(--ink-faint);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
+.ident b{color:var(--accent);font-weight:500}
+.hero{display:grid;gap:26px;grid-template-columns:minmax(0,1fr);margin-bottom:30px}
+@media(min-width:820px){.hero{grid-template-columns:minmax(0,440px) minmax(0,1fr);align-items:start}}
+.heroframe{border:2px solid var(--line);box-shadow:5px 5px 0 var(--shadow);background:var(--card);position:relative;min-height:120px}
+.heroframe img{width:100%;display:block}
+.caption{font-size:12.5px;color:var(--ink-faint);margin-top:10px;line-height:1.45}
+.caption b{color:var(--ink-soft);font-weight:500;font-style:italic}
+.block h3{font:600 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 9px}
+.carriere{font-size:16.5px;line-height:1.66;margin:0}
+.gr{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:30px 0}
+.gr .block{background:var(--card);border:1px solid var(--rule);padding:16px 17px}
+.gr p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
+.steal{border:2px solid var(--accent);padding:18px 20px;margin:6px 0 30px;background:var(--card)}
+.steal h3{color:var(--accent)}
+.steal ol{margin:0;padding-left:20px}
+.steal li{font-size:15.5px;line-height:1.55;margin-bottom:7px}
+.steal li:last-child{margin-bottom:0}
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 30px}
+.sw{width:74px;height:74px;border:1.5px solid var(--line);display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;cursor:pointer}
+.sw span{font:500 9.5px var(--sans);letter-spacing:.06em;background:rgba(248,245,238,.94);color:#141210;padding:2px 5px;border-radius:2px}
+.sw:hover{transform:translateY(-2px)}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{font-size:13px;text-decoration:none;padding:7px 13px;border:1.5px solid var(--rule);border-radius:100px;color:var(--ink-soft)}
+.links a:hover{border-color:var(--accent);color:var(--accent)}
+.foot{margin-top:60px;padding-top:20px;border-top:1px solid var(--rule);font-size:12px;color:var(--ink-faint);line-height:1.7}
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:var(--bg);padding:9px 17px;font-size:13px;border-radius:3px;
+  opacity:0;pointer-events:none;transition:.2s;z-index:200
+}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <a class="backhome" href="/">← vesanerie.fr</a>
+    <div class="kicker">Bibliothèque de travail</div>
+    <h1>Références d'artistes</h1>
+    <p class="sub">Une œuvre par artiste, le résumé de sa <b>carrière</b>, et surtout la lecture graphique : technique, trait, couleur, composition, et <b>deux choses à voler</b> chez lui dès le prochain dessin.</p>
+  </header>
+
+  <div class="tools">
+    <div class="searchrow">
+      <input id="q" type="search" placeholder="Chercher un nom, une technique, un courant..." autocomplete="off" spellcheck="false">
+      <button class="iconbtn" id="rand" title="Un artiste au hasard">⚄</button>
+      <button class="iconbtn" id="theme" title="Clair / sombre">◐</button>
+    </div>
+    <div class="cats" id="cats"></div>
+    <div class="count" id="count"></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="sheet" id="sheet"><div class="sheetin" id="sheetin"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+
+/* helpers DOM : tout le texte passe par textContent, aucun HTML n'est injecte */
+function el(tag, cls, txt){
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (txt != null) n.textContent = txt;
+  return n;
+}
+function block(titre, contenu, cls){
+  const b = el('div', cls || 'block');
+  b.appendChild(el('h3', null, titre));
+  if (contenu) b.appendChild(contenu);
+  return b;
+}
+
+let DATA = [], CAT = 'Tout', Q = '', VIEW = [], CUR = -1;
+
+/* ----- theme ----- */
+const savedTheme = localStorage.getItem('ref-theme');
+if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+$('#theme').onclick = () => {
+  const d = document.documentElement.dataset.theme === 'dark' ? '' : 'dark';
+  document.documentElement.dataset.theme = d;
+  localStorage.setItem('ref-theme', d);
+};
+
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('on');
+  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('on'), 1400);
+}
+
+function norm(s){ return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+
+function matches(a){
+  if (CAT !== 'Tout' && a.categorie !== CAT) return false;
+  if (!Q) return true;
+  const g = a.graphique || {}, o = a.oeuvre || {};
+  const hay = norm([a.nom, a.courant, a.nationalite, o.titre, g.technique, g.trait,
+                    g.couleur, g.composition, a.carriere].join(' '));
+  return Q.split(/\s+/).every(w => hay.includes(w));
+}
+
+function initiales(nom){
+  return nom.split(/\s+/).map(w => w[0]).join('').slice(0, 3).toUpperCase();
+}
+
+function vignette(a){
+  const f = el('div', 'frame');
+  if (a.img){
+    const img = el('img');
+    img.src = a.img;
+    img.alt = (a.oeuvre && a.oeuvre.titre) || a.nom;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    f.appendChild(img);
+  } else {
+    f.appendChild(el('div', 'ph', initiales(a.nom)));
+  }
+  return f;
+}
+
+function render(){
+  VIEW = DATA.filter(matches);
+  $('#count').textContent = VIEW.length + (VIEW.length > 1 ? ' artistes' : ' artiste');
+  const grid = $('#grid');
+  grid.replaceChildren();
+  if (!VIEW.length){
+    grid.appendChild(el('div', 'empty', 'Rien sous cette recherche.'));
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  VIEW.forEach((a, i) => {
+    const c = el('button', 'card');
+    c.dataset.i = i;
+    c.appendChild(el('div', 'name', a.nom));
+    c.appendChild(vignette(a));
+    const m = el('div', 'meta', a.annees || '');
+    m.appendChild(el('span', 'cur', a.courant || ''));
+    c.appendChild(m);
+    frag.appendChild(c);
+  });
+  grid.appendChild(frag);
+}
+
+/* ----- fiche ----- */
+function openSheet(i){
+  CUR = i;
+  const a = VIEW[i]; if (!a) return;
+  const g = a.graphique || {}, oe = a.oeuvre || {};
+  const box = $('#sheetin');
+  box.replaceChildren();
+
+  const bar = el('div', 'sheetbar');
+  const close = el('button', 'iconbtn', '✕'); close.title = 'Fermer (Échap)';
+  close.onclick = closeSheet;
+  const navs = el('div', 'navbtns');
+  const prev = el('button', 'iconbtn', '←'); prev.title = 'Précédent';
+  const next = el('button', 'iconbtn', '→'); next.title = 'Suivant';
+  prev.onclick = () => openSheet((CUR - 1 + VIEW.length) % VIEW.length);
+  next.onclick = () => openSheet((CUR + 1) % VIEW.length);
+  navs.append(prev, next);
+  bar.append(close, navs);
+  box.appendChild(bar);
+
+  box.appendChild(el('h2', null, a.nom));
+  const ident = el('div', 'ident', [a.annees, a.nationalite, a.categorie].filter(Boolean).join(' · '));
+  if (a.courant){
+    ident.append(document.createTextNode(' · '));
+    ident.appendChild(el('b', null, a.courant));
+  }
+  box.appendChild(ident);
+
+  const hero = el('div', 'hero');
+  const left = el('div');
+  const hf = el('div', 'heroframe');
+  if (a.img){
+    const img = el('img');
+    img.src = a.img;
+    img.alt = oe.titre || a.nom;
+    hf.appendChild(img);
+  } else {
+    hf.appendChild(el('div', 'ph', initiales(a.nom)));
+  }
+  left.appendChild(hf);
+  const cap = el('div', 'caption');
+  if (a.legende){
+    // image tiree de la collection perso : elle ne montre pas forcement l'oeuvre citee
+    cap.appendChild(el('b', null, a.legende));
+  } else if (oe.titre){
+    cap.appendChild(el('b', null, oe.titre));
+    if (oe.annee) cap.append(document.createTextNode(', ' + oe.annee));
+  }
+  if (a.credit && !a.legende){ cap.appendChild(el('br')); cap.append(document.createTextNode(a.credit)); }
+  if (a.licence) cap.append(document.createTextNode((a.credit ? ' · ' : '') + a.licence));
+  if (a.source){
+    cap.appendChild(el('br'));
+    const s = el('a', null, "source de l'image");
+    s.href = a.source; s.target = '_blank'; s.rel = 'noopener';
+    cap.appendChild(s);
+  }
+  left.appendChild(cap);
+  hero.appendChild(left);
+  hero.appendChild(block('Carrière', el('p', 'carriere', a.carriere || '')));
+  box.appendChild(hero);
+
+  if (g.a_voler && g.a_voler.length){
+    const ol = el('ol');
+    g.a_voler.forEach(x => ol.appendChild(el('li', null, x)));
+    box.appendChild(block('À voler', ol, 'steal'));
+  }
+
+  const gr = el('div', 'gr');
+  [['Technique', g.technique], ['Trait', g.trait], ['Couleur', g.couleur], ['Composition', g.composition]]
+    .filter(([, v]) => v)
+    .forEach(([t, v]) => gr.appendChild(block(t, el('p', null, v))));
+  if (gr.children.length) box.appendChild(gr);
+
+  if (a.palette && a.palette.length){
+    const pal = el('div', 'pal');
+    a.palette.forEach(c => {
+      const sw = el('div', 'sw');
+      sw.style.background = c;
+      sw.appendChild(el('span', null, c));
+      sw.onclick = () => { navigator.clipboard.writeText(c); toast(c + ' copié'); };
+      pal.appendChild(sw);
+    });
+    box.appendChild(block("Palette de l'œuvre", pal));
+  }
+
+  if (a.liens && a.liens.length){
+    const wrapL = el('div', 'links');
+    a.liens.forEach(l => {
+      const x = el('a', null, l.titre);
+      x.href = l.url; x.target = '_blank'; x.rel = 'noopener';
+      wrapL.appendChild(x);
+    });
+    box.appendChild(block('Aller plus loin', wrapL));
+  }
+
+  box.appendChild(el('div', 'foot',
+    "Fiche de travail, pas une notice de musée. Les images sont reproduites en basse définition à titre de référence graphique, chaque source est créditée."));
+
+  $('#sheet').classList.add('open');
+  $('#sheet').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  location.hash = a.slug;
+}
+
+function closeSheet(){
+  $('#sheet').classList.remove('open');
+  document.body.style.overflow = '';
+  history.replaceState(null, '', location.pathname + location.search);
+}
+
+/* ----- events ----- */
+$('#grid').onclick = e => { const c = e.target.closest('.card'); if (c) openSheet(+c.dataset.i); };
+$('#q').oninput = e => { Q = norm(e.target.value).trim(); render(); };
+$('#rand').onclick = () => { if (VIEW.length) openSheet(Math.floor(Math.random() * VIEW.length)); };
+document.addEventListener('keydown', e => {
+  if (!$('#sheet').classList.contains('open')){
+    if (e.key === '/' && document.activeElement !== $('#q')){ e.preventDefault(); $('#q').focus(); }
+    return;
+  }
+  if (e.key === 'Escape') closeSheet();
+  if (e.key === 'ArrowLeft') openSheet((CUR - 1 + VIEW.length) % VIEW.length);
+  if (e.key === 'ArrowRight') openSheet((CUR + 1) % VIEW.length);
+});
+
+/* ----- boot ----- */
+fetch('data.json').then(r => r.json()).then(d => {
+  DATA = d.artistes;
+  const cats = ['Tout', ...[...new Set(DATA.map(a => a.categorie))].sort()];
+  const bar = $('#cats');
+  cats.forEach(c => {
+    const n = c === 'Tout' ? DATA.length : DATA.filter(a => a.categorie === c).length;
+    const b = el('button', 'cat' + (c === 'Tout' ? ' on' : ''), c);
+    b.dataset.c = c;
+    b.appendChild(el('i', null, String(n)));
+    bar.appendChild(b);
+  });
+  bar.onclick = e => {
+    const b = e.target.closest('.cat'); if (!b) return;
+    CAT = b.dataset.c;
+    bar.querySelectorAll('.cat').forEach(x => x.classList.toggle('on', x === b));
+    render();
+  };
+  render();
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h){ const i = VIEW.findIndex(a => a.slug === h); if (i >= 0) openSheet(i); }
+}).catch(() => {
+  $('#grid').replaceChildren(el('div', 'empty', 'data.json introuvable.'));
+});
+</script>
+</body>
+</html>
