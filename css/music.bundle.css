@@ -1,0 +1,857 @@
+/* ============================================================
+   FICHIER GENERE PAR build-css.py, NE PAS EDITER A LA MAIN.
+   Editer les fichiers sources puis relancer : python3 build-css.py
+   Genere le 2026-09-19 18:51
+   ============================================================ */
+
+/* ----- css/variables.css ----- */
+/* ===== CSS Custom Properties ===== */
+
+:root {
+  /* Light mode */
+  --bg: #f0ece4;
+  --bg-card: #f8f5ee;
+  --text: #111;
+  --text-muted: #666;
+  --border: #111;
+  --switch-bg: #ddd;
+  --switch-dot: #111;
+  /* Cards that stay light in dark mode */
+  --card-keep-bg: #f8f5ee;
+  --card-keep-text: #111;
+  --card-keep-muted: #666;
+  --card-keep-border: #111;
+  --card-keep-shadow: #111;
+}
+
+[data-theme="dark"] {
+  --bg: #0e0e0e;
+  --bg-card: #1a1a1a;
+  --text: #f0ece4;
+  --text-muted: #999;
+  --border: #f0ece4;
+  --switch-bg: #333;
+  --switch-dot: #f0ece4;
+  --card-keep-bg: #f8f5ee;
+  --card-keep-text: #111;
+  --card-keep-muted: #666;
+  --card-keep-border: #111;
+  --card-keep-shadow: #111;
+}
+
+/* Kill transitions during theme switch to prevent lag */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
+/* ----- css/base.css ----- */
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.hidden { display: none !important; }
+.skip-link { position: absolute; top: -100%; left: 0; background: var(--bg); color: var(--text); padding: 8px 16px; z-index: 9999; font-size: 14px; }
+.skip-link:focus { top: 0; }
+button:focus-visible, [role="button"]:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Special Elite', serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url('https://pub-43a141f7a8b84a30a90fcc01da2114ca.r2.dev/Texture_landscape.webp') repeat;
+  background-size: 600px;
+  opacity: 1;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.landing, .pile-view, .tech-page, .music-page, .book-view { position: relative; z-index: 1; }
+
+/* ===== Background Slideshow ===== */
+.bg-slideshow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  will-change: opacity;
+  contain: strict;
+}
+
+.bg-slideshow img.active {
+  opacity: 0.06;
+}
+
+/* ===== Back Link ===== */
+.back-link {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  border: 2px solid var(--border);
+  background: var(--bg-card);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  padding: 10px 18px;
+}
+.back-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+/* ===== Legal Link ===== */
+.legal-link {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 998;
+  font-family: 'Special Elite', serif;
+  font-size: 10px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.legal-link:hover {
+  opacity: 1;
+}
+
+/* ===== Card Logo (shared) ===== */
+.card-logo {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 4px;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .card-logo {
+  mix-blend-mode: screen;
+}
+
+@media (max-width: 600px) {
+  .back-link { font-size: 14px; padding: 10px 16px; top: 10px; left: 10px; }
+  .legal-link { bottom: 6px; right: 6px; font-size: 9px; }
+}
+
+/* ----- css/components/theme-toggle.css ----- */
+/* ===== Theme Switch ===== */
+.theme-toggle {
+  all: unset;
+  box-sizing: border-box;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  left: auto;
+  z-index: 999;
+  cursor: pointer;
+  width: 52px;
+  height: 28px;
+  background: var(--switch-bg);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  transition: background 0.3s;
+}
+
+.theme-toggle .dot {
+  width: 20px;
+  height: 20px;
+  background: var(--switch-dot);
+  border-radius: 2px;
+  transition: transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+[data-theme="dark"] .theme-toggle .dot {
+  transform: translateX(24px);
+}
+
+@media (max-width: 600px) {
+  .theme-toggle { top: 12px; right: 12px; width: 48px; height: 28px; }
+  .theme-toggle .dot { width: 20px; height: 20px; }
+  [data-theme="dark"] .theme-toggle .dot { transform: translateX(20px); }
+}
+
+/* ----- css/components/cards.css ----- */
+/* ===== CV Card ===== */
+.cv-card {
+  position: fixed;
+  top: -90px;
+  left: 30px;
+  z-index: 998;
+  width: 140px;
+  height: 170px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+  box-shadow: 4px 4px 0 0 var(--border);
+  transition: transform 0.3s, box-shadow 0.3s;
+  transform: rotate(-3deg);
+}
+
+.cv-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background: rgba(0,0,0,0.3);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  display: none;
+}
+
+.cv-overlay.open {
+  display: flex;
+}
+
+.cv-overlay canvas {
+  display: block;
+  height: 72vh;
+  width: auto;
+  border: 3px solid var(--border);
+  box-shadow: 8px 8px 0 0 var(--border);
+  background: #fff;
+}
+
+.cv-download {
+  font-family: 'Bangers', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--bg);
+  background: var(--border);
+  border: 2px solid var(--border);
+  padding: 6px 16px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.cv-download:hover {
+  opacity: 0.8;
+}
+
+.cv-card:hover {
+  transform: rotate(0deg) translateY(10px);
+  box-shadow: 6px 6px 0 0 var(--border);
+}
+
+.cv-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 36px;
+  letter-spacing: 3px;
+  color: var(--text);
+}
+
+/* ===== Contact Card ===== */
+.contact-card {
+  all: unset;
+  box-sizing: border-box;
+  position: fixed;
+  top: 50%;
+  right: -210px;
+  transform: translateY(-50%) rotate(-2deg);
+  z-index: 998;
+  width: 300px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  box-shadow: -4px 4px 0 0 var(--border);
+  cursor: pointer;
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s;
+}
+
+.contact-card:hover {
+  right: -200px;
+}
+
+.contact-card.open {
+  right: 0;
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.contact-card-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 28px;
+  letter-spacing: 4px;
+  text-align: center;
+  padding: 14px;
+  border-bottom: 3px solid var(--border);
+}
+
+.contact-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+}
+
+.contact-item {
+  font-family: 'Special Elite', serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a.contact-item:hover {
+  color: var(--text-muted);
+}
+
+/* ===== Tools Card ===== */
+.tools-card {
+  all: unset;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 20px;
+  right: -180px;
+  z-index: 998;
+  width: 240px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  box-shadow: -4px 4px 0 0 var(--border);
+  cursor: pointer;
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s;
+  transform: rotate(-2deg);
+}
+
+.tools-card:hover {
+  right: -170px;
+}
+
+.tools-card.open {
+  right: 0;
+  transform: rotate(0deg);
+}
+
+.tools-card-label {
+  font-family: 'Bangers', sans-serif;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-align: center;
+  padding: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.tools-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+}
+
+.tools-item {
+  font-family: 'Special Elite', serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.tools-item:last-child {
+  border-bottom: none;
+}
+
+/* ===== Tools Trigger (mobile only) ===== */
+.tools-trigger {
+  display: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  /* ---- CV card ---- */
+  .cv-card {
+    width: 54px;
+    height: 64px;
+    top: -28px;
+    left: 10px;
+    padding-bottom: 6px;
+    border-width: 2px;
+  }
+  .cv-label { font-size: 14px; }
+
+  /* ---- Contact card mobile : bottom-sheet ---- */
+  .contact-card {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 0 0 var(--border);
+  }
+  .contact-card:hover {
+    right: 0;
+  }
+  .contact-card.open {
+    transform: translateY(0);
+  }
+  .contact-card-label {
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
+  }
+  .contact-card-content {
+    padding: 16px 20px 24px;
+    gap: 0;
+  }
+  .contact-item {
+    font-size: 13px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--text-muted);
+    display: block;
+  }
+  .contact-item:last-child {
+    border-bottom: none;
+  }
+
+  /* ---- Tools trigger mobile ---- */
+  .tools-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    z-index: 998;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--border);
+    background: var(--bg-card);
+    cursor: pointer;
+    padding: 0;
+  }
+  .tools-trigger-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  /* ---- Tools card mobile : bottom-sheet ---- */
+  .tools-card {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    transform: translateY(100%);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 0 0 var(--border);
+  }
+  .tools-card:hover {
+    right: 0;
+  }
+  .tools-card.open {
+    transform: translateY(0);
+  }
+  .tools-card-label {
+    font-size: 18px;
+    padding: 12px;
+    text-align: center;
+  }
+  .tools-card-content {
+    padding: 16px 20px 24px;
+    gap: 0;
+  }
+  .tools-item {
+    font-size: 13px;
+    padding: 14px 0;
+  }
+}
+
+/* ----- css/components/scroll.css ----- */
+/* ===== Scroll to Top ===== */
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 998;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+.scroll-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.scroll-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+/* ===== Scroll Reveal ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pile items: fade-in without overriding custom transforms */
+.pile-reveal {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.pile-reveal.visible {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .scroll-top {
+    bottom: 12px;
+    left: 64px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+}
+
+/* ----- css/music.css ----- */
+/* ===== Music Page ===== */
+.music-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 60px 20px 40px;
+}
+
+/* ===== iPod Classic ===== */
+.ipod {
+  width: 320px;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 16px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 8px 8px 0 0 var(--border);
+}
+
+/* Screen — iPod LCD palette */
+.ipod {
+  --lcd-bg: #c8d4a2;
+  --lcd-text: #444;
+  --lcd-text-light: #333;
+  --lcd-border: #a0b080;
+}
+
+[data-theme="dark"] .ipod {
+  --lcd-bg: #2a3a1a;
+  --lcd-text: #8a9a6a;
+  --lcd-text-light: #a0b080;
+  --lcd-border: #3a4a2a;
+}
+
+.ipod-screen {
+  width: 100%;
+  background: var(--lcd-bg);
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ipod-header {
+  font-family: 'Bangers', sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-align: center;
+  color: var(--lcd-text);
+  border-bottom: 1px solid var(--lcd-border);
+  padding-bottom: 4px;
+}
+
+.ipod-now-playing {
+  font-family: 'Special Elite', serif;
+  font-size: 11px;
+  text-align: center;
+  color: var(--lcd-text-light);
+  padding: 4px 0;
+  min-height: 18px;
+}
+
+/* Track list */
+.ipod-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ipod-track {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-family: 'Special Elite', serif;
+  font-size: 11px;
+  color: var(--text);
+  border-radius: 3px;
+  transition: background 0.15s;
+}
+
+[data-theme="dark"] .ipod-track {
+  color: #a0b080;
+}
+
+.ipod-track:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .ipod-track:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.ipod-track.active {
+  background: #444;
+  color: #c8d4a2;
+}
+
+[data-theme="dark"] .ipod-track.active {
+  background: #8a9a6a;
+  color: #1a2a0a;
+}
+
+.track-num {
+  font-size: 10px;
+  width: 14px;
+  text-align: right;
+  opacity: 0.6;
+}
+
+.track-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Progress */
+.ipod-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 2px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.ipod-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #444;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+[data-theme="dark"] .ipod-progress-bar {
+  background: #8a9a6a;
+}
+
+.ipod-time {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Special Elite', serif;
+  font-size: 9px;
+  color: #666;
+}
+
+[data-theme="dark"] .ipod-time {
+  color: #6a7a5a;
+}
+
+/* Click Wheel */
+.ipod-wheel {
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ipod-wheel-ring {
+  width: 200px;
+  height: 200px;
+  border: 3px solid var(--border);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.ipod-wheel-center {
+  all: unset;
+  box-sizing: border-box;
+  width: 76px;
+  height: 76px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.ipod-wheel-center:hover {
+  transform: scale(1.05);
+}
+
+.ipod-wheel-center:active {
+  transform: scale(0.95);
+}
+
+.ipod-wheel-label {
+  position: absolute;
+  font-family: 'Bangers', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.ipod-wheel-label.top { top: 10px; }
+.ipod-wheel-label.bottom { bottom: 10px; }
+.ipod-wheel-label.left { left: 14px; }
+.ipod-wheel-label.right { right: 14px; }
+
+@media (max-width: 600px) {
+  .music-page {
+    padding: 56px 16px 30px;
+  }
+  .ipod {
+    width: 290px;
+    padding: 20px 14px 24px;
+    gap: 20px;
+    box-shadow: 6px 6px 0 0 var(--border);
+  }
+  .ipod-track {
+    padding: 8px 10px;
+    min-height: 36px;
+  }
+  .ipod-wheel {
+    width: 180px;
+    height: 180px;
+  }
+  .ipod-wheel-ring {
+    width: 160px;
+    height: 160px;
+  }
+  .ipod-wheel-center {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ===== Spotify Button ===== */
+.spotify-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 999;
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  padding: 12px 24px;
+  background: var(--border);
+  color: var(--bg);
+  border: 3px solid var(--border);
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 4px 4px 0 var(--border);
+}
+
+.spotify-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 6px 6px 0 var(--border);
+}
+
+@media (max-width: 600px) {
+  .spotify-btn {
+    bottom: 14px;
+    left: 14px;
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+}
+
+@media (max-width: 380px) {
+  .ipod {
+    width: 250px;
+    padding: 16px 12px 20px;
+  }
+
+  .ipod-wheel {
+    width: 150px;
+    height: 150px;
+  }
+
+  .ipod-wheel-ring {
+    width: 130px;
+    height: 130px;
+  }
+
+  .ipod-wheel-center {
+    width: 50px;
+    height: 50px;
+  }
+}

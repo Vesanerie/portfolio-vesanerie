@@ -1,6 +1,6 @@
 // ===== Service Worker — Cache offline =====
 
-var CACHE_NAME = 'vesanerie-v8';
+var CACHE_NAME = 'vesanerie-v9';
 
 var PRECACHE_URLS = [
   '/',
@@ -10,6 +10,11 @@ var PRECACHE_URLS = [
   '/mentions-legales.html',
   '/404.html',
   '/css/home.css',
+  '/css/art.bundle.css',
+  '/css/tech.bundle.css',
+  '/css/music.bundle.css',
+  '/css/mentions.bundle.css',
+  '/css/erreur.bundle.css',
   '/css/variables.css',
   '/css/base.css',
   '/css/components/theme-toggle.css',

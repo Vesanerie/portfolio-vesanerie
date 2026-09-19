@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Concatene les CSS de la landing en un seul fichier.
+"""Concatene les CSS de chaque page en un seul fichier par page.
 
 Pourquoi : O2Switch (PowerBoost) renvoie des 429 quand une page reclame trop de
-fichiers d'un coup. La home demandait 8 feuilles plus le JS, et un visiteur qui
-arrivait sans cache recevait la page sans styles. Un seul fichier regle le probleme.
+fichiers d'un coup. Mesure a froid sur la home avant correction : 7 fichiers sur
+9 en 429, donc un visiteur sans cache recevait la page sans aucun style et avec
+les boutons inertes. La page /art etait la pire avec 12 feuilles plus le JS.
 
 Les fichiers sources restent la source de verite, on ne les modifie jamais.
-Relancer ce script apres toute modification d'un CSS de la landing :
+Relancer ce script apres toute modification d'un CSS, puis incrementer
+CACHE_NAME dans sw.js :
 
     python3 build-css.py
 """
@@ -15,21 +17,44 @@ import time
 
 RACINE = os.path.dirname(os.path.abspath(__file__))
 
-# l'ordre compte : variables et base d'abord, puis les composants
-SOURCES = [
-    'css/variables.css',
-    'css/base.css',
-    'css/components/theme-toggle.css',
-    'css/components/liens.css',
-    'css/components/landing.css',
-    'css/components/cards.css',
-    'css/components/about.css',
-    'css/components/scroll.css',
-]
-SORTIE = 'css/home.css'
+COMMUN = ['css/variables.css', 'css/base.css', 'css/components/theme-toggle.css']
+
+# un bundle par page : sortie -> liste ordonnee des sources
+BUNDLES = {
+    'css/home.css': COMMUN + [
+        'css/components/liens.css',
+        'css/components/landing.css',
+        'css/components/cards.css',
+        'css/components/about.css',
+        'css/components/scroll.css',
+    ],
+    'css/art.bundle.css': COMMUN + [
+        'css/components/cards.css',
+        'css/components/scroll.css',
+        'css/components/pile.css',
+        'css/components/gallery.css',
+        'css/components/film.css',
+        'css/components/anim.css',
+        'css/components/tiktok.css',
+        'css/components/art-fiche.css',
+        'css/pdf-viewer.css',
+    ],
+    'css/tech.bundle.css': COMMUN + [
+        'css/components/cards.css',
+        'css/components/scroll.css',
+        'css/tech.css',
+    ],
+    'css/music.bundle.css': COMMUN + [
+        'css/components/cards.css',
+        'css/components/scroll.css',
+        'css/music.css',
+    ],
+    'css/mentions.bundle.css': COMMUN + ['css/components/mentions.css'],
+    'css/erreur.bundle.css': COMMUN + ['css/components/error-page.css'],
+}
 
 
-def main():
+def construit(sortie, sources):
     morceaux = [
         "/* ============================================================\n"
         "   FICHIER GENERE PAR build-css.py, NE PAS EDITER A LA MAIN.\n"
@@ -37,7 +62,7 @@ def main():
         f"   Genere le {time.strftime('%Y-%m-%d %H:%M')}\n"
         "   ============================================================ */\n"
     ]
-    for rel in SOURCES:
+    for rel in sources:
         chemin = os.path.join(RACINE, rel)
         if not os.path.exists(chemin):
             raise SystemExit(f'Source introuvable : {rel}')
@@ -45,12 +70,15 @@ def main():
         morceaux.append(open(chemin, encoding='utf-8').read().rstrip() + '\n')
 
     contenu = ''.join(morceaux)
-    dest = os.path.join(RACINE, SORTIE)
-    open(dest, 'w', encoding='utf-8').write(contenu)
+    open(os.path.join(RACINE, sortie), 'w', encoding='utf-8').write(contenu)
+    return len(sources), len(contenu.encode('utf-8'))
 
-    poids = len(contenu.encode('utf-8'))
-    print(f'{SORTIE} : {len(SOURCES)} fichiers concatenes, {poids // 1024} Ko')
-    print('Pense a incrementer CACHE_NAME dans sw.js si le contenu a change.')
+
+def main():
+    for sortie, sources in BUNDLES.items():
+        n, poids = construit(sortie, sources)
+        print(f'  {sortie:26} {n:2} fichiers  {poids // 1024:3} Ko')
+    print('\nPense a incrementer CACHE_NAME dans sw.js.')
 
 
 if __name__ == '__main__':
