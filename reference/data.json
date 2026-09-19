@@ -91,10 +91,10 @@
    ],
    "categorie": "Animation",
    "img": "img/andreas-deja.webp",
-   "credit": "Andreas Deja, blog Deja View, © Disney",
-   "licence": "Reproduction de reference",
-   "source": "https://andreasdeja.blogspot.com/2026/09/gaston-rough.html",
-   "legende": "Rough d'animation au crayon bleu de Gaston (La Belle et la Bête), premier dessin d'animation du personnage"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre d'Andreas Deja"
   },
   {
    "nom": "Bastien Dubois",
@@ -732,10 +732,10 @@
    ],
    "categorie": "Animation",
    "img": "img/james-baxter.webp",
-   "credit": "James Baxter, via le blog Deja View d'Andreas Deja",
-   "licence": "Reproduction de reference",
-   "source": "https://andreasdeja.blogspot.com/2024/12/the-real-roger-rabbit.html",
-   "legende": "Feuille d'étude au crayon 'Would the real Roger Rabbit please stand up', dessinée par James Baxter : Roger Rabbit tel que dessiné par 5 animateurs différents (Qui veut la peau de Roger Rabbit)"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de James Baxter"
   },
   {
    "nom": "Jan Švankmajer",
@@ -1419,10 +1419,10 @@
    ],
    "categorie": "Animation",
    "img": "img/remi-chaye.webp",
-   "credit": "Rémi Chayé, Tout en haut du monde, Diaphana",
-   "licence": "Reproduction de reference",
-   "source": "https://diaphana.fr/film/tout-en-haut-du-monde/",
-   "legende": "Plan du film Tout en haut du monde (Sacha grimpant dans le gréement du navire), aplats de couleur sans contour"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Rémi Chayé"
   },
   {
    "nom": "Richard Williams",
@@ -1959,10 +1959,10 @@
    ],
    "categorie": "BD",
    "img": "img/bastien-vives.webp",
-   "credit": "Bastien Vivès, Casterman",
-   "licence": "Reproduction de reference",
-   "source": "https://fr.wikipedia.org/wiki/Polina_(bande_dessin%C3%A9e)",
-   "legende": "Couverture de Polina"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Bastien Vivès"
   },
   {
    "nom": "Blutch",
@@ -2002,10 +2002,10 @@
    ],
    "categorie": "BD",
    "img": "img/blutch.webp",
-   "credit": "Blutch, Dargaud",
-   "licence": "Reproduction de reference",
-   "source": "https://www.dargaud.com/bd/lune-lenvers",
-   "legende": "Couverture de Lune l'envers"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Blutch"
   },
   {
    "nom": "Boulet (Gilles Roussel)",
@@ -2135,10 +2135,10 @@
    ],
    "categorie": "BD",
    "img": "img/catherine-meurisse.webp",
-   "credit": "Catherine Meurisse, Dargaud",
-   "licence": "Reproduction de reference",
-   "source": "https://fr.wikipedia.org/wiki/La_L%C3%A9g%C3%A8ret%C3%A9",
-   "legende": "Couverture de La Légèreté"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Catherine Meurisse"
   },
   {
    "nom": "Charles Burns",
@@ -3014,10 +3014,10 @@
    ],
    "categorie": "BD",
    "img": "img/manu-larcenet.webp",
-   "credit": "Manu Larcenet, Dargaud",
-   "licence": "Reproduction de reference",
-   "source": "https://www.dargaud.com/bd/blast",
-   "legende": "Couverture de Blast tome 1, Grasse carcasse"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Manu Larcenet"
   },
   {
    "nom": "Marion Montaigne",
@@ -3061,10 +3061,10 @@
    ],
    "categorie": "BD",
    "img": "img/marion-montaigne.webp",
-   "credit": "Marion Montaigne, Dargaud",
-   "licence": "Reproduction de reference",
-   "source": "https://fr.wikipedia.org/wiki/Dans_la_combi_de_Thomas_Pesquet",
-   "legende": "Couverture de Dans la combi de Thomas Pesquet"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Marion Montaigne"
   },
   {
    "nom": "Marjane Satrapi",
@@ -3807,10 +3807,10 @@
    ],
    "categorie": "Illustrateur",
    "img": "img/beatrice-alemagna.webp",
-   "credit": "Beatrice Alemagna",
-   "licence": "Reproduction de reference",
-   "source": "https://www.beatricealemagna.com/books",
-   "legende": "Couverture de l'album Le Merveilleux Dodu-velu-petit (Albin Michel Jeunesse)"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Beatrice Alemagna"
   },
   {
    "nom": "Blexbolex",
@@ -4372,10 +4372,10 @@
    ],
    "categorie": "Illustrateur",
    "img": "img/jon-klassen.webp",
-   "credit": "Jon Klassen · Candlewick Press",
-   "licence": "Reproduction de reference",
-   "source": "https://en.wikipedia.org/wiki/I_Want_My_Hat_Back",
-   "legende": "Couverture de I Want My Hat Back (Je veux mon chapeau), l'ours de Klassen. Fair use, 266 px de large seulement"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Jon Klassen"
   },
   {
    "nom": "Juliette Baily",
@@ -4894,10 +4894,10 @@
    ],
    "categorie": "Illustrateur",
    "img": "img/olivier-tallec.webp",
-   "credit": "Olivier Tallec",
-   "licence": "Reproduction de reference",
-   "source": "https://www.ecoledesloisirs.fr/livre/cest-mon-arbre",
-   "legende": "Couverture de C'est mon arbre, l'écureuil possessif (Pastel, l'école des loisirs)"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre d'Olivier Tallec"
   },
   {
    "nom": "Quentin Blake",
@@ -5260,10 +5260,10 @@
    ],
    "categorie": "Illustrateur",
    "img": "img/tomer-hanuka.webp",
-   "credit": "Tomer Hanuka",
-   "licence": "Reproduction de reference",
-   "source": "https://thanuka.com/still-alive/",
-   "legende": "Couverture du roman graphique Sono Ancora Vivo / Still Alive (Saviano), minotaure au crâne, dessinée par Tomer Hanuka"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Tomer Hanuka"
   },
   {
    "nom": "Tomi Ungerer",
@@ -5498,10 +5498,10 @@
    ],
    "categorie": "Concept art et décor",
    "img": "img/craig-mullins.webp",
-   "credit": "Craig Mullins, goodbrush.com",
-   "licence": "Reproduction de reference",
-   "source": "https://web.archive.org/web/2005/http://www.goodbrush.com/",
-   "legende": "Robots dans la neige, peinture numerique de Craig Mullins, archive de son site goodbrush.com (le site actuel est mort)"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Craig Mullins"
   },
   {
    "nom": "Dice Tsutsumi",
@@ -5633,10 +5633,10 @@
    ],
    "categorie": "Concept art et décor",
    "img": "img/harald-siepermann.webp",
-   "credit": "Harald Siepermann, The Harald Siepermann Archive",
-   "licence": "Reproduction de reference",
-   "source": "https://www.haraldsiepermann.com/",
-   "legende": "Collage de ses designs de personnages (Alfred J. Kwak, Kerchak de Tarzan, hippopotame, morse capitaine...)"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre d'Harald Siepermann"
   },
   {
    "nom": "Iain McCaig",
@@ -5726,10 +5726,10 @@
    ],
    "categorie": "Concept art et décor",
    "img": "img/kazuo-oga.webp",
-   "credit": "Kazuo Oga (direction artistique des decors), Studio Ghibli",
-   "licence": "Reproduction de reference",
-   "source": "https://www.ghibli.jp/works/totoro/",
-   "legende": "La maison des Kusakabe dans Mon voisin Totoro, image dominee par le decor peint (personnages minuscules), du travail de decor signe Kazuo Oga"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Kazuo Oga"
   },
   {
    "nom": "Lou Romano",
@@ -5773,10 +5773,10 @@
    ],
    "categorie": "Concept art et décor",
    "img": "img/lou-romano.webp",
-   "credit": "Lou Romano, Pixar",
-   "licence": "Reproduction de reference",
-   "source": "https://web.archive.org/web/20100206141002/http://louromano.blogspot.com/2009/06/up-color-script.html",
-   "legende": "Image du color script de La-haut (Up) : Carl et Doug face a Kevin en cage, gouache aux couleurs plates"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Lou Romano"
   },
   {
    "nom": "Maurice Noble",
@@ -5910,10 +5910,10 @@
    ],
    "categorie": "Concept art et décor",
    "img": "img/paul-lasaine.webp",
-   "credit": "Paul Lasaine",
-   "licence": "Reproduction de reference",
-   "source": "https://paullasaine.blogspot.com/2010/08/traditional-vs-digital.html",
-   "legende": "Paysage de montagnes et lac peint en numerique, signe Lasaine, poste par lui sur son blog (demo traditionnel vs digital)"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Paul Lasaine"
   },
   {
    "nom": "Peter Chan",
@@ -5999,10 +5999,10 @@
    ],
    "categorie": "Concept art et décor",
    "img": "img/ralph-mcquarrie.webp",
-   "credit": "Ralph McQuarrie, Lucasfilm",
-   "licence": "Reproduction de reference",
-   "source": "https://www.theastromech.com/2024/04/star-wars-concept-art-of-ralph-mcquarrie.html",
-   "legende": "Concept art de la Cite des Nuages (Bespin) pour L'Empire contre-attaque, peinture signee R. McQuarrie en bas a gauche"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Ralph McQuarrie"
   },
   {
    "nom": "Robert Kondo",
@@ -6283,10 +6283,10 @@
    ],
    "categorie": "Peintre",
    "img": "img/adrian-ghenie.webp",
-   "credit": "Adrian Ghenie · Galerie Thaddaeus Ropac",
-   "licence": "Reproduction de reference",
-   "source": "https://ropac.net/artists/44-adrian-ghenie/",
-   "legende": "Pie Fight Interior 12, 2014, huile sur toile 284 x 350 cm, matière raclée typique"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre d'Adrian Ghenie"
   },
   {
    "nom": "Anders Zorn",
@@ -7470,10 +7470,10 @@
    ],
    "categorie": "Peintre",
    "img": "img/peter-doig.webp",
-   "credit": "Peter Doig",
-   "licence": "Reproduction de reference",
-   "source": "https://www.wikiart.org/en/peter-doig/white-canoe-1991",
-   "legende": "White Canoe, 1991, le canoë blanc reflété dans le lac nocturne (la peinture, pas une photo)"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de Peter Doig"
   },
   {
    "nom": "Rembrandt",
@@ -9364,10 +9364,10 @@
    ],
    "categorie": "Street art et graffiti",
    "img": "img/c215.webp",
-   "credit": "C215 (Christian Guémy) · photo Bruno, CC BY-SA 2.0",
-   "licence": "Reproduction de reference",
-   "source": "https://commons.wikimedia.org/wiki/File:C215_Caravaggio_(8241255101).jpg",
-   "legende": "Pochoir de C215 d'après La Diseuse de bonne aventure du Caravage, sur un boîtier de rue à Rome"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de C215"
   },
   {
    "nom": "Dondi White",
@@ -9920,10 +9920,10 @@
    ],
    "categorie": "Street art et graffiti",
    "img": "img/seen.webp",
-   "credit": "SEEN (Richard Mirando), CC BY-SA 3.0",
-   "licence": "Reproduction de reference",
-   "source": "https://commons.wikimedia.org/wiki/File:SEEN_2003.jpg",
-   "legende": "Peinture sur toile de SEEN, 2003, 24x36 pouces, throw-up rouge et bleu avec pochoir 0720"
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "legende": "Œuvre de SEEN"
   },
   {
    "nom": "Shepard Fairey",
