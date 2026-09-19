@@ -1,6 +1,6 @@
 {
  "maj": "2026-09-18",
- "total": 253,
+ "total": 254,
  "artistes": [
   {
    "nom": "Alberto Mielgo",
@@ -1920,6 +1920,54 @@
    "licence": "",
    "source": "",
    "legende": "Planche de référence, collection AnimationRef"
+  },
+  {
+   "nom": "Balak",
+   "slug": "balak",
+   "annees": "1979",
+   "nationalite": "France",
+   "categorie": "BD",
+   "courant": "Manga français · BD numérique (turbomedia)",
+   "oeuvre": {
+    "titre": "Lastman",
+    "annee": "2013-2019"
+   },
+   "carriere": "Né en 1979 à Nancy, Yves Bigerel étudie la philosophie avant les Gobelins (diplômé en 2006), puis storyboarde et anime pour la télévision et la publicité. En 2009, il publie about DIGITAL COMICS sur DeviantArt et invente le turbomedia, une BD au clic pensée pour l'écran. Repéré par Joe Quesada, il aide Marvel à lancer les Infinite Comics en 2012. De 2013 à 2019, il coécrit et découpe Lastman avec Bastien Vivès et Michaël Sanlaville (12 tomes chez Casterman, prix de la série à Angoulême 2015), adapté en série animée sur France 4 puis Netflix. Il cocrée la web-série Les Kassos et assure la direction créative de Captain Laserhawk: A Blood Dragon Remix (Netflix, 2023).",
+   "graphique": {
+    "technique": "Encrage direct au feutre ou au pinceau sur papier pour les illustrations, dessin numérique en images fixes séquencées pour le turbomedia ; sur Lastman, il fournit le découpage et les crayonnés de storyboard que Vivès et Sanlaville encrent.",
+    "trait": "Ligne vive héritée du cartoon et du shonen : contour fermé, épaisseur franche peu modulée, silhouettes lisibles avant tout ; personnages construits en volumes simples, visages poussés jusqu'à la grimace, ancrage au sol très net.",
+    "couleur": "Noir et blanc au trait sur Lastman, gris posés en aplats ; en numérique, couleurs franches et saturées ; il aime aussi la page monochrome au feutre unique, rouge ou bleu, qui unifie tout le dessin.",
+    "composition": "Il pense la BD comme un montage : dans le turbomedia, chaque clic est une coupe, la case suivante remplace la précédente au même endroit de l'écran, et seul un élément change (un regard, une main) pour fabriquer le timing. Sur Lastman, découpage type nekketsu : grandes cases d'impact, enchaînements action-réaction, ellipses courtes qui accélèrent la lecture.",
+    "a_voler": [
+     "Entre deux images fixes, ne changer qu'une seule chose : le regard ou la main qui bouge suffit à créer le temps.",
+     "Découper comme au montage : traiter chaque case comme une coupe et penser en action-réaction, pas en décor."
+    ]
+   },
+   "palette": [
+    "#EEE7E9",
+    "#B41835",
+    "#A52A52",
+    "#CC7193",
+    "#E5AFCC"
+   ],
+   "liens": [
+    {
+     "titre": "Blog officiel de Balak (Boubize)",
+     "url": "https://boubize.blogspot.com/"
+    },
+    {
+     "titre": "Balak sur DeviantArt (balak01)",
+     "url": "https://www.deviantart.com/balak01"
+    },
+    {
+     "titre": "Balak sur Wikipédia",
+     "url": "https://fr.wikipedia.org/wiki/Balak_(auteur)"
+    }
+   ],
+   "credit": "",
+   "licence": "",
+   "source": "",
+   "img": "img/balak.webp"
   },
   {
    "nom": "Bastien Vivès",
