@@ -1,6 +1,6 @@
 {
  "maj": "2026-09-18",
- "total": 252,
+ "total": 253,
  "artistes": [
   {
    "nom": "Alberto Mielgo",
@@ -2581,6 +2581,54 @@
    "licence": "",
    "source": "",
    "legende": "Planche de référence, collection AnimationRef"
+  },
+  {
+   "nom": "Guillaume Singelin",
+   "slug": "guillaume-singelin",
+   "annees": "1987",
+   "nationalite": "France",
+   "categorie": "BD",
+   "courant": "BD alternative française, croisement manga · franco-belge (Label 619)",
+   "oeuvre": {
+    "titre": "Frontier",
+    "annee": "2023"
+   },
+   "carriere": "Né à Rennes, il entre à l'EPSAA d'Ivry-sur-Seine, école d'arts graphiques qu'il quitte au bout de deux ans pour rejoindre la préproduction du film Mutafukaz chez Ankama, mené avec le studio japonais 4°C. Au Label 619, il dessine The Grocery (4 tomes, 2011-2016, scénario Aurélien Ducoudray) et participe aux recueils Doggybags. PTSD (2019, Ankama en France, First Second aux États-Unis) le révèle en auteur complet. Frontier (Label 619 · Rue de Sèvres, avril 2023), space opera humaniste mûri pendant dix ans, reçoit le prix Landerneau BD 2023. Sa place est singulière : un pont assumé entre le manga, l'animation japonaise et l'album européen.",
+   "graphique": {
+    "technique": "Encrage traditionnel à l'encre noire sur un crayonné rouge (visible sur ses originaux), puis couleur numérique en lavis texturés façon aquarelle ou gouache sèche, avec un léger grain de papier. Le trait noir reste apparent partout, la couleur ne le recouvre jamais.",
+    "trait": "Ligne fine, d'épaisseur presque constante, héritée du manga. Personnages ronds et compacts, têtes larges, yeux points, mains simplifiées ; les décors sont décrits objet par objet (câbles, visserie, outils, sachets) avec le même trait que les figures. Très peu de hachures : le volume vient de la couleur, pas du noir.",
+    "couleur": "Gammes désaturées posées sur un fond crème : vert menthe, gris-bleu, kaki, rose poudré, réveillés par un rouge framboise et quelques jaunes signal. Ombres colorées froides plutôt que noires, lumière diffuse sans éclats durs ; le contraste est porté par les vêtements et les objets clés, jamais par le fond.",
+    "composition": "Planches denses : de grandes cases descriptives où fourmillent machines et détails, alternées avec des vignettes serrées de dialogue. Les personnages sont souvent petits dans le cadre, immergés dans le décor à hauteur d'objet. L'accumulation ralentit volontairement la lecture, l'œil circule d'un détail à l'autre avant de suivre les bulles.",
+    "a_voler": [
+     "Personnages ronds et très simples posés dans des décors sur-détaillés : le contraste garde les deux lisibles.",
+     "Réserver une seule couleur saturée (son rouge framboise) aux figures clés pour guider l'œil dans une gamme éteinte."
+    ]
+   },
+   "palette": [
+    "#EFF2EA",
+    "#DA7584",
+    "#A4D1CF",
+    "#DCD8AD",
+    "#374D55"
+   ],
+   "liens": [
+    {
+     "titre": "Instagram officiel (@blackysan)",
+     "url": "https://www.instagram.com/blackysan/"
+    },
+    {
+     "titre": "Rue de Sèvres · page auteur",
+     "url": "https://www.editions-ruedesevres.fr/auteur/Guillaume-Singelin"
+    },
+    {
+     "titre": "Wikipédia (EN)",
+     "url": "https://en.wikipedia.org/wiki/Guillaume_Singelin"
+    }
+   ],
+   "credit": "Guillaume Singelin, Label 619 · Rue de Sèvres",
+   "licence": "",
+   "source": "https://www.ligneclaire.info/",
+   "img": "img/guillaume-singelin.webp"
   },
   {
    "nom": "Hergé",
