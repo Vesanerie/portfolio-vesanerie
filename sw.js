@@ -1,6 +1,6 @@
 // ===== Service Worker — Cache offline =====
 
-var CACHE_NAME = 'vesanerie-v10';
+var CACHE_NAME = 'vesanerie-v11';
 
 // Shell minimal seulement. O2Switch (PowerBoost) renvoie des 429 quand on tire
 // beaucoup de fichiers d'un coup : cette liste faisait 42 URLs et la rafale
