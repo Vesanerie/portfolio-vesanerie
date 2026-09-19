@@ -1,58 +1,28 @@
 // ===== Service Worker — Cache offline =====
 
-var CACHE_NAME = 'vesanerie-v9';
+var CACHE_NAME = 'vesanerie-v10';
 
+// Shell minimal seulement. O2Switch (PowerBoost) renvoie des 429 quand on tire
+// beaucoup de fichiers d'un coup : cette liste faisait 42 URLs et la rafale
+// d'installation se faisait rate-limiter. Pire, cache.addAll echoue en bloc des
+// qu'une seule requete rate, donc le cache restait vide.
+// Le reste n'a pas besoin d'etre precache : le handler fetch plus bas est
+// cache-first et range chaque asset au premier passage.
 var PRECACHE_URLS = [
   '/',
-  '/art/',
-  '/tech/',
-  '/music/',
-  '/mentions-legales.html',
-  '/404.html',
   '/css/home.css',
-  '/css/art.bundle.css',
-  '/css/tech.bundle.css',
-  '/css/music.bundle.css',
-  '/css/mentions.bundle.css',
-  '/css/erreur.bundle.css',
-  '/css/variables.css',
-  '/css/base.css',
-  '/css/components/theme-toggle.css',
-  '/css/components/liens.css',
-  '/css/components/landing.css',
-  '/css/components/cards.css',
-  '/css/components/about.css',
-  '/css/components/scroll.css',
-  '/css/components/pile.css',
-  '/css/components/gallery.css',
-
-  '/css/components/film.css',
-  '/css/components/anim.css',
-  '/css/components/tiktok.css',
-  '/css/components/art-fiche.css',
-  '/css/components/mentions.css',
-  '/css/components/error-page.css',
-  '/css/pdf-viewer.css',
-  '/css/tech.css',
-  '/css/music.css',
   '/js/main.js',
-  '/js/art.js',
-  '/js/art/state.js',
-  '/js/art/fiche.js',
-  '/js/art/lightbox.js',
-  '/js/art/cinema.js',
-  '/js/art/tiktok.js',
-  '/js/art/pdf-viewer.js',
-  '/js/art/tilt.js',
-  '/js/tech.js',
-  '/js/music.js'
+  '/404.html'
 ];
 
 // Install: precache shell
 self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(PRECACHE_URLS);
+      // un fichier qui rate ne doit pas faire echouer tout le precache
+      return Promise.all(PRECACHE_URLS.map(function(u) {
+        return cache.add(u).catch(function() {});
+      }));
     }).then(function() {
       return self.skipWaiting();
     })
