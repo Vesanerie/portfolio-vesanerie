@@ -90,7 +90,11 @@
     }
    ],
    "categorie": "Animation",
-   "img": null
+   "img": "img/andreas-deja.webp",
+   "credit": "Andreas Deja, blog Deja View, © Disney",
+   "licence": "Reproduction de reference",
+   "source": "https://andreasdeja.blogspot.com/2026/09/gaston-rough.html",
+   "legende": "Rough d'animation au crayon bleu de Gaston (La Belle et la Bête), premier dessin d'animation du personnage"
   },
   {
    "nom": "Bastien Dubois",
@@ -727,7 +731,11 @@
     }
    ],
    "categorie": "Animation",
-   "img": null
+   "img": "img/james-baxter.webp",
+   "credit": "James Baxter, via le blog Deja View d'Andreas Deja",
+   "licence": "Reproduction de reference",
+   "source": "https://andreasdeja.blogspot.com/2024/12/the-real-roger-rabbit.html",
+   "legende": "Feuille d'étude au crayon 'Would the real Roger Rabbit please stand up', dessinée par James Baxter : Roger Rabbit tel que dessiné par 5 animateurs différents (Qui veut la peau de Roger Rabbit)"
   },
   {
    "nom": "Jan Švankmajer",
@@ -1410,7 +1418,11 @@
     }
    ],
    "categorie": "Animation",
-   "img": null
+   "img": "img/remi-chaye.webp",
+   "credit": "Rémi Chayé, Tout en haut du monde, Diaphana",
+   "licence": "Reproduction de reference",
+   "source": "https://diaphana.fr/film/tout-en-haut-du-monde/",
+   "legende": "Plan du film Tout en haut du monde (Sacha grimpant dans le gréement du navire), aplats de couleur sans contour"
   },
   {
    "nom": "Richard Williams",
@@ -1946,7 +1958,11 @@
     }
    ],
    "categorie": "BD",
-   "img": null
+   "img": "img/bastien-vives.webp",
+   "credit": "Bastien Vivès, Casterman",
+   "licence": "Reproduction de reference",
+   "source": "https://fr.wikipedia.org/wiki/Polina_(bande_dessin%C3%A9e)",
+   "legende": "Couverture de Polina"
   },
   {
    "nom": "Blutch",
@@ -1985,7 +2001,11 @@
     }
    ],
    "categorie": "BD",
-   "img": null
+   "img": "img/blutch.webp",
+   "credit": "Blutch, Dargaud",
+   "licence": "Reproduction de reference",
+   "source": "https://www.dargaud.com/bd/lune-lenvers",
+   "legende": "Couverture de Lune l'envers"
   },
   {
    "nom": "Boulet (Gilles Roussel)",
@@ -2114,7 +2134,11 @@
     }
    ],
    "categorie": "BD",
-   "img": null
+   "img": "img/catherine-meurisse.webp",
+   "credit": "Catherine Meurisse, Dargaud",
+   "licence": "Reproduction de reference",
+   "source": "https://fr.wikipedia.org/wiki/La_L%C3%A9g%C3%A8ret%C3%A9",
+   "legende": "Couverture de La Légèreté"
   },
   {
    "nom": "Charles Burns",
@@ -2989,7 +3013,11 @@
     }
    ],
    "categorie": "BD",
-   "img": null
+   "img": "img/manu-larcenet.webp",
+   "credit": "Manu Larcenet, Dargaud",
+   "licence": "Reproduction de reference",
+   "source": "https://www.dargaud.com/bd/blast",
+   "legende": "Couverture de Blast tome 1, Grasse carcasse"
   },
   {
    "nom": "Marion Montaigne",
@@ -3032,7 +3060,11 @@
     }
    ],
    "categorie": "BD",
-   "img": null
+   "img": "img/marion-montaigne.webp",
+   "credit": "Marion Montaigne, Dargaud",
+   "licence": "Reproduction de reference",
+   "source": "https://fr.wikipedia.org/wiki/Dans_la_combi_de_Thomas_Pesquet",
+   "legende": "Couverture de Dans la combi de Thomas Pesquet"
   },
   {
    "nom": "Marjane Satrapi",
@@ -3774,7 +3806,11 @@
     }
    ],
    "categorie": "Illustrateur",
-   "img": null
+   "img": "img/beatrice-alemagna.webp",
+   "credit": "Beatrice Alemagna",
+   "licence": "Reproduction de reference",
+   "source": "https://www.beatricealemagna.com/books",
+   "legende": "Couverture de l'album Le Merveilleux Dodu-velu-petit (Albin Michel Jeunesse)"
   },
   {
    "nom": "Blexbolex",
@@ -4335,7 +4371,11 @@
     }
    ],
    "categorie": "Illustrateur",
-   "img": null
+   "img": "img/jon-klassen.webp",
+   "credit": "Jon Klassen · Candlewick Press",
+   "licence": "Reproduction de reference",
+   "source": "https://en.wikipedia.org/wiki/I_Want_My_Hat_Back",
+   "legende": "Couverture de I Want My Hat Back (Je veux mon chapeau), l'ours de Klassen. Fair use, 266 px de large seulement"
   },
   {
    "nom": "Juliette Baily",
@@ -4853,7 +4893,11 @@
     }
    ],
    "categorie": "Illustrateur",
-   "img": null
+   "img": "img/olivier-tallec.webp",
+   "credit": "Olivier Tallec",
+   "licence": "Reproduction de reference",
+   "source": "https://www.ecoledesloisirs.fr/livre/cest-mon-arbre",
+   "legende": "Couverture de C'est mon arbre, l'écureuil possessif (Pastel, l'école des loisirs)"
   },
   {
    "nom": "Quentin Blake",
@@ -5215,7 +5259,11 @@
     }
    ],
    "categorie": "Illustrateur",
-   "img": null
+   "img": "img/tomer-hanuka.webp",
+   "credit": "Tomer Hanuka",
+   "licence": "Reproduction de reference",
+   "source": "https://thanuka.com/still-alive/",
+   "legende": "Couverture du roman graphique Sono Ancora Vivo / Still Alive (Saviano), minotaure au crâne, dessinée par Tomer Hanuka"
   },
   {
    "nom": "Tomi Ungerer",
@@ -6210,7 +6258,11 @@
     }
    ],
    "categorie": "Peintre",
-   "img": null
+   "img": "img/adrian-ghenie.webp",
+   "credit": "Adrian Ghenie · Galerie Thaddaeus Ropac",
+   "licence": "Reproduction de reference",
+   "source": "https://ropac.net/artists/44-adrian-ghenie/",
+   "legende": "Pie Fight Interior 12, 2014, huile sur toile 284 x 350 cm, matière raclée typique"
   },
   {
    "nom": "Anders Zorn",
@@ -7393,7 +7445,11 @@
     }
    ],
    "categorie": "Peintre",
-   "img": null
+   "img": "img/peter-doig.webp",
+   "credit": "Peter Doig",
+   "licence": "Reproduction de reference",
+   "source": "https://www.wikiart.org/en/peter-doig/white-canoe-1991",
+   "legende": "White Canoe, 1991, le canoë blanc reflété dans le lac nocturne (la peinture, pas une photo)"
   },
   {
    "nom": "Rembrandt",
@@ -8363,7 +8419,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/anthony-burrill.webp",
+   "credit": "Anthony Burrill, boutique officielle",
+   "licence": "Reproduction de reference",
+   "source": "https://anthonyburrill.com/",
+   "legende": "Affiche letterpress Work Hard & Be Nice to People, tirage encadré"
   },
   {
    "nom": "David Carson",
@@ -8572,7 +8632,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/jan-tschichold.webp",
+   "credit": "Jan Tschichold · Merrill C. Berman Collection",
+   "licence": "Reproduction de reference",
+   "source": "https://mcbcollection.com/jan-tschichold-designer-theorist-collector",
+   "legende": "Affiche Der Berufsphotograph (1938), photo en négatif et typographie asymétrique"
   },
   {
    "nom": "Josef Müller-Brockmann",
@@ -8654,7 +8718,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/massimo-vignelli.webp",
+   "credit": "Massimo Vignelli · Victoria and Albert Museum, Londres",
+   "licence": "Reproduction de reference",
+   "source": "https://collections.vam.ac.uk/item/O1313325/",
+   "legende": "Affiche typographique Piccolo Teatro di Milano, Il Gioco dei Potenti (1965), rouge/noir sur grille"
   },
   {
    "nom": "Michael Bierut",
@@ -8693,7 +8761,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/michael-bierut.webp",
+   "credit": "Michael Bierut, Pentagram",
+   "licence": "Reproduction de reference",
+   "source": "https://www.pentagram.com/work/yale-school-of-architecture",
+   "legende": "Affiche typographique noir et blanc pour la Yale School of Architecture (série lectures/expos)"
   },
   {
    "nom": "Milton Glaser",
@@ -8821,7 +8893,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/otl-aicher.webp",
+   "credit": "Otl Aicher, dép. XI du comité d'organisation Munich 72 · photo György Körössy / otlaicher.de (IDZ)",
+   "licence": "Reproduction de reference",
+   "source": "https://www.otlaicher.de/beitraege/die-regenbogenspiele/",
+   "legende": "Programme du jour Munich 1972 (30.8.72) : pictogramme gymnastique sur fond jaune/turquoise, identité des Jeux"
   },
   {
    "nom": "Paul Rand",
@@ -8860,7 +8936,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/paul-rand.webp",
+   "credit": "Paul Rand pour IBM, archive officielle paulrand.design",
+   "licence": "Reproduction de reference",
+   "source": "https://www.paulrand.design/work/IBM.html",
+   "legende": "Affiche IBM Golden Circle (1981), formes découpées colorées, signée Paul Rand"
   },
   {
    "nom": "Paula Scher",
@@ -8899,7 +8979,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/paula-scher.webp",
+   "credit": "Paula Scher, Pentagram",
+   "licence": "Reproduction de reference",
+   "source": "https://www.pentagram.com/work/the-public-theater",
+   "legende": "Logotype The Public Theater (identité 1994/2008), noir et blanc, typographie condensée"
   },
   {
    "nom": "Peter Saville",
@@ -9026,7 +9110,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/stefan-sagmeister.webp",
+   "credit": "Stefan Sagmeister, Sagmeister Inc.",
+   "licence": "Reproduction de reference",
+   "source": "https://sagmeister.com/work/aiga-detroit/",
+   "legende": "Affiche AIGA Detroit (1999), texte scarifié au cutter sur le torse de Sagmeister"
   },
   {
    "nom": "Tadanori Yokoo",
@@ -9065,7 +9153,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/tadanori-yokoo.webp",
+   "credit": "Tadanori Yokoo · Victoria and Albert Museum, Londres",
+   "licence": "Reproduction de reference",
+   "source": "https://collections.vam.ac.uk/item/O1192906/",
+   "legende": "Affiche psychédélique À la Maison de M. Civeçawa (1965), soleil levant, vagues et collage sérigraphié"
   },
   {
    "nom": "Wim Crouwel",
@@ -9108,7 +9200,11 @@
     }
    ],
    "categorie": "Graphisme et affiche",
-   "img": null
+   "img": "img/wim-crouwel.webp",
+   "credit": "Wim Crouwel (Total Design) pour le Stedelijk Museum · via Fonts In Use",
+   "licence": "Reproduction de reference",
+   "source": "https://fontsinuse.com/uses/3891/catalog-covers-for-stedelijk-museum",
+   "legende": "Couverture de catalogue SM du Stedelijk Museum (1966), grille et Univers sur fond rouge"
   },
   {
    "nom": "Banksy",
@@ -9243,7 +9339,11 @@
     }
    ],
    "categorie": "Street art et graffiti",
-   "img": null
+   "img": "img/c215.webp",
+   "credit": "C215 (Christian Guémy) · photo Bruno, CC BY-SA 2.0",
+   "licence": "Reproduction de reference",
+   "source": "https://commons.wikimedia.org/wiki/File:C215_Caravaggio_(8241255101).jpg",
+   "legende": "Pochoir de C215 d'après La Diseuse de bonne aventure du Caravage, sur un boîtier de rue à Rome"
   },
   {
    "nom": "Dondi White",
@@ -9795,7 +9895,11 @@
     }
    ],
    "categorie": "Street art et graffiti",
-   "img": null
+   "img": "img/seen.webp",
+   "credit": "SEEN (Richard Mirando), CC BY-SA 3.0",
+   "licence": "Reproduction de reference",
+   "source": "https://commons.wikimedia.org/wiki/File:SEEN_2003.jpg",
+   "legende": "Peinture sur toile de SEEN, 2003, 24x36 pouces, throw-up rouge et bleu avec pochoir 0720"
   },
   {
    "nom": "Shepard Fairey",
