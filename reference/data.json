@@ -5497,7 +5497,11 @@
     }
    ],
    "categorie": "Concept art et décor",
-   "img": null
+   "img": "img/craig-mullins.webp",
+   "credit": "Craig Mullins, goodbrush.com",
+   "licence": "Reproduction de reference",
+   "source": "https://web.archive.org/web/2005/http://www.goodbrush.com/",
+   "legende": "Robots dans la neige, peinture numerique de Craig Mullins, archive de son site goodbrush.com (le site actuel est mort)"
   },
   {
    "nom": "Dice Tsutsumi",
@@ -5628,7 +5632,11 @@
     }
    ],
    "categorie": "Concept art et décor",
-   "img": null
+   "img": "img/harald-siepermann.webp",
+   "credit": "Harald Siepermann, The Harald Siepermann Archive",
+   "licence": "Reproduction de reference",
+   "source": "https://www.haraldsiepermann.com/",
+   "legende": "Collage de ses designs de personnages (Alfred J. Kwak, Kerchak de Tarzan, hippopotame, morse capitaine...)"
   },
   {
    "nom": "Iain McCaig",
@@ -5717,7 +5725,11 @@
     }
    ],
    "categorie": "Concept art et décor",
-   "img": null
+   "img": "img/kazuo-oga.webp",
+   "credit": "Kazuo Oga (direction artistique des decors), Studio Ghibli",
+   "licence": "Reproduction de reference",
+   "source": "https://www.ghibli.jp/works/totoro/",
+   "legende": "La maison des Kusakabe dans Mon voisin Totoro, image dominee par le decor peint (personnages minuscules), du travail de decor signe Kazuo Oga"
   },
   {
    "nom": "Lou Romano",
@@ -5760,7 +5772,11 @@
     }
    ],
    "categorie": "Concept art et décor",
-   "img": null
+   "img": "img/lou-romano.webp",
+   "credit": "Lou Romano, Pixar",
+   "licence": "Reproduction de reference",
+   "source": "https://web.archive.org/web/20100206141002/http://louromano.blogspot.com/2009/06/up-color-script.html",
+   "legende": "Image du color script de La-haut (Up) : Carl et Doug face a Kevin en cage, gouache aux couleurs plates"
   },
   {
    "nom": "Maurice Noble",
@@ -5893,7 +5909,11 @@
     }
    ],
    "categorie": "Concept art et décor",
-   "img": null
+   "img": "img/paul-lasaine.webp",
+   "credit": "Paul Lasaine",
+   "licence": "Reproduction de reference",
+   "source": "https://paullasaine.blogspot.com/2010/08/traditional-vs-digital.html",
+   "legende": "Paysage de montagnes et lac peint en numerique, signe Lasaine, poste par lui sur son blog (demo traditionnel vs digital)"
   },
   {
    "nom": "Peter Chan",
@@ -5978,7 +5998,11 @@
     }
    ],
    "categorie": "Concept art et décor",
-   "img": null
+   "img": "img/ralph-mcquarrie.webp",
+   "credit": "Ralph McQuarrie, Lucasfilm",
+   "licence": "Reproduction de reference",
+   "source": "https://www.theastromech.com/2024/04/star-wars-concept-art-of-ralph-mcquarrie.html",
+   "legende": "Concept art de la Cite des Nuages (Bespin) pour L'Empire contre-attaque, peinture signee R. McQuarrie en bas a gauche"
   },
   {
    "nom": "Robert Kondo",
