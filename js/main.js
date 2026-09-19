@@ -81,3 +81,30 @@ document.addEventListener('keydown', function(e) {
     if (tools) { tools.classList.remove('open'); return; }
   }
 });
+
+// ===== Panneau des liens du site =====
+(function() {
+  var btn = document.getElementById('liens-btn');
+  var box = document.getElementById('liens-box');
+  if (!btn || !box) return;
+
+  function ferme() {
+    box.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var ouvert = box.classList.toggle('open');
+    btn.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+  });
+
+  // clic en dehors : on referme
+  document.addEventListener('click', function(e) {
+    if (box.classList.contains('open') && !box.contains(e.target) && e.target !== btn) ferme();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') ferme();
+  });
+})();

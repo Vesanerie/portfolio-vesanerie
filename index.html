@@ -60,6 +60,7 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components/theme-toggle.css">
+  <link rel="stylesheet" href="css/components/liens.css">
   <link rel="stylesheet" href="css/components/landing.css">
   <link rel="stylesheet" href="css/components/cards.css">
   <link rel="stylesheet" href="css/components/about.css">
@@ -74,6 +75,71 @@
   <button class="theme-toggle" aria-label="Changer le theme" onclick="toggleTheme()">
     <div class="dot"></div>
   </button>
+
+  <button class="liens-toggle" id="liens-btn" aria-label="Tous les liens du site"
+          aria-expanded="false" aria-controls="liens-box">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="liens-box" id="liens-box" aria-label="Tous les liens du site">
+    <h2>Tout le site</h2>
+    <p class="liens-intro">vesanerie.fr</p>
+
+    <div class="liens-groupe">Portfolio</div>
+    <a href="/art/">
+      <span class="l-nom">Art</span>
+      <span class="l-url">vesanerie.fr/art</span>
+      <span class="l-desc">Fanzines, illustration, graphisme, animation</span>
+    </a>
+    <a href="/tech/">
+      <span class="l-nom">Tech</span>
+      <span class="l-url">vesanerie.fr/tech</span>
+      <span class="l-desc">Gesturo, outils web, IA générative</span>
+    </a>
+    <a href="/music/">
+      <span class="l-nom">Musique</span>
+      <span class="l-url">vesanerie.fr/music</span>
+      <span class="l-desc">Beats, instrus, sound design</span>
+    </a>
+
+    <div class="liens-groupe">Outils et bases</div>
+    <a href="/reference/">
+      <span class="l-nom">Références d'artistes</span>
+      <span class="l-url">vesanerie.fr/reference</span>
+      <span class="l-desc">254 artistes, leur carrière et la lecture graphique de leur travail</span>
+    </a>
+    <a href="/affinity/">
+      <span class="l-nom">AffinityDB</span>
+      <span class="l-url">vesanerie.fr/affinity</span>
+      <span class="l-desc">172 tutoriels Affinity classés et résumés</span>
+    </a>
+    <a href="/texte/">
+      <span class="l-nom">Par Coeur</span>
+      <span class="l-url">vesanerie.fr/texte</span>
+      <span class="l-desc">Mémoriser un texte par masquage progressif</span>
+    </a>
+    <a href="/prompteur/">
+      <span class="l-nom">Prompteur</span>
+      <span class="l-url">vesanerie.fr/prompteur</span>
+      <span class="l-desc">Le texte défile par dessus le retour caméra</span>
+    </a>
+    <a href="/assiette/">
+      <span class="l-nom">Assiette</span>
+      <span class="l-url">vesanerie.fr/assiette</span>
+      <span class="l-desc">Suivi des repas et de la perte de poids</span>
+    </a>
+    <a href="/recette/">
+      <span class="l-nom">Recettes</span>
+      <span class="l-url">vesanerie.fr/recette</span>
+      <span class="l-desc">Les recettes maison</span>
+    </a>
+
+    <div class="liens-groupe">Divers</div>
+    <a href="/mentions-legales.html">
+      <span class="l-nom">Mentions légales</span>
+      <span class="l-url">vesanerie.fr/mentions-legales</span>
+    </a>
+  </nav>
 
   <button class="cv-card" id="cv-btn">
     <span class="cv-label">CV</span>
