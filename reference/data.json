@@ -1,6 +1,6 @@
 {
  "maj": "2026-09-18",
- "total": 254,
+ "total": 255,
  "artistes": [
   {
    "nom": "Alberto Mielgo",
@@ -7353,6 +7353,55 @@
    "licence": "Reproduction de reference",
    "source": "https://www.davidzwirner.com/artists/kerry-james-marshall",
    "legende": "Image du site officiel de l artiste"
+  },
+  {
+   "nom": "Kurt Seligmann",
+   "slug": "kurt-seligmann",
+   "annees": "1900-1962",
+   "nationalite": "Suisse, naturalisé américain",
+   "categorie": "Peintre",
+   "courant": "Surréalisme, gravure surréaliste",
+   "oeuvre": {
+    "titre": "Magnetic Mountain",
+    "annee": "1948"
+   },
+   "carriere": "Bâlois formé aux Beaux-Arts de Genève (1919) puis à l'Accademia de Florence, installé à Paris en 1929, première exposition personnelle chez Jeanne Bucher en 1932. Passé par Abstraction-Création, il rejoint le groupe surréaliste de Breton en 1937 et montre l'Ultra-Meuble à l'Exposition internationale du surréalisme de 1938. C'est surtout le graveur du groupe : l'album Protubérances cardiaques (1933) puis les six eaux-fortes d'Œdipe présentées par Meyer Schapiro (1944). Premier surréaliste à débarquer à New York en 1939, il aide ses confrères à fuir l'Europe, signe les décors et costumes du ballet The Golden Fleece (1941), publie The Mirror of Magic (1948) et enseigne au Brooklyn College de 1953 à 1962, avec Robert Motherwell parmi ses élèves.",
+   "graphique": {
+    "technique": "Huile lisse et glacée, sans empâtement, montée en couches minces comme une estampe colorée, et une pratique intensive de l'eau-forte et de la plume. Ses formes cycloniques naissent d'un relevé : il transcrit les réseaux de verre fêlé et y lit des figures.",
+    "trait": "Trait de graveur porté dans la peinture : contour net, continu, qui enroule des rubans d'étoffe et des drapés vides. Les personnages n'ont pas d'anatomie, ce sont des enveloppes qui tournent, refermées par des hachures fines.",
+    "couleur": "Monochromie chaude d'ocres, de bruns dorés et de beiges sur fond neutre, valeurs rapprochées, puis deux ou trois accents saturés seulement : vermillon, vert sombre, bleu-vert. L'éclat est rationné, c'est ce qui le rend violent.",
+    "composition": "Tourbillon centrifuge de formes molles pris dans une charpente de plans géométriques anguleux. Espace de théâtre sans sol lisible, échelles instables, sujet éparpillé sur toute la toile plutôt que centré.",
+    "a_voler": [
+     "Construire un personnage en rubans et drapés qui tournent autour d'un axe creux au lieu d'un corps plein : le mouvement fait le volume, l'anatomie devient inutile.",
+     "Opposer une charpente de plans droits et tranchants à des formes molles qui tourbillonnent dedans : la rigidité du décor donne sa vitesse au motif."
+    ]
+   },
+   "palette": [
+    "#2a1f0f",
+    "#a17d46",
+    "#dec87d",
+    "#e63812",
+    "#236367"
+   ],
+   "liens": [
+    {
+     "titre": "Fiche Wikipédia",
+     "url": "https://fr.wikipedia.org/wiki/Kurt_Seligmann"
+    },
+    {
+     "titre": "Seligmann Center, Sugar Loaf",
+     "url": "https://www.kurtseligmanncenter.org/"
+    },
+    {
+     "titre": "Œuvres à l'Art Institute of Chicago",
+     "url": "https://www.artic.edu/artists/40809/kurt-seligmann"
+    }
+   ],
+   "credit": "Kurt Seligmann",
+   "licence": "Reproduction de reference",
+   "source": "https://surrealism.website/seligmann.html",
+   "legende": "Magnetic Mountain, 1948, huile sur toile",
+   "img": "img/kurt-seligmann.webp"
   },
   {
    "nom": "Le Caravage",
