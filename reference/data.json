@@ -1,6 +1,6 @@
 {
  "maj": "2026-09-18",
- "total": 255,
+ "total": 257,
  "artistes": [
   {
    "nom": "Alberto Mielgo",
@@ -334,6 +334,55 @@
    "legende": "Plan de The External World (2010), les personnages low poly dans le metro"
   },
   {
+   "nom": "Eadweard Muybridge",
+   "slug": "eadweard-muybridge",
+   "annees": "1830-1904",
+   "nationalite": "Britannique, actif aux États-Unis",
+   "categorie": "Animation",
+   "courant": "Chronophotographie, précinéma",
+   "oeuvre": {
+    "titre": "Animal Locomotion, planche 646",
+    "annee": "1887"
+   },
+   "carriere": "Libraire émigré en Californie, il se fait photographe dans les années 1860 sous le pseudonyme Helios : vues du Yosemite et panorama de San Francisco en treize plaques (1878). En 1872 Leland Stanford lui commande la preuve photographique du galop. Au ranch de Palo Alto en juin 1878, douze appareils déclenchés par des fils tendus en travers de la piste saisissent la jument Sallie Gardner et démontrent que le cheval décolle des quatre pieds, mais ramassé sous lui et non en extension comme le peignaient les peintres. Il invente en 1879 le zoopraxiscope, disque projeté qui remet ses images en mouvement. De 1883 à 1886 l'Université de Pennsylvanie finance la grande campagne : plus de vingt mille clichés, publiés en 1887 en 781 planches sous le titre Animal Locomotion. Ces planches deviennent le manuel d'anatomie du mouvement des animateurs, de Disney à Richard Williams, et la matière première de Duchamp et de Francis Bacon.",
+   "graphique": {
+    "technique": "Batteries de douze à vingt-quatre appareils alignés le long de la piste, plus des batteries d'angle, obturateurs à ressort autour du millième de seconde. Tirages au collotype assemblés en planches. Devant le sujet, un fond de planches peint en bandes et chiffré au décimètre, qui n'est pas un décor mais un instrument de mesure.",
+    "trait": "Aucun trait, rien que de la silhouette. La lumière rasante et le fond sombre réduisent le corps à une masse claire au contour net, sans modelé interne. La pose se lit en un dixième de seconde parce qu'il ne reste que le bord.",
+    "couleur": "Monochromie de collotype, entre le brun chaud et le gris de plomb. Noir dense du fond, corps en crème surexposé, quelques gris terreux au sol. Zéro couleur locale, tout est construit en valeurs et le sujet est toujours la valeur la plus claire du cadre.",
+    "composition": "La grille. Des bandes horizontales de douze vues au pas régulier, empilées par points de vue, de profil puis de trois quarts arrière. La lecture va de gauche à droite comme une bande de film, et c'est la répétition qui fabrique la forme : aucune vignette n'est composée pour elle-même.",
+    "a_voler": [
+     "Mettre une grille chiffrée derrière le sujet avant de dessiner une action : le fond mesure le déplacement, et les intervalles cessent d'être faits au jugé.",
+     "Poser la même action sous deux angles sur deux bandes superposées : ce que le profil cache, rotation du bassin et ligne d'épaules, saute aux yeux dans la vue de dos."
+    ]
+   },
+   "palette": [
+    "#302723",
+    "#5d5149",
+    "#877d75",
+    "#aca49c",
+    "#d3d0c9"
+   ],
+   "liens": [
+    {
+     "titre": "Fiche Wikipédia",
+     "url": "https://fr.wikipedia.org/wiki/Eadweard_Muybridge"
+    },
+    {
+     "titre": "The Horse in Motion, 1882, en ligne",
+     "url": "https://archive.org/details/horseinmotionass01stil"
+    },
+    {
+     "titre": "Planches sur Wikimedia Commons",
+     "url": "https://commons.wikimedia.org/wiki/Category:Eadweard_Muybridge"
+    }
+   ],
+   "credit": "Eadweard Muybridge",
+   "licence": "Domaine public",
+   "source": "https://commons.wikimedia.org/wiki/File:Eadweard_Muybridge_-_Animal_Locomotion,_Plate_646_-_Google_Art_Project.jpg",
+   "legende": "Animal Locomotion, planche 646, 1887, collotype : cheval monté au saut, de profil et de dos",
+   "img": "img/eadweard-muybridge.webp"
+  },
+  {
    "nom": "Eric Goldberg",
    "slug": "eric-goldberg",
    "annees": "1955",
@@ -374,6 +423,55 @@
    "credit": "",
    "licence": "Fair use",
    "source": "https://en.wikipedia.org/wiki/File:Aladdin_(1992_Disney_film)_poster.jpg"
+  },
+  {
+   "nom": "Étienne-Jules Marey",
+   "slug": "etienne-jules-marey",
+   "annees": "1830-1904",
+   "nationalite": "Français",
+   "categorie": "Animation",
+   "courant": "Chronophotographie, méthode graphique",
+   "oeuvre": {
+    "titre": "Saut à la perche, chronophotographie sur plaque fixe",
+    "annee": "vers 1890"
+   },
+   "carriere": "Médecin de formation devenu physiologiste, il met au point dans les années 1860 la méthode graphique : sphygmographe, myographe, tambours inscripteurs, des appareils qui font tracer au corps lui-même la courbe de son pouls ou de son muscle. La Machine animale paraît en 1873 et le mouvement devient son objet unique. En 1878 les images de Muybridge, publiées dans La Nature, le décident à passer à la photographie. Il invente en 1882 le fusil photographique, douze vues par seconde sur un disque tournant, puis la chronophotographie sur plaque fixe : un seul négatif, un obturateur à fente, toutes les phases inscrites dans le même cadre. L'État lui construit la Station physiologique du parc des Princes. Vers 1884 il habille ses sujets de noir avec des rubans et des points blancs et obtient la chronophotographie géométrique, premier système de capture de mouvement. Sa version sur pellicule mobile, en 1888, est l'ancêtre direct de la caméra. L'Institut Marey ouvre en 1901. Ses plaques frappent Duchamp au moment du Nu descendant un escalier et arment le futurisme de Balla et Boccioni.",
+   "graphique": {
+    "technique": "Un négatif unique exposé dix à soixante fois par un disque fendu qui tourne devant l'objectif, devant un hangar tendu de velours noir qui ne renvoie rien. Sujet en plein soleil, de profil, sur un rail. Variante géométrique : combinaison noire, bandes et points blancs vissés aux segments, et il ne reste du corps que sa charpente.",
+    "trait": "Pas de contour, des traînées. Le corps s'écrit en arcs clairs qui se recouvrent, les parties lentes s'empâtent en une masse laiteuse tandis que les parties rapides se détachent nettes et isolées. Le trait le plus pur arrive avec les perches ou les rubans : de longues droites qui rayonnent en éventail depuis le point d'appui.",
+    "couleur": "Négatif sépia réduit à deux termes, un noir absorbant qui avale le décor et un blanc crème pour le seul sujet. Aucune demi-teinte n'est peinte : les gris intermédiaires sont uniquement le produit des superpositions, donc la densité de la couleur dit la lenteur du geste.",
+    "composition": "Une seule bande horizontale, un seul cadre, le temps lu de gauche à droite sans jamais découper en cases. Les phases se chevauchent et font apparaître une forme d'ensemble, éventail, vague ou hélice, qui n'existe dans aucune image isolée et qui devient le vrai sujet de la plaque.",
+    "a_voler": [
+     "Empiler toutes les phases d'un geste dans un cadre unique au lieu de les séparer en cases : le recouvrement dessine une forme neuve et la trajectoire devient un objet que l'on compose.",
+     "Réduire le personnage à quelques segments et points clairs sur du noir : privé de sa chair, le mouvement se lit mieux, et l'écart entre les points donne directement le rythme, serré pour le lent, largement ouvert pour le rapide."
+    ]
+   },
+   "palette": [
+    "#605848",
+    "#78705e",
+    "#998a74",
+    "#b2a491",
+    "#c8b9a7"
+   ],
+   "liens": [
+    {
+     "titre": "Fiche Wikipédia",
+     "url": "https://fr.wikipedia.org/wiki/%C3%89tienne-Jules_Marey"
+    },
+    {
+     "titre": "La Machine animale, 1873, en ligne",
+     "url": "https://archive.org/details/lamachineanimale00mare"
+    },
+    {
+     "titre": "Plaques sur Wikimedia Commons",
+     "url": "https://commons.wikimedia.org/wiki/Category:%C3%89tienne-Jules_Marey"
+    }
+   ],
+   "credit": "Étienne-Jules Marey",
+   "licence": "Domaine public",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89tienne-Jules_Marey_-_Movements_in_Pole_Vaulting_-_Google_Art_Project.jpg",
+   "legende": "Saut à la perche, vers 1890, chronophotographie sur plaque fixe",
+   "img": "img/etienne-jules-marey.webp"
   },
   {
    "nom": "Frédéric Back",
