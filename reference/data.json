@@ -1,6 +1,6 @@
 {
  "maj": "2026-09-18",
- "total": 257,
+ "total": 258,
  "artistes": [
   {
    "nom": "Alberto Mielgo",
@@ -2637,6 +2637,47 @@
    "licence": "Reproduction de reference",
    "source": "https://www.dupuis.com/le-spirou-d-emile-bravo/bd/le-spirou-d-emile-bravo-tome-1-le-journal-d-un-ingenu/81703",
    "legende": "Couverture du \"Journal d'un ingénu\" (Le Spirou d'Emile Bravo, tome 1)"
+  },
+  {
+   "nom": "Enki Bilal",
+   "slug": "enki-bilal",
+   "annees": "1951",
+   "nationalite": "France, né en Yougoslavie",
+   "categorie": "BD",
+   "courant": "Science-fiction politique, couleur directe peinte",
+   "oeuvre": {
+    "titre": "La Femme piège",
+    "annee": "1986"
+   },
+   "carriere": "Né à Belgrade en 1951, arrivé en France en 1961. Repéré par Goscinny, il publie dans Pilote dès 1972. Dès 1975, avec le scénariste Pierre Christin, il impose une bande dessinée politique adulte : Légendes d'aujourd'hui, Les Phalanges de l'Ordre noir (1979), Partie de chasse (1983). Seul au scénario et au dessin, il signe la trilogie Nikopol (1980-1992), dont Froid Équateur est élu livre de l'année 1992 par Lire, première fois pour une bande dessinée. Grand Prix d'Angoulême en 1987. Suivent la tétralogie du Monstre (1998-2007), née de la guerre en ex-Yougoslavie, puis Animal'z et Bug. Réalisateur de quatre films dont Immortel ad vitam (2004), peintre invité du Louvre en 2012.",
+   "graphique": {
+    "technique": "Couleur directe peinte sur l'original, acrylique et pastel posés par l'auteur lui-même, sans coloriste ni aplat d'imprimerie. Le papier reste visible et participe aux carnations.",
+    "trait": "Trait de crayon gras laissé apparent sous la peinture, contours interrompus, hachures qui griffent la peau. Les visages sont construits par fêlures et par manques plutôt que par volumes lisses.",
+    "couleur": "Gamme rabattue de gris verts, d'ocres et de bruns sales, trouée par un bleu froid saturé réservé à un seul élément : cheveux, lèvres, cernes. Le rouge n'apparaît qu'en gouttes et signale toujours quelque chose.",
+    "composition": "Cases horizontales larges cadrées comme au téléobjectif, personnages coupés par le bord, carrelages et boiseries qui enferment la scène. Le lettrage manuscrit épouse le dessin au lieu de flotter au-dessus.",
+    "a_voler": [
+     "Rabattre toute l'image en gamme sourde et réserver une seule couleur saturée à un détail, qui devient alors le sujet.",
+     "Ne pas gommer le crayon de construction sous la couleur : c'est lui qui fait vibrer la surface peinte."
+    ]
+   },
+   "palette": [
+    "#e6e2c7",
+    "#81b296",
+    "#21586a",
+    "#6d5135",
+    "#232017"
+   ],
+   "liens": [
+    {
+     "titre": "Fiche Wikipédia",
+     "url": "https://fr.wikipedia.org/wiki/Enki_Bilal"
+    }
+   ],
+   "credit": "Planche de référence, collection AnimationRef",
+   "licence": "",
+   "source": "",
+   "legende": "Planche originale de La Femme piège, collection AnimationRef",
+   "img": "img/enki-bilal.webp"
   },
   {
    "nom": "Filipe Andrade",
