@@ -94,12 +94,9 @@ document.querySelectorAll('.app-icon').forEach(function(btn) {
     }
     var url = this.dataset.url;
     if (!url) return;
-    siteImg.style.display = 'none';
-    siteIframe.style.display = '';
-    siteIframe.src = url;
-    siteUrl.textContent = url;
-    desktop.classList.add('hidden');
-    siteView.classList.remove('hidden');
+    // Les sites (gesturo.fr) refusent d'etre affiches dans une iframe
+    // (X-Frame-Options DENY) : on les ouvre dans un nouvel onglet.
+    window.open(url, '_blank', 'noopener');
   });
 });
 
