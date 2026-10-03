@@ -1,7 +1,7 @@
 /* ============================================================
    FICHIER GENERE PAR build-css.py, NE PAS EDITER A LA MAIN.
    Editer les fichiers sources puis relancer : python3 build-css.py
-   Genere le 2026-09-19 18:51
+   Genere le 2026-10-03 22:12
    ============================================================ */
 
 /* ----- css/variables.css ----- */
@@ -971,6 +971,33 @@ a.contact-item:hover {
   color: var(--text-muted);
   padding-top: 8px;
   border-top: 2px solid var(--border);
+}
+
+.experiment-text code {
+  font-size: 12px;
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.experiment-download {
+  align-self: flex-start;
+  font-family: 'Bangers', sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--text);
+  text-decoration: none;
+  padding: 10px 18px;
+  border: 3px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.experiment-download:hover,
+.experiment-download:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 0 var(--border);
 }
 
 .experiment-row-reverse .experiment-card {
