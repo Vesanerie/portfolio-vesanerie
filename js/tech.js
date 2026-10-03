@@ -47,6 +47,13 @@ var projects = {
     stack: 'Electron, WireGuard, Python, Oracle Cloud',
     year: '2026',
     type: 'Application desktop'
+  },
+  'murmure': {
+    name: 'Murmure',
+    desc: 'Dictee vocale 100% locale pour macOS. On maintient Option droite, on parle, le texte se colle tout seul. Whisper tourne sur le Mac, rien ne part sur Internet. Installeur a telecharger.',
+    stack: 'Python, Faster-Whisper, AppKit',
+    year: '2026',
+    type: 'Application macOS'
   }
 };
 
@@ -54,7 +61,7 @@ var projects = {
 var appDesc = document.getElementById('app-desc');
 document.querySelectorAll('.app-icon').forEach(function(btn) {
   btn.addEventListener('mouseenter', function() {
-    var key = this.dataset.url || (this.dataset.img ? this.querySelector('.app-icon-name').textContent.toLowerCase().replace(/\s/g, '') : null);
+    var key = this.dataset.url || this.dataset.anchor || (this.dataset.img ? this.querySelector('.app-icon-name').textContent.toLowerCase().replace(/\s/g, '') : null);
     var proj = projects[key];
     if (!proj) return;
     appDesc.textContent = proj.desc;
@@ -70,6 +77,11 @@ var siteImg = document.getElementById('site-img');
 // Clic sur icone → lance la demo ou affiche l'image dans l'ecran
 document.querySelectorAll('.app-icon').forEach(function(btn) {
   btn.addEventListener('click', function() {
+    var anchor = this.dataset.anchor;
+    if (anchor) {
+      document.getElementById(anchor).scrollIntoView({behavior: 'smooth'});
+      return;
+    }
     var imgSrc = this.dataset.img;
     if (imgSrc) {
       siteIframe.style.display = 'none';
