@@ -1,6 +1,6 @@
 {
  "maj": "2026-09-18",
- "total": 258,
+ "total": 259,
  "artistes": [
   {
    "nom": "Alberto Mielgo",
@@ -5597,6 +5597,50 @@
    "licence": "Reproduction de reference",
    "source": "https://victo-ngai.com/",
    "legende": "Image du site officiel de l artiste"
+  },
+  {
+   "nom": "Wilson McLean",
+   "slug": "wilson-mclean",
+   "annees": "né en 1937",
+   "nationalite": "Écosse / États-Unis",
+   "categorie": "Illustrateur",
+   "courant": "Illustration américaine des années 70-80, réalisme surréaliste",
+   "oeuvre": {
+    "titre": "Illustration originale pour l'affiche d'American Pop (Ralph Bakshi)",
+    "annee": "1981"
+   },
+   "carriere": "Né à Glasgow, apprenti sérigraphe à Londres à quinze ans, formé le soir à Saint Martins et à la Central School, il passe par Fleet Street, Copenhague et l'Espagne avant New York en 1966. Après des années maigres, 1973 le lance chez Look, Sports Illustrated et Playboy, puis viennent les couvertures de Time, les campagnes de Chiat Day, les pochettes CBS (Return to Forever, Romantic Warrior, 1976 ; Ian Hunter, Overnight Angels, 1977), les affiches de Fingers (1978) et d'American Pop (1981), des timbres pour la Royal Mail (1985) et l'US Postal Service (Oklahoma!, 1993). Treize médailles à la Society of Illustrators, Hamilton King Award 1980, Hall of Fame 2010. Enseigne à Syracuse, SVA et Ringling, puis se consacre à la peinture de chevalet.",
+   "graphique": {
+    "technique": "Acrylique sur toile, d'après photos de modèles posés, glacis lisses sans trace de pinceau visible, parfois gouache et aérographe pour les fonds",
+    "trait": "Pas de ligne : les formes sont cernées par le contraste des aplats, modelé très arrondi et volumes gonflés comme des ballons, visages caricaturés mais anatomiquement justes, mains et doigts surdimensionnés",
+    "couleur": "Saturation maximale, roses, violets et orangés posés côte à côte sans transition grise, chair chaude contre fonds froids, une lumière théâtrale irréelle qui vient de nulle part",
+    "composition": "Montage de scènes empilées à des échelles différentes, un faisceau ou une forme géométrique blanche qui traverse tout, lecture en deux temps : l'image réaliste d'abord, le second récit caché ensuite",
+    "a_voler": [
+     "Empiler plusieurs scènes à des échelles contradictoires dans un seul cadre et les tenir ensemble par une seule forme géométrique franche.",
+     "Supprimer le cerne : construire chaque volume par un aplat saturé contre un aplat complémentaire, et pousser le modelé jusqu'au gonflé."
+    ]
+   },
+   "palette": [
+    "#eadfcf",
+    "#cb805d",
+    "#883735",
+    "#687e8b",
+    "#342a2c"
+   ],
+   "liens": [
+    {
+     "titre": "Fiche Wikipédia (EN)",
+     "url": "https://en.wikipedia.org/wiki/Wilson_McLean"
+    },
+    {
+     "titre": "Hall of Fame, Society of Illustrators",
+     "url": "https://societyillustrators.org/award-winners/wilson-mclean/"
+    }
+   ],
+   "credit": "Wilson McLean / Incollect",
+   "licence": "Reproduction de reference",
+   "source": "https://www.incollect.com/listings/photos-prints/posters/wilson-mclean-movie-poster-illustration-for-american-pop-234983",
+   "img": "img/wilson-mclean.webp"
   },
   {
    "nom": "Yuko Shimizu",
